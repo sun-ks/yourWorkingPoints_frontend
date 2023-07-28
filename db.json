@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "title": "e",
+      "body": "d",
+      "id": 1
+    },
+    {
+      "title": "er",
+      "body": "d",
+      "id": 2
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
