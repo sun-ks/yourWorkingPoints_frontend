@@ -14,5 +14,10 @@
     "title": "Sign Up",
     "btn_sign_in":"Sign Up",
     "do_not_account": "Do you have an account?"
+  },
+  "forgot": {
+    "title": "Forgot password",
+    "btn_sign_in":"Send Recovery Link",
+    "do_not_account": "Don’t have an account?"
   }
 }

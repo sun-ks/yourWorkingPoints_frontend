@@ -6,6 +6,7 @@ import { Container, Typography } from '@mui/material';
 import { AuthForm } from '../sections/auth/login';
 import { useParams } from 'react-router-dom';
 import StyledRouterLink from '../components/styled/RouterLink'
+import {AuthPageType} from '../types/ICommon'
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -25,30 +26,28 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 const AuthPage: FC = () => {
   const { t } = useTranslation();
+  const { typePage='sign_in' } = useParams<{typePage: AuthPageType}>();
+  const opositeType = (typePage === 'sign_in' || typePage === 'forgot') ? 'sign_up' : 'sign_in';
 
-  const { type='sign_in' } = useParams();
-  const opositeType = type === 'sign_in' ? 'sign_up' : 'sign_in';
-
-  console.log(`${opositeType}.oposite`)
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{t(`${type}.meta.title`)}</title>
+        <title>{t(`${typePage}.meta.title`)}</title>
       </Helmet>
 
       <StyledRoot>
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              {t(`${type}.title`)}
+              {t(`${typePage}.title`)}
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
-              {t(`${type}.do_not_account`)} {' '}
+              {t(`${typePage}.do_not_account`)} {' '}
               <StyledRouterLink to={`/auth/${opositeType}`} >{t(`${opositeType}.title`)}</StyledRouterLink>
             </Typography>
 
-            <AuthForm type={type} />
+            <AuthForm typePage={typePage} />
           </StyledContent>
         </Container>
       </StyledRoot>
