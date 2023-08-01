@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {Provider} from "react-redux";
 import {setupStore} from "./store/store";
+import "./i18n";
 
 const store = setupStore();
 

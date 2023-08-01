@@ -1,7 +1,7 @@
 import { async } from "q";
 import { AppDispatch } from "../store";
 import axios from 'axios';
-import { ITodos } from "../../models/ITodos";
+import { ITodos } from "../../types/ITodos";
 
 import { createAsyncThunk, isAsyncThunkAction } from "@reduxjs/toolkit";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, FC } from 'react';
 import {postAPI} from '../services/PostService';
 import PostItem from './PostItem';
-import { IPost } from "../models/IPost";
+import { IPost } from "../types/IPost";
 
 const PostContainer:FC<any> = () => {
   const {data: posts, error, isLoading} = postAPI.useFetchAllPostsQuery(200);

@@ -5,6 +5,12 @@ import {fetchUsers} from './store/reducers/ActionCreators';
 import {useAppSelector, useAppDispatch}  from './hooks/redux';
 import  PostContainer from './components/PostContainer';
 import {postAPI} from './services/PostService'
+import Button from '@mui/material/Button';
+import Paperbase from './components/Paperbase';
+// routes
+import Router from './routes';
+import { BrowserRouter } from 'react-router-dom';
+
 function App() {
 
   const state = useAppSelector(state => state.testReducer);
@@ -18,15 +24,19 @@ function App() {
   }, []);
 
   const {data: posts, error, isLoading} = postAPI.useFetchAllPostsQuery(200);
-  console.log(posts)
 
   return (
     <div className="App">
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+      <Paperbase/>
       <h2>Clasical Counter: {state.count}</h2>
       <br/>
-      <button onClick={()=>{dispatch(incriment(state.count))}}>Incriment</button>
+      <Button onClick={()=>{dispatch(incriment(state.count))}} variant="contained">Incriment</Button>
+      <Button onClick={()=>{dispatch(dicriment(state.count))}} variant="outlined">Dincriment</Button>
       <br/>
-      <button onClick={()=>{dispatch(dicriment(state.count))}}>Dincriment</button>
+      <button >Dincriment</button>
       <br/>
       - - -
       <PostContainer/>

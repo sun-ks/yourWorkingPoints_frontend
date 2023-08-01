@@ -1,4 +1,4 @@
-import {ITodos} from "../../models/ITodos";
+import {ITodos} from "../../types/ITodos";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { fetchUsers } from "./ActionCreators";
 //import {fetchUsers} from "./ActionCreators";

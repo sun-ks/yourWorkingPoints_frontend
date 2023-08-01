@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
-import { IPost } from "../models/IPost";
+import { IPost } from "../types/IPost";
 
 const baseUrl = 'https://jsonplaceholder.typicode.com/';
 
