@@ -1,1 +1,1 @@
-export type AuthPageType = 'sign_in' | 'sign_up' | 'forgot';
+export type AuthPageType = 'sign_in' | 'sign_up' | 'forgot' | 'new_password';

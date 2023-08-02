@@ -26,7 +26,7 @@ const routers = useRoutes([
       ],
     },*/
     {
-      path: 'auth/:typePage',
+      path: 'auth/:typePage/:id?',
       element: <AuthPage />,
     }
     /*{

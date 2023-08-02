@@ -7,6 +7,7 @@ import { AuthForm } from '../sections/auth/login';
 import { useParams } from 'react-router-dom';
 import StyledRouterLink from '../components/styled/RouterLink'
 import {AuthPageType} from '../types/ICommon'
+import { useRoutes, Outlet, useNavigate } from 'react-router-dom';
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -28,7 +29,15 @@ const AuthPage: FC = () => {
   const { t } = useTranslation();
   const { typePage='sign_in' } = useParams<{typePage: AuthPageType}>();
   const opositeType = (typePage === 'sign_in' || typePage === 'forgot') ? 'sign_up' : 'sign_in';
-
+  
+  const navigate = useNavigate();
+  if (typePage !== 'sign_in' && 
+    typePage !== 'sign_up' && 
+    typePage !== 'forgot' && 
+    typePage !== 'new_password') {
+    navigate('/404');
+    return null;
+  }
   return (
     <HelmetProvider>
       <Helmet>

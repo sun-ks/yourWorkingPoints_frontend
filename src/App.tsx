@@ -7,7 +7,6 @@ import  PostContainer from './components/PostContainer';
 import {postAPI} from './services/PostService'
 import Button from '@mui/material/Button';
 import Paperbase from './components/Paperbase';
-// routes
 import Router from './routes';
 import { BrowserRouter } from 'react-router-dom';
 
