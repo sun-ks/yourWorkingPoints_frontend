@@ -8,11 +8,11 @@ export const userAPI = createApi({
   baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
   tagTypes: ['User'],
   endpoints: (build) => ({
-    createPost: build.mutation<IUser,IUser>({
-      query: (post) => ({
-        url: `/auth/login`,
+    login: build.mutation< any, {email: string; password: string}>({
+      query: (body) => ({
+        url: `/auth/login/`,
         method: 'POST',
-        body: post
+        body
       }),
       invalidatesTags: ['User']
     }),

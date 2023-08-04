@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+import Paperbase from './components/Paperbase';
 // layouts
 //import DashboardLayout from './layouts/dashboard';
 //import SimpleLayout from './layouts/simple';
@@ -14,17 +15,17 @@ import AuthPage from './pages/AuthPage';
 // ----------------------------------------------------------------------
 const Router: FC = () => {
 const routers = useRoutes([
-    /*{
-      path: '/dashboard',
-      element: <DashboardLayout />,
+    {
+      path: '/point',
+      element: <Paperbase />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'app', element: <DashboardAppPage /> },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        //{ element: <Navigate to="/dashboard/app" />, index: true },
+        //{ path: 'app', element: <DashboardAppPage /> },
+        { path: 'create_point', element: <div>TEST</div> },
+        //{ path: 'products', element: <ProductsPage /> },
+        //{ path: 'blog', element: <BlogPage /> },
       ],
-    },*/
+    },
     {
       path: 'auth/:typePage/:id?',
       element: <AuthPage />,

@@ -5,28 +5,45 @@ import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@m
 import { LoadingButton } from '@mui/lab';
 import Iconify from '../../../components/iconify';
 import { useTranslation } from "react-i18next";
-import StyledRouterLink from '../../../components/styled/RouterLink'
-import {AuthPageType} from '../../../types/ICommon'
+import StyledRouterLink from '../../../components/styled/RouterLink';
+import {ICredentials, AuthPageType} from '../../../types/index';
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
+import {userAPI} from '../../../services/UserService';
+import {authSlice} from '../../../store/reducers/AuthSlice';
+import { useDispatch } from 'react-redux'
+
 
 interface IFormInputs {
   password: string;
   email: string;
 }
 
+
 const AuthForm: FC<{typePage: AuthPageType}> = ({typePage}) => {
+  const { handleSubmit, control, reset, formState, formState: { errors, isValid } } = useForm<IFormInputs>({});
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [login, {}] = userAPI.useLoginMutation();
+
+  const dispatch = useDispatch();
   
   const navigate = useNavigate();
 
-  const { handleSubmit, control, reset, formState: { errors } } = useForm<IFormInputs>({});
-  const onSubmit: SubmitHandler<IFormInputs> = data => console.log(data);
+  const {setCredentials} = authSlice.actions;
 
-  const [showPassword, setShowPassword] = useState(false);
+  const onSubmit: SubmitHandler<{ email: string; password: string; }> = async (q) => {
+    const {data}  =  await login(q) as {data: ICredentials}
+    console.log('user', data.accessToken)
+        
+    dispatch(setCredentials(data))
+  };
 
   const { t } = useTranslation();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <div onClick={()=>{}}></div>
       <Stack spacing={3}>
         <Controller
           control={control}
@@ -54,7 +71,7 @@ const AuthForm: FC<{typePage: AuthPageType}> = ({typePage}) => {
             rules={{ 
               required: true, 
               minLength: {
-                value: 5,
+                value: 3,
                 message: "Password must be at least 5 characters long",
               }, 
             }}

@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function Content() {
   return (
@@ -51,6 +52,7 @@ export default function Content() {
       </AppBar>
       <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
         No users for this project yet
+        <Outlet />
       </Typography>
     </Paper>
   );

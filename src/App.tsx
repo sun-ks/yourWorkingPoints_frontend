@@ -29,7 +29,6 @@ function App() {
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-      <Paperbase/>
       <h2>Clasical Counter: {state.count}</h2>
       <br/>
       <Button onClick={()=>{dispatch(incriment(state.count))}} variant="contained">Incriment</Button>
