@@ -9,9 +9,10 @@ import RequireAuth from './pages/RequireAuth'
 //import BlogPage from './pages/BlogPage';
 //import UserPage from './pages/UserPage';
 import AuthPage from './pages/AuthPage';
-//import Page404 from './pages/Page404';
+import Page404 from './pages/Page404';
 //import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/DashboardAppPage';
+import PointList from './sections/mainContent/point/PointList';
 
 // ----------------------------------------------------------------------
 const Router: FC = () => {
@@ -23,7 +24,7 @@ const routers = useRoutes([
       children: [
         { path: 'dashboard', element: <Paperbase/> ,
         children: [
-          { path: 'points', element: <div>12345 TEST</div>, index: true },
+          { path: 'points', element: <PointList/>, index: true },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         
@@ -35,6 +36,10 @@ const routers = useRoutes([
     {
       path: 'auth/:typePage/:ressetPassToken?',
       element: <AuthPage />,
+    },
+    {
+      path: '*',
+      element: <Page404 />,
     }
     /*{
       element: <SimpleLayout />,
@@ -43,11 +48,8 @@ const routers = useRoutes([
         { path: '404', element: <Page404 /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],
-    },
-    {
-      path: '*',
-      element: <Navigate to="/404" replace />,
     },*/
+    
     
 
   ]);
