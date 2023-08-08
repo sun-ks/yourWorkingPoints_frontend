@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import Paperbase from './components/Paperbase';
+import RequireAuth from './pages/RequireAuth'
 // layouts
 //import DashboardLayout from './layouts/dashboard';
 //import SimpleLayout from './layouts/simple';
@@ -15,19 +16,24 @@ import AuthPage from './pages/AuthPage';
 // ----------------------------------------------------------------------
 const Router: FC = () => {
 const routers = useRoutes([
+    /* protected routes */
     {
-      path: '/point',
-      element: <Paperbase />,
+      //path: '/point',
+      element: <RequireAuth />,
       children: [
+        { path: 'dashboard', element: <Paperbase/> ,
+        children: [
+          { path: 'points', element: <div>12345 TEST</div>, index: true },
+        ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
-        //{ path: 'app', element: <DashboardAppPage /> },
-        { path: 'create_point', element: <div>TEST</div> },
+        
         //{ path: 'products', element: <ProductsPage /> },
         //{ path: 'blog', element: <BlogPage /> },
       ],
     },
+    /* public routes */
     {
-      path: 'auth/:typePage/:id?',
+      path: 'auth/:typePage/:ressetPassToken?',
       element: <AuthPage />,
     }
     /*{
@@ -42,6 +48,8 @@ const routers = useRoutes([
       path: '*',
       element: <Navigate to="/404" replace />,
     },*/
+    
+
   ]);
 
   return routers
