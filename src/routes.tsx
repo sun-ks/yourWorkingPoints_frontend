@@ -10,11 +10,12 @@ import RequireAuth from './pages/RequireAuth'
 //import UserPage from './pages/UserPage';
 import AuthPage from './pages/AuthPage';
 import Page404 from './pages/Page404';
+import AddFirstPoint from './pages/AddFirstPoint';
 //import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/DashboardAppPage';
-import PointList from './sections/mainContent/point/PointList';
+import PointList from './sections/mainContent/pointList/layout/PointList';
+import Point from './sections/mainContent/point/layout/Point';
 
-// ----------------------------------------------------------------------
 const Router: FC = () => {
 const routers = useRoutes([
     /* protected routes */
@@ -22,15 +23,19 @@ const routers = useRoutes([
       //path: '/point',
       element: <RequireAuth />,
       children: [
-        { path: 'dashboard', element: <Paperbase/> ,
+        { path: '/', element: <Paperbase/> ,
         children: [
-          { path: 'points', element: <PointList/>, index: true },
+          { element: <PointList/>, index: true },
+          { path: ':point_id', element: <Point/> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
-        
         //{ path: 'products', element: <ProductsPage /> },
         //{ path: 'blog', element: <BlogPage /> },
       ],
+    },
+    { 
+      path: 'createFirstPoint', 
+      element: <AddFirstPoint /> 
     },
     /* public routes */
     {
@@ -49,9 +54,6 @@ const routers = useRoutes([
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },*/
-    
-    
-
   ]);
 
   return routers

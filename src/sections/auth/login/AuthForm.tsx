@@ -58,7 +58,7 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     
     dispatch(setCredentials(data));
 
-    if(data && typePage !== 'forgot') navigate('/dashboard/points')
+    if(data && typePage !== 'forgot') navigate('/createFirstPoint')
   };
 
   const { t } = useTranslation();
@@ -70,7 +70,6 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
           <Typography color="error">{!!apiErrs[typePage] && apiErrs[typePage]?.data}</Typography>
         </Stack>
       </Collapse>
-
       <Stack spacing={3}>
         {typePage !== 'new_password' && (
           <Controller

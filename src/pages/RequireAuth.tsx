@@ -1,6 +1,5 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { isEmpty } from "lodash"
 import { selectCurrentUser } from "../store/reducers/AuthSlice"
 
 const RequireAuth = () => {

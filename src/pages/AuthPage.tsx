@@ -21,8 +21,7 @@ const StyledContent = styled('div')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   justifyContent: 'center',
-  flexDirection: 'column',
-  padding: theme.spacing(12, 0),
+  flexDirection: 'column'
 }));
 
 const AuthPage: FC = () => {
