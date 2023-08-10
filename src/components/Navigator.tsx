@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
+import AlbumIcon from '@mui/icons-material/Album';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
@@ -18,32 +18,23 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import { useTranslation } from "react-i18next";
+import { NavLink } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
+import { selectAccessToken } from "../store/reducers/AuthSlice";
+import getAuthorizationHeaders from "../utils/api/getAuthorizationHeaders";
+import {pointAPI} from "../services/PointService";
 
 const categories = [
   {
-    id: 'Build',
+    id: 'Will be soon:',
     children: [
       {
-        id: 'Authentication',
+        id: 'Workers',
         icon: <PeopleIcon />,
-        active: true,
+        active: false,
       },
-      { id: 'Database', icon: <DnsRoundedIcon /> },
-      { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Hosting', icon: <PublicIcon /> },
-      { id: 'Functions', icon: <SettingsEthernetIcon /> },
-      {
-        id: 'Machine learning',
-        icon: <SettingsInputComponentIcon />,
-      },
-    ],
-  },
-  {
-    id: 'Quality',
-    children: [
-      { id: 'Analytics', icon: <SettingsIcon /> },
-      { id: 'Performance', icon: <TimerIcon /> },
-      { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
+      { id: 'Statistics', icon: <PermMediaOutlinedIcon /> },
     ],
   },
 ];
@@ -65,6 +56,11 @@ const itemCategory = {
 
 export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
+  const { point_id } = useParams<{point_id: string}>();
+  const accessToken = useSelector(selectAccessToken);
+  const {data: point, error, isLoading: isLoading_point} = pointAPI.useGetPointByPointIdQuery({...getAuthorizationHeaders(accessToken), point_id})
+
+console.log('point', point?.name)
   const { t } = useTranslation();
 
   return (
@@ -73,27 +69,38 @@ export default function Navigator(props: DrawerProps) {
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
           {t('company_name')}
         </ListItem>
-        <ListItem sx={{ ...item, ...itemCategory }}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText>Project Overview</ListItemText>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+          <ListItem sx={{ ...item, ...itemCategory, textDecoration: 'none' }}>
+            <ListItemIcon>
+              <AlbumIcon />
+            </ListItemIcon>
+            <ListItemText sx={{ textDecoration: 'none' }}>
+              { point && !isLoading_point ? (
+                <>{point.name}</>
+              ) : (
+                <>Choise Point</>
+              )}
+            </ListItemText>
         </ListItem>
+        </NavLink>
         {categories.map(({ id, children }) => (
           <Box key={id} sx={{ bgcolor: '#101F33' }}>
             <ListItem sx={{ py: 2, px: 3 }}>
               <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
             </ListItem>
             {children.map(({ id: childId, icon, active }) => (
-              <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
-                </ListItemButton>
-              </ListItem>
+              <NavLink to="/53c1dbfe-37ea-4928-9c3f-a9db2e51cb69" style={{ textDecoration: 'none' }}>
+                <ListItem disablePadding key={childId}>
+                  <ListItemButton selected={active} sx={item}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{childId}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </NavLink>
             ))}
             <Divider sx={{ mt: 2 }} />
           </Box>
+          
         ))}
       </List>
     </Drawer>

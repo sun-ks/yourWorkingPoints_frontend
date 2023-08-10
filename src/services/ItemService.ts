@@ -10,7 +10,7 @@ export const itemAPI = createApi({
   baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
   tagTypes: ['Item'],
   endpoints: (build) => ({
-    getPoints: build.query<IItem[], any>({
+    getItems: build.query<IItem[], any>({
       query: ({Authorization, point_id}) => ({
         url: `/items`,
         headers: {Authorization},

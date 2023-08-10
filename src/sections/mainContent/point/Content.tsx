@@ -10,7 +10,7 @@ const Content: FC = () => {
   const { point_id } = useParams<{point_id: string}>();
 
   const accessToken = useSelector(selectAccessToken);
-  const {data: items, error, isLoading} = itemAPI.useGetPointsQuery({...getAuthorizationHeaders(accessToken), point_id});
+  const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({...getAuthorizationHeaders(accessToken), point_id});
 
   return <>
     {items && !isLoading && !_.isEmpty(items) ? (

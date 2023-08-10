@@ -181,7 +181,7 @@ export default function Paperbase() {
         <Box
           component="nav"
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        >Navigator
+        >
           {isSmUp ? null : (
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}

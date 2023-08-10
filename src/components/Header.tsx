@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
+
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 interface HeaderProps {
@@ -71,48 +72,8 @@ export default function Header(props: HeaderProps) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar
-        component="div"
-        color="primary"
-        position="static"
-        elevation={0}
-        sx={{ zIndex: 0 }}
-      >
-        <Toolbar>
-          <Grid container alignItems="center" spacing={1}>
-            <Grid item xs>
-              <Typography color="inherit" variant="h5" component="h1">
-                Authentication
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Button
-                sx={{ borderColor: lightColor }}
-                variant="outlined"
-                color="inherit"
-                size="small"
-              >
-                Web setup
-              </Button>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Help">
-                <IconButton color="inherit">
-                  <HelpIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
-        <Tabs value={0} textColor="inherit">
-          <Tab label="Users" />
-          <Tab label="Sign-in method" />
-          <Tab label="Templates" />
-          <Tab label="Usage" />
-        </Tabs>
-      </AppBar>
+ 
+      
     </React.Fragment>
   );
 }

@@ -6,12 +6,22 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 export const pointAPI = createApi({
   reducerPath: 'pointAPI',
   baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
-  tagTypes: ['Point'],
+  tagTypes: ['Points', 'Point'],
   endpoints: (build) => ({
     getPoints: build.query<IPoint[], any>({
       query: (authorizationHeaders) => ({
         url: `/points`,
         headers: authorizationHeaders
+      }),
+      providesTags: result => ['Points']
+    }),
+    getPointByPointId: build.query<IPoint, any>({
+      query: ({Authorization, point_id}) => ({
+        url: `/points/point`,
+        headers: {Authorization},
+        params: {
+          point_id
+        }
       }),
       providesTags: result => ['Point']
     }),
@@ -22,7 +32,7 @@ export const pointAPI = createApi({
         body: args.body,
         headers: args.headers
       }),
-      invalidatesTags: ['Point']
+      invalidatesTags: ['Points']
     }),
   })
 });
