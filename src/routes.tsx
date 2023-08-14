@@ -15,6 +15,7 @@ import AddFirstPoint from './pages/AddFirstPoint';
 //import DashboardAppPage from './pages/DashboardAppPage';
 import PointList from './sections/mainContent/pointList/layout/PointList';
 import Point from './sections/mainContent/point/layout/Point';
+import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 
 const Router: FC = () => {
 const routers = useRoutes([
@@ -23,10 +24,11 @@ const routers = useRoutes([
       //path: '/point',
       element: <RequireAuth />,
       children: [
-        { path: '/', element: <Paperbase/> ,
+        { path: '/', element: <Paperbase/>,
         children: [
           { element: <PointList/>, index: true },
           { path: ':point_id', element: <Point/> },
+          { path: '/createNewPoint', element: <CreateNewPoint/> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },

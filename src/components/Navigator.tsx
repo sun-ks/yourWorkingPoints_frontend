@@ -11,6 +11,8 @@ import AlbumIcon from '@mui/icons-material/Album';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 import PublicIcon from '@mui/icons-material/Public';
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
@@ -27,6 +29,16 @@ import {pointAPI} from "../services/PointService";
 
 const categories = [
   {
+
+    children: [
+      {
+        id: 'Tickets',
+        icon: <PeopleIcon />,
+        active: false,
+      },
+    ],
+  },
+  {
     id: 'Will be soon:',
     children: [
       {
@@ -35,6 +47,8 @@ const categories = [
         active: false,
       },
       { id: 'Statistics', icon: <PermMediaOutlinedIcon /> },
+      { id: 'Shop', icon: <ShoppingBasketIcon /> },
+      { id: 'Clients', icon: <Diversity1Icon /> },
     ],
   },
 ];
@@ -66,7 +80,7 @@ console.log('point', point?.name)
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
+        <ListItem sx={{ ...item, ...itemCategory, fontSize: 16, color: '#fff' }}>
           {t('company_name')}
         </ListItem>
         <NavLink to="/" style={{ textDecoration: 'none' }}>

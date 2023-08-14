@@ -9,7 +9,7 @@ import _ from 'lodash';
 const Content: FC = () => {
   const accessToken = useSelector(selectAccessToken);
   const {data: points, error, isLoading} = pointAPI.useGetPointsQuery(getAuthorizationHeaders(accessToken));
-
+console.log('points', points)
   return <>
     { points && !isLoading && !_.isEmpty(points) ? (
       points.map((point) => (

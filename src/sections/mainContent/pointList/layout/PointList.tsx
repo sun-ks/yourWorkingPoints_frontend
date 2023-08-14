@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { Link } from 'react-router-dom';
 
 import Content from '../Content';
 
@@ -24,23 +25,13 @@ const PointList: FC = () => {
         >
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
-              <Grid item>
-                <SearchIcon color="inherit" sx={{ display: 'block' }} />
-              </Grid>
+              
               <Grid item xs>
-                <TextField
-                  fullWidth
-                  placeholder="Search by email address, phone number, or user UID"
-                  InputProps={{
-                    disableUnderline: true,
-                    sx: { fontSize: 'default' },
-                  }}
-                  variant="standard"
-                />
+                
               </Grid>
               <Grid item>
-                <Button variant="contained" sx={{ mr: 1 }}>
-                  Add user
+                <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
+                  Create Point
                 </Button>
                 <Tooltip title="Reload">
                   <IconButton>
