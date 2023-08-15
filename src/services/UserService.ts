@@ -1,11 +1,10 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
+import {createApi} from "@reduxjs/toolkit/dist/query/react";
 import { IUser } from "../types/IUser";
-
-const baseUrl = process.env.REACT_APP_BASE_URL;
+import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
 export const userAPI = createApi({
   reducerPath: 'user',
-  baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
+  baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['User'],
   endpoints: (build) => ({
     login: build.mutation<IUser, {email: string; password: string}>({

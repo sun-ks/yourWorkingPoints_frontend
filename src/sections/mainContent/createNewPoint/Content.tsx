@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Container, Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import {pointAPI} from "../../../services/PointService";
@@ -34,64 +34,51 @@ const Content: FC = () => {
   };
 
     return (
-      <HelmetProvider>
-        <Helmet>
-          <title>{'YWP | Create Point'}</title>
-        </Helmet>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Container maxWidth="sm">
-            <Box 
-              sx={{
-                padding: 4
-              }}>
-              <Stack spacing={3}>
-                <Typography variant="h6" gutterBottom>
-                  Create New Point
-                </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={3}>
+          <Typography variant="h6" gutterBottom>
+            Create New Point
+          </Typography>
 
-                {isError && <Typography color="error">{dataFromError}</Typography>}
-         
-                {point?.point.name && <Typography color="green">Point "{point?.point.name}" has been created!</Typography>}
+          {isError && <Typography color="error">{dataFromError}</Typography>}
 
-                <Controller
-                  control={control}
-                  name="name"
-                  rules={{
-                    required: "Name is required",
-                  }}
-                  render={({ field }) => {
-                    return <TextField label="Name" 
-                        {...field} 
-                        error={!!errors.name}
-                        helperText={errors.name?.message}
-                      />
-                    }
-                  }
+          {point?.point.name && <Typography color="green">Point "{point?.point.name}" has been created!</Typography>}
+
+          <Controller
+            control={control}
+            name="name"
+            rules={{
+              required: "Name is required",
+            }}
+            render={({ field }) => {
+              return <TextField label="Name" 
+                  {...field} 
+                  error={!!errors.name}
+                  helperText={errors.name?.message}
                 />
+              }
+            }
+          />
 
-                <Controller
-                  control={control}
-                  name="description"
-                  render={({ field }) => {
-                    return <TextField label="Description"
-                        multiline
-                        rows={4}
-                        {...field} 
-                        error={!!errors.description}
-                        helperText={errors.description?.message}
-                      />
-                    }
-                  }
+          <Controller
+            control={control}
+            name="description"
+            render={({ field }) => {
+              return <TextField label="Description"
+                  multiline
+                  rows={4}
+                  {...field} 
+                  error={!!errors.description}
+                  helperText={errors.description?.message}
                 />
-                <LoadingButton fullWidth size="large" type="submit" variant="contained" >
-                  Create Point
-                </LoadingButton>
-              </Stack>
-            </Box>
-            
-          </Container>
-        </form>
-      </HelmetProvider>
+              }
+            }
+          />
+          <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+            Create Point
+          </LoadingButton>
+        </Stack>
+      </form>
     )
 }
 

@@ -5,9 +5,9 @@ import { selectCurrentUser } from "../store/reducers/AuthSlice"
 const RequireAuth = () => {
   const location = useLocation()
   const user = useSelector(selectCurrentUser);
-
+  
   return (
-    user ? <Outlet />
+    user && user.tokens.accessToken ? <Outlet />
       : <Navigate to="auth/sign_in" state={{ from: location }} replace />
   )
 }

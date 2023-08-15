@@ -1,8 +1,9 @@
 import React, { FC } from "react";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
-import Tooltip from '@mui/material/Tooltip';
+import {Tooltip, Container, Box} from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -15,7 +16,10 @@ const CreateNewPoint: FC = () => {
   const navigate = useNavigate();
 
     return (
-      <>
+      <HelmetProvider>
+        <Helmet>
+          <title>{'YWP | Create Point'}</title>
+        </Helmet>
         <AppBar
           position="static"
           color="default"
@@ -34,9 +38,15 @@ const CreateNewPoint: FC = () => {
             </Grid>
           </Toolbar>
         </AppBar>
-        
-        <Content/>
-      </>
+          <Container maxWidth="sm">
+            <Box 
+              sx={{
+                padding: 4
+              }}>
+              <Content/>
+            </Box>
+          </Container>
+      </HelmetProvider>
     )
 }
 

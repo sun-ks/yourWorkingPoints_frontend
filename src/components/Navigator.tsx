@@ -9,16 +9,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AlbumIcon from '@mui/icons-material/Album';
 import PeopleIcon from '@mui/icons-material/People';
-import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
-import PublicIcon from '@mui/icons-material/Public';
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
-import TimerIcon from '@mui/icons-material/Timer';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import { useTranslation } from "react-i18next";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -26,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { selectAccessToken } from "../store/reducers/AuthSlice";
 import getAuthorizationHeaders from "../utils/api/getAuthorizationHeaders";
 import {pointAPI} from "../services/PointService";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const categories = [
   {
@@ -33,7 +27,7 @@ const categories = [
     children: [
       {
         id: 'Tickets',
-        icon: <PeopleIcon />,
+        icon: <ListAltIcon />,
         active: false,
       },
     ],

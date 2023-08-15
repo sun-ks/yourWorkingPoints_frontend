@@ -1,24 +1,21 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
+import {createApi} from "@reduxjs/toolkit/dist/query/react";
 import { IPoint } from "../types/IPoint";
-
-const baseUrl = process.env.REACT_APP_BASE_URL;
+import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
 export const pointAPI = createApi({
   reducerPath: 'pointAPI',
-  baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
+  baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['Points', 'Point'],
   endpoints: (build) => ({
     getPoints: build.query<IPoint[], any>({
       query: (authorizationHeaders) => ({
         url: `/points`,
-        headers: authorizationHeaders
       }),
       providesTags: result => ['Points']
     }),
     getPointByPointId: build.query<IPoint, any>({
       query: ({Authorization, point_id}) => ({
         url: `/points/point`,
-        headers: {Authorization},
         params: {
           point_id
         }
@@ -29,8 +26,7 @@ export const pointAPI = createApi({
       query: (args) => ({
         url: `/points`,
         method: 'POST',
-        body: args.body,
-        headers: args.headers
+        body: args.body
       }),
       invalidatesTags: ['Points']
     }),
