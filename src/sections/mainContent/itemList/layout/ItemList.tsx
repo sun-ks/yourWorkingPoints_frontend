@@ -3,6 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AppBar from '@mui/material/AppBar';
 import {Toolbar, Container, Box, Grid, Button, Tooltip} from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Content from '../Content';
 import IconButton from '@mui/material/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -10,14 +11,14 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-const PointList: FC = () => {
+const ItemList: FC = () => {
   const navigate = useNavigate();
-
+  const { point_id } = useParams<{point_id: string }>();
   return (
     <>
     <HelmetProvider>
       <Helmet>
-        <title>{'YWP | Create Point'}</title>
+        <title>{'YWP | Ticket List'}</title>
       </Helmet>
       <AppBar
         position="static"
@@ -27,19 +28,19 @@ const PointList: FC = () => {
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Tooltip title="Back">
-              <IconButton onClick={() => navigate(-1)}>
-                <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
             <Grid item>
-              Points List
+              <Tooltip title="Back">
+                <IconButton onClick={() => navigate(-1)}>
+                  <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
+                </IconButton>
+              </Tooltip>
             </Grid>
             <Grid item>
-              <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
-                Create Point
+              Tickets List
+            </Grid>
+            <Grid item>
+              <Button component={Link} to={`/createTicket/${point_id}`} variant="contained" sx={{ mr: 1 }}>
+                Create Ticket
               </Button>
             </Grid>
           </Grid>
@@ -50,7 +51,7 @@ const PointList: FC = () => {
             sx={{
               padding: 4
             }}>
-            <Content/>
+            <Content point_id={point_id}/>
           </Box>
         </Container>
       </HelmetProvider>
@@ -58,4 +59,4 @@ const PointList: FC = () => {
   )
 }
 
-export default PointList;
+export default ItemList;

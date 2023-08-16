@@ -1,13 +1,12 @@
 import { FC, useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
 import {itemAPI} from "../../../services/ItemService";
 import { useSelector } from "react-redux";
 import { selectAccessToken } from "../../../store/reducers/AuthSlice";
 import getAuthorizationHeaders from "../../../utils/api/getAuthorizationHeaders";
 import _ from 'lodash';
 
-const Content: FC = () => {
-  const { point_id } = useParams<{point_id: string}>();
+const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
+  
 
   const accessToken = useSelector(selectAccessToken);
   const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({...getAuthorizationHeaders(accessToken), point_id});

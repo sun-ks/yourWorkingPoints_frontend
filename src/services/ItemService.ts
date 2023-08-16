@@ -16,5 +16,13 @@ export const itemAPI = createApi({
       }),
       providesTags: result => ['Item']
     }),
+    createItem: build.mutation<IItem, any>({
+      query: (body) => ({
+        url: `/items`,
+        method: 'POST',
+        body: body
+      }),
+      invalidatesTags: ['Item']
+    })
   })
 });

@@ -1,23 +1,45 @@
 import { FC, useState, useEffect } from "react";
-import {pointAPI} from "../../../services/PointService";
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "../../../store/reducers/AuthSlice";
-import getAuthorizationHeaders from "../../../utils/api/getAuthorizationHeaders";
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { Container, Stack, Box, Typography, IconButton, Tooltip } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
+
+import AlertDialog from "../../../components/AlertDialog";
+
+import {pointAPI} from "../../../services/PointService"
 
 import {
   useNavigate,
 } from 'react-router-dom';
 
+
 const Content: FC = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const {data: points, error, isLoading} = pointAPI.useGetPointsQuery(getAuthorizationHeaders(accessToken));
+
+  const [deletePoint, {isError, error:errorDeletePoint}] = pointAPI.useDeletePointMutation();
+
+  const {data: points, error, isLoading} = pointAPI.useGetPointsQuery('');
+
+  const [openAlertDelete, setOpenAlertDelete] = useState(false);
+
+  const [pointIdForDelete, setPointIdForDelete] = useState('');
+
+  const handleClose = () => {
+    setOpenAlertDelete(false);
+  };
+
+  const handleClickAgreeDelete = () => {
+    deletePoint({point_id: pointIdForDelete})
+  };
 
   const navigate = useNavigate();
   return <>
+    <AlertDialog 
+      handleClose={handleClose}
+      handleClickOk={handleClickAgreeDelete}
+      isOpen={openAlertDelete} 
+      title={'Are you sure you want to delete this Point?'} />
+
     { points && !isLoading && !_.isEmpty(points) ? (
       points.map((point) => (
         <Box 
@@ -32,7 +54,12 @@ const Content: FC = () => {
             onClick={() => navigate(`/${point.point_id}`)}>
             {point.name}
           </Typography>
-          <Tooltip title="Delete">
+          <Tooltip 
+            onClick={()=>{
+              setOpenAlertDelete(true); 
+              setPointIdForDelete(point.point_id); 
+            }}
+            title="Delete">
             <IconButton>
               <DeleteIcon sx={{ fontSize: 14 }}/>
             </IconButton>
@@ -48,3 +75,15 @@ const Content: FC = () => {
 };
 
 export default Content;
+
+
+
+
+
+
+
+
+
+
+
+

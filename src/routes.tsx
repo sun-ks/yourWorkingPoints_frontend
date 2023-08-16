@@ -14,8 +14,9 @@ import AddFirstPoint from './pages/AddFirstPoint';
 //import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/DashboardAppPage';
 import PointList from './sections/mainContent/pointList/layout/PointList';
-import Point from './sections/mainContent/point/layout/Point';
+import Point from './sections/mainContent/itemList/layout/ItemList';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
+import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket';
 
 const Router: FC = () => {
 const routers = useRoutes([
@@ -29,6 +30,7 @@ const routers = useRoutes([
           { element: <PointList/>, index: true },
           { path: ':point_id', element: <Point/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
+          { path: '/createTicket/:point_id', element: <CreateNewTiket /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },

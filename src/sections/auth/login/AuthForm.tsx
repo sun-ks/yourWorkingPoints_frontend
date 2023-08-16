@@ -10,7 +10,6 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import {userAPI} from '../../../services/UserService';
 import {authSlice} from '../../../store/reducers/AuthSlice';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 
 interface IFormInputs {
   password: string;
@@ -36,8 +35,6 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     forgot: error_forgot,
     new_password: error_new_password
   };
-
-  const location = useLocation();
 
   const dispatch = useDispatch();
   

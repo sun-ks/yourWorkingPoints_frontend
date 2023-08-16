@@ -30,5 +30,13 @@ export const pointAPI = createApi({
       }),
       invalidatesTags: ['Points']
     }),
+    deletePoint: build.mutation<{point_id: string}, any>({
+      query: (point_id) => ({
+        url: `/points/point`,
+        method: 'DELETE',
+        body: point_id
+      }),
+      invalidatesTags: ['Points']
+    }),
   })
 });
