@@ -46,7 +46,7 @@ const ItemList: FC = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="sm">
+      <Container >
           <Box 
             sx={{
               padding: 4
