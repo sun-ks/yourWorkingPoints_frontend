@@ -1,4 +1,3 @@
-import {IStatus} from "./IStatus";
 
 export interface IItem {
   "item_id": string;  
@@ -8,7 +7,7 @@ export interface IItem {
   "client_first_name"?: string;
   "client_last_name"?: string;
   "client_phone": string;
-  "status": IStatus;
+  "status": 'inbox' | 'in progress' | 'done' | 'completely paid';
   "email": string;
   "device_sn": string;
   "deposit": number;

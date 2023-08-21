@@ -7,7 +7,6 @@ import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { itemAPI } from "../../../services/ItemService";
 import {IItem} from "../../../types/IItem";
-import {IStatus} from "../../../types/IStatus";
 import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
