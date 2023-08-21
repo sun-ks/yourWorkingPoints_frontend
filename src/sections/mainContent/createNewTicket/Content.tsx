@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 const Content: FC = () => {
   const [createItem, {isError, error:errorCreatePoint}] = itemAPI.useCreateItemMutation();
 
-  const { handleSubmit, control,  formState: { errors } } = useForm<IItem>({defaultValues:{paid:0}});
+  const { handleSubmit, control,  formState: { errors } } = useForm<IItem>({defaultValues:{deposit:0}});
 
   const dataFromError:any = (errorCreatePoint && 'data' in errorCreatePoint) ? errorCreatePoint?.data : undefined;
 
@@ -29,11 +29,11 @@ const Content: FC = () => {
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={3}>
-          <Typography variant="h6" gutterBottom>
-            Create New Ticket
-          </Typography>
+        <Typography variant="h6" gutterBottom>
+          Create New Ticket
+        </Typography>
 
+        <Stack spacing={3} sx={{textAlign:'left'}}>
           {isError && <Typography color="error">{dataFromError}</Typography>}
 
           {item && <Typography color="green">Ticket has been created!</Typography>}
@@ -106,7 +106,7 @@ const Content: FC = () => {
 
           <Controller
             control={control}
-            name="paid"
+            name="deposit"
             rules={{
               required: "Client Already Paid is required",
             }}
@@ -114,8 +114,8 @@ const Content: FC = () => {
               return <TextField label="Client Already Paid *" 
                   {...field} 
                   type="number"
-                  error={!!errors.paid}
-                  helperText={errors.paid?.message}
+                  error={!!errors.deposit}
+                  helperText={errors.deposit?.message}
                 />
               }
             }

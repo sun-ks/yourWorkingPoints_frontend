@@ -8,10 +8,19 @@ export const itemAPI = createApi({
   tagTypes: ['Item'],
   endpoints: (build) => ({
     getItems: build.query<IItem[], any>({
-      query: ({Authorization, point_id}) => ({
+      query: ({point_id}) => ({
         url: `/items`,
         params: {
           point_id
+        }
+      }),
+      providesTags: result => ['Item']
+    }),
+    getItem: build.query<IItem, any>({
+      query: (ticket_id) => ({
+        url: `/items/item`,
+        params: {
+          ticket_id
         }
       }),
       providesTags: result => ['Item']
@@ -20,6 +29,14 @@ export const itemAPI = createApi({
       query: (body) => ({
         url: `/items`,
         method: 'POST',
+        body: body
+      }),
+      invalidatesTags: ['Item']
+    }),
+    updateItem: build.mutation<IItem, any>({
+      query: (body) => ({
+        url: `/items`,
+        method: 'PUT',
         body: body
       }),
       invalidatesTags: ['Item']

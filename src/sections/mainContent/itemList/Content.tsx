@@ -1,8 +1,6 @@
 import { FC } from "react";
 import {itemAPI} from "../../../services/ItemService";
-import { useSelector } from "react-redux";
-import { selectAccessToken } from "../../../store/reducers/AuthSlice";
-import getAuthorizationHeaders from "../../../utils/api/getAuthorizationHeaders";
+import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
 
@@ -14,6 +12,18 @@ const columns: GridColDef[] = [
     editable: true,
     valueGetter: (params: GridValueGetterParams) =>
       `${ new Date(params.row.created).toLocaleDateString()}`,
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
+    width: 80,
+    editable: true,
+  },
+  {
+    field: 'priority',
+    headerName: 'Priority',
+    width: 80,
+    editable: true,
   },
   {
     field: 'device_sn',
@@ -43,12 +53,6 @@ const columns: GridColDef[] = [
       `${params.row.client_first_name || ''} ${params.row.client_lasrt_name || ''}`,
   },
   {
-    field: 'status',
-    headerName: 'Status',
-    width: 80,
-    editable: true,
-  },
-  {
     field: 'paid',
     headerName: 'Already Paid',
     type: 'number',
@@ -59,11 +63,13 @@ const columns: GridColDef[] = [
 ];
 
 const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
-  const accessToken = useSelector(selectAccessToken);
-  const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({...getAuthorizationHeaders(accessToken), point_id});
-  
+
+  const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({point_id});
+
+  const navigate = useNavigate();
+
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    console.log('params', params)
+    navigate(`/items/${point_id}/${params.id}`)
   };
 
   return <>
@@ -80,11 +86,11 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
          initialState={{
            pagination: {
              paginationModel: {
-               pageSize: 5,
+               pageSize: 10,
              },
            },
          }}
-         pageSizeOptions={[5]}
+         pageSizeOptions={[10]}
          //checkboxSelection
          disableRowSelectionOnClick
          disableColumnFilter

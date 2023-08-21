@@ -1,3 +1,5 @@
+import {IStatus} from "./IStatus";
+
 export interface IItem {
   "item_id": string;  
   "name"?: string;
@@ -6,9 +8,13 @@ export interface IItem {
   "client_first_name"?: string;
   "client_last_name"?: string;
   "client_phone": string;
-  "status": "inbox" | "in progress" | "done" | "paid";
+  "status": IStatus;
   "email": string;
   "device_sn": string;
-  "paid": number;
+  "deposit": number;
   "comments": string;
+  "created": string | number | Date;
+  "last_part_payment"?: number | "";
+  "note"?: string;
+  "priority"?: 'low' | 'high' | 'standard';
 }

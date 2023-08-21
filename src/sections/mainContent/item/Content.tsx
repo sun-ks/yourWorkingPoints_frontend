@@ -1,0 +1,219 @@
+import React, { FC, useState, useEffect } from "react";
+
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import { Stack, Grid, Paper, Box } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { itemAPI } from "../../../services/ItemService";
+import {IItem} from "../../../types/IItem";
+import {IStatus} from "../../../types/IStatus";
+import { useParams } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+const Content: FC = () => {
+  const { ticket_id }  = useParams();
+
+  const {data: item, error:getItem, isLoading} = itemAPI.useGetItemQuery(ticket_id);
+
+  const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateItemMutation();
+
+  const { handleSubmit, control, register, setValue, formState: { errors } } = useForm<IItem>({
+    defaultValues: {
+      'last_part_payment': "", 
+      note: ''
+    }
+  });
+
+  useEffect(() => {
+    if (item) {
+      setValue('status', item.status);
+      setValue('priority', item.priority);
+      setValue('note', item.note);
+      setValue('last_part_payment', item.last_part_payment);
+    }
+  }, [item]);
+
+  const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
+
+  const dataFromError:any = (errorUpdateTicket && 'data' in errorUpdateTicket) ? errorUpdateTicket?.data : undefined;
+
+  const onSubmit: SubmitHandler<IItem> = async (args) => {
+    const {data} = await updateTicket({...args, ticket_id}) as {data: any};
+    
+    if(data) {
+      setshowSuccessesBlock(true)
+
+      setTimeout(() => {
+        setshowSuccessesBlock(false);
+      }, 3000); 
+    }
+  };
+
+  const statuses = [{
+      value: 'inbox',
+    },
+    {
+      value: 'in progress',
+    },
+    {
+      value: 'done',
+    },
+    {
+      value: 'completely paid',
+    },
+  ];
+
+  const priorities = [{
+      value: 'low',
+    },
+    {
+      value: 'high',
+    },
+    {
+      value: 'standard',
+    }
+  ];
+
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={3} sx={{textAlign:'left'}}>
+
+          <Grid container spacing={2}>
+            <Grid xs={8} >
+              <Item sx={{textAlign:'left', boxShadow: 0}}>
+              {item &&  (
+                <Typography fontSize={13}>
+                  Ticket Created: { new Date(item.created).toLocaleDateString()}<br/>
+                  Client Phone: {item.client_phone}<br/>
+                  Divice Name: {item.name}<br/><br/>
+
+                  Device S/N (imei): {item.device_sn}<br/>
+                  Client Email: {item?.email}<br/>
+                  Client Name: {item?.client_first_name} {item?.client_last_name}<br/><br/>
+                
+                  Client Already Paid: {item.deposit}<br/>
+                  Description: {item.description}<br/>
+                </Typography>)}
+              </Item>
+            </Grid>
+            <Grid xs={4}>
+              <Item sx={{textAlign:'left', boxShadow: 0}}>
+                
+                <Typography fontSize={13}>
+                  Current Point: <br/>
+                </Typography><br/>
+              
+                <Box sx={{marginBottom: 2}}>
+                  <Controller
+                    control={control}
+                    name="status"
+                    render={({ field }) => {
+                      return <TextField 
+                          {...field}
+                          id="outlined-select-currency-native"
+                          select
+                          label="Ticket Status"
+                          variant="outlined"
+                          size="small" 
+                          SelectProps={{
+                            native: true,
+                          }}
+                          >
+                          {statuses.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.value}
+                            </option>
+                          ))}
+                        </TextField>
+                      }
+                    }
+                  />
+                </Box>
+
+                <Box sx={{marginBottom: 2}}>
+                  <Controller
+                    control={control}
+                    name="priority"
+                    render={({ field }) => {
+                      return <TextField 
+                          {...field}
+                          id="outlined-select-currency-native2"
+                          select
+                          label="Ticket Priority"
+                          variant="outlined"
+                          size="small" 
+                          SelectProps={{
+                            native: true,
+                          }}
+                            >
+                          {priorities.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.value}
+                            </option>
+                          ))}
+                        </TextField>
+                      }
+                    }
+                  />
+                </Box>
+              </Item>
+            </Grid>
+          </Grid>
+          
+          <Controller
+            control={control}
+            name="note"
+            render={({ field }) => {
+              return <TextField label="Note"
+                  multiline
+                  variant="outlined"
+                  size="small"
+                  rows={4}
+                  {...field} 
+                  error={!!errors.note}
+                  helperText={errors.note?.message}
+                />
+              }
+            }
+          />
+          <Box>
+            <Controller
+              control={control}
+              name="last_part_payment"
+              render={({ field }) => {
+                return <TextField label="Last Part Payment" 
+                    {...field}
+                    type="number"
+                    variant="outlined"
+                    size="small" 
+                    error={!!errors.last_part_payment}
+                    helperText={errors.last_part_payment?.message}
+                  />
+                }
+              }
+            />
+          </Box>
+
+          {isError && <Typography color="error">{dataFromError}</Typography>}
+
+          {showSuccessesBlock && <Typography color="green">Updated Successful!</Typography>}
+
+          <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+            Update Ticket
+          </LoadingButton>
+          
+        </Stack>
+      </form>
+    
+)}
+
+export default Content;
