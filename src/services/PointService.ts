@@ -14,7 +14,7 @@ export const pointAPI = createApi({
       providesTags: result => ['Points']
     }),
     getPointByPointId: build.query<IPoint, any>({
-      query: ({Authorization, point_id}) => ({
+      query: (point_id) => ({
         url: `/points/point`,
         params: {
           point_id

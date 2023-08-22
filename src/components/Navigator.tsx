@@ -66,7 +66,7 @@ export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
   const { point_id } = useParams<{point_id: string}>();
   const accessToken = useSelector(selectAccessToken);
-  const {data: point, error, isLoading: isLoading_point} = pointAPI.useGetPointByPointIdQuery({...getAuthorizationHeaders(accessToken), point_id})
+  const {data: point, error, isLoading: isLoading_point} = pointAPI.useGetPointByPointIdQuery(point_id)
 
 console.log('point', point?.name)
   const { t } = useTranslation();

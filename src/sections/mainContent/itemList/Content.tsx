@@ -16,7 +16,7 @@ const columns: GridColDef[] = [
   {
     field: 'status',
     headerName: 'Status',
-    width: 80,
+    width: 120,
     editable: true,
   },
   {
@@ -53,11 +53,13 @@ const columns: GridColDef[] = [
       `${params.row.client_first_name || ''} ${params.row.client_lasrt_name || ''}`,
   },
   {
-    field: 'paid',
-    headerName: 'Already Paid',
+    field: 'parseInt(',
+    headerName: 'Paid',
     type: 'number',
     width: 100,
     editable: true,
+    valueGetter: (params: GridValueGetterParams) =>
+    parseInt(params.row.paid) + parseInt(params.row.last_part_payment)
   },
   
 ];

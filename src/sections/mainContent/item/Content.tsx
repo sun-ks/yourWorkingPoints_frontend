@@ -6,6 +6,7 @@ import { Stack, Grid, Paper, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { itemAPI } from "../../../services/ItemService";
+import { pointAPI } from "../../../services/PointService";
 import {IItem} from "../../../types/IItem";
 import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -18,16 +19,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Content: FC = () => {
+const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
   const { ticket_id }  = useParams();
 
   const {data: item, error:getItem, isLoading} = itemAPI.useGetItemQuery(ticket_id);
 
+  const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
+  console.log('currentPoint', currentPoint)
   const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateItemMutation();
 
   const { handleSubmit, control, register, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {
-      'last_part_payment': "", 
+      'last_part_payment': 0, 
       note: ''
     }
   });
@@ -67,8 +70,14 @@ const Content: FC = () => {
       value: 'done',
     },
     {
-      value: 'completely paid',
+      value: 'paid',
     },
+    {
+      value: 'cancelled',
+    },
+    {
+      value: 'hold'
+    }
   ];
 
   const priorities = [{
@@ -78,7 +87,7 @@ const Content: FC = () => {
       value: 'high',
     },
     {
-      value: 'standard',
+      value: 'medium',
     }
   ];
 
@@ -86,8 +95,8 @@ const Content: FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3} sx={{textAlign:'left'}}>
 
-          <Grid container spacing={2}>
-            <Grid xs={8} >
+          <Grid container spacing={0}>
+            <Grid xs={7} >
               <Item sx={{textAlign:'left', boxShadow: 0}}>
               {item &&  (
                 <Typography fontSize={13}>
@@ -99,16 +108,16 @@ const Content: FC = () => {
                   Client Email: {item?.email}<br/>
                   Client Name: {item?.client_first_name} {item?.client_last_name}<br/><br/>
                 
-                  Client Already Paid: {item.deposit}<br/>
+                  First payment: {item.paid}<br/>
                   Description: {item.description}<br/>
                 </Typography>)}
               </Item>
             </Grid>
-            <Grid xs={4}>
+            <Grid xs={5}>
               <Item sx={{textAlign:'left', boxShadow: 0}}>
                 
                 <Typography fontSize={13}>
-                  Current Point: <br/>
+                  Current Point:  {currentPoint?.name}<br/>
                 </Typography><br/>
               
                 <Box sx={{marginBottom: 2}}>
@@ -189,7 +198,7 @@ const Content: FC = () => {
               control={control}
               name="last_part_payment"
               render={({ field }) => {
-                return <TextField label="Last Part Payment" 
+                return <TextField label="Finish Payment" 
                     {...field}
                     type="number"
                     variant="outlined"

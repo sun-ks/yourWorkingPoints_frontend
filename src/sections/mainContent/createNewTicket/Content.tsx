@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 const Content: FC = () => {
   const [createItem, {isError, error:errorCreatePoint}] = itemAPI.useCreateItemMutation();
 
-  const { handleSubmit, control,  formState: { errors } } = useForm<IItem>({defaultValues:{deposit:0}});
+  const { handleSubmit, control,  formState: { errors } } = useForm<IItem>();
 
   const dataFromError:any = (errorCreatePoint && 'data' in errorCreatePoint) ? errorCreatePoint?.data : undefined;
 
@@ -97,6 +97,7 @@ const Content: FC = () => {
             render={({ field }) => {
               return <TextField label="Client Phone *" 
                   {...field} 
+                  type="number"
                   error={!!errors.client_phone}
                   helperText={errors.client_phone?.message}
                 />
@@ -106,16 +107,16 @@ const Content: FC = () => {
 
           <Controller
             control={control}
-            name="deposit"
+            name="paid"
             rules={{
-              required: "Client Already Paid is required",
+              required: "First payment is required",
             }}
             render={({ field }) => {
-              return <TextField label="Client Already Paid *" 
+              return <TextField label="First payment *" 
                   {...field} 
                   type="number"
-                  error={!!errors.deposit}
-                  helperText={errors.deposit?.message}
+                  error={!!errors.paid}
+                  helperText={errors.paid?.message}
                 />
               }
             }
