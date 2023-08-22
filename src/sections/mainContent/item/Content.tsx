@@ -8,7 +8,6 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { itemAPI } from "../../../services/ItemService";
 import { pointAPI } from "../../../services/PointService";
 import {IItem} from "../../../types/IItem";
-import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,30 +18,38 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
-  const { ticket_id }  = useParams();
-
-  const {data: item, error:getItem, isLoading} = itemAPI.useGetItemQuery(ticket_id);
+const Content: FC<{
+  point_id?: string, 
+  ticket?: IItem, 
+  ticket_id?: string,
+  setStatus: any
+}> = ({point_id, 
+  ticket, 
+  ticket_id,
+  setStatus}) => {
 
   const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
 
   const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateItemMutation();
 
-  const { handleSubmit, control, register, setValue, formState: { errors } } = useForm<IItem>({
+  const { handleSubmit, control, register, watch, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {
       'last_part_payment': 0, 
       note: ''
     }
   });
 
+  const status = watch('status');
+  setStatus(status)
+
   useEffect(() => {
-    if (item) {
-      setValue('status', item.status);
-      setValue('priority', item.priority);
-      setValue('note', item.note);
-      setValue('last_part_payment', item.last_part_payment);
+    if (ticket) {
+      setValue('status', ticket.status);
+      setValue('priority', ticket.priority);
+      setValue('note', ticket.note);
+      setValue('last_part_payment', ticket.last_part_payment);
     }
-  }, [item]);
+  }, [ticket]);
 
   const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
 
@@ -92,24 +99,24 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
   ];
 
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} >
         <Stack spacing={3} sx={{textAlign:'left'}}>
 
           <Grid container spacing={0}>
             <Grid xs={7} >
               <Item sx={{textAlign:'left', boxShadow: 0}}>
-              {item &&  (
+              {ticket &&  (
                 <Typography fontSize={13}>
-                  Ticket Created: { new Date(item.created).toLocaleDateString()}<br/>
-                  Client Phone: {item.client_phone}<br/>
-                  Divice Name: {item.name}<br/><br/>
+                  Ticket Created: { new Date(ticket.created).toLocaleDateString()}<br/>
+                  Client Phone: {ticket.client_phone}<br/>
+                  Divice Name: {ticket.name}<br/><br/>
 
-                  Device S/N (imei): {item.device_sn}<br/>
-                  Client Email: {item?.email}<br/>
-                  Client Name: {item?.client_first_name} {item?.client_last_name}<br/><br/>
+                  Device S/N (imei): {ticket.device_sn}<br/>
+                  Client Email: {ticket?.email}<br/>
+                  Client Name: {ticket?.client_first_name} {ticket?.client_last_name}<br/><br/>
                 
-                  First payment: {item.paid}<br/>
-                  Description: {item.description}<br/>
+                  First payment: {ticket.paid}<br/>
+                  Description: {ticket.description}<br/>
                 </Typography>)}
               </Item>
             </Grid>
@@ -218,7 +225,6 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
             Update Ticket
           </LoadingButton>
-          
         </Stack>
       </form>
     

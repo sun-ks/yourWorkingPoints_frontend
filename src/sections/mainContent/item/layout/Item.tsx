@@ -1,11 +1,23 @@
-import React, { FC } from "react";
-import { Link } from 'react-router-dom';
+import React, { FC, useState } from "react";
+import { itemAPI } from "../../../../services/ItemService";
+import { makeStyles } from '@mui/styles';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
-import {Tooltip, Container, Box, Button} from '@mui/material';
-import IconButton from '@mui/material/IconButton';
+import {Tooltip, 
+  Container, 
+  Box, 
+  Button, 
+  Typography, 
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer, 
+  TableRow, 
+  Paper, 
+  IconButton, 
+  Grid, 
+  Toolbar, 
+  AppBar} from '@mui/material';
+
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useNavigate,
@@ -14,16 +26,49 @@ import {
 
 import Content from '../Content';
 
+const useStyles = makeStyles((theme:any) => ({
+  noPrint: {
+    '@media print': {
+      display: 'none',
+    }
+  },
+  print: {
+    display: 'none',
+    '@media print': {
+      display: 'block',
+      backgroundColor: 'lightgray',
+    },
+  },
+}));
+
 const Item: FC = () => {
   const navigate = useNavigate();
 
-  const { point_id }  = useParams();
+  const { point_id, ticket_id }  = useParams();
+
+  const {data: ticket } = itemAPI.useGetItemQuery(ticket_id);
+
+  const [status, setStatus] = useState();
+
+  const classes = useStyles();
+
+  const rows = [
+    {name: 'Ticket ID', value:`${ticket?.ticket_id}`},
+    {name: 'Client', 
+      value:`${ticket?.client_phone}  
+      ${ticket?.client_first_name ? ticket?.client_first_name.toUpperCase() : ''}  
+      ${ticket?.client_last_name ? ticket?.client_last_name.toUpperCase() : ''}
+    `},
+    {name: 'Device S/N', value:`${ticket?.device_sn}`},
+    {name: 'Description', value:`${ticket?.description}`},
+  ];
 
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{'YWP | Create Ticket'}</title>
+        <title>{`YWP | ${ticket?.name}`}</title>
       </Helmet>
+      <div className={classes.noPrint}>
       <AppBar
         position="static"
         color="default"
@@ -40,10 +85,12 @@ const Item: FC = () => {
               </Tooltip>
             </Grid>
       
-            <Grid item>
-              <Button onClick={()=>{ window.print();}} variant="contained" sx={{ mr: 1 }}>
-                Print Receipt
-              </Button>
+            <Grid item> 
+              <Tooltip enterDelay={2000} title="Set status 'paid' for printing guarantee">
+                <Button onClick={()=>{ window.print();}} variant="contained" sx={{ mr: 1 }}>
+                {(status === 'paid') ? 'Print Guarantee' : 'Print Repair Order'}
+                </Button>
+              </Tooltip>
             </Grid>
           </Grid>
         </Toolbar>
@@ -53,9 +100,30 @@ const Item: FC = () => {
             sx={{
               padding: 4
             }}>
-            <Content point_id={point_id} />
+            <Content point_id={point_id} ticket={ticket} ticket_id={ticket_id} setStatus={setStatus} />
           </Box>
         </Container>
+      </div>
+      <div className={classes.print}>
+        <Typography fontSize={16} sx={{padding:'20px 0 30px'}}>
+          {(status === 'paid') ? 'Guarantee' : 'Repair Order'}
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="caption table">
+            <caption>Service information:</caption>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.value}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </HelmetProvider>
   )
 }

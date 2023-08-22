@@ -4,10 +4,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
+import { makeStyles } from '@mui/styles';
 
 function Copyright() {
   return (
@@ -162,9 +162,20 @@ theme = {
 
 const drawerWidth = 256;
 
+const useStyles = makeStyles((theme: any) => ({
+  
+  noPrint: {
+    '@media print': {
+      display: 'none', // Hide the common container by default
+    }
+  }
+}));
+
 export default function Paperbase() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const classes = useStyles();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -192,13 +203,17 @@ export default function Paperbase() {
           />
         </Box>
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header onDrawerToggle={handleDrawerToggle} />
+          <div className={classes.noPrint}>
+            <Header  onDrawerToggle={handleDrawerToggle} />
+          </div>
           <Box component="main" sx={{ flex: 1, py: 6,  bgcolor: '#eaeff1' }}>
             <Content />
           </Box>
-          <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
-            <Copyright />
-          </Box>
+          <div className={classes.noPrint}>
+            <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
+              <Copyright />
+            </Box>
+          </div>
         </Box>
       </Box>
     </ThemeProvider>

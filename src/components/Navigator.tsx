@@ -17,16 +17,14 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { selectAccessToken } from "../store/reducers/AuthSlice";
-import getAuthorizationHeaders from "../utils/api/getAuthorizationHeaders";
 import {pointAPI} from "../services/PointService";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const categories = [
   {
-
     children: [
       {
-        id: 'Tickets',
+        id: 'All Tickets',
         icon: <ListAltIcon />,
         active: false,
       },

@@ -1,6 +1,6 @@
 
 export interface IItem {
-  "item_id": string;  
+  "ticket_id": string;  
   "name"?: string;
   "description"?: string;
   "point_id": string;

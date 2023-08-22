@@ -7,8 +7,6 @@ import { useParams } from 'react-router-dom';
 import { pointAPI } from "../../../../services/PointService";
 import Content from '../Content';
 import StyledRouterLink from '../../../../components/styled/RouterLink';
-import IconButton from '@mui/material/IconButton';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useNavigate,
 } from 'react-router-dom';
