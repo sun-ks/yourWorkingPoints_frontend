@@ -1,10 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AppBar from '@mui/material/AppBar';
-import {Toolbar, Container, Box, Grid, Button, Tooltip} from '@mui/material';
+import {Toolbar, Container, Box, Grid, Button, Tooltip, Typography} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { pointAPI } from "../../../../services/PointService";
 import Content from '../Content';
+import StyledRouterLink from '../../../../components/styled/RouterLink';
 import IconButton from '@mui/material/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
@@ -14,6 +16,7 @@ import {
 const ItemList: FC = () => {
   const navigate = useNavigate();
   const { point_id } = useParams<{point_id: string }>();
+  const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
   return (
     <>
     <HelmetProvider>
@@ -29,14 +32,7 @@ const ItemList: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Tooltip title="Back">
-                <IconButton onClick={() => navigate(-1)}>
-                  <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              Tickets List
+              <StyledRouterLink to={`/`}>Points</StyledRouterLink> / {currentPoint?.name} tickets
             </Grid>
             <Grid item>
               <Button component={Link} to={`/createTicket/${point_id}`} variant="contained" sx={{ mr: 1 }}>

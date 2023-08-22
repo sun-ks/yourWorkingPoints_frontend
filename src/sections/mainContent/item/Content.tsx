@@ -25,7 +25,7 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
   const {data: item, error:getItem, isLoading} = itemAPI.useGetItemQuery(ticket_id);
 
   const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
-  console.log('currentPoint', currentPoint)
+
   const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateItemMutation();
 
   const { handleSubmit, control, register, setValue, formState: { errors } } = useForm<IItem>({

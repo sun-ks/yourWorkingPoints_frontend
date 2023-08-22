@@ -27,15 +27,8 @@ const PointList: FC = () => {
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
-          <Grid item>
-            <Tooltip title="Back">
-              <IconButton onClick={() => navigate(-1)}>
-                <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
             <Grid item>
-              Points List
+              Points
             </Grid>
             <Grid item>
               <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
