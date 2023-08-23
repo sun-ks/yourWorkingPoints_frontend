@@ -116,7 +116,6 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
 ) : (
   'This point does not have Tickets yet'
 )}
-
   </>
 };
 

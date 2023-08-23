@@ -97,7 +97,7 @@ const Content: FC<{
       value: 'medium',
     }
   ];
-
+  
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
         <Stack spacing={3} sx={{textAlign:'left'}}>

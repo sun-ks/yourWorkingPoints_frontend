@@ -61,10 +61,14 @@ const Item: FC = () => {
 
   useEffect(()=>{
     if (printType) {
-      setPrintType(false)
       window.print();
+
+      //It provide printType !== false when print dialog will be open in mobile Chrome
+      setTimeout(()=>{ 
+        setPrintType(false)
+      },1000)
     }
-  },[printType]);
+  }, [printType]);
 
   const QRForService = () => <QRCode size={150} value={`${siteUrl}items/${point_id}/${ticket_id}`} />
 
@@ -96,13 +100,13 @@ const Item: FC = () => {
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
               <Tooltip title="Back">
-                <IconButton onClick={() => navigate(-1)}>
+                <IconButton onClick={() => navigate(`/${point_id}`)}>
                   <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
                 </IconButton>
               </Tooltip>
             </Grid>
       
-            <Grid item display="flex"> 
+            <Grid item display="flex" alignItems="center"> 
               <Box sx={{marginRight: 1}}>
                 <Tooltip title="Print QR For Service">
                   <IconButton onClick={() => {
