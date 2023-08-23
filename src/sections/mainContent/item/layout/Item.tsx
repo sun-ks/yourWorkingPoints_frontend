@@ -129,7 +129,7 @@ const Item: FC = () => {
         <Container maxWidth="sm">
           <Box 
             sx={{
-              padding: 4
+              padding: 1
             }}>
             <Content point_id={point_id} ticket={ticket} ticket_id={ticket_id} setStatus={setStatus} />
           </Box>

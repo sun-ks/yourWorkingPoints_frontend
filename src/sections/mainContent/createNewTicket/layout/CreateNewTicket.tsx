@@ -41,7 +41,7 @@ const CreateNewTiket: FC = () => {
         <Container maxWidth="sm">
           <Box 
             sx={{
-              padding: 4
+              padding: 1
             }}>
             <Content/>
           </Box>

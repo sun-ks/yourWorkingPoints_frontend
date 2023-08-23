@@ -66,7 +66,6 @@ export default function Navigator(props: DrawerProps) {
   const accessToken = useSelector(selectAccessToken);
   const {data: point, error, isLoading: isLoading_point} = pointAPI.useGetPointByPointIdQuery(point_id)
 
-console.log('point', point?.name)
   const { t } = useTranslation();
 
   return (

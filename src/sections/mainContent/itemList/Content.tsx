@@ -3,7 +3,7 @@ import {itemAPI} from "../../../services/ItemService";
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
-
+import { DataGridPro } from '@mui/x-data-grid-pro';
 const columns: GridColDef[] = [
   {
     field: 'created',
@@ -82,8 +82,11 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
     {isLoading ? (
   <p>Loading...</p>
 ) : items && items.length > 0 ? (
-  <Box sx={{ height: 400, width: '100%' }}>
+  <Box sx={{  width: '100%', overflow: 'auto'}}>
     <DataGrid
+      autoHeight
+      autoPageSize
+      scrollbarSize={53}
       rows={items || []}
       columns={columns}
       getRowId={(row) => row.ticket_id}
@@ -97,7 +100,7 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
       pageSizeOptions={[10]}
       //checkboxSelection
       disableRowSelectionOnClick
-      //disableColumnFilter
+      disableColumnFilter
       disableColumnSelector
       disableDensitySelector
       slots={{ toolbar: GridToolbar }}

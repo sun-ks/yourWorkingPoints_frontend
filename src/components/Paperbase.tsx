@@ -8,6 +8,7 @@ import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
 import { makeStyles } from '@mui/styles';
+import {DRAWER_WIDTH} from '../constants/common';
 
 function Copyright() {
   return (
@@ -160,8 +161,6 @@ theme = {
   },
 };
 
-const drawerWidth = 256;
-
 const useStyles = makeStyles((theme: any) => ({
   
   noPrint: {
@@ -187,22 +186,23 @@ export default function Paperbase() {
         <CssBaseline />
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
         >
           {isSmUp ? null : (
             <Navigator
-              PaperProps={{ style: { width: drawerWidth } }}
+              PaperProps={{ style: { width: DRAWER_WIDTH } }}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
+              onClick={()=>{handleDrawerToggle() ;console.log('click')}}
             />
           )}
           <Navigator
-            PaperProps={{ style: { width: drawerWidth } }}
+            PaperProps={{ style: { width: DRAWER_WIDTH } }}
             sx={{ display: { sm: 'block', xs: 'none' } }}
           />
         </Box>
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', width: `calc(100% - ${DRAWER_WIDTH}px)` }}>
           <div className={classes.noPrint}>
             <Header  onDrawerToggle={handleDrawerToggle} />
           </div>

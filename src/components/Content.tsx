@@ -5,7 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 export default function Content() {
   return (
-    <Paper sx={{  margin: 'auto 30px auto 30px', overflow: 'hidden' }}>
+    <Paper sx={{   margin: 'auto 10px auto 10px', overflow: 'hidden' }}>
       <Outlet />
     </Paper>
   );

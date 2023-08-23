@@ -101,9 +101,8 @@ const Content: FC<{
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
         <Stack spacing={3} sx={{textAlign:'left'}}>
-
-          <Grid container spacing={0}>
-            <Grid xs={7} >
+          <Grid container spacing={0} >
+            <Grid xs={12}  sm={7}>
               <Item sx={{textAlign:'left', boxShadow: 0}}>
               {ticket &&  (
                 <Typography fontSize={13}>
@@ -120,13 +119,12 @@ const Content: FC<{
                 </Typography>)}
               </Item>
             </Grid>
-            <Grid xs={5}>
+            <Grid xs={12} sm={5}>
               <Item sx={{textAlign:'left', boxShadow: 0}}>
-                
                 <Typography fontSize={13}>
                   Current Point:  {currentPoint?.name}<br/>
-                </Typography><br/>
-              
+                </Typography>
+                <br/>
                 <Box sx={{marginBottom: 2}}>
                   <Controller
                     control={control}

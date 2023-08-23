@@ -19,7 +19,7 @@ const ItemList: FC = () => {
     <>
     <HelmetProvider>
       <Helmet>
-        <title>{'YWP | Ticket List'}</title>
+        <title>{'YWP | Tickets'}</title>
       </Helmet>
       <AppBar
         position="static"
@@ -30,7 +30,7 @@ const ItemList: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              <StyledRouterLink to={`/`}>Points</StyledRouterLink> / {currentPoint?.name}, tickets
+              <StyledRouterLink to={`/`}>Points</StyledRouterLink> / {currentPoint?.name}
             </Grid>
             <Grid item>
               <Button component={Link} to={`/createTicket/${point_id}`} variant="contained" sx={{ mr: 1 }}>
@@ -43,7 +43,7 @@ const ItemList: FC = () => {
       <Container >
           <Box 
             sx={{
-              padding: 4
+              padding: 1
             }}>
             <Content point_id={point_id}/>
           </Box>
