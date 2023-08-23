@@ -76,41 +76,44 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
 
   return <>
     {error && <Box sx={{ marginBottom: 3 }}>
-        <Typography color="error">Data load Error</Typography>
-      </Box>}
+      <Typography color="error">Data load Error</Typography>
+    </Box>}
     
-    {!isLoading ? (
-       <Box sx={{ height: 400, width: '100%' }}>
-       <DataGrid
-         rows={items || []}
-         columns={columns}
-         getRowId={(row) => row.ticket_id}
-         initialState={{
-           pagination: {
-             paginationModel: {
-               pageSize: 10,
-             },
-           },
-         }}
-         pageSizeOptions={[10]}
-         //checkboxSelection
-         disableRowSelectionOnClick
-         disableColumnFilter
-         disableColumnSelector
-         disableDensitySelector
-         slots={{ toolbar: GridToolbar }}
-         slotProps={{
-           toolbar: {
-             showQuickFilter: true,
-             quickFilterProps: { debounceMs: 500 }
-           }
-         }}
-         onRowClick={handleRowClick}
-       />
-     </Box>
-    ) : (
-      <p>Loading...</p>
-    )}
+    {isLoading ? (
+  <p>Loading...</p>
+) : items && items.length > 0 ? (
+  <Box sx={{ height: 400, width: '100%' }}>
+    <DataGrid
+      rows={items || []}
+      columns={columns}
+      getRowId={(row) => row.ticket_id}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 10,
+          },
+        },
+      }}
+      pageSizeOptions={[10]}
+      //checkboxSelection
+      disableRowSelectionOnClick
+      //disableColumnFilter
+      disableColumnSelector
+      disableDensitySelector
+      slots={{ toolbar: GridToolbar }}
+      slotProps={{
+        toolbar: {
+          showQuickFilter: true,
+          quickFilterProps: { debounceMs: 500 },
+        },
+      }}
+      onRowClick={handleRowClick}
+    />
+  </Box>
+) : (
+  'This point does not have Tickets yet'
+)}
+
   </>
 };
 
