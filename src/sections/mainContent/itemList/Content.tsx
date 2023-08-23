@@ -8,7 +8,7 @@ const columns: GridColDef[] = [
   {
     field: 'created',
     headerName: 'Сreated',
-    width: 110,
+    width: 150,
     editable: true,
     valueGetter: (params: GridValueGetterParams) =>
       `${ new Date(params.row.created).toLocaleDateString()}`,
@@ -16,13 +16,13 @@ const columns: GridColDef[] = [
   {
     field: 'status',
     headerName: 'Status',
-    width: 120,
+    width: 150,
     editable: true,
   },
   {
     field: 'priority',
     headerName: 'Priority',
-    width: 80,
+    width: 150,
     editable: true,
   },
   {
@@ -40,15 +40,15 @@ const columns: GridColDef[] = [
   {
     field: 'client_phone',
     headerName: 'Client Phone',
-    width: 140,
+    width: 150,
     editable: true,
   },
   {
     field: 'client_first_name',
-    headerName: 'Client Name',
+    headerName: 'Client',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 120,
+    width: 130,
     valueGetter: (params: GridValueGetterParams) =>
       `${params.row.client_first_name || ''} ${params.row.client_lasrt_name || ''}`,
   },
@@ -56,7 +56,7 @@ const columns: GridColDef[] = [
     field: 'parseInt(',
     headerName: 'Paid',
     type: 'number',
-    width: 100,
+    width: 150,
     editable: true,
     valueGetter: (params: GridValueGetterParams) =>
     parseInt(params.row.paid) + parseInt(params.row.last_part_payment)
