@@ -1,48 +1,78 @@
 import { FC, useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import _ from 'lodash';
-import { Container, Stack, Box, Typography, IconButton, Tooltip } from '@mui/material';
 
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 
-import AlertDialog from "../../../components/AlertDialog";
-
-import {pointAPI} from "../../../services/PointService"
+import {isEmpty} from "lodash"
 
 import {
   useNavigate,
 } from 'react-router-dom';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import AlertDialog from "../../../components/AlertDialog";
+
+import {pointAPI} from "../../../services/PointService";
+
+import {IPoint} from "../../../types/IPoint";
 
 const Content: FC = () => {
-
   const [deletePoint, {isError, error:errorDeletePoint}] = pointAPI.useDeletePointMutation();
 
   const {data: points, error, isLoading} = pointAPI.useGetPointsQuery('');
 
-  const [openAlertDelete, setOpenAlertDelete] = useState(false);
+  const [pointsWithHaveTickets] = pointAPI.useGetPointsWithHaveTicketsMutation();
+
+  const [openAlertDelete, setOpenAlertDelete] = useState<{
+    open: boolean;
+    title?: string;
+    showSubmitBtn?: boolean;
+  }>({
+    open:false,
+  });
 
   const [pointIdForDelete, setPointIdForDelete] = useState('');
 
-  const handleClose = () => {
-    setOpenAlertDelete(false);
-  };
-
-  const handleClickAgreeDelete = () => {
-    deletePoint({point_id: pointIdForDelete})
-  };
-
   const navigate = useNavigate();
+
+  const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
+
+  async function fetchPoints() {
+    const { data } = await pointsWithHaveTickets('') as { data: IPoint[] | [] };
+
+    const points = await data;
+
+    setPointsHasTickets(points);
+  }
+
+  const DEFAULT_TITLE_ALERT = 'Are you sure you want to delete this Point?';
+  const HAS_TICKETS_TITLE_ALERT = 'Only empty Points available for deletion';
+  const TOOLTIP_TXT = 'Delete'
+
+  useEffect(() => {
+    fetchPoints();
+  }, []);
+
+  const handleClose = () => {
+    setOpenAlertDelete((prev)=>({...prev, open:false}));
+  };
+
+  const handleClickAgreeDelete = async () => {
+    await deletePoint({point_id: pointIdForDelete});
+    fetchPoints();
+  };
+
   return <>
     <AlertDialog 
       handleClose={handleClose}
       handleClickOk={handleClickAgreeDelete}
-      isOpen={openAlertDelete} 
-      title={'Are you sure you want to delete this Point?'} />
+      isOpen={openAlertDelete.open} 
+      showSubmitBtn={openAlertDelete.showSubmitBtn}
+      title={openAlertDelete.title ? openAlertDelete.title : DEFAULT_TITLE_ALERT} />
 
-    { points && !isLoading && !_.isEmpty(points) ? (
-      points.map((point) => (
-        <Box 
+    { pointsHasTickets && !isLoading && !isEmpty(points) ? (
+      pointsHasTickets.map((point) =>  {
+        return (<Box 
           display="flex" 
           alignItems="center"
           justifyContent="center"
@@ -50,22 +80,26 @@ const Content: FC = () => {
             padding: 1
           }}>
           <Typography 
-            sx={{ cursor: 'pointer', marginRight: 1 }} 
+            sx={{ cursor: 'pointer', marginRight: 1 }}
             onClick={() => navigate(`/${point.point_id}`)}>
             {point.name}
           </Typography>
           <Tooltip 
             onClick={()=>{
-              setOpenAlertDelete(true); 
+              const alertModalTitle = point.hastickets ? HAS_TICKETS_TITLE_ALERT : undefined;
+              const showSubmitBtn = !point.hastickets;
+
+              setOpenAlertDelete({open: true, title: alertModalTitle, showSubmitBtn}); 
               setPointIdForDelete(point.point_id); 
             }}
-            title="Delete">
-            <IconButton>
+            title={TOOLTIP_TXT}>
+            <IconButton >
               <DeleteIcon sx={{ fontSize: 14 }}/>
             </IconButton>
           </Tooltip>
         </Box>
-      ))
+      )
+    })
     ) : isLoading ? (
       <p>Loading...</p>
     ) : (

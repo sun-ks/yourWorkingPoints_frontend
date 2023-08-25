@@ -28,7 +28,7 @@ const PointList: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              Points
+              Choice Point:
             </Grid>
             <Grid item>
               <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>

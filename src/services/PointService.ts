@@ -8,10 +8,16 @@ export const pointAPI = createApi({
   tagTypes: ['Points', 'Point'],
   endpoints: (build) => ({
     getPoints: build.query<IPoint[], any>({
-      query: (authorizationHeaders) => ({
+      query: () => ({
         url: `/points`,
       }),
       providesTags: result => ['Points']
+    }),
+    getPointsWithHaveTickets: build.mutation<IPoint[], any>({
+      query: () => ({
+        url: `/points/pointsWithHaveTickets`,
+      }),
+      //providesTags: ['Points'],
     }),
     getPointByPointId: build.query<IPoint, any>({
       query: (point_id) => ({

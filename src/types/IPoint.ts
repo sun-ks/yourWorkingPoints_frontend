@@ -3,4 +3,5 @@ export interface IPoint {
   name: string;
   description: string;
   created: string;
+  hastickets?: boolean;
 }

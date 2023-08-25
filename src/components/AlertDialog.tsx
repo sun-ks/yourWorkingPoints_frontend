@@ -12,15 +12,16 @@ import DialogTitle from '@mui/material/DialogTitle';
   isOpen: boolean; 
   title?:string; 
   description?: string;
+  showSubmitBtn?: boolean;
 }> = ({
   handleClose,
   handleClickOk,
   isOpen, 
   title='Are you sure?', 
-  description
+  description,
+  showSubmitBtn=true
 }) => {
  
-
   return (
     <>
       <Dialog
@@ -39,9 +40,9 @@ import DialogTitle from '@mui/material/DialogTitle';
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cansel</Button>
-          <Button variant="contained" onClick={()=>{handleClose(); handleClickOk()}} autoFocus>
+          {showSubmitBtn && (<Button variant="contained" onClick={()=>{handleClose(); handleClickOk()}} autoFocus>
             Ok
-          </Button>
+          </Button>)}
         </DialogActions>
       </Dialog>
     </>
