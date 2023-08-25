@@ -100,7 +100,7 @@ const Item: FC = () => {
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
               <Tooltip title="Back">
-                <IconButton onClick={() => navigate(`/${point_id}`)}>
+                <IconButton onClick={() => navigate(`/${ticket?.point_id}`)}>
                   <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
                 </IconButton>
               </Tooltip>
@@ -135,7 +135,7 @@ const Item: FC = () => {
             sx={{
               padding: 1
             }}>
-            <Content point_id={point_id} ticket={ticket} ticket_id={ticket_id} setStatus={setStatus} />
+            <Content ticket={ticket} setStatus={setStatus} />
           </Box>
         </Container>
       </div>

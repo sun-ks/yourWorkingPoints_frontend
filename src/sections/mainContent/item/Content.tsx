@@ -7,7 +7,7 @@ import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { itemAPI } from "../../../services/ItemService";
 import { pointAPI } from "../../../services/PointService";
-import {IItem} from "../../../types/IItem";
+import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,27 +19,26 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Content: FC<{
-  point_id?: string, 
   ticket?: IItem, 
-  ticket_id?: string,
   setStatus: any
-}> = ({point_id, 
-  ticket, 
-  ticket_id,
+}> = ({
+  ticket,
   setStatus}) => {
 
-  const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
+  const {data: points} = pointAPI.useGetPointsQuery('');
 
   const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateItemMutation();
 
-  const { handleSubmit, control, register, watch, setValue, formState: { errors } } = useForm<IItem>({
+  const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {
-      'last_part_payment': 0, 
-      note: ''
+      last_part_payment: 0, 
+      note: '',
+      point_id: ''
     }
   });
 
   const status = watch('status');
+
   setStatus(status)
 
   useEffect(() => {
@@ -48,6 +47,7 @@ const Content: FC<{
       setValue('priority', ticket.priority);
       setValue('note', ticket.note);
       setValue('last_part_payment', ticket.last_part_payment);
+      setValue('point_id', ticket.point_id);
     }
   }, [ticket]);
 
@@ -56,7 +56,7 @@ const Content: FC<{
   const dataFromError:any = (errorUpdateTicket && 'data' in errorUpdateTicket) ? errorUpdateTicket?.data : undefined;
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
-    const {data} = await updateTicket({...args, ticket_id}) as {data: any};
+    const {data} = await updateTicket({...args, ticket_id: ticket?.ticket_id}) as {data: any};
     
     if(data) {
       setshowSuccessesBlock(true)
@@ -121,10 +121,32 @@ const Content: FC<{
             </Grid>
             <Grid xs={12} sm={5}>
               <Item sx={{textAlign:'left', boxShadow: 0}}>
-                <Typography fontSize={13}>
-                  Current Point:  {currentPoint?.name}<br/>
-                </Typography>
-                <br/>
+                <Box sx={{marginBottom: 2}}>
+                  <Controller
+                    control={control}
+                    name="point_id"
+                    render={({ field }) => {
+                    return <TextField 
+                      {...field}
+                      id="outlined-select-currency-native2"
+                      select
+                      label="Current Point"
+                      variant="outlined"
+                      size="small"
+                      SelectProps={{
+                        native: true,
+                      }}
+                        >
+                      {points && points.map((point) => (
+                        <option key={point.point_id} value={point.point_id}>
+                          {point.name}
+                        </option>
+                      ))}
+                    </TextField>
+                    }
+                    }
+                  />
+                </Box>
                 <Box sx={{marginBottom: 2}}>
                   <Controller
                     control={control}

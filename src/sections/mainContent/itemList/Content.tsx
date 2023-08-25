@@ -71,7 +71,7 @@ const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
   const navigate = useNavigate();
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    navigate(`/items/${point_id}/${params.id}`)
+    navigate(`/items/${params.id}`)
   };
 
   return <>
