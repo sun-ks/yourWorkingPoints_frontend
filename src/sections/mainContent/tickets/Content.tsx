@@ -3,7 +3,7 @@ import {itemAPI} from "../../../services/ItemService";
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
-import { DataGridPro } from '@mui/x-data-grid-pro';
+
 const columns: GridColDef[] = [
   {
     field: 'created',
@@ -64,9 +64,9 @@ const columns: GridColDef[] = [
   
 ];
 
-const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
+const Content: FC = () => {
 
-  const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({point_id});
+  const {data: items, error, isLoading} = itemAPI.useGetAllItemsQuery('')
 
   const navigate = useNavigate();
 

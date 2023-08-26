@@ -27,6 +27,7 @@ const categories = [
         id: 'All Tickets',
         icon: <ListAltIcon />,
         active: false,
+        linkTo: '/tickets'
       },
     ],
   },
@@ -37,10 +38,11 @@ const categories = [
         id: 'Workers',
         icon: <PeopleIcon />,
         active: false,
+        linkTo: '/'
       },
-      { id: 'Statistics', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Shop', icon: <ShoppingBasketIcon /> },
-      { id: 'Clients', icon: <Diversity1Icon /> },
+      { id: 'Statistics', linkTo: '/', icon: <PermMediaOutlinedIcon /> },
+      { id: 'Shop', linkTo: '/', icon: <ShoppingBasketIcon /> },
+      { id: 'Clients', linkTo: '/', icon: <Diversity1Icon /> },
     ],
   },
 ];
@@ -93,8 +95,8 @@ export default function Navigator(props: DrawerProps) {
             <ListItem sx={{ py: 2, px: 3 }}>
               <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon, active }) => (
-              <NavLink to="/53c1dbfe-37ea-4928-9c3f-a9db2e51cb69" style={{ textDecoration: 'none' }}>
+            {children.map(({ id: childId, icon, active, linkTo }) => (
+              <NavLink to={linkTo} style={{ textDecoration: 'none' }}>
                 <ListItem disablePadding key={childId}>
                   <ListItemButton selected={active} sx={item}>
                     <ListItemIcon>{icon}</ListItemIcon>

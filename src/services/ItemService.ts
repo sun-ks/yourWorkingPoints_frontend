@@ -7,6 +7,12 @@ export const itemAPI = createApi({
   baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['Item'],
   endpoints: (build) => ({
+    getAllItems: build.query<IItem[], any>({
+      query: () => ({
+        url: `/items/all`,
+      }),
+      providesTags: result => ['Item']
+    }),
     getItems: build.query<IItem[], any>({
       query: ({point_id}) => ({
         url: `/items`,

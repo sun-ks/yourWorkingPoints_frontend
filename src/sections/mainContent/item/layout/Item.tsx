@@ -66,7 +66,7 @@ const Item: FC = () => {
       //It provide printType !== false when print dialog will be open in mobile Chrome
       setTimeout(()=>{ 
         setPrintType(false)
-      },1000)
+      },2000)
     }
   }, [printType]);
 

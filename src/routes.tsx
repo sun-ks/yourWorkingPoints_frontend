@@ -18,6 +18,7 @@ import Point from './sections/mainContent/itemList/layout/ItemList';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
 import Item from './sections/mainContent/item/layout/Item';
+import Tickets from './sections/mainContent/tickets/layout/Tickets';
 
 const Router: FC = () => {
 const routers = useRoutes([
@@ -32,6 +33,7 @@ const routers = useRoutes([
           { path: ':point_id', element: <Point/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
+          { path: '/tickets', element: <Tickets/> },
           { path: '/items/:ticket_id', element: <Item /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
