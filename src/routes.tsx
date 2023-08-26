@@ -13,7 +13,7 @@ import Page404 from './pages/Page404';
 import AddFirstPoint from './pages/AddFirstPoint';
 //import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/DashboardAppPage';
-import PointList from './sections/mainContent/pointList/layout/PointList';
+import Points from './sections/mainContent/points/layout/Points';
 import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
@@ -29,7 +29,7 @@ const routers = useRoutes([
       children: [
         { path: '/', element: <Paperbase/>,
         children: [
-          { element: <PointList/>, index: true },
+          { element: <Points/>, index: true },
           { path: ':point_id', element: <TicketsByPoints/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },

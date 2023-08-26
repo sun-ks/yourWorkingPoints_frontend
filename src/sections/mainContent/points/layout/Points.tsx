@@ -10,7 +10,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-const PointList: FC = () => {
+const Points: FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -51,4 +51,4 @@ const PointList: FC = () => {
   )
 }
 
-export default PointList;
+export default Points;
