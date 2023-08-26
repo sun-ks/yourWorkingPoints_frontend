@@ -9,13 +9,13 @@ export const itemAPI = createApi({
   endpoints: (build) => ({
     getAllItems: build.query<IItem[], any>({
       query: () => ({
-        url: `/items/all`,
+        url: `/items/allTickets`,
       }),
       providesTags: result => ['Item']
     }),
     getItems: build.query<IItem[], any>({
       query: ({point_id}) => ({
-        url: `/items`,
+        url: `/items/allTicketsByPoint`,
         params: {
           point_id
         }
@@ -24,7 +24,7 @@ export const itemAPI = createApi({
     }),
     getItem: build.query<IItem, any>({
       query: (ticket_id) => ({
-        url: `/items/item`,
+        url: `/items/ticketByTicketId`,
         params: {
           ticket_id
         }
@@ -33,7 +33,7 @@ export const itemAPI = createApi({
     }),
     createItem: build.mutation<IItem, any>({
       query: (body) => ({
-        url: `/items`,
+        url: `/items/createTicket`,
         method: 'POST',
         body: body
       }),
@@ -41,7 +41,7 @@ export const itemAPI = createApi({
     }),
     updateItem: build.mutation<IItem, any>({
       query: (body) => ({
-        url: `/items`,
+        url: `/items/updateTicket`,
         method: 'PUT',
         body: body
       }),
