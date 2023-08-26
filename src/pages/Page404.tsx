@@ -32,7 +32,7 @@ const Page404: FC = () => {
               spelling.
             </Typography>
 
-            <Button to="/dashboard/points" size="large" variant="contained" component={RouterLink}>
+            <Button to="/" size="large" variant="contained" component={RouterLink}>
               Go to Home
             </Button>
           </StyledContent>
