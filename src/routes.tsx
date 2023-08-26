@@ -14,10 +14,10 @@ import AddFirstPoint from './pages/AddFirstPoint';
 //import ProductsPage from './pages/ProductsPage';
 //import DashboardAppPage from './pages/DashboardAppPage';
 import PointList from './sections/mainContent/pointList/layout/PointList';
-import Point from './sections/mainContent/itemList/layout/ItemList';
+import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
-import Item from './sections/mainContent/item/layout/Item';
+import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 
 const Router: FC = () => {
@@ -30,11 +30,11 @@ const routers = useRoutes([
         { path: '/', element: <Paperbase/>,
         children: [
           { element: <PointList/>, index: true },
-          { path: ':point_id', element: <Point/> },
+          { path: ':point_id', element: <TicketsByPoints/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
           { path: '/tickets', element: <Tickets/> },
-          { path: '/items/:ticket_id', element: <Item /> },
+          { path: '/items/:ticket_id', element: <Ticket /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },

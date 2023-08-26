@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme:any) => ({
   },
 }));
 
-const Item: FC = () => {
+const Ticket: FC = () => {
   const navigate = useNavigate();
 
   const { point_id, ticket_id }  = useParams();
@@ -178,7 +178,7 @@ const Item: FC = () => {
   )
 }
 
-export default Item;
+export default Ticket;
 
 
 

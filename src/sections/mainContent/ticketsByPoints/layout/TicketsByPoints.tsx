@@ -11,7 +11,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-const ItemList: FC = () => {
+const TicketsByPoints: FC = () => {
   const navigate = useNavigate();
   const { point_id } = useParams<{point_id: string }>();
   const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
@@ -53,4 +53,4 @@ const ItemList: FC = () => {
   )
 }
 
-export default ItemList;
+export default TicketsByPoints;
