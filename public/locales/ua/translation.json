@@ -1,0 +1,37 @@
+{
+  "company_name": "Your Working Points UA",
+  "company_name_short": "YWP",
+  "forgot_password": "Forgot password",
+  "sign_in":{
+    "meta": {
+      "title" : "YWP, Log In"
+    },
+    "title" : "Log In",
+    "btn_sign_in":"Log In",
+    "do_not_account": "Don’t have an account?"
+  },
+  "sign_up":{
+    "meta": {
+      "title" : "YWP, Sign Up"
+    },
+    "title": "Sign Up",
+    "btn_sign_in":"Sign Up",
+    "do_not_account": "Do you have an account?"
+  },
+  "forgot": {
+    "meta": {
+      "title" : "YWP, Forgot password"
+    },
+    "title": "Forgot password",
+    "btn_sign_in":"Send Recovery Link",
+    "do_not_account": "Don’t have an account?"
+  },
+  "new_password": {
+    "meta": {
+      "title" : "YWP, Set New Password"
+    },
+    "title": "Set new password",
+    "btn_sign_in":"Set New Password",
+    "do_not_account": "Go to"
+  }
+}
