@@ -21,7 +21,7 @@ export default function Header(props: HeaderProps) {
 
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (evt:React.ChangeEvent<HTMLSelectElement>) => {
+  const handleLanguageChange = (evt:any) => {
     const lang = evt.target.value;
     // setLanguage(lang);
     i18n.changeLanguage(lang);
@@ -45,7 +45,7 @@ export default function Header(props: HeaderProps) {
             <Grid item xs />
             <Grid item>
               <select 
-                defaultValue={i18n.language} 
+                value={i18n.language} 
                 onChange={handleLanguageChange}>
                   <option value="en">en</option>
                   <option value="ua">ua</option>

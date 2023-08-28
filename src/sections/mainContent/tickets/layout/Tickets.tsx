@@ -10,9 +10,12 @@ import StyledRouterLink from '../../../../components/styled/RouterLink';
 import {
   useNavigate,
 } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const Tickets: FC = () => {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -29,7 +32,7 @@ const Tickets: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              <StyledRouterLink to={`/`}>Points</StyledRouterLink> / All Tickets:
+              <StyledRouterLink to={`/`}>{t('points')}</StyledRouterLink> / {t('all_tickets')}:
             </Grid>
             <Grid item>
               <Button component={Link} to={`/createTicket`} variant="contained" sx={{ mr: 1 }}>

@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 import Content from '../Content';
 import IconButton from '@mui/material/IconButton';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useTranslation } from "react-i18next";
 import {
   useNavigate,
 } from 'react-router-dom';
 
 const Points: FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -28,11 +30,11 @@ const Points: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              Choice Point:
+              {t('choise_point')}:
             </Grid>
             <Grid item>
               <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
-                Create Point
+              {t('create_point')}
               </Button>
             </Grid>
           </Grid>

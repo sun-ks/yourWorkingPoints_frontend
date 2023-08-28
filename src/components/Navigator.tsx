@@ -20,33 +20,6 @@ import { selectAccessToken } from "../store/reducers/AuthSlice";
 import {pointAPI} from "../services/PointService";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
-const categories = [
-  {
-    children: [
-      {
-        id: 'All Tickets',
-        icon: <ListAltIcon />,
-        active: false,
-        linkTo: '/tickets'
-      },
-    ],
-  },
-  {
-    id: 'Will be soon:',
-    children: [
-      {
-        id: 'Workers',
-        icon: <PeopleIcon />,
-        active: false,
-        linkTo: '/'
-      },
-      { id: 'Statistics', linkTo: '/', icon: <PermMediaOutlinedIcon /> },
-      { id: 'Shop', linkTo: '/', icon: <ShoppingBasketIcon /> },
-      { id: 'Clients', linkTo: '/', icon: <Diversity1Icon /> },
-    ],
-  },
-];
-
 const item = {
   py: '2px',
   px: 3,
@@ -70,6 +43,33 @@ export default function Navigator(props: DrawerProps) {
 
   const { t } = useTranslation();
 
+  const categories = [
+    {
+      children: [
+        {
+          id: t('all_tickets'),
+          icon: <ListAltIcon />,
+          active: false,
+          linkTo: '/tickets'
+        },
+      ],
+    },
+    {
+      id: t('will_be_soon'),
+      children: [
+        {
+          id: t('workers'),
+          icon: <PeopleIcon />,
+          active: false,
+          linkTo: '/'
+        },
+        { id: t('statistics'), linkTo: '/', icon: <PermMediaOutlinedIcon /> },
+        { id: t('shop'), linkTo: '/', icon: <ShoppingBasketIcon /> },
+        { id: t('clients'), linkTo: '/', icon: <Diversity1Icon /> },
+      ],
+    },
+  ];
+
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
@@ -85,7 +85,7 @@ export default function Navigator(props: DrawerProps) {
               { point && !isLoading_point ? (
                 <>{point.name}</>
               ) : (
-                <>Choise Point</>
+                <>{t('choise_point')}</>
               )}
             </ListItemText>
         </ListItem>

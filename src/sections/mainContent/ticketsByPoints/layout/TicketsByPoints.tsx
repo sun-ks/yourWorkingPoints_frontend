@@ -10,9 +10,11 @@ import StyledRouterLink from '../../../../components/styled/RouterLink';
 import {
   useNavigate,
 } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const TicketsByPoints: FC = () => {
   const navigate = useNavigate();
+  const {t} = useTranslation();
   const { point_id } = useParams<{point_id: string }>();
   const {data: currentPoint} = pointAPI.useGetPointByPointIdQuery(point_id);
   return (
@@ -34,7 +36,7 @@ const TicketsByPoints: FC = () => {
             </Grid>
             <Grid item>
               <Button component={Link} to={`/createTicket/${point_id}`} variant="contained" sx={{ mr: 1 }}>
-                Create Ticket
+                {t('tickets.create_ticket')}
               </Button>
             </Grid>
           </Grid>

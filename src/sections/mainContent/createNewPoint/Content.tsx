@@ -11,14 +11,15 @@ import getAuthorizationHeaders from "../../../utils/api/getAuthorizationHeaders"
 import { selectAccessToken } from "../../../store/reducers/AuthSlice";
 import { useSelector } from "react-redux";
 import {IPoint} from "../../../types/IPoint";
-
+import { useTranslation } from "react-i18next";
 interface IFormInputs {
   name: string;
   description: string;
 };
 
 const Content: FC = () => {
-  const accessToken = useSelector(selectAccessToken);
+  const { t } = useTranslation();
+
   const [createPoint, {isError, error:errorCreatePoint}] = pointAPI.useCreatePointMutation();
 
   const { handleSubmit, control,  formState: { errors } } = useForm<IFormInputs>();
@@ -28,7 +29,7 @@ const Content: FC = () => {
   const [point, setPoint] = useState<{point:IPoint}>();
 
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
-    const {data} = await createPoint({headers: getAuthorizationHeaders(accessToken), body: {name: args.name, description: args.description}}) as {data: any};
+    const {data} = await createPoint({body: {name: args.name, description: args.description}}) as {data: any};
 
     setPoint(data);
   };
@@ -36,7 +37,7 @@ const Content: FC = () => {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
-          Create New Point
+          {t('point.create_new_point')}
         </Typography>
 
         <Stack spacing={3}>
@@ -47,7 +48,8 @@ const Content: FC = () => {
               required: "Name is required",
             }}
             render={({ field }) => {
-              return <TextField label="Name" 
+              return <TextField 
+                  label={t('point.name')}
                   {...field} 
                   error={!!errors.name}
                   helperText={errors.name?.message}
@@ -60,7 +62,8 @@ const Content: FC = () => {
             control={control}
             name="description"
             render={({ field }) => {
-              return <TextField label="Description"
+              return <TextField 
+                  label={t('point.description')}
                   multiline
                   rows={4}
                   {...field} 
@@ -76,7 +79,7 @@ const Content: FC = () => {
           {point?.point.name && <Typography color="green">Point "{point?.point.name}" Point created!</Typography>}
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
-            Create Point
+            {t('point.btn_create')}
           </LoadingButton>
         </Stack>
       </form>
