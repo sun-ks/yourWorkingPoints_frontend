@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { itemAPI } from "../../../services/ItemService";
+import { itemAPI } from "../../../services/ITicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { useParams } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Content: FC = () => {
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
-  const [createItem, {isError, error:errorCreatePoint}] = itemAPI.useCreateItemMutation();
+  const [createTicket, {isError, error:errorCreatePoint}] = itemAPI.useCreateTicketMutation();
 
   const dataFromError:any = (errorCreatePoint && 'data' in errorCreatePoint) ? errorCreatePoint?.data : undefined;
 
@@ -27,7 +27,7 @@ const Content: FC = () => {
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
 
-    const {data} = await createItem({...args}) as {data: any};
+    const {data} = await createTicket({...args}) as {data: any};
 
     //navigate to ticket page
     navigate(`/items/${data.ticket_id}`);

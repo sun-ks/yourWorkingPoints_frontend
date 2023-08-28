@@ -7,13 +7,13 @@ export const itemAPI = createApi({
   baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['Item'],
   endpoints: (build) => ({
-    getAllItems: build.query<IItem[], any>({
+    getAllItemsTickets: build.query<IItem[], any>({
       query: () => ({
         url: `/items/allTickets`,
       }),
       providesTags: result => ['Item']
     }),
-    getItems: build.query<IItem[], any>({
+    getTicketsByPoint: build.query<IItem[], any>({
       query: ({point_id}) => ({
         url: `/items/allTicketsByPoint`,
         params: {
@@ -22,7 +22,7 @@ export const itemAPI = createApi({
       }),
       providesTags: result => ['Item']
     }),
-    getItem: build.query<IItem, any>({
+    getTicket: build.query<IItem, any>({
       query: (ticket_id) => ({
         url: `/items/ticketByTicketId`,
         params: {
@@ -31,7 +31,7 @@ export const itemAPI = createApi({
       }),
       providesTags: result => ['Item']
     }),
-    createItem: build.mutation<IItem, any>({
+    createTicket: build.mutation<IItem, any>({
       query: (body) => ({
         url: `/items/createTicket`,
         method: 'POST',
@@ -39,7 +39,7 @@ export const itemAPI = createApi({
       }),
       invalidatesTags: ['Item']
     }),
-    updateItem: build.mutation<IItem, any>({
+    updateTicket: build.mutation<IItem, any>({
       query: (body) => ({
         url: `/items/updateTicket`,
         method: 'PUT',

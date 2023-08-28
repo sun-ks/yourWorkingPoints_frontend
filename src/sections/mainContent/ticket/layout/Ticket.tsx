@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { itemAPI } from "../../../../services/ItemService";
+import { itemAPI } from "../../../../services/ITicketService";
 import { makeStyles } from '@mui/styles';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {Tooltip, 
@@ -51,7 +51,7 @@ const Ticket: FC = () => {
 
   const { point_id, ticket_id }  = useParams();
 
-  const {data: ticket } = itemAPI.useGetItemQuery(ticket_id);
+  const {data: ticket } = itemAPI.useGetTicketQuery(ticket_id);
 
   const [status, setStatus] = useState();
 

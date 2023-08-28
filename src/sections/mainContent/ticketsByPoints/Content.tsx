@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {itemAPI} from "../../../services/ItemService";
+import {itemAPI} from "../../../services/ITicketService";
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
@@ -66,7 +66,7 @@ const columns: GridColDef[] = [
 
 const Content: FC<{point_id: string | undefined}> = ({point_id}) => {
 
-  const {data: items, error, isLoading} = itemAPI.useGetItemsQuery({point_id});
+  const {data: items, error, isLoading} = itemAPI.useGetTicketsByPointQuery({point_id});
 
   const navigate = useNavigate();
 
