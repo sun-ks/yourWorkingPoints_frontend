@@ -24,11 +24,11 @@ const Points: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              {t('choise_point')}:
+              {t('choise_point')}
             </Grid>
             <Grid item>
               <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
-                {t('tickets.create_ticket')}
+                {t('create_point')}
               </Button>
             </Grid>
           </Grid>
