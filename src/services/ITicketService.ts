@@ -2,50 +2,50 @@ import {createApi} from "@reduxjs/toolkit/dist/query/react";
 import { IItem } from "../types/IItem";
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
-export const itemAPI = createApi({
-  reducerPath: 'itemAPI',
+export const ticketAPI = createApi({
+  reducerPath: 'ticketAPI',
   baseQuery: baseQueryCheckAccessToken,
-  tagTypes: ['Item'],
+  tagTypes: ['Iticket'],
   endpoints: (build) => ({
     getAllItemsTickets: build.query<IItem[], any>({
       query: () => ({
-        url: `/items/allTickets`,
+        url: `/tickets/allTickets`,
       }),
-      providesTags: result => ['Item']
+      providesTags: result => ['Iticket']
     }),
     getTicketsByPoint: build.query<IItem[], any>({
       query: ({point_id}) => ({
-        url: `/items/allTicketsByPoint`,
+        url: `/tickets/allTicketsByPoint`,
         params: {
           point_id
         }
       }),
-      providesTags: result => ['Item']
+      providesTags: result => ['Iticket']
     }),
     getTicket: build.query<IItem, any>({
       query: (ticket_id) => ({
-        url: `/items/ticketByTicketId`,
+        url: `/tickets/ticketByTicketId`,
         params: {
           ticket_id
         }
       }),
-      providesTags: result => ['Item']
+      providesTags: result => ['Iticket']
     }),
     createTicket: build.mutation<IItem, any>({
       query: (body) => ({
-        url: `/items/createTicket`,
+        url: `/tickets/createTicket`,
         method: 'POST',
         body: body
       }),
-      invalidatesTags: ['Item']
+      invalidatesTags: ['Iticket']
     }),
     updateTicket: build.mutation<IItem, any>({
       query: (body) => ({
-        url: `/items/updateTicket`,
+        url: `/tickets/updateTicket`,
         method: 'PUT',
         body: body
       }),
-      invalidatesTags: ['Item']
+      invalidatesTags: ['Iticket']
     })
   })
 });

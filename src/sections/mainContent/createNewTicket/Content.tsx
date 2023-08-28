@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { itemAPI } from "../../../services/ITicketService";
+import { ticketAPI } from "../../../services/ITicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { useParams } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Content: FC = () => {
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
-  const [createTicket, {isError, error:errorCreatePoint}] = itemAPI.useCreateTicketMutation();
+  const [createTicket, {isError, error:errorCreatePoint}] = ticketAPI.useCreateTicketMutation();
 
   const dataFromError:any = (errorCreatePoint && 'data' in errorCreatePoint) ? errorCreatePoint?.data : undefined;
 

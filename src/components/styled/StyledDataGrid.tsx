@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {itemAPI} from "../../services/ITicketService";
+import {ticketAPI} from "../../services/ITicketService";
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';

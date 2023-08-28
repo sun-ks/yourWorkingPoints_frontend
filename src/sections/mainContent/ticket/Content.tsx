@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Stack, Grid, Paper, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { itemAPI } from "../../../services/ITicketService";
+import { ticketAPI } from "../../../services/ITicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
@@ -27,7 +27,7 @@ const Content: FC<{
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
-  const [updateTicket, {isError, error:errorUpdateTicket}] = itemAPI.useUpdateTicketMutation();
+  const [updateTicket, {isError, error:errorUpdateTicket}] = ticketAPI.useUpdateTicketMutation();
 
   const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {

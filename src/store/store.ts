@@ -6,7 +6,7 @@ import services from "../services/index";
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-const {postAPI, userAPI, pointAPI, itemAPI} = services;
+const {postAPI, userAPI, pointAPI, ticketAPI} = services;
 
 const reducers = {
   testReducer,
@@ -14,7 +14,7 @@ const reducers = {
   [postAPI.reducerPath]: postAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [pointAPI.reducerPath]: pointAPI.reducer,
-  [itemAPI.reducerPath]: itemAPI.reducer
+  [ticketAPI.reducerPath]: ticketAPI.reducer
 }
 
 const rootReducer = combineReducers(reducers);
@@ -36,7 +36,7 @@ export const setupStore = () => {
       .concat(postAPI.middleware)
       .concat(userAPI.middleware)
       .concat(pointAPI.middleware)
-      .concat(itemAPI.middleware)
+      .concat(ticketAPI.middleware)
       //devTools: true, // Enable Redux DevTools
   })
 };
