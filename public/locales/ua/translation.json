@@ -1,7 +1,17 @@
 {
-  "company_name": "Your Working Points UA",
+  "choise_point": "Оберіть Точку",
+  "create_point": "Створити Точку",
+  "all_tickets": "Всі Задачі",
+  "points": "Всі точки",
+  "will_be_soon": "Незабаром:",
+  "workers": "Персонал",
+  "statistics": "Статитстика",
+  "shop": "Магазин",
+  "clients": "Клієнти",
+  "company_name": "Your Working Points",
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
+  "back": "Назад",
   "sign_in":{
     "meta": {
       "title" : "YWP, Log In"
@@ -33,5 +43,24 @@
     "title": "Set new password",
     "btn_sign_in":"Set New Password",
     "do_not_account": "Go to"
+  },
+  "ticketsColumns": {
+    "created": "Створен",
+    "status": "Статус",
+    "priority": "Пріорітет",
+    "device_sn": "Серійний номер",
+    "name": "Пристрій",
+    "client_phone": "Номер телефона",
+    "client": "Клієнт",
+    "paid": "Сплачено"
+  },
+  "createPoint": {
+    "create_point": "Створити Точку"
+  },
+  "point": {
+    "create_new_point": "Створити Нову Точку",
+    "name": "Назва",
+    "description": "Опис",
+    "btn_create": "Створити Точку"
   }
 }

@@ -1,7 +1,17 @@
 {
+  "choise_point": "Choise Point",
+  "create_point": "Create Point",
+  "all_tickets": "All Tickets",
+  "points": "Points",
+  "will_be_soon": "Will be soon:",
+  "workers": "Workers",
+  "statistics": "Statistics",
+  "shop": "Shop",
+  "clients": "Clients",
   "company_name": "Your Working Points",
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
+  "back": "Back",
   "sign_in":{
     "meta": {
       "title" : "YWP, Log In"
@@ -33,5 +43,27 @@
     "title": "Set new password",
     "btn_sign_in":"Set New Password",
     "do_not_account": "Go to"
+  },
+  "ticketsColumns": {
+    "created": "Created",
+    "status": "Status",
+    "priority": "Priority",
+    "device_sn": "Device S/N",
+    "name": "Device Name",
+    "client_phone": "Client Phone",
+    "client": "Client",
+    "paid": "Paid"
+  },
+  "createPoint": {
+    "create_point": "Create Point"
+  },
+  "point": {
+    "create_new_point": "Create New Point",
+    "name": "Name",
+    "description": "Description",
+    "btn_create": "Create Point"
+  },
+  "tickets": {
+    "create_ticket": "Create Ticket"
   }
 }
