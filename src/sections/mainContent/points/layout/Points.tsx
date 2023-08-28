@@ -1,25 +1,19 @@
 import React, { FC, useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import AppBar from '@mui/material/AppBar';
-import {Toolbar, Container, Box, Grid, Button, Tooltip} from '@mui/material';
+import {Toolbar, Container, Box, Grid, Button} from '@mui/material';
 import { Link } from 'react-router-dom';
 import Content from '../Content';
-import IconButton from '@mui/material/IconButton';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useTranslation } from "react-i18next";
-import {
-  useNavigate,
-} from 'react-router-dom';
 
 const Points: FC = () => {
-  const navigate = useNavigate();
+  
   const { t } = useTranslation();
 
   return (
-    <>
     <HelmetProvider>
       <Helmet>
-        <title>{'YWP | Create Point'}</title>
+        <title>{`YWP | ${t('points')}`}</title>
       </Helmet>
       <AppBar
         position="static"
@@ -34,22 +28,21 @@ const Points: FC = () => {
             </Grid>
             <Grid item>
               <Button component={Link} to="/createNewPoint" variant="contained" sx={{ mr: 1 }}>
-              {t('create_point')}
+                {t('tickets.create_ticket')}
               </Button>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Container maxWidth="sm">
-          <Box 
-            sx={{
-              padding: 1
-            }}>
-            <Content/>
-          </Box>
-        </Container>
-      </HelmetProvider>
-    </>
+        <Box 
+          sx={{
+            padding: 1
+          }}>
+          <Content/>
+        </Box>
+      </Container>
+    </HelmetProvider>
   )
 }
 

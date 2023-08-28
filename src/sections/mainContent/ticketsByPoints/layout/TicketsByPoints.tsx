@@ -32,7 +32,7 @@ const TicketsByPoints: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              <StyledRouterLink to={`/`}>Points</StyledRouterLink> / {currentPoint?.name}
+              <StyledRouterLink to={`/`}>{t('points')}</StyledRouterLink> / {currentPoint?.name}
             </Grid>
             <Grid item>
               <Button component={Link} to={`/createTicket/${point_id}`} variant="contained" sx={{ mr: 1 }}>

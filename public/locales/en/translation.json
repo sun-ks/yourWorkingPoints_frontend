@@ -54,6 +54,9 @@
     "client": "Client",
     "paid": "Paid"
   },
+  "tickets": {
+    "create_ticket": "Create Ticket"
+  },
   "createPoint": {
     "create_point": "Create Point"
   },

@@ -54,6 +54,9 @@
     "client": "Клієнт",
     "paid": "Сплачено"
   },
+  "tickets": {
+    "create_ticket": "Створити Задачу"
+  },
   "createPoint": {
     "create_point": "Створити Точку"
   },
