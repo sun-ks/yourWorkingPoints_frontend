@@ -60,6 +60,18 @@
   "createPoint": {
     "create_point": "Створити Точку"
   },
+  "createTicket": {
+    "head_line": "Створити Задачу",
+    "select_point": "Виберіть Точку",
+    "device_name": "Назва Пристрою",
+    "device_sn": "Номер S/N (imei)",
+    "description": "Опис",
+    "client_phone": "Телефон Клієнта",
+    "first_payment": "Перший Платіж",
+    "client_email": "Електрона Адреса",
+    "client_name": "Ім'я Клієнта",
+    "btn_create": "Створити Задачу"
+  },
   "point": {
     "create_new_point": "Створити Нову Точку",
     "name": "Назва",

@@ -60,6 +60,18 @@
   "createPoint": {
     "create_point": "Create Point"
   },
+  "createTicket": {
+    "head_line": "Create New Ticket",
+    "select_point": "Select Point",
+    "device_name": "Device Name",
+    "device_sn": "Device S/N (imei)",
+    "description": "Description",
+    "client_phone": "Client Phone",
+    "first_payment": "First Payment",
+    "client_email": "Client Email",
+    "client_name": "Client Name",
+    "btn_create": "Create Ticket"
+  },
   "point": {
     "create_new_point": "Create New Point",
     "name": "Name",

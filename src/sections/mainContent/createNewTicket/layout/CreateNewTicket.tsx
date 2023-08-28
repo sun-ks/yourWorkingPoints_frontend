@@ -9,11 +9,14 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import {
   useNavigate,
 } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 import Content from '../Content';
 
 const CreateNewTiket: FC = () => {
   const navigate = useNavigate();
+
+  const {t} = useTranslation();
 
   return (
     <HelmetProvider>
@@ -29,7 +32,7 @@ const CreateNewTiket: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
             <Grid item>
-              <Tooltip title="Back">
+              <Tooltip title={t('back')}>
                 <IconButton onClick={() => navigate(-1)}>
                   <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
                 </IconButton>

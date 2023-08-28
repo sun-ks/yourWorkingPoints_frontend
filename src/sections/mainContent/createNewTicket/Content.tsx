@@ -9,9 +9,12 @@ import { ticketAPI } from "../../../services/ITicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { useParams } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const Content: FC = () => {
   const navigate = useNavigate();
+
+  const {t} = useTranslation();
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
@@ -29,7 +32,6 @@ const Content: FC = () => {
 
     const {data} = await createTicket({...args}) as {data: any};
 
-    //navigate to ticket page
     navigate(`/items/${data.ticket_id}`);
   };
 
@@ -42,7 +44,7 @@ const Content: FC = () => {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
-          Create New Ticket
+          {t('createTicket.head_line')}
         </Typography>
 
         <Stack spacing={3} sx={{textAlign:'left'}}>
@@ -54,7 +56,7 @@ const Content: FC = () => {
                   {...field}
                   id="outlined-select-currency-native2"
                   select
-                  label="Select Point"
+                  label={t('createTicket.select_point')}
                   variant="outlined" 
                   SelectProps={{
                     native: true,
@@ -77,7 +79,8 @@ const Content: FC = () => {
               required: "Divice Name is required",
             }}
             render={({ field }) => {
-              return <TextField label="Divice Name *" 
+              return <TextField 
+                  label={`${t('createTicket.device_name')} *`} 
                   {...field} 
                   error={!!errors.name}
                   helperText={errors.name?.message}
@@ -93,7 +96,8 @@ const Content: FC = () => {
               required: "Device S/N (imei) is required",
             }}
             render={({ field }) => {
-              return <TextField label="Device S/N (imei) *" 
+              return <TextField 
+                  label={`${t('createTicket.device_sn')} *`} 
                   {...field} 
                   error={!!errors.device_sn}
                   helperText={errors.device_sn?.message}
@@ -109,7 +113,7 @@ const Content: FC = () => {
               required: "Description is required",
             }}
             render={({ field }) => {
-              return <TextField label="Description *"
+              return <TextField label={`${t('createTicket.description')} *`}
                   multiline
                   rows={4}
                   {...field} 
@@ -131,11 +135,46 @@ const Content: FC = () => {
               },
             }}
             render={({ field }) => {
-              return <TextField label="Client Phone *" 
-                  {...field} 
-                  type="number"
-                  error={!!errors.client_phone}
-                  helperText={errors.client_phone?.message}
+              return <TextField 
+                label={`${t('createTicket.client_phone')} *`}
+                {...field} 
+                type="number"
+                error={!!errors.client_phone}
+                helperText={errors.client_phone?.message}
+              />
+              }
+            }
+          />
+
+          <Controller
+            control={control}
+            name="email"
+            rules={{
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: "Invalid email address",
+              },
+            }}
+            render={({ field }) => {
+              return <TextField 
+                label={`${t('createTicket.client_email')} *`}
+                {...field} 
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+              }
+            }
+          />
+
+          <Controller
+            control={control}
+            name="client_first_name"
+            render={({ field }) => {
+              return <TextField 
+                label={t('createTicket.client_name')}
+                {...field} 
+                error={!!errors.client_first_name}
+                helperText={errors.client_first_name?.message}
                 />
               }
             }
@@ -148,44 +187,13 @@ const Content: FC = () => {
               required: "First payment is required",
             }}
             render={({ field }) => {
-              return <TextField label="First payment *" 
-                  {...field} 
-                  type="number"
-                  error={!!errors.paid}
-                  helperText={errors.paid?.message}
-                />
-              }
-            }
-          />
-          
-          <Controller
-            control={control}
-            name="email"
-            rules={{
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Invalid email address",
-              },
-            }}
-            render={({ field }) => {
-              return <TextField label="Client Email"
-                  {...field} 
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              }
-            }
-          />
-
-          <Controller
-            control={control}
-            name="client_first_name"
-            render={({ field }) => {
-              return <TextField label="Client First Name" 
-                  {...field} 
-                  error={!!errors.client_first_name}
-                  helperText={errors.client_first_name?.message}
-                />
+              return <TextField 
+                label={`${t('createTicket.first_payment')} *`}
+                {...field} 
+                type="number"
+                error={!!errors.paid}
+                helperText={errors.paid?.message}
+              />
               }
             }
           />
@@ -193,7 +201,7 @@ const Content: FC = () => {
           {isError && <Typography color="error">{dataFromError}</Typography>}
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
-            Create Ticket
+            {t('createTicket.btn_create')}
           </LoadingButton>
         </Stack>
       </form>
