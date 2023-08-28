@@ -1,19 +1,14 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import HelpIcon from '@mui/icons-material/Help';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
-
+import { useTranslation } from "react-i18next";
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -24,6 +19,14 @@ interface HeaderProps {
 export default function Header(props: HeaderProps) {
   const { onDrawerToggle } = props;
 
+  const { i18n } = useTranslation();
+
+  const handleLanguageChange = (evt:React.ChangeEvent<HTMLSelectElement>) => {
+    const lang = evt.target.value;
+    // setLanguage(lang);
+    i18n.changeLanguage(lang);
+  };
+  
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -40,6 +43,14 @@ export default function Header(props: HeaderProps) {
               </IconButton>
             </Grid>
             <Grid item xs />
+            <Grid item>
+              <select 
+                defaultValue={i18n.language} 
+                onChange={handleLanguageChange}>
+                  <option value="en">en</option>
+                  <option value="ua">ua</option>
+              </select>
+            </Grid>
             <Grid item>
               <Link
                 href="/"

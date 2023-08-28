@@ -2,7 +2,8 @@ import React, { FC, useState, useEffect } from "react";
 import { itemAPI } from "../../../../services/ITicketService";
 import { makeStyles } from '@mui/styles';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import {Tooltip, 
+import {
+  Tooltip, 
   Container, 
   Box, 
   Button, 
@@ -11,12 +12,12 @@ import {Tooltip,
   TableBody,
   TableCell,
   TableContainer, 
-  TableRow, 
-  Paper, 
+  TableRow,
   IconButton, 
   Grid, 
   Toolbar, 
-  AppBar} from '@mui/material';
+  AppBar
+} from '@mui/material';
   import QrCode2Icon from '@mui/icons-material/QrCode2';
 
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme:any) => ({
 const Ticket: FC = () => {
   const navigate = useNavigate();
 
-  const { point_id, ticket_id }  = useParams();
+  const { ticket_id }  = useParams();
 
   const {data: ticket } = itemAPI.useGetTicketQuery(ticket_id);
 
@@ -62,15 +63,15 @@ const Ticket: FC = () => {
   useEffect(()=>{
     if (printType) {
       window.print();
-
+      
       //It provide printType !== false when print dialog will be open in mobile Chrome
-      setTimeout(()=>{ 
+      setTimeout(() => {
         setPrintType(false)
       },2000)
     }
   }, [printType]);
 
-  const QRForService = () => <QRCode size={150} value={`${siteUrl}items/${point_id}/${ticket_id}`} />
+  const QRForService = () => <QRCode size={150} value={`${siteUrl}items/${ticket_id}`} />
 
   const rows = [
     {name: 'Ticket ID', value:`${ticket?.ticket_id}`},
@@ -160,17 +161,17 @@ const Ticket: FC = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-          </div>):(
+          </div>) : (
           <Table sx={{ minWidth: 650 }} aria-label="caption table">
             <TableBody>
-                <TableRow key={'qr01'}>
-                  <TableCell component="th" scope="row">
-                    {ticket?.ticket_id} <br/><br/>
-                    Description:<br/>
-                    {ticket?.description}
-                  </TableCell>
-                  <TableCell align="right"><QRForService/></TableCell>
-                </TableRow>
+              <TableRow key={'qr01'}>
+                <TableCell component="th" scope="row">
+                  {ticket?.ticket_id} <br/><br/>
+                  Description:<br/>
+                  {ticket?.description}
+                </TableCell>
+                <TableCell align="right"><QRForService/></TableCell>
+              </TableRow>
             </TableBody>
           </Table>)}
       </div>

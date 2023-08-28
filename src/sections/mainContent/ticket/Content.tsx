@@ -100,6 +100,10 @@ const Content: FC<{
   
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
+        <Typography variant="h6" gutterBottom margin={4}>
+          Edit Ticket
+        </Typography>
+
         <Stack spacing={3} sx={{textAlign:'left'}}>
           <Grid container spacing={0} >
             <Grid xs={12}  sm={7}>

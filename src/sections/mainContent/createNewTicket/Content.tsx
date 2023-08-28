@@ -41,7 +41,7 @@ const Content: FC = () => {
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom margin={4}>
           Create New Ticket
         </Typography>
 

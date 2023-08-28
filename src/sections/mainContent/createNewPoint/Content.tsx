@@ -35,15 +35,11 @@ const Content: FC = () => {
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Typography variant="h6" gutterBottom margin={4}>
+          Create New Point
+        </Typography>
+
         <Stack spacing={3}>
-          <Typography variant="h6" gutterBottom>
-            Create New Point
-          </Typography>
-
-          {isError && <Typography color="error">{dataFromError}</Typography>}
-
-          {point?.point.name && <Typography color="green">Point "{point?.point.name}" has been created!</Typography>}
-
           <Controller
             control={control}
             name="name"
@@ -74,6 +70,11 @@ const Content: FC = () => {
               }
             }
           />
+          
+          {isError && <Typography color="error">{dataFromError}</Typography>}
+
+          {point?.point.name && <Typography color="green">Point "{point?.point.name}" Point created!</Typography>}
+
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
             Create Point
           </LoadingButton>
