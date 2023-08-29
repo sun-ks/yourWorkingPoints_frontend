@@ -76,7 +76,8 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    navigate(`/items/${params.id}`)
+    const pintId = params.row.point_id;
+    navigate(`/items/${params.id}/${pintId}`)
   };
 
   return <>

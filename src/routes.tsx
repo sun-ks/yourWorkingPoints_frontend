@@ -34,7 +34,7 @@ const routers = useRoutes([
           { path: '/createNewPoint', element: <CreateNewPoint/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
           { path: '/tickets', element: <Tickets/> },
-          { path: '/items/:ticket_id', element: <Ticket /> },
+          { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },
