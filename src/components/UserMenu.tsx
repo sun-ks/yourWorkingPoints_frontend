@@ -8,13 +8,18 @@ import Avatar from '@mui/material/Avatar';
 import {authSlice} from '../store/reducers/AuthSlice';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/reducers/AuthSlice";
 
 const UserMenu: FC<any> = () => {
   const {t} = useTranslation();
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const {logOut} = authSlice.actions;
+
+  const avatarLetter = currentUser?.userInfo?.email[0].toUpperCase();
   
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,7 +37,7 @@ const UserMenu: FC<any> = () => {
       aria-controls={open ? 'account-menu' : undefined}
       aria-haspopup="true"
       aria-expanded={open ? 'true' : undefined}>
-      <Avatar sx={{ width: 32, height: 32 }}>S</Avatar>
+      <Avatar sx={{ width: 32, height: 32 }}>{avatarLetter}</Avatar>
     </IconButton>
     <Menu
       anchorEl={anchorEl}
