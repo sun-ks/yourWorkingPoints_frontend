@@ -119,5 +119,8 @@
     "name": "Name",
     "description": "Description",
     "btn_create": "Create Point"
+  },
+  "account":{
+    "logout": "Logout"
   }
 }

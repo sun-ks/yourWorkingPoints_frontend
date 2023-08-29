@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
-import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
+import UserMenu from './UserMenu';
+
 import { useTranslation } from "react-i18next";
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
@@ -76,15 +77,11 @@ export default function Header(props: HeaderProps) {
               </Tooltip>
             </Grid>
             <Grid item>
-              <IconButton color="inherit" sx={{ p: 0.5 }}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-              </IconButton>
+              <UserMenu/>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
- 
-      
     </React.Fragment>
   );
 }
