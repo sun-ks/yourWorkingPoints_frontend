@@ -101,9 +101,9 @@
     "finish_payment":"Кінцевий платіж",
     "description": "Опис",
     "update_ticket": "Оновити Задачу",
-    "current_point":"Поточна точка",
-    "ticket_status": "Статус задачі",
-    "ticket_priority": "Пріорітет задачі",
+    "current_point":"Поточна Точка",
+    "ticket_status": "Статус",
+    "ticket_priority": "Пріорітет",
     "note": "Нотатки"
   },
   "printTicket": {
