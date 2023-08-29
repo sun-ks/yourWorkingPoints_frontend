@@ -1,5 +1,4 @@
 import { FC } from "react";
-import {ticketAPI} from "../../services/ITicketService";
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
@@ -25,12 +24,14 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
       headerName: t('ticketsColumns.status'),
       width: 150,
       editable: true,
+      valueGetter: (params: GridValueGetterParams) => t(`statuses.${params.row.status}`)
     },
     {
       field: 'priority',
       headerName: t('ticketsColumns.priority'),
       width: 150,
       editable: true,
+      valueGetter: (params: GridValueGetterParams) => t(`priorities.${params.row.priority}`)
     },
     {
       field: 'device_sn',
