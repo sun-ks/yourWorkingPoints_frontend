@@ -19,6 +19,8 @@ import { useParams } from 'react-router-dom';
 import { selectAccessToken } from "../store/reducers/AuthSlice";
 import {pointAPI} from "../services/PointService";
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import { useTheme } from '@mui/material/styles';
+import { palette } from '@mui/system';
 
 const item = {
   py: '2px',
@@ -42,6 +44,9 @@ export default function Navigator(props: DrawerProps) {
   const {data: point, error, isLoading: isLoading_point} = pointAPI.useGetPointByPointIdQuery(point_id)
 
   const { t } = useTranslation();
+  const theme = useTheme();
+
+  console.log(theme.palette);
 
   const categories = [
     {
@@ -79,10 +84,10 @@ export default function Navigator(props: DrawerProps) {
         <NavLink to="/" style={{ textDecoration: 'none' }}>
           <ListItem sx={{ ...item, ...itemCategory, textDecoration: 'none' }}>
             <ListItemIcon>
-              <AlbumIcon />
+              <AlbumIcon sx={{ color: point? theme.palette.primary.main : undefined }} />
             </ListItemIcon>
             <ListItemText sx={{ textDecoration: 'none' }}>
-              { point && !isLoading_point ? (
+              {point && !isLoading_point ? (
                 <>{point.name}</>
               ) : (
                 <>{t('choise_point')}</>
@@ -107,7 +112,6 @@ export default function Navigator(props: DrawerProps) {
             ))}
             <Divider sx={{ mt: 2 }} />
           </Box>
-          
         ))}
       </List>
     </Drawer>
