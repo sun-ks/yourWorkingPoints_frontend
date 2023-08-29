@@ -12,6 +12,19 @@
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
   "back": "Back",
+  "statuses":{
+    "inbox": "Inbox",
+    "in_progress": "In progress",
+    "done": "Done",
+    "paid": "Paid",
+    "cancelled": "Cancelled",
+    "hold": "Hold"
+  },
+  "priorities": {
+    "low": "Low",
+    "high": "High",
+    "medium": "Medium"
+  },
   "sign_in":{
     "meta": {
       "title" : "YWP, Log In"
@@ -72,13 +85,39 @@
     "client_name": "Client Name",
     "btn_create": "Create Ticket"
   },
+  "editTicket": {
+    "set_status_paid": "After reaching the status 'Paid,' printing the Guarantee will be possible",
+    "print_guarantee": "Print Guarantee",
+    "print_repair_order": "Print Repair Order",
+    "print_qr_for_service": "Printing a QR code for phone identification on the service",
+    "title": "Edit Ticket",
+    "ticket_created": "Created",
+    "client_phone": "Client phone",
+    "device_name": "Device name",
+    "sn": "Device S/N (imei)",
+    "client_email": "Email",
+    "client_name":"Client name",
+    "first_payment":"First payment",
+    "finish_payment":"Final payment",
+    "description": "Description",
+    "update_ticket": "Update Ticket",
+    "current_point":"Current Point",
+    "ticket_status": "Status",
+    "ticket_priority": "Priority",
+    "note": "Note"
+  },
+  "printTicket": {
+    "title_guarantee":"Guarantee",
+    "title_order": "Repair Order",
+    "service_information": "Service Information",
+    "ticket_id": "Ticket Id",
+    "client": "Client",
+    "ticket_qr_code": "QR ticket"
+  },
   "point": {
     "create_new_point": "Create New Point",
     "name": "Name",
     "description": "Description",
     "btn_create": "Create Point"
-  },
-  "tickets": {
-    "create_ticket": "Create Ticket"
   }
 }

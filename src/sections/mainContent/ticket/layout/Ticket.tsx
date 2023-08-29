@@ -26,8 +26,10 @@ import {
   useParams
 } from 'react-router-dom';
 import QRCode from 'react-qr-code';
+import { useTranslation } from "react-i18next";
 
 import Content from '../Content';
+import { title } from "process";
 
 const siteUrl = process.env.REACT_APP_BASE_URL;
 
@@ -49,6 +51,8 @@ const useStyles = makeStyles((theme:any) => ({
 
 const Ticket: FC = () => {
   const navigate = useNavigate();
+
+  const {t} = useTranslation();
 
   const { ticket_id }  = useParams();
 
@@ -73,16 +77,16 @@ const Ticket: FC = () => {
 
   const QRForService = () => <QRCode size={150} value={`${siteUrl}items/${ticket_id}`} />
 
-  const rows = [
-    {name: 'Ticket ID', value:`${ticket?.ticket_id}`},
-    {name: 'Client', 
+  const printRows = [
+    {name: t('printTicket.ticket_id'), value:`${ticket?.ticket_id}`},
+    {name: t('printTicket.client'), 
       value:`${ticket?.client_phone}  
       ${ticket?.client_first_name ? ticket?.client_first_name.toUpperCase() : ''}  
       ${ticket?.client_last_name ? ticket?.client_last_name.toUpperCase() : ''}
     `},
-    {name: 'Device S/N', value:`${ticket?.device_sn}`},
-    {name: 'Description', value:`${ticket?.description}`},
-    {name: 'Ticket QR Code', value: <QRForService/>}
+    {name: t('editTicket.sn'), value:`${ticket?.device_sn}`},
+    {name: t('editTicket.description'), value:`${ticket?.description}`},
+    {name: t('printTicket.ticket_qr_code'), value: <QRForService/>}
   ];
 
   return (
@@ -100,7 +104,7 @@ const Ticket: FC = () => {
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item>
-              <Tooltip title="Back">
+              <Tooltip title={t('back')}>
                 <IconButton onClick={() => navigate(`/${ticket?.point_id}`)}>
                   <KeyboardBackspaceIcon color="inherit" sx={{ display: 'block' }} />
                 </IconButton>
@@ -109,7 +113,7 @@ const Ticket: FC = () => {
       
             <Grid item display="flex" alignItems="center"> 
               <Box sx={{marginRight: 1}}>
-                <Tooltip title="Print QR For Service">
+                <Tooltip title={t('editTicket.print_qr_for_service')}>
                   <IconButton onClick={() => {
                     setPrintType('qr');
                   }}>
@@ -118,12 +122,12 @@ const Ticket: FC = () => {
                 </Tooltip>
               </Box>
               <Box>
-                <Tooltip enterDelay={2000} title="Set status 'paid' for printing guarantee">
+                <Tooltip enterDelay={2000} title={t('editTicket.set_status_paid')}>
                   <Button onClick={()=>{ 
                     setPrintType('order');
                   }} 
                   variant="contained">
-                  {(status === 'paid') ? 'Print Guarantee' : 'Print Repair Order'}
+                    {(status === 'paid') ? t('editTicket.print_guarantee') : t('editTicket.print_repair_order')}
                   </Button>
                 </Tooltip>
               </Box>
@@ -144,13 +148,13 @@ const Ticket: FC = () => {
         {printType === 'order' ? (
           <div style={{ marginBottom: '20px' }}>
             <Typography fontSize={16} sx={{ padding: '20px 0 30px', textAlign: 'center' }}>
-              {(status === 'paid') ? 'Guarantee' : 'Repair Order'}
+              {(status === 'paid') ? t('printTicket.title_guarantee') : t('printTicket.title_order')}
             </Typography>
             <TableContainer >
               <Table sx={{ minWidth: 650 }} aria-label="caption table">
-                <caption>Service information:</caption>
+                <caption>{t('printTicket.service_information')}:</caption>
                 <TableBody>
-                  {rows.map((row) => (
+                  {printRows.map((row) => (
                     <TableRow key={row.name}>
                       <TableCell component="th" scope="row">
                         {row.name}
@@ -167,7 +171,7 @@ const Ticket: FC = () => {
               <TableRow key={'qr01'}>
                 <TableCell component="th" scope="row">
                   {ticket?.ticket_id} <br/><br/>
-                  Description:<br/>
+                  {t('editTicket.description')}:<br/>
                   {ticket?.description}
                 </TableCell>
                 <TableCell align="right"><QRForService/></TableCell>

@@ -12,6 +12,19 @@
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
   "back": "Назад",
+  "statuses":{
+    "inbox": "Взято на ремонт",
+    "in_progress": "Ремонтується",
+    "done": "Готово",
+    "paid": "Сплачено",
+    "cancelled": "Відмінено",
+    "hold": "Призупинено"
+  },
+  "priorities": {
+    "low": "Низький",
+    "high": "Високий",
+    "medium": "Середній"
+  },
   "sign_in":{
     "meta": {
       "title" : "YWP, Log In"
@@ -71,6 +84,35 @@
     "client_email": "Електрона Адреса",
     "client_name": "Ім'я Клієнта",
     "btn_create": "Створити Задачу"
+  },
+  "editTicket": {
+    "set_status_paid": "Після досягнення статусу 'Сплачено' буде можливий друк гарантії",
+    "print_guarantee": "Друк гарантії",
+    "print_repair_order": "Друк бланку прийому",
+    "print_qr_for_service": "Друк QR-кода для ідентифікації телефона на сервісі",
+    "title": "Редагувати Задачу",
+    "ticket_created": "Задачу було створено",
+    "client_phone": "Телефон клієнта",
+    "device_name": "Назва пристрою",
+    "sn": "Серійний номер (imei)",
+    "client_email": "Електрона Адреса",
+    "client_name":"Ім'я Клієнта",
+    "first_payment":"Перший Платіж",
+    "finish_payment":"Кінцевий платіж",
+    "description": "Опис",
+    "update_ticket": "Оновити Задачу",
+    "current_point":"Поточна точка",
+    "ticket_status": "Статус задачі",
+    "ticket_priority": "Пріорітет задачі",
+    "note": "Нотатки"
+  },
+  "printTicket": {
+    "title_guarantee":"Гарантія",
+    "title_order": "Бланк прийому",
+    "service_information": "Інформація про сервіс",
+    "ticket_id": "Ідентифікатор задачі",
+    "client": "Клієнт",
+    "ticket_qr_code": "QR Задачі"
   },
   "point": {
     "create_new_point": "Створити Нову Точку",

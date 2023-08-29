@@ -9,6 +9,7 @@ import { ticketAPI } from "../../../services/ITicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
+import { useTranslation } from "react-i18next";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,6 +25,8 @@ const Content: FC<{
 }> = ({
   ticket,
   setStatus}) => {
+
+  const {t} = useTranslation();
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
@@ -69,39 +72,48 @@ const Content: FC<{
 
   const statuses = [{
       value: 'inbox',
+      text: t('statuses.inbox')
     },
     {
       value: 'in progress',
+      text: t('statuses.in_progress')
     },
     {
       value: 'done',
+      text: t('statuses.done')
     },
     {
       value: 'paid',
+      text: t('statuses.paid')
     },
     {
       value: 'cancelled',
+      text: t('statuses.cancelled')
     },
     {
-      value: 'hold'
+      value: 'hold',
+      text: t('statuses.hold')
     }
   ];
 
   const priorities = [{
       value: 'low',
+      text: t('priorities.low')
     },
     {
       value: 'high',
+      text: t('priorities.high')
     },
     {
       value: 'medium',
+      text: t('priorities.medium')
     }
   ];
   
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
         <Typography variant="h6" gutterBottom margin={4}>
-          Edit Ticket
+          {t('editTicket.title')}
         </Typography>
 
         <Stack spacing={3} sx={{textAlign:'left'}}>
@@ -110,16 +122,16 @@ const Content: FC<{
               <Item sx={{textAlign:'left', boxShadow: 0}}>
               {ticket &&  (
                 <Typography fontSize={13}>
-                  Ticket Created: { new Date(ticket.created).toLocaleDateString()}<br/>
-                  Client Phone: {ticket.client_phone}<br/>
-                  Divice Name: {ticket.name}<br/><br/>
+                  {t('editTicket.ticket_created')}: { new Date(ticket.created).toLocaleDateString()}<br/>
+                  {t('editTicket.client_phone')}: {ticket.client_phone}<br/>
+                  {t('editTicket.device_name')}: {ticket.name}<br/><br/>
 
-                  Device S/N (imei): {ticket.device_sn}<br/>
-                  Client Email: {ticket?.email}<br/>
-                  Client Name: {ticket?.client_first_name} {ticket?.client_last_name}<br/><br/>
+                  {t('editTicket.sn')}: {ticket.device_sn}<br/>
+                  {t('editTicket.client_email')}: {ticket?.email}<br/>
+                  {t('editTicket.client_name')} : {ticket?.client_first_name} {ticket?.client_last_name}<br/><br/>
                 
-                  First payment: {ticket.paid}<br/>
-                  Description: {ticket.description}<br/>
+                  {t('editTicket.first_payment')}: {ticket.paid}<br/>
+                  {t('editTicket.description')}: {ticket.description}<br/>
                 </Typography>)}
               </Item>
             </Grid>
@@ -134,7 +146,7 @@ const Content: FC<{
                       {...field}
                       id="outlined-select-currency-native2"
                       select
-                      label="Current Point"
+                      label={t('editTicket.current_point')}
                       variant="outlined"
                       size="small"
                       SelectProps={{
@@ -160,7 +172,7 @@ const Content: FC<{
                           {...field}
                           id="outlined-select-currency-native"
                           select
-                          label="Ticket Status"
+                          label={t('editTicket.ticket_status')}
                           variant="outlined"
                           size="small" 
                           SelectProps={{
@@ -169,7 +181,7 @@ const Content: FC<{
                           >
                           {statuses.map((option) => (
                             <option key={option.value} value={option.value}>
-                              {option.value}
+                              {option.text}
                             </option>
                           ))}
                         </TextField>
@@ -187,7 +199,7 @@ const Content: FC<{
                           {...field}
                           id="outlined-select-currency-native2"
                           select
-                          label="Ticket Priority"
+                          label={t('editTicket.ticket_priority')}
                           variant="outlined"
                           size="small" 
                           SelectProps={{
@@ -196,7 +208,7 @@ const Content: FC<{
                             >
                           {priorities.map((option) => (
                             <option key={option.value} value={option.value}>
-                              {option.value}
+                              {option.text}
                             </option>
                           ))}
                         </TextField>
@@ -212,7 +224,8 @@ const Content: FC<{
             control={control}
             name="note"
             render={({ field }) => {
-              return <TextField label="Note"
+              return <TextField 
+                  label={t('editTicket.note')}
                   multiline
                   variant="outlined"
                   size="small"
@@ -229,7 +242,8 @@ const Content: FC<{
               control={control}
               name="last_part_payment"
               render={({ field }) => {
-                return <TextField label="Finish Payment" 
+                return <TextField 
+                  label={t('editTicket.finish_payment')}
                     {...field}
                     type="number"
                     variant="outlined"
@@ -247,7 +261,7 @@ const Content: FC<{
           {showSuccessesBlock && <Typography color="green">Updated Successful!</Typography>}
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
-            Update Ticket
+            {t('editTicket.update_ticket')}
           </LoadingButton>
         </Stack>
       </form>
