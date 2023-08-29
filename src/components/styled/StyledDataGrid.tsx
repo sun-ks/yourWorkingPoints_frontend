@@ -24,7 +24,11 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
       headerName: t('ticketsColumns.status'),
       width: 150,
       editable: true,
-      valueGetter: (params: GridValueGetterParams) => t(`statuses.${params.row.status}`)
+      valueGetter: (params: GridValueGetterParams) => { 
+        let status = params.row.status; 
+        if (status === 'in progress') status = 'in_progress'
+        return t(`statuses.${status}`)
+      }
     },
     {
       field: 'priority',
