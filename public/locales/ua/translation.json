@@ -10,7 +10,7 @@
   "clients": "Клієнти",
   "company_name": "Your Working Points",
   "company_name_short": "YWP",
-  "forgot_password": "Forgot password",
+  "forgot_password": "Забули пароль?",
   "back": "Назад",
   "statuses":{
     "inbox": "Взято на ремонт",
@@ -27,35 +27,35 @@
   },
   "sign_in":{
     "meta": {
-      "title" : "YWP, Log In"
+      "title" : "YWP, Вхід"
     },
-    "title" : "Log In",
-    "btn_sign_in":"Log In",
-    "do_not_account": "Don’t have an account?"
+    "title" : "Вхід",
+    "btn_sign_in":"Вхід",
+    "do_not_account": "У вас немає облікового запису?"
   },
   "sign_up":{
     "meta": {
-      "title" : "YWP, Sign Up"
+      "title" : "YWP, Реєстрація"
     },
-    "title": "Sign Up",
-    "btn_sign_in":"Sign Up",
-    "do_not_account": "Do you have an account?"
+    "title": "Реєстрація",
+    "btn_sign_in":"Зареєструватись",
+    "do_not_account": "У вас немає облікового запису?"
   },
   "forgot": {
     "meta": {
-      "title" : "YWP, Forgot password"
+      "title" : "YWP, Забули пароль?"
     },
-    "title": "Forgot password",
-    "btn_sign_in":"Send Recovery Link",
-    "do_not_account": "Don’t have an account?"
+    "title": "Забули пароль?",
+    "btn_sign_in":"Надіслати посилання для відновлення",
+    "do_not_account": "У вас немає облікового запису?"
   },
   "new_password": {
     "meta": {
       "title" : "YWP, Set New Password"
     },
-    "title": "Set new password",
-    "btn_sign_in":"Set New Password",
-    "do_not_account": "Go to"
+    "title": "Встановити новий пароль",
+    "btn_sign_in":"Встановити новий пароль",
+    "do_not_account": "Перейти до"
   },
   "ticketsColumns": {
     "created": "Створен",
