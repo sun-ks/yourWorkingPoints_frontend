@@ -3,12 +3,10 @@ import React, { useEffect } from 'react';
 import { todosSlice } from './store/reducers/TodosSlice';
 import {fetchUsers} from './store/reducers/ActionCreators';
 import {useAppSelector, useAppDispatch}  from './hooks/redux';
-import  PostContainer from './components/PostContainer';
 import {postAPI} from './services/PostService'
-import Button from '@mui/material/Button';
-import Paperbase from './components/Paperbase';
 import Router from './routes';
 import { BrowserRouter } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
 
@@ -26,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+     <CssBaseline/>
       <BrowserRouter>
         <Router />
       </BrowserRouter>

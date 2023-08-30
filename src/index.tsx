@@ -9,6 +9,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import "./i18n";
 
+
 const store = setupStore();
 
 let persistor = persistStore(store)

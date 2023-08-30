@@ -15,12 +15,13 @@ const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 interface HeaderProps {
   onDrawerToggle?: () => void;
+  isAuthPage?: boolean;
 }
 
 export default function Header(props: HeaderProps) {
-  const { onDrawerToggle } = props;
+  const { onDrawerToggle, isAuthPage=false } = props;
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   const handleLanguageChange = (evt:any) => {
     const lang = evt.target.value;
@@ -33,16 +34,24 @@ export default function Header(props: HeaderProps) {
       <AppBar color="primary" position="sticky" elevation={0}>
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
-            <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={onDrawerToggle}
-                edge="start"
-              >
-                <MenuIcon />
-              </IconButton>
-            </Grid>
+            {!isAuthPage && (<Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={onDrawerToggle}
+                  edge="start"
+                >
+                  <MenuIcon />
+                </IconButton>
+                
+              </Grid>
+            )}
+
+            {isAuthPage && (
+              <Grid item sx={{ fontSize: 18, color: '#fff' }}>
+                {t('company_name')}
+              </Grid>
+            )}
             <Grid item xs />
             <Grid item>
               <select 
@@ -52,6 +61,8 @@ export default function Header(props: HeaderProps) {
                   <option value="ua">ua</option>
               </select>
             </Grid>
+
+            {!isAuthPage && (<>
             <Grid item>
               <Link
                 href="/"
@@ -78,7 +89,10 @@ export default function Header(props: HeaderProps) {
             </Grid>
             <Grid item>
               <UserMenu/>
-            </Grid>
+            </Grid></>)}
+         
+
+
           </Grid>
         </Toolbar>
       </AppBar>

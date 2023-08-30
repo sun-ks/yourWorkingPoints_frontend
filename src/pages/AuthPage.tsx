@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import StyledRouterLink from '../components/styled/RouterLink'
 import {AuthPageType} from '../types/ICommon'
 import { useRoutes, Outlet, useNavigate } from 'react-router-dom';
+import Header from "../components/Header";
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -18,7 +19,8 @@ const StyledRoot = styled('div')(({ theme }) => ({
 const StyledContent = styled('div')(({ theme }) => ({
   maxWidth: 480,
   margin: 'auto',
-  minHeight: '100vh',
+  minHeight: 'calc(100vh - 50px)',
+  padding: '0 20px 0 20px',
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column'
@@ -44,7 +46,9 @@ const AuthPage: FC = () => {
       </Helmet>
 
       <StyledRoot>
-        <Container maxWidth="sm">
+        
+        <Container maxWidth="xl" disableGutters>
+          <Header isAuthPage={true}/>
           <StyledContent>
             <Typography variant="h4" gutterBottom>
               {t(`${typePage}.title`)}
