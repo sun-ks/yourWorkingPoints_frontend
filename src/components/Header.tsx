@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 interface HeaderProps {
-  onDrawerToggle: () => void;
+  onDrawerToggle?: () => void;
 }
 
 export default function Header(props: HeaderProps) {

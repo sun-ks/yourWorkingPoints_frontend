@@ -81,9 +81,10 @@ const UserMenu: FC<any> = () => {
       <MenuItem onClick={()=>{
         dispatch(logOut(''));
         handleClose();
-      }}>
+      }}
+      sx={{   fontSize: 14,}}>
         <ListItemIcon>
-          <Logout fontSize="small" />
+          <Logout />
         </ListItemIcon>
         {t('account.logout')}
       </MenuItem>

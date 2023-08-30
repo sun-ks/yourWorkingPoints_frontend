@@ -46,8 +46,6 @@ export default function Navigator(props: DrawerProps) {
   const { t } = useTranslation();
   const theme = useTheme();
 
-  console.log(theme.palette);
-
   const categories = [
     {
       children: [
@@ -55,6 +53,7 @@ export default function Navigator(props: DrawerProps) {
           id: t('all_tickets'),
           icon: <ListAltIcon />,
           active: false,
+          avaliable: true,
           linkTo: '/tickets'
         },
       ],
@@ -66,11 +65,12 @@ export default function Navigator(props: DrawerProps) {
           id: t('workers'),
           icon: <PeopleIcon />,
           active: false,
+          avaliable: false,
           linkTo: '/'
         },
-        { id: t('statistics'), linkTo: '/', icon: <PermMediaOutlinedIcon /> },
-        { id: t('shop'), linkTo: '/', icon: <ShoppingBasketIcon /> },
-        { id: t('clients'), linkTo: '/', icon: <Diversity1Icon /> },
+        { id: t('statistics'), avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> },
+        { id: t('shop'), avaliable: false, linkTo: '/', icon: <ShoppingBasketIcon /> },
+        { id: t('clients'), avaliable: false, linkTo: '/', icon: <Diversity1Icon /> },
       ],
     },
   ];
@@ -100,9 +100,12 @@ export default function Navigator(props: DrawerProps) {
             <ListItem sx={{ py: 2, px: 3 }}>
               <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon, active, linkTo }) => (
-              <NavLink to={linkTo} style={{ textDecoration: 'none' }}>
-                <ListItem disablePadding key={childId}>
+            {children.map(({ id: childId, icon, active, avaliable, linkTo }) => (
+              <NavLink to={linkTo} style={{ textDecoration: 'none', }}>
+                <ListItem disablePadding key={childId} 
+                  sx={{
+                    opacity: !avaliable ? 0.2 : undefined,
+                  }}>
                   <ListItemButton selected={active} sx={item}>
                     <ListItemIcon>{icon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
