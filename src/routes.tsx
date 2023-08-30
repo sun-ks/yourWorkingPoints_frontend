@@ -17,6 +17,7 @@ import Points from './sections/mainContent/points/layout/Points';
 import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
+import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 
@@ -32,6 +33,7 @@ const routers = useRoutes([
           { element: <Points/>, index: true },
           { path: ':point_id', element: <TicketsByPoints/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
+          { path: '/editPoint/:point_id', element: <EditPoint/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
           { path: '/tickets', element: <Tickets/> },
           { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },

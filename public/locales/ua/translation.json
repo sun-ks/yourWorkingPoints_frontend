@@ -116,9 +116,16 @@
   },
   "point": {
     "create_new_point": "Створити Нову Точку",
+    "edit_point": "Редагувати Точку",
+    "btn_edit":"Редагувати Точку",
+    "successes_block": "Точку успішно оновлено!",
     "name": "Назва",
     "description": "Опис",
-    "btn_create": "Створити Точку"
+    "btn_create": "Створити Точку",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "delete_title_default": "Ви впевнені, що хочете видалити цю точку?",
+    "delete_title_has_ticket":"Доступні для видалення лише порожні точки"
   },
   "account":{
     "logout": "Вийти"

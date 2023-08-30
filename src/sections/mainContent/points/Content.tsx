@@ -1,20 +1,17 @@
 import { FC, useState, useEffect } from "react";
-
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
-
 import {isEmpty} from "lodash"
-
 import {
   useNavigate,
 } from 'react-router-dom';
-
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import AlertDialog from "../../../components/AlertDialog";
-
 import {pointAPI} from "../../../services/PointService";
-
 import {IPoint} from "../../../types/IPoint";
+import StyledRouterLink from './../../../components/styled/RouterLink'
+import EditIcon from '@mui/icons-material/Edit';
+
+import { useTranslation } from "react-i18next";
 
 const Content: FC = () => {
   const [deletePoint, {isError, error:errorDeletePoint}] = pointAPI.useDeletePointMutation();
@@ -31,6 +28,8 @@ const Content: FC = () => {
     open:false,
   });
 
+  const { t } = useTranslation();
+
   const [pointIdForDelete, setPointIdForDelete] = useState('');
 
   const navigate = useNavigate();
@@ -45,9 +44,8 @@ const Content: FC = () => {
     setPointsHasTickets(points);
   }
 
-  const DEFAULT_TITLE_ALERT = 'Are you sure you want to delete this Point?';
-  const HAS_TICKETS_TITLE_ALERT = 'Only empty Points available for deletion';
-  const TOOLTIP_TXT = 'Delete'
+  const DEFAULT_TITLE_ALERT = t('point.delete_title_default');
+  const HAS_TICKETS_TITLE_ALERT = t('point.delete_title_has_ticket');
 
   useEffect(() => {
     fetchPoints();
@@ -84,7 +82,16 @@ const Content: FC = () => {
             onClick={() => navigate(`/${point.point_id}`)}>
             {point.name}
           </Typography>
+          
           <Tooltip 
+            onClick={() => navigate(`/editPoint/${point.point_id}`)}
+            title={t(`point.edit`)}>
+            <IconButton>
+              <EditIcon sx={{ fontSize: 14 }}/>
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip
             onClick={()=>{
               const alertModalTitle = point.hastickets ? HAS_TICKETS_TITLE_ALERT : undefined;
               const showSubmitBtn = !point.hastickets;
@@ -92,7 +99,7 @@ const Content: FC = () => {
               setOpenAlertDelete({open: true, title: alertModalTitle, showSubmitBtn}); 
               setPointIdForDelete(point.point_id); 
             }}
-            title={TOOLTIP_TXT}>
+            title={t(`point.delete`)}>
             <IconButton >
               <DeleteIcon sx={{ fontSize: 14 }}/>
             </IconButton>

@@ -5,7 +5,7 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 export const pointAPI = createApi({
   reducerPath: 'pointAPI',
   baseQuery: baseQueryCheckAccessToken,
-  tagTypes: ['Points', 'Point'],
+  tagTypes: ['Points'],
   endpoints: (build) => ({
     getPoints: build.query<IPoint[], any>({
       query: () => ({
@@ -26,13 +26,21 @@ export const pointAPI = createApi({
           point_id
         }
       }),
-      providesTags: result => ['Point']
+      providesTags: result => ['Points']
     }),
     createPoint: build.mutation<any, any>({
       query: (args) => ({
         url: `/points`,
         method: 'POST',
         body: args.body
+      }),
+      invalidatesTags: ['Points']
+    }),
+    updatePoint: build.mutation<{point_id: string}, any>({
+      query: (body) => ({
+        url: `/points/point`,
+        method: 'PUT',
+        body
       }),
       invalidatesTags: ['Points']
     }),
