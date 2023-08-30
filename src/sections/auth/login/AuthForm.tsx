@@ -21,6 +21,8 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const [dataResponce, setDataResponce] = useState<any>('');
+
   const [signUp, {isError:isError_sign_up, error: error_sign_up}] = userAPI.useSignUpMutation();
   
   const [login, {isError:isError_sign_in, error:error_sign_in}] = userAPI.useLoginMutation();
@@ -55,18 +57,18 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     
     dispatch(setCredentials(data));
 
-    if(data && typePage !== 'forgot') navigate('/createFirstPoint')
+    if(data && typePage !== 'forgot') {
+      navigate('/createFirstPoint')
+    } else {
+      setDataResponce(data)
+    }
   };
 
   const { t } = useTranslation();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Collapse in={!!apiErrs[typePage]} timeout={200}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-          <Typography color="error">{!!apiErrs[typePage] && apiErrs[typePage]?.data}</Typography>
-        </Stack>
-      </Collapse>
+      
       <Stack spacing={3}>
         {typePage !== 'new_password' && (
           <Controller
@@ -126,6 +128,14 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
           <Typography variant="body2">{t('forgot_password')}</Typography>
         </StyledRouterLink>}
       </Stack>
+
+      <Collapse in={!!apiErrs[typePage]} timeout={200}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+          <Typography color="error">{!!apiErrs[typePage] && apiErrs[typePage]?.data}</Typography>
+        </Stack>
+      </Collapse>
+
+      {dataResponce && <Typography sx={{ my: 2, textAlign: 'left' }} color="green">{dataResponce}</Typography>}
       
       <LoadingButton fullWidth size="large" type="submit" variant="contained" >
         {t(`${typePage}.btn_sign_in`)}
