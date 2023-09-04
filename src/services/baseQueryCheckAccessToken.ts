@@ -5,7 +5,7 @@ import type {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query'
 
-const baseUrl = process.env.REACT_APP_API_URL;
+const baseUrl = process.env.REACT_APP_API_URL; 
 const baseQueryWithAccessToken = fetchBaseQuery({
   baseUrl: baseUrl,
   prepareHeaders: (headers, { getState }) => {
