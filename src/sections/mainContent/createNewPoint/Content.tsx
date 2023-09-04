@@ -20,7 +20,7 @@ interface IFormInputs {
 const Content: FC = () => {
   const { t } = useTranslation();
 
-  const [createPoint, {isError, error:errorCreatePoint}] = pointAPI.useCreatePointMutation();
+  const [createPoint, {isError, isLoading: isLoadingCreatePoint, error:errorCreatePoint}] = pointAPI.useCreatePointMutation();
 
   const { handleSubmit, control,  formState: { errors } } = useForm<IFormInputs>();
 
@@ -78,7 +78,9 @@ const Content: FC = () => {
 
           {point?.point.name && <Typography color="green">Point "{point?.point.name}" Point created!</Typography>}
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+          <LoadingButton 
+            disabled={isLoadingCreatePoint}
+            fullWidth size="large" type="submit" variant="contained" >
             {t('point.btn_create')}
           </LoadingButton>
         </Stack>

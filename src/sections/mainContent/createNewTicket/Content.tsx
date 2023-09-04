@@ -18,7 +18,7 @@ const Content: FC = () => {
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
-  const [createTicket, {isError, error:errorCreatePoint}] = ticketAPI.useCreateTicketMutation();
+  const [createTicket, {isError, isLoading: isLoadingCreateTicket, error:errorCreatePoint}] = ticketAPI.useCreateTicketMutation();
 
   const dataFromError:any = (errorCreatePoint && 'data' in errorCreatePoint) ? errorCreatePoint?.data : undefined;
 
@@ -200,7 +200,11 @@ const Content: FC = () => {
 
           {isError && <Typography color="error">{dataFromError}</Typography>}
 
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" >
+          <LoadingButton 
+            disabled={isLoadingCreateTicket}
+            fullWidth size="large" 
+            type="submit" 
+            variant="contained">
             {t('createTicket.btn_create')}
           </LoadingButton>
         </Stack>
