@@ -79,6 +79,10 @@ const Content: FC<{
       text: t('statuses.in_progress')
     },
     {
+      value: 'ask client',
+      text: t('statuses.ask_client')
+    },
+    {
       value: 'done',
       text: t('statuses.done')
     },

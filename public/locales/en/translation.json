@@ -15,6 +15,7 @@
   "statuses":{
     "inbox": "Inbox",
     "in_progress": "In progress",
+    "ask_client": "ask client",
     "done": "Done",
     "paid": "Paid",
     "cancelled": "Cancelled",
