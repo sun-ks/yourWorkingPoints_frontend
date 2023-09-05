@@ -69,7 +69,8 @@
     "paid": "Сплачено"
   },
   "tickets": {
-    "create_ticket": "Створити Задачу"
+    "create_ticket": "Створити Задачу",
+    "client_approval": "Важливо! Ці задачі потребують комунікації з клієнтомі:"
   },
   "createPoint": {
     "create_point": "Створити Точку"

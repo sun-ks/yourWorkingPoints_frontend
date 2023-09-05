@@ -15,7 +15,7 @@
   "statuses":{
     "inbox": "Inbox",
     "in_progress": "In progress",
-    "ask_client": "ask client",
+    "ask_client": "Ask client",
     "done": "Done",
     "paid": "Paid",
     "cancelled": "Cancelled",
@@ -69,7 +69,8 @@
     "paid": "Paid"
   },
   "tickets": {
-    "create_ticket": "Create Ticket"
+    "create_ticket": "Create Ticket",
+    "client_approval": "Important! These tickets need communication with the client:"
   },
   "createPoint": {
     "create_point": "Create Point"

@@ -1,8 +1,24 @@
 import { FC } from "react";
+import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import {Box, Typography} from '@mui/material';
 import {GridToolbar, DataGrid, GridColDef, GridValueGetterParams, GridEventListener } from '@mui/x-data-grid';
 import { useTranslation } from "react-i18next";
+import {isEmpty} from "lodash";
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+
+
+const StyledHeaderAskClient = styled('span')(({ theme }) => ({
+  color: theme.palette.error.light,
+  textAlign: 'left',
+  display: 'block',
+  fontSize: 14,
+  marginBottom: 8,
+}));
 
 const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
 
@@ -27,6 +43,7 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
       valueGetter: (params: GridValueGetterParams) => { 
         let status = params.row.status; 
         if (status === 'in progress') status = 'in_progress'
+        else if (status === 'ask client') status = 'ask_client'
         return t(`statuses.${status}`)
       }
     },
@@ -80,6 +97,8 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
     navigate(`/items/${params.id}/${pintId}`)
   };
 
+  const askClientTickets = tickets && tickets.filter((item:any) => item.status === 'ask client');
+
   return <>
     {error && <Box sx={{ marginBottom: 3 }}>
       <Typography color="error">Data load Error</Typography>
@@ -88,8 +107,40 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
     {isLoading ? (
   <p>Loading...</p>
 ) : tickets && tickets.length > 0 ? (
- 
-  <Box sx={{  width: '100%', overflow: 'auto'}}>
+<>
+  {!isEmpty(askClientTickets) && 
+  <List
+      sx={{
+        width: '100%',
+        bgcolor: 'background.paper',
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 300,
+        marginBottom: 3,
+        '& ul': { padding: 0 },
+      }}>
+      <StyledHeaderAskClient>
+        {t('tickets.client_approval')}
+      </StyledHeaderAskClient>
+      {askClientTickets.map((item:any, i:number) => (
+        <div onClick={()=>{}} key={`section-${i}`}>
+          <ul>
+            <ListItem sx={{marginTop: 0, padding: '0'}} key={`item-${i}`}>
+              <span onClick={()=>{navigate(`/items/${item.ticket_id}/${item.point_id}`)}} style={{cursor: 'pointer', fontSize: 14}} >
+                {`${ new Date(item.created).toLocaleDateString()}, 
+                ${t(`priorities.${item.priority}`)}, 
+                ${item.name}${item.client_first_name ? ', '+item.client_first_name : ''}`} 
+              </span>
+            </ListItem>
+          </ul>
+        </div>
+      ))}
+  </List>}
+
+  <Box sx={{ 
+    width: '100%', 
+    overflow: 'auto'
+  }}>
     <DataGrid
       scrollbarSize={53}
       rows={tickets || []}
@@ -102,13 +153,13 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
           },
         },
       }}
-      pageSizeOptions={[10]}
+      pageSizeOptions={[50]}
       //checkboxSelection
       disableRowSelectionOnClick
       //disableColumnFilter
       disableColumnSelector
       disableDensitySelector
-      //slots={{ toolbar: GridToolbar }}
+      slots={{ toolbar: GridToolbar }}
       slotProps={{
         toolbar: {
           showQuickFilter: true,
@@ -118,6 +169,7 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
       onRowClick={handleRowClick}
     />
   </Box>
+  </>
 ) : (
   'This point does not have Tickets yet'
 )}
