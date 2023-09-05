@@ -55,10 +55,11 @@ const NewPoint: FC = () => {
 
   const { handleSubmit, control, formState: { errors } } = useForm<{
     name: string;
+    phone_number: string;
   }>();
 
   const onSubmit: SubmitHandler<any> = async (args) => {
-    await createPoint({headers: getAuthorizationHeaders(accessToken), body: {name: args.name}});
+    await createPoint(args);
   };
 
   return (
@@ -72,10 +73,9 @@ const NewPoint: FC = () => {
       <StyledRoot>
         <Container maxWidth="sm">
           <StyledContent>
-            <Typography variant="h4" gutterBottom sx={{ mb: 5 }}>
-              Create First <StyledHeaderFirst>Point </StyledHeaderFirst>
-              <StyledHeader> / Service Senter</StyledHeader>
-
+            <Typography variant="h5" gutterBottom sx={{ mb: 5 }}>
+              {t('create_first')} <StyledHeaderFirst>{t('point.point')} </StyledHeaderFirst>
+              <StyledHeader> / {t('service_center')}</StyledHeader>
             </Typography>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +91,7 @@ const NewPoint: FC = () => {
                   </Stack>
                 </Collapse>
 
-                <Stack spacing={3}>
+                <Stack spacing={3} marginBottom={2}>
                   <Controller
                     control={control}
                     name="name"
@@ -101,6 +101,26 @@ const NewPoint: FC = () => {
                     render={({ field }) => {
                       return <TextField 
                         label="Point Name *"
+                        sx={{ mb: 5 }}
+                        {...field} 
+                        error={!!errors.name}
+                        helperText={errors.name?.message}
+                        />
+                      }
+                    }
+                  />
+                </Stack>
+
+                <Stack spacing={3} marginBottom={3}>
+                  <Controller
+                    control={control}
+                    name="phone_number"
+                    rules={{
+                      required: "Point Phone Number is required",
+                    }}
+                    render={({ field }) => {
+                      return <TextField 
+                        label="Point Phone Number *"
                         sx={{ mb: 5 }}
                         {...field} 
                         error={!!errors.name}

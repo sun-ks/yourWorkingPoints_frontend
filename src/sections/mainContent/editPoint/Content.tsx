@@ -16,6 +16,7 @@ import { useParams } from 'react-router-dom';
 interface IFormInputs {
   name: string;
   description: string;
+  phone_number: string;
 };
 
 const Content: FC = () => {
@@ -30,12 +31,14 @@ const Content: FC = () => {
   const { handleSubmit, control, setValue, formState: { errors } } = useForm<IFormInputs>({
     defaultValues:{
       name: '',
+      phone_number: '',
       description: ''
   }});
 
   useEffect(() => {
     if(point) {
       setValue('name', point.name);
+      setValue('phone_number', point.phone_number);
       setValue('description', point.description);
     }
   }, [point]);
@@ -71,10 +74,24 @@ const Content: FC = () => {
             }}
             render={({ field }) => {
               return <TextField 
-                  label={t('point.name')}
+                  label={t('point.name') + '*'}
                   {...field} 
                   error={!!errors.name}
                   helperText={errors.name?.message}
+                />
+              }
+            }
+          />
+
+          <Controller
+            control={control}
+            name="phone_number"
+            render={({ field }) => {
+              return <TextField 
+                  label={t('point.phone_number')}
+                  {...field} 
+                  error={!!errors.name}
+                  helperText={errors.name?.message || t('printTicket.will_in_print')}
                 />
               }
             }

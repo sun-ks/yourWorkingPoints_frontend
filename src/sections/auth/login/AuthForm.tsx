@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 interface IFormInputs {
   password: string;
   email: string;
+  company_name: string;
 }
 
 const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typePage, ressetPassToken}) => {
@@ -44,14 +45,14 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
 
   const {setCredentials} = authSlice.actions;
 
-  const onSubmit: SubmitHandler<{ email: string; password: string; }> = async (args) => {
+  const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     
     let apiCall = typePage  === 'sign_up' ? signUp 
       : typePage === 'forgot' ? forgot
       : typePage === 'new_password' ? newPassword
       : login;
 
-    const params:any = {...args, token: ressetPassToken};
+    const params:any = {...args};
 
     const { data } = await apiCall(params) as { data: IUser };
     
@@ -70,6 +71,24 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     <form onSubmit={handleSubmit(onSubmit)}>
       
       <Stack spacing={3}>
+        {typePage  === 'sign_up' && (
+          <Controller
+          control={control}
+          name="company_name"
+          rules={{
+            required: "Company Name is required",
+          }}
+          render={({ field }) => {
+            return <TextField 
+                label="Company Name *" 
+                {...field} 
+                error={!!errors.company_name}
+                helperText={errors.company_name?.message}
+              />
+            }
+          }
+        />)}
+
         {typePage !== 'new_password' && (
           <Controller
             control={control}
@@ -82,7 +101,8 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
               },
             }}
             render={({ field }) => {
-              return <TextField label="Email" 
+              return <TextField 
+                label="Email *" 
                   {...field} 
                   error={!!errors.email}
                   helperText={errors.email?.message}
@@ -104,7 +124,7 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
             }}
             render={({ field }) =>
             <TextField 
-              label="Password"
+              label="Password *"
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (

@@ -12,6 +12,8 @@
   "company_name_short": "YWP",
   "forgot_password": "Забули пароль?",
   "back": "Назад",
+  "create_first": "Створити нову",
+  "service_center": "Сервісний центр",
   "statuses":{
     "inbox": "Взято на ремонт",
     "in_progress": "Ремонтується",
@@ -32,7 +34,7 @@
     },
     "title" : "Вхід",
     "btn_sign_in":"Вхід",
-    "do_not_account": "У вас немає облікового запису?"
+    "do_not_account": "У Вас немає облікового запису?"
   },
   "sign_up":{
     "meta": {
@@ -40,7 +42,7 @@
     },
     "title": "Реєстрація",
     "btn_sign_in":"Зареєструватись",
-    "do_not_account": "У вас немає облікового запису?"
+    "do_not_account": "У Вас є обліковий запис?"
   },
   "forgot": {
     "meta": {
@@ -48,7 +50,7 @@
     },
     "title": "Забули пароль?",
     "btn_sign_in":"Надіслати посилання для відновлення",
-    "do_not_account": "У вас немає облікового запису?"
+    "do_not_account": "У Вас немає облікового запису?"
   },
   "new_password": {
     "meta": {
@@ -109,19 +111,22 @@
     "note": "Нотатки"
   },
   "printTicket": {
+    "will_in_print": "Важливо! Це буде надруковано. Бланк приймання, Гарантія",
     "title_guarantee":"Гарантія",
-    "title_order": "Бланк прийому",
+    "title_order": "Бланк прийняття",
     "service_information": "Інформація про сервіс",
     "ticket_id": "Ідентифікатор задачі",
     "client": "Клієнт",
     "ticket_qr_code": "QR Задачі"
   },
   "point": {
+    "point": "Точку",
     "create_new_point": "Створити Нову Точку",
     "edit_point": "Редагувати Точку",
     "btn_edit":"Редагувати Точку",
     "successes_block": "Точку успішно оновлено!",
     "name": "Назва",
+    "phone_number": "Номер Телефону Точки",
     "description": "Опис",
     "btn_create": "Створити Точку",
     "edit": "Редагувати",

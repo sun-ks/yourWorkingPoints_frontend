@@ -12,6 +12,8 @@
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
   "back": "Back",
+  "create_first": "Create First",
+  "service_center": "Service Center",
   "statuses":{
     "inbox": "Inbox",
     "in_progress": "In progress",
@@ -109,6 +111,7 @@
     "note": "Note"
   },
   "printTicket": {
+    "will_in_print": "Important! This will be in print. Repair Order, Guarantee",
     "title_guarantee":"Guarantee",
     "title_order": "Repair Order",
     "service_information": "Service Information",
@@ -117,11 +120,13 @@
     "ticket_qr_code": "QR ticket"
   },
   "point": {
+    "point": "Point",
     "create_new_point": "Create New Point",
     "edit_point": "Edit Point",
     "btn_edit":"Edit Point",
     "successes_block": "Point updated successfully!",
     "name": "Name",
+    "phone_number": "Point Phone Number",
     "description": "Description",
     "btn_create": "Create Point",
     "edit": "Edit",

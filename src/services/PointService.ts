@@ -32,7 +32,7 @@ export const pointAPI = createApi({
       query: (args) => ({
         url: `/points`,
         method: 'POST',
-        body: args.body
+        body: args
       }),
       invalidatesTags: ['Points']
     }),
