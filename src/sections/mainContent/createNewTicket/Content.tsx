@@ -157,7 +157,7 @@ const Content: FC = () => {
             }}
             render={({ field }) => {
               return <TextField 
-                label={`${t('createTicket.client_email')} *`}
+                label={`${t('createTicket.client_email')}`}
                 {...field} 
                 error={!!errors.email}
                 helperText={errors.email?.message}
@@ -204,7 +204,7 @@ const Content: FC = () => {
             disabled={isLoadingCreateTicket}
             fullWidth size="large" 
             type="submit" 
-            variant="contained">
+            variant="contained" >
             {t('createTicket.btn_create')}
           </LoadingButton>
         </Stack>

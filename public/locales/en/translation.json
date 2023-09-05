@@ -82,7 +82,7 @@
     "device_sn": "Device S/N (imei)",
     "description": "Description",
     "client_phone": "Client Phone",
-    "first_payment": "First Payment",
+    "first_payment": "Deposit",
     "client_email": "Client Email",
     "client_name": "Client Name",
     "btn_create": "Create Ticket"
@@ -99,7 +99,7 @@
     "sn": "Device S/N (imei)",
     "client_email": "Email",
     "client_name":"Client name",
-    "first_payment":"First payment",
+    "first_payment":"Deposit",
     "finish_payment":"Final payment",
     "description": "Description",
     "update_ticket": "Update Ticket",
