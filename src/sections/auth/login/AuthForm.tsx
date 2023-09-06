@@ -83,7 +83,7 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
                 label="Company Name *" 
                 {...field} 
                 error={!!errors.company_name}
-                helperText={errors.company_name?.message}
+                helperText={errors.company_name?.message || t('printTicket.will_in_print')}
               />
             }
           }
