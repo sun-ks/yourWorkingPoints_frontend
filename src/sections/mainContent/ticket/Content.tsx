@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Stack, Grid, Paper, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { ticketAPI } from "../../../services/ITicketService";
+import { ticketAPI } from "../../../services/TicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';

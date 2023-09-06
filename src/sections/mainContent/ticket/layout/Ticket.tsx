@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { ticketAPI } from "../../../../services/ITicketService";
+import { ticketAPI } from "../../../../services/TicketService";
 import { makeStyles } from '@mui/styles';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {

@@ -57,7 +57,7 @@ export default function Navigator(props: DrawerProps) {
           linkTo: '/tickets'
         },
         {
-          id: t('company_settings'),
+          id: t('company.company_settings'),
           icon: <SettingsApplicationsIcon />,
           active: false,
           avaliable: true,

@@ -20,7 +20,7 @@ import CreateNewTiket from './sections/mainContent/createNewTicket/layout/Create
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
-import СompanySettings from './sections/mainContent/сompanySettings/layout/СompanySettings';
+import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
 
 const Router: FC = () => {
 const routers = useRoutes([

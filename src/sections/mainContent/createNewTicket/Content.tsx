@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { ticketAPI } from "../../../services/ITicketService";
+import { ticketAPI } from "../../../services/TicketService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { useParams } from 'react-router-dom';

@@ -2,7 +2,6 @@
   "choise_point": "Оберіть Точку",
   "create_point": "Створити Точку",
   "all_tickets": "Всі Задачі",
-  "company_settings":"Налаштування Компанії",
   "points": "Всі точки",
   "will_be_soon": "Незабаром:",
   "workers": "Персонал",
@@ -15,6 +14,12 @@
   "back": "Назад",
   "create_first": "Створити нову",
   "service_center": "Сервісний центр",
+  "updated": "Оновлено успішно!",
+  "company": {
+    "company_settings":"Налаштування Компанії",
+    "btn_edit": "Редагувати Компанию",
+    "name": "Назва Компанії"
+  },
   "statuses":{
     "inbox": "Взято на ремонт",
     "in_progress": "Ремонтується",
@@ -73,7 +78,7 @@
   },
   "tickets": {
     "create_ticket": "Створити Задачу",
-    "client_approval": "Важливо! Ці задачі потребують комунікації з клієнтомі:"
+    "client_approval": "Важливо! Ці задачі потребують комунікації з клієнтом:"
   },
   "createPoint": {
     "create_point": "Створити Точку"
