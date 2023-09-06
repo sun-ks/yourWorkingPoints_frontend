@@ -86,7 +86,7 @@ const Ticket: FC = () => {
   const QRForService = () => <QRCode size={150} value={`${siteUrl}items/${ticket_id}`} />
 
   const printRows = [
-    {name: t('printTicket.ticket_id'), value:`${ticket?.ticket_id}`},
+    {name: t('printTicket.device'), value:`${ticket?.name}`},
     {name: t('printTicket.client'), 
       value:`${ticket?.client_phone}  
       ${ticket?.client_first_name ? ticket?.client_first_name.toUpperCase() : ''}  

@@ -118,6 +118,7 @@
     "note": "Note"
   },
   "printTicket": {
+    "device": "Device",
     "will_in_print": "Important! This will be in print (Repair Order, Guarantee)",
     "title_guarantee":"Guarantee",
     "title_order": "Repair Order",
