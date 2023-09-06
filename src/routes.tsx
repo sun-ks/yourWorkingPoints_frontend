@@ -20,6 +20,7 @@ import CreateNewTiket from './sections/mainContent/createNewTicket/layout/Create
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
+import СompanySettings from './sections/mainContent/сompanySettings/layout/СompanySettings';
 
 const Router: FC = () => {
 const routers = useRoutes([
@@ -34,6 +35,7 @@ const routers = useRoutes([
           { path: ':point_id', element: <TicketsByPoints/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
           { path: '/editPoint/:point_id', element: <EditPoint/> },
+          { path: '/settings', element: <СompanySettings/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
           { path: '/tickets', element: <Tickets/> },
           { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },

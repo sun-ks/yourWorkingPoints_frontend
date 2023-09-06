@@ -12,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import { useTranslation } from "react-i18next";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from "react-redux";
@@ -20,7 +21,6 @@ import { selectAccessToken } from "../store/reducers/AuthSlice";
 import {pointAPI} from "../services/PointService";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { useTheme } from '@mui/material/styles';
-import { palette } from '@mui/system';
 
 const item = {
   py: '2px',
@@ -55,6 +55,13 @@ export default function Navigator(props: DrawerProps) {
           active: false,
           avaliable: true,
           linkTo: '/tickets'
+        },
+        {
+          id: t('company_settings'),
+          icon: <SettingsApplicationsIcon />,
+          active: false,
+          avaliable: true,
+          linkTo: '/settings'
         },
       ],
     },
