@@ -124,7 +124,9 @@
     "service_information": "Service Information",
     "ticket_id": "Ticket Id",
     "client": "Client",
-    "ticket_qr_code": "QR ticket"
+    "ticket_qr_code": "QR ticket",
+    "PhoneNumber": "Phone",
+    "rule01": "The service center is not responsible for possible data loss in the device's memory or for retained SIM cards. Please take care of backing up your confidential and personal information in advance."
   },
   "point": {
     "point": "Point",

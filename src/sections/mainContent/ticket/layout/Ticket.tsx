@@ -1,5 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
+import { companyAPI } from "../../../../services/CompanyService";
 import { ticketAPI } from "../../../../services/TicketService";
+import { pointAPI } from "../../../../services/PointService"
 import { makeStyles } from '@mui/styles';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import {
@@ -54,7 +56,7 @@ const Ticket: FC = () => {
 
   const {t} = useTranslation();
 
-  const { ticket_id }  = useParams();
+  const { ticket_id, point_id }  = useParams();
 
   const {data: ticket } = ticketAPI.useGetTicketQuery(ticket_id);
 
@@ -62,7 +64,13 @@ const Ticket: FC = () => {
 
   const [printType, setPrintType] = useState<'qr' | 'order' | false>(false);
 
+  const {data: company, error, isLoading} = companyAPI.useGetCompanyQuery('')
+  
+  const {data: point} = pointAPI.useGetPointByPointIdQuery(point_id)
+
   const classes = useStyles();
+
+  console.log('point_id', point?.phone_number)
 
   useEffect(()=>{
     if (printType) {
@@ -152,7 +160,10 @@ const Ticket: FC = () => {
             </Typography>
             <TableContainer >
               <Table sx={{ minWidth: 650 }} aria-label="caption table">
-                <caption>{t('printTicket.service_information')}:</caption>
+                <caption>
+                  {company.company_name}<br/>
+                  {t('printTicket.PhoneNumber')}: {point?.phone_number}
+                </caption>
                 <TableBody>
                   {printRows.map((row) => (
                     <TableRow key={row.name}>
@@ -165,6 +176,12 @@ const Ticket: FC = () => {
                 </TableBody>
               </Table>
             </TableContainer>
+
+            <Typography fontSize={12} padding={2} sx={{}}>
+              {t('printTicket.rule01')}
+
+            </Typography>
+            
           </div>) : (
           <Table sx={{ minWidth: 650 }} aria-label="caption table">
             <TableBody>
