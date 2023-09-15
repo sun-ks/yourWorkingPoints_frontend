@@ -65,7 +65,8 @@ export default function Header(props: HeaderProps) {
             {!isAuthPage && (<>
             <Grid item>
               <Link
-                href="/"
+                href="https://ywp-general.web.app/"
+                target="_blank"
                 variant="body2"
                 sx={{
                   textDecoration: 'none',
@@ -75,7 +76,6 @@ export default function Header(props: HeaderProps) {
                   },
                 }}
                 rel="noopener noreferrer"
-                target="_blank"
               >
                 Buy
               </Link>
