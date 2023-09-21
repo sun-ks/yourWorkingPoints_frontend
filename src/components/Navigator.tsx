@@ -63,21 +63,21 @@ export default function Navigator(props: DrawerProps) {
           avaliable: true,
           linkTo: '/settings'
         },
+        {
+          id: t('workers'),
+          icon: <PeopleIcon />,
+          active: false,
+          avaliable: true,
+          linkTo: '/workers'
+        },
       ],
     },
     {
       id: t('will_be_soon'),
       children: [
-        {
-          id: t('workers'),
-          icon: <PeopleIcon />,
-          active: false,
-          avaliable: false,
-          linkTo: '/'
-        },
-        { id: t('statistics'), avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> },
-        { id: t('shop'), avaliable: false, linkTo: '/', icon: <ShoppingBasketIcon /> },
-        { id: t('clients'), avaliable: false, linkTo: '/', icon: <Diversity1Icon /> },
+        { id: t('statistics'), active: false, avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> },
+        { id: t('shop'), active: false, avaliable: false, linkTo: '/', icon: <ShoppingBasketIcon /> },
+        { id: t('clients'), active: false, avaliable: false, linkTo: '/', icon: <Diversity1Icon /> },
       ],
     },
   ];

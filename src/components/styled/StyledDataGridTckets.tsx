@@ -20,7 +20,7 @@ const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   marginBottom: 8,
 }));
 
-const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
+const StyledDataGridTckets: FC<any> = ({tickets, error, isLoading}) => {
 
   const navigate = useNavigate();
 
@@ -176,4 +176,4 @@ const StyledDataGrid: FC<any> = ({tickets, error, isLoading}) => {
   </>
 };
 
-export default StyledDataGrid;
+export default StyledDataGridTckets;

@@ -17,7 +17,7 @@ interface IFormInputs {
   company_name: string;
 }
 
-const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typePage, ressetPassToken}) => {
+const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token}) => {
   const { handleSubmit, control, reset:resetForm, clearErrors, formState, formState: { errors, isValid } } = useForm<IFormInputs>();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +25,8 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
   const [dataResponce, setDataResponce] = useState<any>('');
 
   const [signUp, {isError:isError_sign_up, error: error_sign_up}] = userAPI.useSignUpMutation();
+
+  const [addWorker, {isError:isError_add_worker, error: error_add_worker}] = userAPI.useAddWorkerMutation();
   
   const [login, {isError:isError_sign_in, error:error_sign_in}] = userAPI.useLoginMutation();
 
@@ -36,7 +38,8 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     sign_up: error_sign_up, 
     sign_in: error_sign_in,
     forgot: error_forgot,
-    new_password: error_new_password
+    new_password: error_new_password,
+    add_worker: error_add_worker
   };
 
   const dispatch = useDispatch();
@@ -50,9 +53,14 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
     let apiCall = typePage  === 'sign_up' ? signUp 
       : typePage === 'forgot' ? forgot
       : typePage === 'new_password' ? newPassword
+      : typePage === 'add_worker' ? addWorker
       : login;
 
     const params:any = {...args};
+
+    if(token) {
+      params.token = token;
+    }
 
     const { data } = await apiCall(params) as { data: IUser };
     
@@ -89,7 +97,8 @@ const AuthForm: FC<{typePage: AuthPageType, ressetPassToken?: string}> = ({typeP
           }
         />)}
 
-        {typePage !== 'new_password' && (
+        {(typePage !== 'new_password' && typePage !== 'add_worker') 
+          && (
           <Controller
             control={control}
             name="email"

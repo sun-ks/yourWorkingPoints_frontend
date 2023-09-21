@@ -67,6 +67,14 @@
     "btn_sign_in":"Set New Password",
     "do_not_account": "Go to"
   },
+  "add_worker": {
+    "meta": {
+      "title" : "YWP, Hello New Member"
+    },
+    "title": "Set password",
+    "btn_sign_in":"Set Password",
+    "do_not_account": "Go to"
+  },
   "ticketsColumns": {
     "created": "Created",
     "status": "Status",
@@ -76,6 +84,13 @@
     "client_phone": "Client Phone",
     "client": "Client",
     "paid": "Paid"
+  },
+  "usersColumns":{
+    "created": "Created",
+    "role": "Role",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email"
   },
   "tickets": {
     "create_ticket": "Create Ticket",
@@ -146,5 +161,14 @@
   },
   "account":{
     "logout": "Logout"
+  },
+  "worker": {
+    "workers_title_seo": "Workers",
+    "add_worker": "Add Employee",
+    "email": "Email",
+    "invite": "Send Invite",
+    "name": "Name",
+    "phone": "Phone",
+    "description": "Description"
   }
 }

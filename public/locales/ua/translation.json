@@ -66,6 +66,14 @@
     "btn_sign_in":"Встановити новий пароль",
     "do_not_account": "Перейти до"
   },
+  "add_worker": {
+    "meta": {
+      "title" : "YWP, Привіт Новенький!"
+    },
+    "title": "Встановити пароль",
+    "btn_sign_in":"Встановити пароль",
+    "do_not_account": "Перейти до"
+  },
   "ticketsColumns": {
     "created": "Створен",
     "status": "Статус",
@@ -75,6 +83,13 @@
     "client_phone": "Номер телефона",
     "client": "Клієнт",
     "paid": "Сплачено"
+  },
+  "usersColumns":{
+    "created": "Створен",
+    "role": "Роль",
+    "name": "Ім'я",
+    "phone": "Номер телефона",
+    "email": "Електрона Адреса"
   },
   "tickets": {
     "create_ticket": "Створити Задачу",
@@ -145,5 +160,14 @@
   },
   "account":{
     "logout": "Вийти"
+  },
+  "worker": {
+    "workers_title_seo": "Робітники",
+    "add_worker": "Додати Робітника",
+    "email": "Електрона Адреса Робітника",
+    "invite": "Надіслати запрошення",
+    "name": "Ім'я",
+    "phone": "Номер Телефону",
+    "description": "Опис"
   }
 }

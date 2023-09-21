@@ -16,10 +16,12 @@ import AddFirstPoint from './pages/AddFirstPoint';
 import Points from './sections/mainContent/points/layout/Points';
 import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
+import AddNewWorker from './sections/mainContent/addNewWorker/layout/AddNewWorker';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
+import Workers from './sections/mainContent/workers/layout/Workers';
 import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
 
 const Router: FC = () => {
@@ -34,10 +36,12 @@ const routers = useRoutes([
           { element: <Points/>, index: true },
           { path: ':point_id', element: <TicketsByPoints/> },
           { path: '/createNewPoint', element: <CreateNewPoint/> },
+          { path: '/addNewWorker', element: <AddNewWorker/> },
           { path: '/editPoint/:point_id', element: <EditPoint/> },
           { path: '/settings', element: <СompanySettings/> },
           { path: '/createTicket/:point_id?', element: <CreateNewTiket /> },
           { path: '/tickets', element: <Tickets/> },
+          { path: '/workers', element: <Workers/> },
           { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
@@ -51,7 +55,7 @@ const routers = useRoutes([
     },
     /* public routes */
     {
-      path: 'auth/:typePage/:ressetPassToken?',
+      path: 'auth/:typePage/:token?',
       element: <AuthPage />,
     },
     {

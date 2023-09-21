@@ -28,14 +28,15 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 const AuthPage: FC = () => {
   const { t } = useTranslation();
-  const { typePage='sign_in', ressetPassToken } = useParams<{typePage: AuthPageType, ressetPassToken?: string}>();
+  const { typePage='sign_in', token } = useParams<{typePage: AuthPageType, token?: string}>();
   const opositeType = (typePage === 'sign_in' || typePage === 'forgot') ? 'sign_up' : 'sign_in';
   
   const navigate = useNavigate();
   if (typePage !== 'sign_in' && 
     typePage !== 'sign_up' && 
     typePage !== 'forgot' && 
-    typePage !== 'new_password') {
+    typePage !== 'new_password' &&
+    typePage !== 'add_worker') {
     navigate('/404');
     return null;
   }
@@ -59,7 +60,7 @@ const AuthPage: FC = () => {
               <StyledRouterLink to={`/auth/${opositeType}`} >{t(`${opositeType}.title`)}</StyledRouterLink>
             </Typography>
 
-            <AuthForm typePage={typePage} ressetPassToken={ressetPassToken}/>
+            <AuthForm typePage={typePage} token={token}/>
           </StyledContent>
         </Container>
       </StyledRoot>
