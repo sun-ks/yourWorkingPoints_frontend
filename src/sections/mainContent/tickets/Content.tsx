@@ -1,12 +1,12 @@
 import { FC } from "react";
 import {ticketAPI} from "../../../services/TicketService";
-import StyledDataGrid from "../../../components/styled/StyledDataGrid";
+import StyledDataGridtTckets from "../../../components/styled/StyledDataGridTckets";
 
 const Content: FC = () => {
 
   const {data: tickets, error, isLoading} = ticketAPI.useGetAllItemsTicketsQuery('')
 
-  return <StyledDataGrid tickets={tickets} error={error} isLoading={isLoading} />
+  return <StyledDataGridtTckets tickets={tickets} error={error} isLoading={isLoading} />
 };
 
 export default Content;
