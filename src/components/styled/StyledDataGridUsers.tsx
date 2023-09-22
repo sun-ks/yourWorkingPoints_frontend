@@ -20,7 +20,7 @@ const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   marginBottom: 8,
 }));
 
-const StyledDataGridUsers: FC<any> = ({users, error, isLoading}) => {
+const StyledDataGridUsers: FC<any> = ({users, error, isLoading, type}) => {
 
   const navigate = useNavigate();
 
@@ -56,16 +56,15 @@ const StyledDataGridUsers: FC<any> = ({users, error, isLoading}) => {
     {
       field: 'email',
       headerName: t('usersColumns.email'),
-      width: 2000,
+      width: 200,
       editable: true,
     },
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    const pintId = params.row.point_id;
-    navigate(`/items/${params.id}/${pintId}`)
+    const user_id = params.row.user_id;
+    navigate(`/${type}/${user_id}`);
   };
-
 
   return <>
     {error && <Box sx={{ marginBottom: 3 }}>

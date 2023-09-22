@@ -5,8 +5,11 @@ import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import {userAPI} from "../../../services/UserService";
-import {IPoint} from "../../../types/IPoint";
 import { useTranslation } from "react-i18next";
+import { useParams } from 'react-router-dom';
+import { isOwner } from "../../../store/reducers/AuthSlice"
+import { useSelector } from "react-redux"
+
 interface IFormInputs {
   email: string;
   name: string;
@@ -16,26 +19,54 @@ interface IFormInputs {
 
 const Content: FC = () => {
   const { t } = useTranslation();
+  const isOwnerVal = useSelector(isOwner);
 
-  const [inviteUser, {isError, isLoading, error}] = userAPI.useInviteWorkerMutation();
+  const { user_id }  = useParams();
 
-  const { handleSubmit, control,  formState: { errors } } = useForm<IFormInputs>();
+  const {data: user, error: user_Error, isLoading: user_isLoading} = userAPI.useGetUserByIdQuery(user_id);
 
-  const dataFromError:any = (error && 'data' in error) ? error?.data : undefined;
+  const [updateWorker, {isError: isError_updateWorker, isLoading: isLoading_updateWorker, error: error_updateWorker}] = userAPI.useUpdateWorkerMutation();
 
-  const [worker, setWorker] = useState<any>();
+  const { handleSubmit, control, setValue, formState: { errors } } = useForm<IFormInputs>({
+    defaultValues: {
+      email: '',
+      name: '',
+      phone: '',
+      description: ''
+    }
+  });
+
+  useEffect(() => {
+    if (user) {
+      setValue('email', user.email);
+      setValue('name', user.name);
+      setValue('phone', user.phone);
+      setValue('description', user.description);
+    }
+  }, [user]);
+
+
+  const dataFromError:any = (error_updateWorker && 'data' in error_updateWorker) ? error_updateWorker?.data : undefined;
+
+  const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
+
 
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
-    const {data} = await inviteUser(args) as {data: any};
+    const {data} = await updateWorker({user_id: user.user_id, ...args}) as {data: any};
 
-    console.log(data)
-    setWorker(data);
+    if(data) {
+      setshowSuccessesBlock(true)
+  
+      setTimeout(() => {
+        setshowSuccessesBlock(false);
+      }, 3000); 
+    }
   };
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
-          {t('worker.add_worker')}
+          {t('worker.edit_worker')} ({user?.role})
         </Typography>
 
         <Stack spacing={3}>
@@ -118,14 +149,15 @@ const Content: FC = () => {
             }
           />
           
-          {isError && <Typography color="error">{dataFromError}</Typography>}
+          {dataFromError && <Typography color="error">{dataFromError}</Typography>}
 
-          {worker?.email && <Typography color="green">Invitation sent to "{worker?.email}" successfully!</Typography>}
+          {showSuccessesBlock && <Typography color="green">{t('update_successful')}</Typography>}
 
           <LoadingButton
-            disabled={isLoading}
+            title={!isOwnerVal ? t('only_for_owner') : ''}
+            disabled={false }
             fullWidth size="large" type="submit" variant="contained" >
-            {t('worker.invite')}
+            {t('worker.save')}
           </LoadingButton>
         </Stack>
       </form>
