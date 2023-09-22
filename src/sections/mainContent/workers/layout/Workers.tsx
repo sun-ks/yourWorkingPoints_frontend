@@ -24,9 +24,7 @@ const Workers: FC = () => {
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
-            <Grid item>
-              <StyledRouterLink to={`/`}>{t('points')}</StyledRouterLink> / {t('all_tickets')}
-            </Grid>
+            <Grid item></Grid>
             <Grid item>
               <Button component={Link} to={`/addNewWorker`} variant="contained" sx={{ mr: 1 }}>
                 {t('worker.add_worker')}

@@ -5,11 +5,20 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 export const userAPI = createApi({
   reducerPath: 'user',
   baseQuery: baseQueryCheckAccessToken,
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Users'],
   endpoints: (build) => ({
     getAllUsers: build.query<any, any>({
       query: () => ({
         url: `/users`,
+      }),
+      providesTags: result => ['Users']
+    }),
+    getUserById: build.query<any, any>({
+      query: (userId) => ({
+        url: `/users/user`,
+        params: {
+          userId
+        }
       }),
       providesTags: result => ['User']
     }),
@@ -51,7 +60,7 @@ export const userAPI = createApi({
         method: 'PUT',
         body
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ['User', 'Users']
     }),
     inviteWorker: build.mutation<any, any>({
       query: (args) => ({
@@ -59,6 +68,14 @@ export const userAPI = createApi({
         url: `/users/inviteWorker`,
         body: args
       }),
+    }),
+    updateWorker: build.mutation<any, any>({
+      query: (args) => ({
+        method: 'PUT',
+        url: `/users/updateWorker`,
+        body: args
+      }),
+      invalidatesTags: ['User','Users']
     }),
   })
 });

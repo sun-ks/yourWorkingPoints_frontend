@@ -22,6 +22,7 @@ import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 import Workers from './sections/mainContent/workers/layout/Workers';
+import Worker from './sections/mainContent/worker/layout/Worker';
 import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
 
 const Router: FC = () => {
@@ -43,6 +44,7 @@ const routers = useRoutes([
           { path: '/tickets', element: <Tickets/> },
           { path: '/workers', element: <Workers/> },
           { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },
+          { path: '/workers/:user_id', element: <Worker /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },
