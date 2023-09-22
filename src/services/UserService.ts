@@ -74,6 +74,7 @@ export const userAPI = createApi({
         url: `/users/updateWorker`,
         body: args
       }),
+      invalidatesTags: ['Users']
     }),
   })
 });
