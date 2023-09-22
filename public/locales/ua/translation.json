@@ -3,6 +3,8 @@
   "create_point": "Створити Точку",
   "all_tickets": "Всі Задачі",
   "points": "Всі точки",
+  "only_for_owner": "Виключно для користувачів з роллю 'Owner'",
+  "update_successful": "Оновлено успішно!",
   "will_be_soon": "Незабаром:",
   "workers": "Персонал",
   "statistics": "Статитстика",
@@ -168,6 +170,8 @@
     "invite": "Надіслати запрошення",
     "name": "Ім'я",
     "phone": "Номер Телефону",
-    "description": "Опис"
+    "description": "Опис",
+    "edit_worker": "Редагувати Робітника",
+    "save": "Зберегти"
   }
 }

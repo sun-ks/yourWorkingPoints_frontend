@@ -2,7 +2,8 @@
   "choise_point": "Choise Point",
   "create_point": "Create Point",
   "all_tickets": "All Tickets",
-  
+  "only_for_owner": "Exclusively for 'owner' role users",
+  "update_successful": "Updated successful!",
   "points": "Points",
   "will_be_soon": "Will be soon:",
   "workers": "Workers",
@@ -169,6 +170,9 @@
     "invite": "Send Invite",
     "name": "Name",
     "phone": "Phone",
-    "description": "Description"
+    "description": "Description",
+    "edit_worker": "Edit Worker",
+    "save": "Save"
+    
   }
 }
