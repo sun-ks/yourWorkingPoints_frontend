@@ -5,13 +5,21 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 export const userAPI = createApi({
   reducerPath: 'user',
   baseQuery: baseQueryCheckAccessToken,
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Users'],
   endpoints: (build) => ({
     getAllUsers: build.query<any, any>({
       query: () => ({
         url: `/users`,
       }),
-      providesTags: result => ['User']
+      providesTags: result => ['Users']
+    }),
+    getUserById: build.query<any, any>({
+      query: (userId) => ({
+        url: `/users/user`,
+        params: {
+          userId
+        }
+      }),
     }),
     login: build.mutation<IUser, {email: string; password: string}>({
       query: (body) => ({
@@ -57,6 +65,13 @@ export const userAPI = createApi({
       query: (args) => ({
         method: 'POST',
         url: `/users/inviteWorker`,
+        body: args
+      }),
+    }),
+    updateWorker: build.mutation<any, any>({
+      query: (args) => ({
+        method: 'PUT',
+        url: `/users/updateWorker`,
         body: args
       }),
     }),
