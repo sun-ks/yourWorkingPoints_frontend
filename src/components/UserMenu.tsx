@@ -19,8 +19,13 @@ const UserMenu: FC<any> = () => {
 
   const {logOut} = authSlice.actions;
 
-  const avatarLetter = currentUser?.userInfo?.email[0].toUpperCase();
-  
+  let avatarLetters = '=)';
+
+  if (currentUser && currentUser.userInfo) {
+    const avatarName = currentUser.userInfo.name ? currentUser.userInfo.name : currentUser.userInfo.email;
+    avatarLetters = avatarName.slice(0, 2).toString().toUpperCase();
+  }
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,7 +42,7 @@ const UserMenu: FC<any> = () => {
       aria-controls={open ? 'account-menu' : undefined}
       aria-haspopup="true"
       aria-expanded={open ? 'true' : undefined}>
-      <Avatar sx={{ width: 32, height: 32 }}>{avatarLetter}</Avatar>
+      <Avatar sx={{ width: 32, height: 32, fontSize: 16 }}>{avatarLetters}</Avatar>
     </IconButton>
     <Menu
       anchorEl={anchorEl}

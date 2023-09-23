@@ -20,6 +20,7 @@ export const userAPI = createApi({
           userId
         }
       }),
+      providesTags: result => ['User']
     }),
     login: build.mutation<IUser, {email: string; password: string}>({
       query: (body) => ({
@@ -59,7 +60,7 @@ export const userAPI = createApi({
         method: 'PUT',
         body
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ['User', 'Users']
     }),
     inviteWorker: build.mutation<any, any>({
       query: (args) => ({
@@ -74,7 +75,7 @@ export const userAPI = createApi({
         url: `/users/updateWorker`,
         body: args
       }),
-      invalidatesTags: ['Users']
+      invalidatesTags: ['User','Users']
     }),
   })
 });
