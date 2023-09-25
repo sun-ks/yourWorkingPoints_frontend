@@ -84,7 +84,8 @@
     "name": "Пристрій",
     "client_phone": "Номер телефона",
     "client": "Клієнт",
-    "paid": "Сплачено"
+    "paid": "Сплачено",
+    "assigned_at": "Назначен на"
   },
   "usersColumns":{
     "created": "Створен",
@@ -131,7 +132,8 @@
     "current_point":"Поточна Точка",
     "ticket_status": "Статус",
     "ticket_priority": "Пріорітет",
-    "note": "Нотатки"
+    "note": "Нотатки",
+    "assigned_at": "Назначен на"
   },
   "printTicket": {
     "device": "Пристрій",

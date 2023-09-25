@@ -16,4 +16,5 @@ export interface IItem {
   "last_part_payment"?: number | "";
   "note"?: string;
   "priority"?: 'low' | 'high' | 'medium';
+  "assigned_at": string | null;
 }
