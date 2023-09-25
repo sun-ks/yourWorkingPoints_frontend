@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/reducers/AuthSlice";
+import { styled } from '@mui/material/styles';
 
 const UserMenu: FC<any> = () => {
   const {t} = useTranslation();
@@ -20,6 +21,7 @@ const UserMenu: FC<any> = () => {
   const {logOut} = authSlice.actions;
 
   let avatarLetters = '=)';
+  const userRole = currentUser?.userInfo.role;
 
   if (currentUser && currentUser.userInfo) {
     const avatarName = currentUser.userInfo.name ? currentUser.userInfo.name : currentUser.userInfo.email;
@@ -34,6 +36,20 @@ const UserMenu: FC<any> = () => {
     setAnchorEl(null);
   };
 
+  const UserRoleBlock = styled('div')<{userRole?: string}>(({ theme, userRole }) => ({
+    position:'absolute',
+    bottom: '0px',
+    color: 'white',
+    fontSize: 8,
+    background: userRole === 'employee' ? '#9d00da' : '#07c21b',
+    padding: '1px 2px',
+    borderRadius: '6px',
+    letterSpacing: '2px',
+    '&::first-letter': {
+      textTransform: 'uppercase',
+    }
+  }));
+
   return <>
     <IconButton
       onClick={handleClick}
@@ -43,6 +59,7 @@ const UserMenu: FC<any> = () => {
       aria-haspopup="true"
       aria-expanded={open ? 'true' : undefined}>
       <Avatar sx={{ width: 32, height: 32, fontSize: 16 }}>{avatarLetters}</Avatar>
+      <UserRoleBlock userRole={userRole}>{userRole}</UserRoleBlock>
     </IconButton>
     <Menu
       anchorEl={anchorEl}
@@ -87,7 +104,7 @@ const UserMenu: FC<any> = () => {
         dispatch(logOut(''));
         handleClose();
       }}
-      sx={{   fontSize: 14,}}>
+      sx={{fontSize: 14}}>
         <ListItemIcon>
           <Logout />
         </ListItemIcon>
