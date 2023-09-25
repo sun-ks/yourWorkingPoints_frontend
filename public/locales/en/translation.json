@@ -84,7 +84,8 @@
     "name": "Device Name",
     "client_phone": "Client Phone",
     "client": "Client",
-    "paid": "Paid"
+    "paid": "Paid",
+    "assigned_at": "Assigned To"
   },
   "usersColumns":{
     "created": "Created",
@@ -131,7 +132,8 @@
     "current_point":"Current Point",
     "ticket_status": "Status",
     "ticket_priority": "Priority",
-    "note": "Note"
+    "note": "Note",
+    "assigned_at": "Assigned To"
   },
   "printTicket": {
     "device": "Device",

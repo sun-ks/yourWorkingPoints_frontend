@@ -6,6 +6,7 @@ import { Stack, Grid, Paper, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { ticketAPI } from "../../../services/TicketService";
+import { userAPI } from "../../../services/UserService";
 import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
@@ -30,17 +31,21 @@ const Content: FC<{
 
   const {data: points} = pointAPI.useGetPointsQuery('');
 
+  const {data: workers} = userAPI.useGetAllUsersQuery('');
+
   const [updateTicket, {isError, error:errorUpdateTicket}] = ticketAPI.useUpdateTicketMutation();
 
   const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {
-      last_part_payment: 0, 
+      last_part_payment: 0,
       note: '',
-      point_id: ''
+      point_id: '',
+      assigned_at: null,
     }
   });
 
   const status = watch('status');
+  
 
   setStatus(status)
 
@@ -51,6 +56,7 @@ const Content: FC<{
       setValue('note', ticket.note);
       setValue('last_part_payment', ticket.last_part_payment);
       setValue('point_id', ticket.point_id);
+      setValue('assigned_at', ticket.assigned_at);
     }
   }, [ticket]);
 
@@ -69,6 +75,15 @@ const Content: FC<{
       }, 3000); 
     }
   };
+
+  let workersList = [
+    {
+      user_id: null,
+      name: 'None'
+    },
+  ];
+
+  if (workers) workersList = [...workersList, ...workers] 
 
   const statuses = [{
       value: 'inbox',
@@ -148,6 +163,7 @@ const Content: FC<{
                     render={({ field }) => {
                     return <TextField 
                       {...field}
+                      sx={{width: "100%"}}
                       id="outlined-select-currency-native2"
                       select
                       label={t('editTicket.current_point')}
@@ -174,6 +190,7 @@ const Content: FC<{
                     render={({ field }) => {
                       return <TextField 
                           {...field}
+                          sx={{width: "100%"}}
                           id="outlined-select-currency-native"
                           select
                           label={t('editTicket.ticket_status')}
@@ -201,6 +218,7 @@ const Content: FC<{
                     render={({ field }) => {
                       return <TextField 
                           {...field}
+                          sx={{width: "100%"}}
                           id="outlined-select-currency-native2"
                           select
                           label={t('editTicket.ticket_priority')}
@@ -213,6 +231,34 @@ const Content: FC<{
                           {priorities.map((option) => (
                             <option key={option.value} value={option.value}>
                               {option.text}
+                            </option>
+                          ))}
+                        </TextField>
+                      }
+                    }
+                  />
+                </Box>
+
+                <Box sx={{marginBottom: 2}}>
+                  <Controller
+                    control={control}
+                    name="assigned_at"
+                    render={({ field }) => {
+                      return <TextField
+                          {...field}
+                          sx={{width: "100%"}}
+                          id="outlined-select-currency-native2"
+                          select
+                          label={t('editTicket.assigned_at')}
+                          variant="outlined"
+                          size="small" 
+                          SelectProps={{
+                            native: true,
+                          }}
+                          >
+                          {workersList.map((option:any) => (
+                            <option key={option.user_id} value={option.user_id}>
+                              {option.name ? option.name : option.email}
                             </option>
                           ))}
                         </TextField>
