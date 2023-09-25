@@ -65,6 +65,8 @@ const Content: FC<{
   const dataFromError:any = (errorUpdateTicket && 'data' in errorUpdateTicket) ? errorUpdateTicket?.data : undefined;
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
+    if (args.assigned_at === 'None') args.assigned_at = null;
+
     const {data} = await updateTicket({...args, ticket_id: ticket?.ticket_id}) as {data: any};
     
     if(data) {
@@ -83,7 +85,7 @@ const Content: FC<{
     },
   ];
 
-  if (workers) workersList = [...workersList, ...workers] 
+  if (workers) workersList = [...workersList, ...workers];
 
   const statuses = [{
       value: 'inbox',
