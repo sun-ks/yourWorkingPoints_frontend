@@ -55,6 +55,15 @@ const StyledDataGridTckets: FC<any> = ({tickets, error, isLoading}) => {
       valueGetter: (params: GridValueGetterParams) => t(`priorities.${params.row.priority}`)
     },
     {
+      field: 'assigned_at',
+      headerName: t('ticketsColumns.assigned_at'),
+      description: 'This column has a value getter and is not sortable.',
+      sortable: true,
+      width: 150,
+      valueGetter: (params: GridValueGetterParams) =>
+        `${params.row.user_name || params.row.user_email || 'None'}`,
+    },
+    {
       field: 'device_sn',
       headerName: t('ticketsColumns.device_sn'),
       width: 170,
