@@ -22,7 +22,9 @@ const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [dataResponce, setDataResponce] = useState<any>('');
+  const [showForgotSendInfo, setShowForgotSendInfo] = useState<any>('');
+
+  const [isActiveUser, setIsActiveUser] = useState<any>(true);
 
   const [signUp, {isError:isError_sign_up, error: error_sign_up}] = userAPI.useSignUpMutation();
 
@@ -64,13 +66,20 @@ const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token
 
     const { data } = await apiCall(params) as { data: IUser };
     
-    dispatch(setCredentials(data));
+    if (data) {
+      dispatch(setCredentials(data));
+      
+      const isActiveUser = data.userInfo.is_active;
 
-    if(data && typePage !== 'forgot') {
-      navigate('/createFirstPoint')
-    } else {
-      setDataResponce(data)
+      setIsActiveUser(isActiveUser);
+    
+      if (typePage === 'forgot') {
+        showForgotSendInfo(data);
+      } else if (isActiveUser) {
+        navigate('/createFirstPoint');
+      }
     }
+    
   };
 
   const { t } = useTranslation();
@@ -164,7 +173,10 @@ const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token
         </Stack>
       </Collapse>
 
-      {dataResponce && <Typography sx={{ my: 2, textAlign: 'left' }} color="green">{dataResponce}</Typography>}
+      {showForgotSendInfo && <Typography sx={{ my: 2, textAlign: 'left' }} color="green">{showForgotSendInfo}</Typography>}
+
+      {!isActiveUser && <Typography sx={{ my: 2, textAlign: 'left' }} color="red">This user has been deactivated!</Typography>}
+      
       
       <LoadingButton fullWidth size="large" type="submit" variant="contained" >
         {t(`${typePage}.btn_sign_in`)}

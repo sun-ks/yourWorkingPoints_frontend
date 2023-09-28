@@ -31,6 +31,7 @@
     "cancelled": "Cancelled",
     "hold": "Hold"
   },
+  
   "priorities": {
     "low": "Low",
     "high": "High",
@@ -92,7 +93,10 @@
     "role": "Role",
     "name": "Name",
     "phone": "Phone",
-    "email": "Email"
+    "email": "Email",
+    "is_active_true": "Active",
+    "is_active_false": "Inactive",
+    "status": "Status"
   },
   "tickets": {
     "create_ticket": "Create Ticket",
