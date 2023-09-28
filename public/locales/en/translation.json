@@ -20,7 +20,8 @@
   "company": {
     "company_settings":"Company Settings",
     "btn_edit": "Edit Company",
-    "name": "Company Name"
+    "name": "Company Name",
+    "deactivated_user":"This user has been deactivated!"
   },
   "statuses":{
     "inbox": "Inbox",

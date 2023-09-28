@@ -5,11 +5,14 @@ import {Toolbar, Container, Box, Grid, Button} from '@mui/material';
 import { Link } from 'react-router-dom';
 import Content from '../Content';
 import StyledRouterLink from '../../../../components/styled/RouterLink';
+import { useSelector } from "react-redux"
+import { isOwner } from "../../../../store/reducers/AuthSlice"
 
 import { useTranslation } from "react-i18next";
 
 const Workers: FC = () => {
   const { t } = useTranslation();
+  const isOwnerVal = useSelector(isOwner);
 
   return (
     <HelmetProvider>
@@ -26,7 +29,7 @@ const Workers: FC = () => {
           <Grid container spacing={2} alignItems="center" justifyContent="space-between">
             <Grid item></Grid>
             <Grid item>
-              <Button component={Link} to={`/addNewWorker`} variant="contained" sx={{ mr: 1 }}>
+              <Button component={Link} to={`/addNewWorker`} variant="contained" sx={{ mr: 1 }} disabled={!isOwnerVal}>
                 {t('worker.add_worker')}
               </Button>
             </Grid>
