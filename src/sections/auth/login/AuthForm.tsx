@@ -175,8 +175,7 @@ const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token
 
       {showForgotSendInfo && <Typography sx={{ my: 2, textAlign: 'left' }} color="green">{showForgotSendInfo}</Typography>}
 
-      {!isActiveUser && <Typography sx={{ my: 2, textAlign: 'left' }} color="red">This user has been deactivated!</Typography>}
-      
+      {!isActiveUser && <Typography sx={{ my: 2, textAlign: 'left' }} color="red">{t('company.deactivated_user')}</Typography>}
       
       <LoadingButton fullWidth size="large" type="submit" variant="contained" >
         {t(`${typePage}.btn_sign_in`)}
