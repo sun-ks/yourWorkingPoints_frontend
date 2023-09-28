@@ -46,7 +46,6 @@ const Content: FC<{
 
   const status = watch('status');
   
-
   setStatus(status)
 
   useEffect(() => {

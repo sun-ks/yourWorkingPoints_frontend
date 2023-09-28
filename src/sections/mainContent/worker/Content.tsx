@@ -11,6 +11,7 @@ import { isOwner } from "../../../store/reducers/AuthSlice"
 import { useSelector } from "react-redux"
 
 interface IFormInputs {
+  is_active: any;
   email: string;
   name: string;
   phone: string;
@@ -29,6 +30,7 @@ const Content: FC = () => {
 
   const { handleSubmit, control, setValue, formState: { errors } } = useForm<IFormInputs>({
     defaultValues: {
+      is_active: true,
       email: '',
       name: '',
       phone: '',
@@ -38,6 +40,7 @@ const Content: FC = () => {
 
   useEffect(() => {
     if (user) {
+      setValue('is_active', user.is_active);
       setValue('email', user.email);
       setValue('name', user.name);
       setValue('phone', user.phone);
@@ -52,7 +55,12 @@ const Content: FC = () => {
 
 
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
-    const {data} = await updateWorker({user_id: user.user_id, ...args}) as {data: any};
+    
+    const {data} = await updateWorker({
+      user_id: user.user_id, 
+      ...args, 
+      is_active: JSON.parse(args.is_active)
+    }) as {data: any};
 
     if(data) {
       setshowSuccessesBlock(true)
@@ -63,6 +71,15 @@ const Content: FC = () => {
     }
   };
 
+  const statuses = [{
+    value: true,
+    text: t('usersColumns.is_active_true')
+  },
+  {
+    value: false,
+    text: t('usersColumns.is_active_false')
+  }];
+
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
@@ -70,6 +87,31 @@ const Content: FC = () => {
         </Typography>
 
         <Stack spacing={3}>
+          {user && user.role !== 'owner' && <Controller
+            control={control}
+            name="is_active"
+            render={({ field }) => {
+              return <TextField 
+                  {...field}
+                  sx={{width: "100%"}}
+                  id="outlined-select-currency-native"
+                  select
+                  label={t('usersColumns.status')}
+                  variant="outlined"
+                  SelectProps={{
+                    native: true,
+                  }}
+                  >
+                  {statuses.map((option, i) => (
+                    <option key={`key-isactive-${i}`} value={option.value.toString()}>
+                      {option.text}
+                    </option>
+                  ))}
+                </TextField>
+              }
+            }
+          />}
+
           <Controller
             control={control}
             name="email"

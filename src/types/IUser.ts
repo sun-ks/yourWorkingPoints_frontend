@@ -15,4 +15,5 @@ export interface IUserInfo {
   password: string,
   role: string,
   created: string,
+  is_active: boolean,
 }

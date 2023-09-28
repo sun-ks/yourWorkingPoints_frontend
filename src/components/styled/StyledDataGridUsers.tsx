@@ -36,6 +36,13 @@ const StyledDataGridUsers: FC<any> = ({users, error, isLoading, type}) => {
         `${ new Date(params.row.created).toLocaleDateString()}`,
     },
     {
+      field: 'is_active',
+      headerName: t('usersColumns.status'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) => t(`usersColumns.is_active_${params.row.is_active}`)
+    },
+    {
       field: 'role',
       headerName: t('usersColumns.role'),
       width: 150,
