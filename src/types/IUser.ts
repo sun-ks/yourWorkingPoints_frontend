@@ -1,12 +1,7 @@
 export interface IUser {
   userInfo: IUserInfo;
-  tokens: ICredentials
+  accessToken: string
 }
-
-export interface ICredentials {
-  accessToken: string;
-  refreshToken: string;
-};
 
 export interface IUserInfo {
   user_id: string,
