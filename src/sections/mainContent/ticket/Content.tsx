@@ -11,6 +11,11 @@ import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
 import { useTranslation } from "react-i18next";
+//import DatePicker from '@mui/lab/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -29,6 +34,13 @@ const Content: FC<{
 
   const {t} = useTranslation();
 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+
   const {data: points} = pointAPI.useGetPointsQuery('');
 
   const {data: workers} = userAPI.useGetAllUsersQuery('');
@@ -41,6 +53,7 @@ const Content: FC<{
       note: '',
       point_id: '',
       assigned_at: null,
+      guarantee_till: null,
     }
   });
 
@@ -56,24 +69,32 @@ const Content: FC<{
       setValue('last_part_payment', ticket.last_part_payment);
       setValue('point_id', ticket.point_id);
       setValue('assigned_at', ticket.assigned_at);
+      setValue('guarantee_till', ticket.guarantee_till);
     }
   }, [ticket]);
+
+  useEffect(() => {
+    if (status !== 'paid') {
+      setValue('guarantee_till', null);
+    }
+  }, [status]);
 
   const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
 
   const dataFromError:any = (errorUpdateTicket && 'data' in errorUpdateTicket) ? errorUpdateTicket?.data : undefined;
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
+
     if (args.assigned_at === 'None') args.assigned_at = null;
 
     const {data} = await updateTicket({...args, ticket_id: ticket?.ticket_id}) as {data: any};
     
     if(data) {
-      setshowSuccessesBlock(true)
+      setshowSuccessesBlock(true);
 
       setTimeout(() => {
         setshowSuccessesBlock(false);
-      }, 3000); 
+      }, 3000);
     }
   };
 
@@ -130,8 +151,10 @@ const Content: FC<{
     }
   ];
   
+  
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
+        
         <Typography variant="h6" gutterBottom margin={4}>
           {t('editTicket.title')}
         </Typography>
@@ -211,6 +234,29 @@ const Content: FC<{
                     }
                   />
                 </Box>
+                
+                {status === 'paid' && 
+                  <Box sx={{marginBottom: 2}}>
+                    <Controller
+                      name="guarantee_till"
+                      control={control}
+                      defaultValue={null} // Set the default value here in the format "YYYY-MM-DD"
+                      render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
+                          <DatePicker
+                            label={t('editTicket.guarantee_till')}
+                            format="DD-MM-YYYY"
+                            value={dayjs(value || null)} // Use the value here to bind the field's value
+                            onChange={event => onChange(event)}
+                            slotProps={{
+                              textField: { size: 'small', error: !!error, helperText: error?.message },
+                            }}
+                          />
+                        </LocalizationProvider>
+                      )}
+                    />
+                  </Box>
+                }
 
                 <Box sx={{marginBottom: 2}}>
                   <Controller
@@ -270,7 +316,7 @@ const Content: FC<{
               </Item>
             </Grid>
           </Grid>
-          
+
           <Controller
             control={control}
             name="note"
@@ -278,6 +324,24 @@ const Content: FC<{
               return <TextField 
                   label={t('editTicket.note')}
                   multiline
+                  variant="outlined"
+                  size="small"
+                  rows={4}
+                  {...field} 
+                  error={!!errors.note}
+                  helperText={errors.note?.message}
+                />
+              }
+            }
+          />
+          
+          <Controller
+            control={control}
+            name="note"
+            render={({ field }) => {
+              return <TextField 
+                  label={t('editTicket.note')}
+                  
                   variant="outlined"
                   size="small"
                   rows={4}
@@ -316,7 +380,6 @@ const Content: FC<{
           </LoadingButton>
         </Stack>
       </form>
-    
 )}
 
 export default Content;

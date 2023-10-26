@@ -119,6 +119,7 @@
     "btn_create": "Create Ticket"
   },
   "editTicket": {
+    "guarantee_till": "Guarantee till",
     "set_status_paid": "After reaching the status 'Paid,' printing the Guarantee will be possible",
     "print_guarantee": "Print Guarantee",
     "print_repair_order": "Print Repair Order",

@@ -118,6 +118,7 @@
     "btn_create": "Створити Задачу"
   },
   "editTicket": {
+    "guarantee_till": "Гарантія до",
     "set_status_paid": "Після досягнення статусу 'Сплачено' буде можливий друк гарантії",
     "print_guarantee": "Друк гарантії",
     "print_repair_order": "Друк бланку прийому",

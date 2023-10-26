@@ -17,4 +17,5 @@ export interface IItem {
   "note"?: string;
   "priority"?: 'low' | 'high' | 'medium';
   "assigned_at": string | null;
+  "guarantee_till": string | number | Date | null;
 }
