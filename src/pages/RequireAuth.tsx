@@ -7,7 +7,7 @@ const RequireAuth = () => {
   const user = useSelector(selectCurrentUser);
 
   return (
-    user && user.tokens?.accessToken ? <Outlet />
+    user && user.accessToken ? <Outlet />
       : <Navigate to="auth/sign_in" state={{ from: location }} replace />
   )
 }

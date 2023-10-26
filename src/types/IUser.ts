@@ -1,6 +1,6 @@
 export interface IUser {
   userInfo: IUserInfo;
-  tokens: ICredentials
+  accessToken: string
 }
 
 export interface ICredentials {
