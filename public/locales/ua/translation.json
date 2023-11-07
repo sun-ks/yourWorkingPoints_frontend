@@ -9,7 +9,6 @@
   "workers": "Персонал",
   "statistics": "Статитстика",
   "shop": "Магазин",
-  "clients": "Клієнти",
   "company_name": "Your Working Points",
   "company_name_short": "YWP",
   "forgot_password": "Забули пароль?",
@@ -22,6 +21,19 @@
     "btn_edit": "Редагувати Компанию",
     "name": "Назва Компанії",
     "deactivated_user":"Цей користувач був деактивований!"
+  },
+  "clients": {
+    "clients_title_seo": "Всі клієнти",
+    "add_client": "Додати клієнта",
+    "clients_menu_item": "Всі Кліенти",
+    "add_client_btn": "Додати Клієнта",
+    "add_client_title": "Додати Нового Клієнта",
+    "client_added": "Клієнт додан успішно!",
+    "email": "Електрона Адреса",
+    "name":"Ім'я",
+    "phone": "Номер Телефону",
+    "description":"Опис",
+    "edit_client": "Редагувати кліента"
   },
   "statuses":{
     "inbox": "Взято на ремонт",
@@ -115,7 +127,8 @@
     "first_payment": "Перший Платіж",
     "client_email": "Електрона Адреса",
     "client_name": "Ім'я Клієнта",
-    "btn_create": "Створити Задачу"
+    "btn_create": "Створити Задачу",
+    "client_already_exist": "Цей кліент вже існує"
   },
   "editTicket": {
     "guarantee_till": "Гарантія до",

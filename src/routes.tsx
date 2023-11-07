@@ -17,12 +17,15 @@ import Points from './sections/mainContent/points/layout/Points';
 import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import AddNewWorker from './sections/mainContent/addNewWorker/layout/AddNewWorker';
-import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket'
+import AddNewClient from './sections/mainContent/addNewClient/layout/AddNewClient';
+import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket';
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/ticket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 import Workers from './sections/mainContent/workers/layout/Workers';
+import Clients from './sections/mainContent/clients/layout/Clients';
 import Worker from './sections/mainContent/worker/layout/Worker';
+import Client from './sections/mainContent/client/layout/Client';
 import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
 
 const Router: FC = () => {
@@ -45,6 +48,9 @@ const routers = useRoutes([
           { path: '/workers', element: <Workers/> },
           { path: '/items/:ticket_id/:point_id?', element: <Ticket /> },
           { path: '/workers/:user_id', element: <Worker /> },
+          { path: '/clients/:client_id', element: <Client /> },
+          { path: '/clients', element: <Clients /> },
+          { path: '/addClient', element: <AddNewClient /> },
         ]},
         //{ element: <Navigate to="/dashboard/app" />, index: true },
         //{ path: 'products', element: <ProductsPage /> },

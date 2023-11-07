@@ -70,14 +70,18 @@ export default function Navigator(props: DrawerProps) {
           avaliable: true,
           linkTo: '/workers'
         },
+        { 
+          id: t('clients.clients_menu_item'), 
+          active: false, 
+          avaliable: true, 
+          linkTo: '/clients', 
+          icon: <Diversity1Icon /> },
       ],
     },
     {
       id: t('will_be_soon'),
       children: [
-        { id: t('statistics'), active: false, avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> },
-        { id: t('shop'), active: false, avaliable: false, linkTo: '/', icon: <ShoppingBasketIcon /> },
-        { id: t('clients'), active: false, avaliable: false, linkTo: '/', icon: <Diversity1Icon /> },
+        { id: t('statistics'), active: false, avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> }
       ],
     },
   ];
