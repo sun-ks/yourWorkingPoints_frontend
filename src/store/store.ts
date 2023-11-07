@@ -4,9 +4,9 @@ import authReducer from "./reducers/AuthSlice";
 import services from "../services/index";
 
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage'; //defaults to localStorage for web
 
-const {postAPI, userAPI, pointAPI, ticketAPI, companyAPI} = services;
+const {postAPI, userAPI, pointAPI, ticketAPI, companyAPI, clientAPI} = services;
 
 const reducers = {
   testReducer,
@@ -15,7 +15,8 @@ const reducers = {
   [userAPI.reducerPath]: userAPI.reducer,
   [pointAPI.reducerPath]: pointAPI.reducer,
   [ticketAPI.reducerPath]: ticketAPI.reducer,
-  [companyAPI.reducerPath]: companyAPI.reducer
+  [companyAPI.reducerPath]: companyAPI.reducer,
+  [clientAPI.reducerPath]: clientAPI.reducer
 }
 
 const rootReducer = combineReducers(reducers);
@@ -23,7 +24,7 @@ const rootReducer = combineReducers(reducers);
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['testReducer', 'authReducer'] // only navigation will be persisted
+  whitelist: ['testReducer', 'authReducer'] //only navigation will be persisted
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -39,6 +40,8 @@ export const setupStore = () => {
       .concat(pointAPI.middleware)
       .concat(ticketAPI.middleware)
       .concat(companyAPI.middleware)
+      .concat(companyAPI.middleware)
+      .concat(clientAPI.middleware)
       //devTools: true, // Enable Redux DevTools
   })
 };

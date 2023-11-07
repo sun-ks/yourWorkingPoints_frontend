@@ -9,7 +9,6 @@
   "workers": "Workers",
   "statistics": "Statistics",
   "shop": "Shop",
-  "clients": "Clients",
   "company_name": "Your Working Points",
   "company_name_short": "YWP",
   "forgot_password": "Forgot password",
@@ -22,6 +21,19 @@
     "btn_edit": "Edit Company",
     "name": "Company Name",
     "deactivated_user":"This user has been deactivated!"
+  },
+  "clients": {
+    "clients_title_seo": "All Clients",
+    "add_client": "Add Client",
+    "clients_menu_item": "All Clients",
+    "add_client_btn": "Add Client",
+    "add_client_title": "Add New Client",
+    "client_added": "Client added successfully!",
+    "email": "Email",
+    "name":"Name",
+    "phone": "Phone",
+    "description":"Description",
+    "edit_client": "Edit Client"
   },
   "statuses":{
     "inbox": "Inbox",
@@ -116,7 +128,8 @@
     "first_payment": "Deposit",
     "client_email": "Client Email",
     "client_name": "Client Name",
-    "btn_create": "Create Ticket"
+    "btn_create": "Create Ticket",
+    "client_already_exist": "This Client elready exists"
   },
   "editTicket": {
     "guarantee_till": "Guarantee till",

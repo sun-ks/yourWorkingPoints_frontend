@@ -8,9 +8,6 @@ import {isEmpty} from "lodash";
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-
 
 const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   color: theme.palette.error.light,
@@ -88,7 +85,7 @@ const StyledDataGridTckets: FC<any> = ({tickets, error, isLoading}) => {
       sortable: false,
       width: 100,
       valueGetter: (params: GridValueGetterParams) =>
-        `${params.row.client_first_name || ''} ${params.row.client_lasrt_name || ''}`,
+        `${params.row.client_name || ''}`,
     },
     {
       field: 'parseInt(',

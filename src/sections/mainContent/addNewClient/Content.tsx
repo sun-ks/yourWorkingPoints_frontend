@@ -4,37 +4,36 @@ import TextField from '@mui/material/TextField';
 import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import {userAPI} from "../../../services/UserService";
-import {IPoint} from "../../../types/IPoint";
+import { clientAPI } from "../../../services/ClientService";
 import { useTranslation } from "react-i18next";
 interface IFormInputs {
   email: string;
-  name: string;
-  phone: string;
+  client_first_name: string;
+  client_phone: string;
   description: string;
 };
 
 const Content: FC = () => {
   const { t } = useTranslation();
 
-  const [inviteUser, {isError, isLoading, error}] = userAPI.useInviteWorkerMutation();
+  const [createClient, {isError, isLoading, error}] = clientAPI.useCreateClientMutation();
 
   const { handleSubmit, control,  formState: { errors } } = useForm<IFormInputs>();
 
   const dataFromError:any = (error && 'data' in error) ? error?.data : undefined;
 
-  const [worker, setWorker] = useState<any>();
+  const [client, setClient] = useState<any>();
 
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
-    const {data} = await inviteUser(args) as {data: any};
+    const {data} = await createClient(args) as {data: any};
 
-    setWorker(data);
+    setClient(data);
   };
 
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
-          {t('worker.add_worker')}
+          {t('clients.add_client_title')}
         </Typography>
 
         <Stack spacing={3}>
@@ -50,7 +49,7 @@ const Content: FC = () => {
             }}
             render={({ field }) => {
               return <TextField 
-                  label={`${t('worker.email')} *`}
+                  label={`${t('clients.email')} *`}
                   {...field}
                   error={!!errors.email}
                   helperText={errors.email?.message }
@@ -61,7 +60,7 @@ const Content: FC = () => {
 
           <Controller
             control={control}
-            name="name"
+            name="client_first_name"
             rules={{
               required: "Name is required",
             }}
@@ -69,8 +68,8 @@ const Content: FC = () => {
               return <TextField 
                   label={`${t('worker.name')} *`}
                   {...field}
-                  error={!!errors.name}
-                  helperText={errors.name?.message}
+                  error={!!errors.client_first_name}
+                  helperText={errors.client_first_name?.message}
                 />
               }
             }
@@ -78,7 +77,7 @@ const Content: FC = () => {
 
           <Controller
             control={control}
-            name="phone"
+            name="client_phone"
             rules={{
               required: "Phone is required",
               minLength: {
@@ -92,8 +91,8 @@ const Content: FC = () => {
                 sx={{ mb: 5 }}
                 {...field} 
                 type="number"
-                error={!!errors.phone}
-                helperText={errors.phone?.message}
+                error={!!errors.client_phone}
+                helperText={errors.client_phone?.message}
                 />
               }
             }
@@ -109,7 +108,7 @@ const Content: FC = () => {
                   variant="outlined"
                   size="small"
                   rows={4}
-                  {...field} 
+                  {...field}
                   error={!!errors.description}
                   helperText={errors.description?.message}
                 />
@@ -119,12 +118,12 @@ const Content: FC = () => {
           
           {isError && <Typography color="error">{dataFromError}</Typography>}
 
-          {worker?.email && <Typography color="green">Invitation sent to "{worker?.email}" successfully!</Typography>}
+          {client?.email && <Typography color="green">{t('clients.client_added')}</Typography>}
 
           <LoadingButton
             disabled={isLoading}
             fullWidth size="large" type="submit" variant="contained" >
-            {t('worker.invite')}
+            {t('clients.add_client_btn')}
           </LoadingButton>
         </Stack>
       </form>

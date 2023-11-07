@@ -11,7 +11,6 @@ import { pointAPI } from "../../../services/PointService";
 import { IItem } from "../../../types/IItem";
 import { styled } from '@mui/material/styles';
 import { useTranslation } from "react-i18next";
-//import DatePicker from '@mui/lab/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -72,7 +71,7 @@ const Content: FC<{
       setValue('guarantee_till', ticket.guarantee_till);
     }
   }, [ticket]);
-
+console.log('ticket', ticket);
   useEffect(() => {
     if (status !== 'paid') {
       setValue('guarantee_till', null);
@@ -170,8 +169,8 @@ const Content: FC<{
                   {t('editTicket.device_name')}: {ticket.name}<br/><br/>
 
                   {t('editTicket.sn')}: {ticket.device_sn}<br/>
-                  {t('editTicket.client_email')}: {ticket?.email}<br/>
-                  {t('editTicket.client_name')} : {ticket?.client_first_name} {ticket?.client_last_name}<br/><br/>
+                  {t('editTicket.client_email')}: {ticket?.client_email}<br/>
+                  {t('editTicket.client_name')} : {ticket?.client_name}<br/><br/>
                 
                   {t('editTicket.first_payment')}: {ticket.paid}<br/>
                   {t('editTicket.description')}: {ticket.description}<br/>
