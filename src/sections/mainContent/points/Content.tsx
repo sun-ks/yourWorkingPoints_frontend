@@ -37,8 +37,9 @@ const Content: FC = () => {
   const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
 
   async function fetchPoints() {
+    console.log('fetchPoints');
     const { data } = await pointsWithHaveTickets('') as { data: IPoint[] | [] };
-
+    console.log('fetchPoints2')
     const points = await data;
 
     setPointsHasTickets(points);
@@ -74,6 +75,7 @@ const Content: FC = () => {
           display="flex" 
           alignItems="center"
           justifyContent="center"
+          data-testid="content-points"
           sx={{
             padding: 1
           }}>

@@ -1,4 +1,5 @@
 import {configureStore, combineReducers, getDefaultMiddleware} from "@reduxjs/toolkit";
+import { Middleware } from '@reduxjs/toolkit';
 import testReducer from "./reducers/TodosSlice";
 import authReducer from "./reducers/AuthSlice";
 import services from "../services/index";
@@ -27,14 +28,25 @@ const persistConfig = {
   whitelist: ['testReducer', 'authReducer'] //only navigation will be persisted
 }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const setupStore = () => {
+// Custom middleware for logging
+const loggingMiddleware: Middleware = (store) => (next) => (action) => {
+  //console.log('Dispatching action:', action);
+  const result = next(action);
+  //console.log('New state:', store.getState());
+  return result;
+};
+
+export const setupStore = (initialState = {}) => {
+  console.log('initialState', initialState);
   return configureStore({
     //reducer: rootReducer,
     reducer: persistedReducer, 
+    preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
+      .concat(loggingMiddleware)
       .concat(postAPI.middleware)
       .concat(userAPI.middleware)
       .concat(pointAPI.middleware)

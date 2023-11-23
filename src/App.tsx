@@ -28,23 +28,6 @@ function App() {
       <BrowserRouter>
         <Router />
       </BrowserRouter>
-      {/*
-      <h2>Clasical Counter: {state.count}</h2>
-      <br/>
-      <Button onClick={()=>{dispatch(incriment(state.count))}} variant="contained">Incriment</Button>
-      <Button onClick={()=>{dispatch(dicriment(state.count))}} variant="outlined">Dincriment</Button>
-      <br/>
-      <button >Dincriment</button>
-      <br/>
-      - - -
-      <PostContainer/>
-      <div>
-        {state.error && <p>{state.error}</p>}
-        {state.todos.length > 0 && (
-          <pre>{JSON.stringify(state.todos, null, 2)}</pre>
-        )}
-      </div>
-        */}
     </div>
   );
 }
