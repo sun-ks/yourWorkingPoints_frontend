@@ -1,10 +1,21 @@
-
 module.exports = {
-    type: 'module',
-    testEnvironment: 'node',
-    setupFiles: ['./jest.polyfills.js'],
-    testEnvironmentOptions: {
-        customExportConditions: [''],
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['./src/setupTests.js'],
+  setupFiles: ['./src/jest.polyfills.js'],
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
+  },
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
+  globals: {
+    'ts-jest': {
+      tsconfig: './tsconfig.json', // Adjust the path accordingly
+      transformerConfig: {
+        transformIgnorePatterns: ['jest-runner'],
       },
-    // Other Jest configurations..
-  };
+    },
+    
+  },
+  // Other Jest configurations..
+};

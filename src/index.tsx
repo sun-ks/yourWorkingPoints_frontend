@@ -8,13 +8,20 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import "./i18n";
-
-
+import { server } from './mocks/node'
 const store = setupStore();
 
 let persistor = persistStore(store)
 
-ReactDOM.render(
+async function enableMocking() {
+	const { worker } = await import("./mocks/browser.js");
+	return worker.start();
+}
+
+//server.listen()
+
+enableMocking().then(() => {
+	ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
@@ -22,5 +29,6 @@ ReactDOM.render(
         </ThemeProvider>
       </PersistGate>
     </Provider>,
-  document.getElementById('root')
-);
+    document.getElementById('root')
+  );
+});

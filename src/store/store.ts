@@ -39,7 +39,6 @@ const loggingMiddleware: Middleware = (store) => (next) => (action) => {
 };
 
 export const setupStore = (initialState = {}) => {
-  console.log('initialState', initialState);
   return configureStore({
     //reducer: rootReducer,
     reducer: persistedReducer, 

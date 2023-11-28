@@ -12,8 +12,6 @@ const PostContainer:FC<any> = () => {
 
   const [deletePost, {}] = postAPI.useDeletePostMutation()
 
-  console.log(posts)
-
   const handleCreatePost = async () => {
     const title = prompt() ;
     await createPost({title, body:'d'} as IPost)

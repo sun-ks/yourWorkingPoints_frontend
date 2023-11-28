@@ -41,7 +41,6 @@ const Points: FC = () => {
           }}>
             TEST-1234
           <Content/>
-          TEST-1235
         </Box>
       </Container>
     </HelmetProvider>

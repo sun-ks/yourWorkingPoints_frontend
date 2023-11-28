@@ -4,6 +4,7 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
 export const pointAPI = createApi({
   reducerPath: 'pointAPI',
+  keepUnusedDataFor: 0,
   baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['Points'],
   endpoints: (build) => ({
@@ -14,9 +15,11 @@ export const pointAPI = createApi({
       providesTags: result => ['Points']
     }),
     getPointsWithHaveTickets: build.mutation<IPoint[], any>({
-      query: () => ({
-        url: `/points/pointsWithHaveTickets`,
-      }),
+      query: () => {
+        console.log('getPointsWithHaveTickets-service', this);
+        return {
+          url: `/points/pointsWithHaveTickets`,
+        }},
       //providesTags: ['Points'],
     }),
     getPointByPointId: build.query<IPoint, any>({

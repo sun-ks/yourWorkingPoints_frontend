@@ -49,7 +49,6 @@ const NewPoint: FC = () => {
   if (points && points?.length > 1) {
     navigate(`/`)
   } else if (points && points?.length === 1){
-    console.log('points && points?.length === 1')
     navigate(`/${points[0].point_id}`);
   }
 

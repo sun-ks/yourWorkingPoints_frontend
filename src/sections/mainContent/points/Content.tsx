@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 import {isEmpty} from "lodash"
 import {
@@ -18,7 +18,7 @@ const Content: FC = () => {
 
   const {data: points, error, isLoading} = pointAPI.useGetPointsQuery('');
 
-  const [pointsWithHaveTickets] = pointAPI.useGetPointsWithHaveTicketsMutation();
+  const [pointsWithHaveTickets, {isError: pointsWithHaveTickets_iserr, error: pointsWithHaveTickets_error}] = pointAPI.useGetPointsWithHaveTicketsMutation();
 
   const [openAlertDelete, setOpenAlertDelete] = useState<{
     open: boolean;
@@ -32,16 +32,22 @@ const Content: FC = () => {
 
   const [pointIdForDelete, setPointIdForDelete] = useState('');
 
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
 
   const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
 
-  async function fetchPoints() {
-    console.log('fetchPoints');
-    const { data } = await pointsWithHaveTickets('') as { data: IPoint[] | [] };
-    console.log('fetchPoints2')
-    const points = await data;
+  const fetchUsers = async () => {
+    const response = await fetch("https://reqres.in/api/users");
+    const { data } = await response.json();
+    setUsers(data);
+  };
 
+  async function fetchPoints() {
+    const { data } = await pointsWithHaveTickets('') as { data: IPoint[] | [] };
+    const points = await data;
+    
     setPointsHasTickets(points);
   }
 
@@ -50,6 +56,7 @@ const Content: FC = () => {
 
   useEffect(() => {
     fetchPoints();
+    fetchUsers();
   }, []);
 
   const handleClose = () => {
@@ -61,7 +68,10 @@ const Content: FC = () => {
     fetchPoints();
   };
 
-  return <>
+  return <>ContetntTest
+  { users && users.map((user:any, i) => (
+        <li key={user.id}>{user.first_name}</li>
+      ))}
     <AlertDialog 
       handleClose={handleClose}
       handleClickOk={handleClickAgreeDelete}
@@ -69,13 +79,14 @@ const Content: FC = () => {
       showSubmitBtn={openAlertDelete.showSubmitBtn}
       title={openAlertDelete.title ? openAlertDelete.title : DEFAULT_TITLE_ALERT} />
 
-    { pointsHasTickets && !isLoading && !isEmpty(points) ? (
-      pointsHasTickets.map((point) =>  {
+    { pointsHasTickets ? (
+      pointsHasTickets.map((point, i) =>  {
         return (<Box 
           display="flex" 
           alignItems="center"
           justifyContent="center"
-          data-testid="content-points"
+          data-testid="content-point"
+          key={`point-id-${i}`}
           sx={{
             padding: 1
           }}>
@@ -118,15 +129,3 @@ const Content: FC = () => {
 };
 
 export default Content;
-
-
-
-
-
-
-
-
-
-
-
-

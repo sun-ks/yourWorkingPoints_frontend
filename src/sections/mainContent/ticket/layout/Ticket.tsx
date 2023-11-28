@@ -70,8 +70,6 @@ const Ticket: FC = () => {
 
   const classes = useStyles();
 
-  console.log('point_id', point?.phone_number)
-
   useEffect(()=>{
     if (printType) {
       window.print();

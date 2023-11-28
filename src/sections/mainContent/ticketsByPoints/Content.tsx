@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import {ticketAPI} from "../../../services/TicketService";
 import StyledDataGridtTckets from "../../../components/styled/StyledDataGridTckets";
 

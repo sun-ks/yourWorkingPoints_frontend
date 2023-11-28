@@ -13,7 +13,7 @@ function App() {
   const state = useAppSelector(state => state.testReducer);
 
   const {incriment, dicriment, todoFetcing} = todosSlice.actions;
-  console.log(state)
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

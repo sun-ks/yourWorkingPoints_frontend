@@ -79,7 +79,7 @@ export default function Navigator(props: DrawerProps) {
       ],
     },
     {
-      id: t('will_be_soon'),
+      text: t('will_be_soon'),
       children: [
         { id: t('statistics'), active: false, avaliable: false, linkTo: '/', icon: <PermMediaOutlinedIcon /> }
       ],
@@ -106,13 +106,14 @@ export default function Navigator(props: DrawerProps) {
             </ListItemText>
         </ListItem>
         </NavLink>
-        {categories.map(({ id, children }) => (
-          <Box key={id} sx={{ bgcolor: '#101F33' }}>
+  
+        {categories.map(({ children, text }, i) => (
+          <Box key={`main-menu-item-${i}`} sx={{ bgcolor: '#101F33' }}>
             <ListItem sx={{ py: 2, px: 3 }}>
-              <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
+              <ListItemText sx={{ color: '#fff' }}>{text}</ListItemText>
             </ListItem>
             {children.map(({ id: childId, icon, active, avaliable, linkTo }) => (
-              <NavLink to={linkTo} style={{ textDecoration: 'none', }}>
+              <NavLink key={childId} to={linkTo} style={{ textDecoration: 'none', }}>
                 <ListItem disablePadding key={childId} 
                   sx={{
                     opacity: !avaliable ? 0.2 : undefined,
