@@ -35,7 +35,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
-    "msw": "^2.0.9",
+    "msw": "^2.0.7",
     "punycode": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -62,10 +62,10 @@
     "build:prod": "cp .env.production .env && react-scripts build",
     "build:dev": "cp .env.dev && react-scripts build",
     "eject": "react-scripts eject",
-    "test": "jest  --coverage --transformIgnorePatterns ",
+    "test": "jest",
+    "test:create:coverage": "jest --coverage --transformIgnorePatterns ",
     "test:open:coverage": "open coverage/lcov-report/index.html"
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",
