@@ -11,6 +11,8 @@
 
 const { TextDecoder, TextEncoder } = require('node:util')
 
+// Add REACT_APP_API_URL for tests
+process.env.REACT_APP_API_URL = 'http://179.29.10.19:3000/api/'
 
 Object.defineProperties(globalThis, {
   TextDecoder: { value: TextDecoder },
@@ -30,8 +32,7 @@ Object.defineProperties(globalThis, {
   Response: { value: Response },
 })
 
+
+
 // Mock clearImmediate
 //global.clearImmediate = () => {};
-//global.setImmediate = jest.useRealTimers;
-//global.setImmediate = setImmediate ;
-//global.clearImmediate = clearImmediate ;

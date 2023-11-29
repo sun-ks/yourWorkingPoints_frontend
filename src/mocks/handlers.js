@@ -2,7 +2,7 @@ import { rest, http, delay, HttpResponse } from "msw";
 
 export const handlers = [
 	
-	http.get("http://172.20.10.11:3000/api/points/pointsWithHaveTickets", (resolver) => {
+	http.get(`${process.env.REACT_APP_API_URL}points/pointsWithHaveTickets`, (resolver) => {
 		return HttpResponse.json([
 			{
 				"point_id": "9b872118-82fa-42c4-9d64-234ddb373fa7",
@@ -26,7 +26,6 @@ export const handlers = [
 	}),
 
   http.get('https://reqres.in/api/users', (req, res, ctx) => {
-    console.log('reqres.in/api/users-TEST');
     return HttpResponse.json({
         data: [{
           id: 7,

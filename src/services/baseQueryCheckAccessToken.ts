@@ -9,7 +9,7 @@ import { Mutex } from 'async-mutex'
 
 const mutex = new Mutex()
 
-const baseUrl = 'http://172.20.10.11:3000/api/'//process.env.REACT_APP_API_URL ;
+const baseUrl = process.env.REACT_APP_API_URL;
 
 function setBaseUrl() {
   console.log('baseUrl', baseUrl)

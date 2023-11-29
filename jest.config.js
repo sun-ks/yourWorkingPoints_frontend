@@ -1,6 +1,7 @@
 module.exports = {
   testEnvironment: 'jsdom',
   setupFiles: ['./src/jest.polyfills.js'],
+  setupFilesAfterEnv: ['./src/setupTests.js'],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
@@ -9,12 +10,10 @@ module.exports = {
   },
   globals: {
     'ts-jest': {
-      tsconfig: './tsconfig.json', // Adjust the path accordingly
+      tsconfig: './tsconfig.json',
       transformerConfig: {
         transformIgnorePatterns: ['jest-runner'],
       },
     },
-    
-  },
-  // Other Jest configurations..
+  }
 };
