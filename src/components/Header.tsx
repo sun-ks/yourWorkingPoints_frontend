@@ -31,7 +31,7 @@ export default function Header(props: HeaderProps) {
   
   return (
     <React.Fragment>
-      <AppBar color="primary" position="sticky" elevation={0}>
+      <AppBar color="primary" position="sticky" elevation={0} data-testid="header">
         <Toolbar>
           <Grid container spacing={1} alignItems="center">
             {!isAuthPage && (<Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>

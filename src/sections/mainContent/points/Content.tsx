@@ -38,12 +38,6 @@ const Content: FC = () => {
 
   const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
 
-  const fetchUsers = async () => {
-    const response = await fetch("https://reqres.in/api/users");
-    const { data } = await response.json();
-    setUsers(data);
-  };
-
   async function fetchPoints() {
     const { data } = await pointsWithHaveTickets('') as { data: IPoint[] | [] };
     const points = await data;
@@ -56,7 +50,6 @@ const Content: FC = () => {
 
   useEffect(() => {
     fetchPoints();
-    fetchUsers();
   }, []);
 
   const handleClose = () => {
@@ -72,7 +65,7 @@ const Content: FC = () => {
   { users && users.map((user:any, i) => (
         <li key={user.id}>{user.first_name}</li>
       ))}
-    <AlertDialog 
+    <AlertDialog
       handleClose={handleClose}
       handleClickOk={handleClickAgreeDelete}
       isOpen={openAlertDelete.open} 
@@ -110,7 +103,7 @@ const Content: FC = () => {
               const showSubmitBtn = !point.hastickets;
 
               setOpenAlertDelete({open: true, title: alertModalTitle, showSubmitBtn}); 
-              setPointIdForDelete(point.point_id); 
+              setPointIdForDelete(point.point_id);
             }}
             title={t(`point.delete`)}>
             <IconButton >

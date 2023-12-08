@@ -87,7 +87,7 @@ export default function Navigator(props: DrawerProps) {
   ];
 
   return (
-    <Drawer variant="permanent" {...other}>
+    <Drawer variant="permanent" {...other} data-testid="navigator">
       <List disablePadding>
         <ListItem sx={{ ...item, ...itemCategory, fontSize: 16, color: '#fff' }}>
           {t('company_name')}

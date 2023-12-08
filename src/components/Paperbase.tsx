@@ -40,7 +40,7 @@ export default function Paperbase() {
 
   return (
 
-      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <Box sx={{ display: 'flex', minHeight: '100vh' }} data-testid="footer">
         <CssBaseline />
         <Box
           component="nav"

@@ -1,8 +1,8 @@
-import { rest, http, delay, HttpResponse } from "msw";
+import { http, delay, HttpResponse } from "msw";
 
 export const handlers = [
-	
-	http.get(`${process.env.REACT_APP_API_URL}points/pointsWithHaveTickets`, (resolver) => {
+	http.get(`${process.env.REACT_APP_API_URL}points/pointsWithHaveTickets`, ({ request }) => {
+    console.log('Request body:', request.body);
 		return HttpResponse.json([
 			{
 				"point_id": "9b872118-82fa-42c4-9d64-234ddb373fa7",
@@ -20,7 +20,7 @@ export const handlers = [
 				"description": "123",
 				"created": "2023-09-01T04:13:06.909Z",
 				"phone_number": "0991223499",
-				"hastickets": true
+				"hastickets": false
 			}
 		]);
 	}),

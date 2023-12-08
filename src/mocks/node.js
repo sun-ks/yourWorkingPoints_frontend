@@ -4,16 +4,12 @@ import "@testing-library/jest-dom";
 
 export const server = setupServer(...handlers);
 
-const OLD_ENV = process.env;
-
-console.log('OLD_ENV', OLD_ENV)
-
 // Enable the API mocking before tests.
 beforeAll(() => server.listen())
 
 beforeEach(() => {
   jest.resetModules() // Most important - it clears the cache
-  process.env = { ...OLD_ENV }; // Make a copy
+ // process.env = {...process.env}
 });
 
 // Reset any runtime request handlers we may add during the tests.
