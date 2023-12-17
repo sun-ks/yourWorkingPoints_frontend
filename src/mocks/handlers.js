@@ -2,7 +2,6 @@ import { http, delay, HttpResponse } from "msw";
 
 export const handlers = [
 	http.get(`${process.env.REACT_APP_API_URL}points/pointsWithHaveTickets`, ({ request }) => {
-    console.log('Request body:', request.body);
 		return HttpResponse.json([
 			{
 				"point_id": "9b872118-82fa-42c4-9d64-234ddb373fa7",
@@ -25,17 +24,34 @@ export const handlers = [
 		]);
 	}),
 
+  /*http.post(`${process.env.REACT_APP_API_URL}auth/login/`, ({ request }) => {
+		return HttpResponse.json(
+      {
+        "accessToken": "accessToken",
+        "userInfo": {
+          "name": "igor2",
+          "user_id": "bd03ab15-28d1-4b2c-8aac-2d3910384c80",
+          "email": "igor2@email.com",
+          "role": "owner",
+          "created": "2023-08-31T10:44:06.715Z",
+          "is_active": true
+        }
+      }
+    );
+	}),*/
+
   http.get('https://reqres.in/api/users', (req, res, ctx) => {
     return HttpResponse.json({
-        data: [{
-          id: 7,
-          email: "michael.lawson@reqres.in",
-          first_name: "Michael",
-          last_name: "Lawson",
-          avatar: "https://reqres.in/img/faces/7-image.jpg",
-        },],
-      });
+      data: [{
+        id: 7,
+        email: "michael.lawson@reqres.in",
+        first_name: "Michael",
+        last_name: "Lawson",
+        avatar: "https://reqres.in/img/faces/7-image.jpg",
+      },],
+    });
   }),
+
 
 
 	http.post("/api/messages", async ({ request }) => {

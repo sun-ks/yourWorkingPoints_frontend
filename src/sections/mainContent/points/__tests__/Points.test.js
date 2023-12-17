@@ -7,7 +7,20 @@ import { http, HttpResponse } from "msw";
 describe('Points page',  () => {
   test('Should display Points Page with Points', async () => {
     render (
-      renderTestApp(null, { route: '/', initialState: null })
+      renderTestApp(null, { route: '/', initialState: {
+        authReducer: {
+          user: {
+            accessToken: 'eyJhbGciOiJIUzI',
+            userInfo: {
+              name: 'igor2',
+              user_id: 'bd03ab15-28d1-4b2c-8aac-2d3910384c80',
+              email: 'igor2@email.com',
+              role: 'owner',
+              is_active: true
+            }
+          }
+        },
+      }})
     );
 
     const contentPoints = await screen.findAllByTestId('content-point');
@@ -26,7 +39,20 @@ describe('Points page',  () => {
   });
 
   test('Should display Alert Dialog without Ok button', async () => {
-    render (renderTestApp(null, { route: '/', initialState: null }));
+    render (renderTestApp(null, { route: '/', initialState: {
+      authReducer: {
+        user: {
+          accessToken: 'eyJhbGciOiJIUzI',
+          userInfo: {
+            name: 'igor2',
+            user_id: 'bd03ab15-28d1-4b2c-8aac-2d3910384c80',
+            email: 'igor2@email.com',
+            role: 'owner',
+            is_active: true
+          }
+        }
+      },
+    }}));
 
     const deleteBtns = await screen.findAllByLabelText('point.delete');
 
@@ -38,7 +64,20 @@ describe('Points page',  () => {
   });
 
   test('Should display Alert Dialog with Ok button', async () => {
-    render (renderTestApp(null, { route: '/', initialState: null }));
+    render (renderTestApp(null, { route: '/', initialState: {
+      authReducer: {
+        user: {
+          accessToken: 'eyJhbGciOiJIUzI',
+          userInfo: {
+            name: 'igor2',
+            user_id: 'bd03ab15-28d1-4b2c-8aac-2d3910384c80',
+            email: 'igor2@email.com',
+            role: 'owner',
+            is_active: true
+          }
+        }
+      },
+    } }));
 
     const deleteBtns = await screen.findAllByLabelText('point.delete');
 
@@ -56,7 +95,20 @@ describe('Points page',  () => {
       }),
     );
 
-    render (renderTestApp(null, { route: '/', initialState: null }));
+    render (renderTestApp(null, { route: '/', initialState: {
+      authReducer: {
+        user: {
+          accessToken: 'eyJhbGciOiJIUzI',
+          userInfo: {
+            name: 'igor2',
+            user_id: 'bd03ab15-28d1-4b2c-8aac-2d3910384c80',
+            email: 'igor2@email.com',
+            role: 'owner',
+            is_active: true
+          }
+        }
+      },
+    } }));
 
     expect(await screen.findByText('No items available.')).toBeInTheDocument();
   });

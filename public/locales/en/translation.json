@@ -55,7 +55,7 @@
       "title" : "YWP, Log In"
     },
     "title" : "Log In",
-    "btn_sign_in":"Log In",
+    "btn_submit":"Log In",
     "do_not_account": "Don’t have an account?"
   },
   "sign_up":{
@@ -63,7 +63,7 @@
       "title" : "YWP, Sign Up"
     },
     "title": "Sign Up",
-    "btn_sign_in":"Sign Up",
+    "btn_submit":"Sign Up",
     "do_not_account": "Do you have an account?"
   },
   "forgot": {
@@ -71,7 +71,7 @@
       "title" : "YWP, Forgot password"
     },
     "title": "Forgot password",
-    "btn_sign_in":"Send Recovery Link",
+    "btn_submit":"Send Recovery Link",
     "do_not_account": "Don’t have an account?"
   },
   "new_password": {
@@ -79,7 +79,7 @@
       "title" : "YWP, Set New Password"
     },
     "title": "Set new password",
-    "btn_sign_in":"Set New Password",
+    "btn_submit":"Set New Password",
     "do_not_account": "Go to"
   },
   "add_worker": {
@@ -87,7 +87,7 @@
       "title" : "YWP, Hello New Member"
     },
     "title": "Set password",
-    "btn_sign_in":"Set Password",
+    "btn_submit":"Set Password",
     "do_not_account": "Go to"
   },
   "ticketsColumns": {

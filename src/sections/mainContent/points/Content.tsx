@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
-import {isEmpty} from "lodash"
 import {
   useNavigate,
 } from 'react-router-dom';
@@ -8,7 +7,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AlertDialog from "../../../components/AlertDialog";
 import {pointAPI} from "../../../services/PointService";
 import {IPoint} from "../../../types/IPoint";
-import StyledRouterLink from './../../../components/styled/RouterLink'
 import EditIcon from '@mui/icons-material/Edit';
 
 import { useTranslation } from "react-i18next";

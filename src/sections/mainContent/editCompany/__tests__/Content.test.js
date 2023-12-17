@@ -1,12 +1,12 @@
 import React from "react";
 import { render, screen, waitFor } from '@testing-library/react';
-import Content from './Content';
-import { renderTestApp } from '../../../tests/helpers/renderTestApp';
-import { companyAPI } from '../../../services/CompanyService'
+import Content from '../Content';
+import { renderTestApp } from '../../../../tests/helpers/renderTestApp';
+import { companyAPI } from '../../../../services/CompanyService'
 
 // Mocking the useUpdateCompanyMutation
-jest.mock('../../../services/CompanyService', () => {
-  const originalModule = jest.requireActual('../../../services/CompanyService');
+jest.mock('../../../../services/CompanyService', () => {
+  const originalModule = jest.requireActual('../../../../services/CompanyService');
   return {
     ...originalModule,
     companyAPI: {

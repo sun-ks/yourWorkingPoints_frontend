@@ -20,7 +20,6 @@ interface IFormInputs {
 const Content: FC = () => {
   const { t } = useTranslation();
 
-  
   const {data: company, error, isLoading: isLoading_point} = companyAPI.useGetCompanyQuery('')
 
   const [updateCompany, {isError, error:errorupdatePoint}] = companyAPI.useUpdateCompanyMutation();
@@ -43,8 +42,6 @@ const Content: FC = () => {
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     const { data } = await updateCompany(args) as {data: any};
 
-    
-
     if(data) {
       setshowSuccessesBlock(true)
 
@@ -57,9 +54,7 @@ const Content: FC = () => {
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Typography variant="h6" gutterBottom margin={4}>
-          <br/>
-          {t('company.company_name')}
-          ----{company && company.company_name}---
+          {t('company.company_settings')}
         </Typography>
 
         <Stack spacing={3}>

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
