@@ -59,7 +59,7 @@ const Content: FC = () => {
     fetchPoints();
   };
 
-  return <>ContetntTest
+  return <>
   { users && users.map((user:any, i) => (
         <li key={user.id}>{user.first_name}</li>
       ))}

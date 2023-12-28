@@ -39,7 +39,6 @@ const Points: FC = () => {
           sx={{
             padding: 1
           }}>
-            TEST-1234
           <Content/>
         </Box>
       </Container>
