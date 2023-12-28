@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { styled } from '@mui/material/styles';
@@ -49,7 +49,6 @@ const NewPoint: FC = () => {
   if (points && points?.length > 1) {
     navigate(`/`)
   } else if (points && points?.length === 1){
-    console.log('points && points?.length === 1')
     navigate(`/${points[0].point_id}`);
   }
 
@@ -71,7 +70,7 @@ const NewPoint: FC = () => {
       </Helmet>
 
       <StyledRoot>
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" data-testid="first-point-page">
           <StyledContent>
             <Typography variant="h5" gutterBottom sx={{ mb: 5 }}>
               {t('create_first')} <StyledHeaderFirst>{t('point.point')} </StyledHeaderFirst>

@@ -29,6 +29,7 @@ import DialogTitle from '@mui/material/DialogTitle';
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        data-testid="alert-dialog"
       >
         <DialogTitle id="alert-dialog-title">
           {title}
@@ -40,7 +41,7 @@ import DialogTitle from '@mui/material/DialogTitle';
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cansel</Button>
-          {showSubmitBtn && (<Button variant="contained" onClick={()=>{handleClose(); handleClickOk()}} autoFocus>
+          {showSubmitBtn && (<Button data-testid="alert-dialog-btn-ok" variant="contained" onClick={()=>{handleClose(); handleClickOk()}} autoFocus>
             Ok
           </Button>)}
         </DialogActions>

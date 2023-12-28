@@ -9,9 +9,15 @@ import { Mutex } from 'async-mutex'
 
 const mutex = new Mutex()
 
-const baseUrl = process.env.REACT_APP_API_URL; 
+const baseUrl = process.env.REACT_APP_API_URL;
+
+function setBaseUrl() {
+  console.log('baseUrl', baseUrl)
+  return baseUrl
+}
+
 const baseQueryWithAccessToken = fetchBaseQuery({
-  baseUrl: baseUrl,
+  baseUrl: setBaseUrl(),
   prepareHeaders: (headers, { getState }) => {
     const user = (getState() as any);
 
@@ -34,7 +40,6 @@ const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   const {logOut, setCredentials} = authSlice.actions;
-
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock()
 

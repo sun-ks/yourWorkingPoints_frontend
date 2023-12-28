@@ -4,17 +4,17 @@ import { fetchUsers } from "./ActionCreators";
 //import {fetchUsers} from "./ActionCreators";
 
 interface TodosState {
-    todos: ITodos[];
-    isLoading: boolean;
-    error: string;
-    count: number;
+  todos: ITodos[];
+  isLoading: boolean;
+  error: string;
+  count: number;
 }
 
 const initialState: TodosState = {
-    todos: [],
-    isLoading: false,
-    error: '',
-    count: 0,
+  todos: [],
+  isLoading: false,
+  error: '',
+  count: 0,
 }
 
 export const todosSlice = createSlice({
@@ -52,7 +52,6 @@ export const todosSlice = createSlice({
         state.isLoading = true;
       },
     }
-    
 })
 
 export default todosSlice.reducer;

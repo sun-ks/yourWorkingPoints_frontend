@@ -42,8 +42,6 @@ const Content: FC = () => {
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     const { data } = await updateCompany(args) as {data: any};
 
-    console.log('data', data);
-
     if(data) {
       setshowSuccessesBlock(true)
 

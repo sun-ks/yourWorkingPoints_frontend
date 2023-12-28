@@ -16,7 +16,7 @@ import { createAsyncThunk, isAsyncThunkAction } from "@reduxjs/toolkit";
 }*/
 
 export const fetchUsers = createAsyncThunk(
-	'users/fetch', 
+	'users/fetch',
 	async (_, thunkAPI) => {
     try {
       const response = await axios.get<ITodos[]>('https://jsonplaceholder.typicode.com/todos')

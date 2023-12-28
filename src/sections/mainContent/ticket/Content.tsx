@@ -71,7 +71,6 @@ const Content: FC<{
       setValue('guarantee_till', ticket.guarantee_till);
     }
   }, [ticket]);
-console.log('ticket', ticket);
   useEffect(() => {
     if (status !== 'paid') {
       setValue('guarantee_till', null);
