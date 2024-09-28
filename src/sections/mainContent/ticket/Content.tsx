@@ -332,24 +332,6 @@ const Content: FC<{
               }
             }
           />
-          
-          <Controller
-            control={control}
-            name="note"
-            render={({ field }) => {
-              return <TextField 
-                  label={t('editTicket.note')}
-                  
-                  variant="outlined"
-                  size="small"
-                  rows={4}
-                  {...field} 
-                  error={!!errors.note}
-                  helperText={errors.note?.message}
-                />
-              }
-            }
-          />
           <Box>
             <Controller
               control={control}
