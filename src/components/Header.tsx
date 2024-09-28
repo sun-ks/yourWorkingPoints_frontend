@@ -54,18 +54,8 @@ export default function Header(props: HeaderProps) {
             )}
             <Grid item xs />
             <Grid item>
-              <select 
-                value={i18n.language} 
-                onChange={handleLanguageChange}>
-                  <option value="en">en</option>
-                  <option value="ua">ua</option>
-              </select>
-            </Grid>
-
-            {!isAuthPage && (<>
-            <Grid item>
               <Link
-                href="https://ywp-general.web.app/"
+                href="https://buymeacoffee.com/storozhukud"
                 target="_blank"
                 variant="body2"
                 sx={{
@@ -77,9 +67,21 @@ export default function Header(props: HeaderProps) {
                 }}
                 rel="noopener noreferrer"
               >
-                Buy
+                Donate For Us
               </Link>
             </Grid>
+            
+            <Grid item>
+              <select 
+                value={i18n.language} 
+                onChange={handleLanguageChange}>
+                  <option value="en">en</option>
+                  <option value="ua">ua</option>
+              </select>
+            </Grid>
+
+            {!isAuthPage && (<>
+            
             <Grid item>
               <Tooltip title="Alerts • No alerts">
                 <IconButton color="inherit">
