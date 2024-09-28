@@ -121,12 +121,17 @@ const Content: FC = () => {
                   native: true,
                 }}
               >
-                {points &&
+                {points && points.length > 0 ? (
                   points.map((point) => (
                     <option key={point.point_id} value={point.point_id}>
                       {point.name}
                     </option>
-                  ))}
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    {t("createTicket.no_points_available")}
+                  </option>
+                )}
               </TextField>
             );
           }}
