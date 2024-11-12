@@ -60,14 +60,27 @@ const Content: FC = () => {
       point_id,
     } = args;
 
-    const {
-      data: { client_id: client_id },
-    } = (await createClient({
-      client_first_name,
-      client_phone: client_phone,
-      email,
-      name: client_first_name,
-    })) as { data: any };
+    let existingClient;
+    let client_id;
+
+    if (clients && clients.length > 0) {
+      existingClient = clients.find((item: any) => {
+        return item.phone === client_phone;
+      });
+
+      client_id = existingClient.client_id;
+    }
+
+    if (!existingClient) {
+      const { data } = (await createClient({
+        client_first_name,
+        client_phone: client_phone,
+        email,
+        name: client_first_name,
+      })) as { data: any };
+
+      client_id = data.client_id;
+    }
 
     const { data } = (await createTicket({
       description,

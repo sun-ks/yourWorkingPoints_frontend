@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from 'react-router-dom';
 import { isOwner } from "../../../store/reducers/AuthSlice"
 import { useSelector } from "react-redux"
+import { useSnackbar } from "../../../hooks/useSnackbar";
 
 interface IFormInputs {
   email: string;
@@ -23,8 +24,6 @@ const Content: FC = () => {
 
   const { client_id }  = useParams();
 
-  //const {data: user, error: user_Error, isLoading: user_isLoading} = userAPI.useGetUserByIdQuery(user_id);
-
   const {data: client, error: user_Error, isLoading: user_isLoading} = clientAPI.useGetClientByClientIdQuery(client_id);
 
   const [updateClient, {isError: isError_updateWorker, isLoading: isLoading_updateWorker, error: error_updateWorker}] = clientAPI.useUpdateClientMutation();
@@ -38,6 +37,8 @@ const Content: FC = () => {
     }
   });
 
+  const { showSnackbar, SnackbarComponent } = useSnackbar();
+
   useEffect(() => {
     if (client) {
       setValue('email', client.email);
@@ -49,20 +50,19 @@ const Content: FC = () => {
 
   const dataFromError:any = (error_updateWorker && 'data' in error_updateWorker) ? error_updateWorker?.data : undefined;
 
-  const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
-
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
-    const {data} = await updateClient({
-      client_id: client.client_id, 
-      ...args
-    }) as {data: any};
+    showSnackbar("", false, false);
 
-    if(data) {
-      setshowSuccessesBlock(true)
-  
-      setTimeout(() => {
-        setshowSuccessesBlock(false);
-      }, 3000); 
+    try {
+      await updateClient({
+        client_id: client.client_id, 
+        ...args
+      }).unwrap();
+
+      showSnackbar(t('update_successful'), false);
+    } catch (err: any) {
+      const dataFromError = err?.data || "An error occurred";
+      showSnackbar(dataFromError, true);
     }
   };
 
@@ -76,16 +76,9 @@ const Content: FC = () => {
         <Controller
           control={control}
           name="email"
-          rules={{
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Invalid email address",
-            },
-          }}
           render={({ field }) => {
             return <TextField 
-                label={`${t('clients.email')} *`}
+                label={`${t('clients.email')}`}
                 {...field}
                 error={!!errors.email}
                 helperText={errors.email?.message }
@@ -147,9 +140,7 @@ const Content: FC = () => {
           }
         />
         
-        {dataFromError && <Typography color="error">{dataFromError}</Typography>}
-
-        {showSuccessesBlock && <Typography color="green">{t('update_successful')}</Typography>}
+        <SnackbarComponent />
 
         <LoadingButton
           title={!isOwnerVal ? t('only_for_owner') : ''}
