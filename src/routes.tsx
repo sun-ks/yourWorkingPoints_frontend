@@ -20,7 +20,7 @@ import AddNewWorker from './sections/mainContent/addNewWorker/layout/AddNewWorke
 import AddNewClient from './sections/mainContent/addNewClient/layout/AddNewClient';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket';
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
-import Ticket from './sections/mainContent/ticket/layout/Ticket';
+import Ticket from './sections/mainContent/editTicket/layout/Ticket';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 import Workers from './sections/mainContent/workers/layout/Workers';
 import Clients from './sections/mainContent/clients/layout/Clients';

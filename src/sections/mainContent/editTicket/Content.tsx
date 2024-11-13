@@ -15,6 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { useSnackbar } from "../../../hooks/useSnackbar";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -45,6 +46,9 @@ const Content: FC<{
   const {data: workers} = userAPI.useGetAllUsersQuery('');
 
   const [updateTicket, {isError, error:errorUpdateTicket}] = ticketAPI.useUpdateTicketMutation();
+
+
+  const { showSnackbar, SnackbarComponent } = useSnackbar();
 
   const { handleSubmit, control, watch, setValue, formState: { errors } } = useForm<IItem>({
     defaultValues: {
@@ -77,22 +81,20 @@ const Content: FC<{
     }
   }, [status]);
 
-  const [showSuccessesBlock, setshowSuccessesBlock] = useState(false);
-
   const dataFromError:any = (errorUpdateTicket && 'data' in errorUpdateTicket) ? errorUpdateTicket?.data : undefined;
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
+    showSnackbar("", false, false);
 
     if (args.assigned_at === 'None') args.assigned_at = null;
-
-    const {data} = await updateTicket({...args, ticket_id: ticket?.ticket_id}) as {data: any};
     
-    if(data) {
-      setshowSuccessesBlock(true);
+    try {
+      await updateTicket({...args, ticket_id: ticket?.ticket_id}).unwrap();
 
-      setTimeout(() => {
-        setshowSuccessesBlock(false);
-      }, 3000);
+      showSnackbar(t('update_successful'), false);
+    } catch (err: any) {
+      const dataFromError = err?.data || "An error occurred";
+      showSnackbar(dataFromError, true);
     }
   };
 
@@ -148,7 +150,6 @@ const Content: FC<{
       text: t('priorities.medium')
     }
   ];
-  
   
     return (
       <form onSubmit={handleSubmit(onSubmit)} >
@@ -353,7 +354,7 @@ const Content: FC<{
 
           {isError && <Typography color="error">{dataFromError}</Typography>}
 
-          {showSuccessesBlock && <Typography color="green">Updated Successful!</Typography>}
+          <SnackbarComponent />
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" >
             {t('editTicket.update_ticket')}
