@@ -13,7 +13,7 @@ const store = setupStore();
 let persistor = persistStore(store)
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV !== 'development_test') {
     return
   }
 

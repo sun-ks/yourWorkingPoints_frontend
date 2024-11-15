@@ -6,7 +6,7 @@ export const handlers = [
 			{
 				"point_id": "9b872118-82fa-42c4-9d64-234ddb373fa7",
 				"company_id": "8b5d23a5-52be-4098-bd47-0918b0d130b6",
-				"name": "Lily MOCKED",
+				"name": "Lily MOCKED 1",
 				"description": "",
 				"created": "2023-08-31T11:35:03.136Z",
 				"phone_number": null,

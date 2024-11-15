@@ -67,17 +67,17 @@ const Content: FC = () => {
       existingClient = clients.find((item: any) => {
         return item.phone === client_phone;
       });
-
-      client_id = existingClient.client_id;
     }
 
-    if (!existingClient) {
-      const { data } = (await createClient({
+    if (existingClient) {
+      client_id = existingClient.client_id;
+    } else {
+      const { data } = await createClient({
         client_first_name,
         client_phone: client_phone,
         email,
         name: client_first_name,
-      })) as { data: any };
+      }) as { data: any };
 
       client_id = data.client_id;
     }
