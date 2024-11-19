@@ -6,9 +6,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
- const AlertDialog: FC<{
-  handleClose: any;
-  handleClickOk: any;
+const AlertDialog: FC<{
+  handleClose: () => void;
+  handleClickOk: () => void;
   isOpen: boolean; 
   title?:string; 
   description?: string;
