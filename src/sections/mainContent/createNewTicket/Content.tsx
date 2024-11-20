@@ -209,14 +209,21 @@ const Content: FC = () => {
         <Controller
           control={control}
           name="paid"
+          defaultValue={0}
           rules={{
             required: "First payment is required",
+            min: {
+              value: 0,
+              message: "The value must be at least 0",
+            },
           }}
+          
           render={({ field }) => {
             return (
               <TextField
                 label={`${t("createTicket.first_payment")} *`}
                 {...field}
+                inputProps={{ min: 0 }}
                 type="number"
                 error={!!errors.paid}
                 helperText={errors.paid?.message}
