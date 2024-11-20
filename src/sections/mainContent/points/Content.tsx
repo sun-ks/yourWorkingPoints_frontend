@@ -4,7 +4,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AlertDialog from "../../../components/AlertDialog";
+import AlertDialog from "../../../components/AlertDialog/";
 import {pointAPI} from "../../../services/PointService";
 import {IPoint} from "../../../types/IPoint";
 import EditIcon from '@mui/icons-material/Edit';

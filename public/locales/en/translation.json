@@ -148,11 +148,13 @@
     "finish_payment":"Final payment",
     "description": "Description",
     "update_ticket": "Update Ticket",
+    "delete_ticket": "Delete Ticket",
     "current_point":"Current Point",
     "ticket_status": "Status",
     "ticket_priority": "Priority",
     "note": "Note",
-    "assigned_at": "Assigned To"
+    "assigned_at": "Assigned To",
+    "alert_delete_title": "Do you really want to delete this ticket?"
   },
   "printTicket": {
     "device": "Device",

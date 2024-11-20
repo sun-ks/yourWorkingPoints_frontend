@@ -146,12 +146,14 @@
     "first_payment":"Перший Платіж",
     "finish_payment":"Кінцевий платіж",
     "description": "Опис",
-    "update_ticket": "Оновити Задачу",
+    "update_ticket": "Оновити задачу",
+    "delete_ticket": "Видалити задачу",
     "current_point":"Поточна Точка",
     "ticket_status": "Статус",
     "ticket_priority": "Пріорітет",
     "note": "Нотатки",
-    "assigned_at": "Назначен на"
+    "assigned_at": "Назначен на",
+    "alert_delete_title": "Ви справді хочете видалити цю задачу?"
   },
   "printTicket": {
     "device": "Пристрій",
