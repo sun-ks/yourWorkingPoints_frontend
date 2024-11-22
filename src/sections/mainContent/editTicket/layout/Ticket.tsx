@@ -159,7 +159,7 @@ const Ticket: FC = () => {
             <TableContainer >
               <Table sx={{ minWidth: 650 }} aria-label="caption table">
                 <caption>
-                  {company.company_name}<br/>
+                  {company?.company_name}<br/>
                   {t('printTicket.PhoneNumber')}: {point?.phone_number}
                 </caption>
                 <TableBody>
