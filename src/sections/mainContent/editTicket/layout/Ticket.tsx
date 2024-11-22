@@ -73,11 +73,7 @@ const Ticket: FC = () => {
   useEffect(()=>{
     if (printType) {
       window.print();
-      
-      //It provide printType !== false when print dialog will be open in mobile Chrome
-      setTimeout(() => {
-        setPrintType(false)
-      },2000)
+      setPrintType(false)
     }
   }, [printType]);
 
