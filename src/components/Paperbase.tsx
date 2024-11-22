@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
-import { makeStyles } from '@mui/styles';
 import {DRAWER_WIDTH} from '../constants/common';
 import { useTheme } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 
 function Copyright() {
   return (
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: any) => ({
   
   noPrint: {
     '@media print': {
-      display: 'none', // Hide the common container by default
+      display: 'none',
     }
   }
 }));
@@ -43,6 +43,7 @@ export default function Paperbase() {
       <Box sx={{ display: 'flex', minHeight: '100vh' }} data-testid="footer">
         <CssBaseline />
         <Box
+          className={classes.noPrint}
           component="nav"
           sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
         >
