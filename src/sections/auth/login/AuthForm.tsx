@@ -52,7 +52,7 @@ const AuthForm: FC<{typePage: AuthPageType, token?: string}> = ({typePage, token
 
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     
-    let apiCall = typePage  === 'sign_up' ? signUp 
+    const apiCall = typePage  === 'sign_up' ? signUp 
       : typePage === 'forgot' ? forgot
       : typePage === 'new_password' ? newPassword
       : typePage === 'add_worker' ? addWorker

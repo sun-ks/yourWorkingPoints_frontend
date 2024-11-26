@@ -16,7 +16,7 @@ export const authSlice = createSlice({
     setCredentials: (state, action:PayloadAction<IUser>) => {
       state.user = action.payload
     },
-    logOut: (state, action) => {
+    logOut: (state) => {
       state.user = null
     }
   },

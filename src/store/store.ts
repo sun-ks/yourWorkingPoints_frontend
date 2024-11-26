@@ -1,4 +1,4 @@
-import {configureStore, combineReducers, getDefaultMiddleware} from "@reduxjs/toolkit";
+import {configureStore, combineReducers} from "@reduxjs/toolkit";
 import { Middleware } from '@reduxjs/toolkit';
 import testReducer from "./reducers/TodosSlice";
 import authReducer from "./reducers/AuthSlice";
@@ -34,7 +34,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const loggingMiddleware: Middleware = (store) => (next) => (action) => {
   //console.log('Dispatching action:', action);
   const result = next(action);
-  //console.log('New state:', store.getState());
+  console.log('New state:', store.getState());
   return result;
 };
 
