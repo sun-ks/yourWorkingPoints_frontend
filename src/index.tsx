@@ -10,7 +10,7 @@ import theme from './theme';
 import "./i18n";
 const store = setupStore();
 
-let persistor = persistStore(store)
+const persistor = persistStore(store)
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development_test') {
