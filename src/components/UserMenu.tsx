@@ -101,7 +101,7 @@ const UserMenu: FC<any> = () => {
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
     >
       <MenuItem onClick={()=>{
-        dispatch(logOut(''));
+        dispatch(logOut());
         handleClose();
       }}
       sx={{fontSize: 14}}>
