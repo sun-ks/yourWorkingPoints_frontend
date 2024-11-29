@@ -70,10 +70,18 @@ const Ticket: FC = () => {
 
   const classes = useStyles();
 
+  function printDocument() {
+    return new Promise((resolve) => {
+      window.print();
+      setTimeout(resolve, 1000);
+    });
+  }
+
   useEffect(()=>{
     if (printType) {
-      window.print();
-      setPrintType(false)
+      printDocument().then(() => {
+        setPrintType(false);
+      });
     }
   }, [printType]);
 
@@ -116,7 +124,7 @@ const Ticket: FC = () => {
             <Grid item display="flex" alignItems="center"> 
               <Box sx={{marginRight: 1}}>
                 <Tooltip title={t('editTicket.print_qr_for_service')}>
-                  <IconButton onClick={() => {
+                  <IconButton disabled={!!printType} onClick={() => {
                     setPrintType('qr');
                   }}>
                     <QrCode2Icon />
@@ -125,7 +133,7 @@ const Ticket: FC = () => {
               </Box>
               <Box>
                 <Tooltip enterDelay={2000} title={t('editTicket.set_status_paid')}>
-                  <Button onClick={()=>{ 
+                  <Button disabled={!!printType} onClick={()=>{ 
                     setPrintType('order');
                   }} 
                   variant="contained">

@@ -74,7 +74,7 @@ return <>
     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   >
     <MenuItem onClick={()=>{
-      dispatch(logOut(''));
+      dispatch(logOut());
       handleClose();
     }}>
       <ListItemIcon>
