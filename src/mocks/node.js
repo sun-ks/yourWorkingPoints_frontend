@@ -1,23 +1,24 @@
+import '@testing-library/jest-dom';
 import { setupServer } from 'msw/node';
+
 import { handlers } from './handlers';
-import "@testing-library/jest-dom";
 
 export const server = setupServer(...handlers);
 
 // Enable the API mocking before tests.
-beforeAll(() => server.listen())
+beforeAll(() => server.listen());
 
 beforeEach(() => {
-  jest.resetModules() // Most important - it clears the cache
- // process.env = {...process.env}
+    jest.resetModules(); // Most important - it clears the cache
+    // process.env = {...process.env}
 });
 
 // Reset any runtime request handlers we may add during the tests.
-afterEach(() => server.resetHandlers())
+afterEach(() => server.resetHandlers());
 
 // Disable the API mocking after the tests finished.
-afterAll(() => server.close())
+afterAll(() => server.close());
 
 server.events.on('request:start', ({ request }) => {
-  console.log('MSW intercepted:', request.method, request.url)
-})
+    console.log('MSW intercepted:', request.method, request.url);
+});

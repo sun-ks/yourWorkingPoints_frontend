@@ -1,9 +1,9 @@
-import { async } from "q";
-import { AppDispatch } from "../store";
+import { createAsyncThunk, isAsyncThunkAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ITodos } from "../../types/ITodos";
+import { async } from 'q';
 
-import { createAsyncThunk, isAsyncThunkAction } from "@reduxjs/toolkit";
+import { ITodos } from '../../types/ITodos';
+import { AppDispatch } from '../store';
 
 /*export const fetchUsers = () => async(dispatch: AppDispatch) => {
 	try {
@@ -16,13 +16,15 @@ import { createAsyncThunk, isAsyncThunkAction } from "@reduxjs/toolkit";
 }*/
 
 export const fetchUsers = createAsyncThunk(
-	'users/fetch',
-	async (_, thunkAPI) => {
-    try {
-      const response = await axios.get<ITodos[]>('https://jsonplaceholder.typicode.com/todos')
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue("error fetch users")
-    }
-	}
+    'users/fetch',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get<ITodos[]>(
+                'https://jsonplaceholder.typicode.com/todos',
+            );
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue('error fetch users');
+        }
+    },
 );

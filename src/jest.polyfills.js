@@ -9,30 +9,28 @@
  * you don't want to deal with this.
  */
 
-const { TextDecoder, TextEncoder } = require('node:util')
+const { TextDecoder, TextEncoder } = require('node:util');
 
 // Add REACT_APP_API_URL for tests
-process.env.REACT_APP_API_URL = 'http://test.com/api/'
+process.env.REACT_APP_API_URL = 'http://test.com/api/';
 
 Object.defineProperties(globalThis, {
-  TextDecoder: { value: TextDecoder },
-  TextEncoder: { value: TextEncoder },
-})
- 
-const { Blob, File } = require('node:buffer')
-const { fetch, Headers, FormData, Request, Response } = require('undici')
- 
+    TextDecoder: { value: TextDecoder },
+    TextEncoder: { value: TextEncoder },
+});
+
+const { Blob, File } = require('node:buffer');
+const { fetch, Headers, FormData, Request, Response } = require('undici');
+
 Object.defineProperties(globalThis, {
-  fetch: { value: fetch, writable: true },
-  Blob: { value: Blob },
-  File: { value: File },
-  Headers: { value: Headers },
-  FormData: { value: FormData },
-  Request: { value: Request },
-  Response: { value: Response },
-})
-
-
+    fetch: { value: fetch, writable: true },
+    Blob: { value: Blob },
+    File: { value: File },
+    Headers: { value: Headers },
+    FormData: { value: FormData },
+    Request: { value: Request },
+    Response: { value: Response },
+});
 
 // Mock clearImmediate
 //global.clearImmediate = () => {};
