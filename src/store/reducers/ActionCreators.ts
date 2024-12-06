@@ -1,9 +1,7 @@
-import { createAsyncThunk, isAsyncThunkAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { async } from 'q';
 
 import { ITodos } from '../../types/ITodos';
-import { AppDispatch } from '../store';
 
 /*export const fetchUsers = () => async(dispatch: AppDispatch) => {
 	try {
@@ -16,15 +14,15 @@ import { AppDispatch } from '../store';
 }*/
 
 export const fetchUsers = createAsyncThunk(
-    'users/fetch',
-    async (_, thunkAPI) => {
-        try {
-            const response = await axios.get<ITodos[]>(
-                'https://jsonplaceholder.typicode.com/todos',
-            );
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue('error fetch users');
-        }
-    },
+  'users/fetch',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get<ITodos[]>(
+        'https://jsonplaceholder.typicode.com/todos',
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  },
 );

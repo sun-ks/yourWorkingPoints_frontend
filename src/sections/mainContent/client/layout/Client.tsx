@@ -14,47 +14,47 @@ import Toolbar from '@mui/material/Toolbar';
 import Content from '../Content';
 
 const Worker: FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    return (
-        <HelmetProvider>
-            <Helmet>
-                <title>{`YWP | ${t('worker.add_worker')}`}</title>
-            </Helmet>
-            <AppBar
-                position="static"
-                color="default"
-                elevation={0}
-                sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
-            >
-                <Toolbar>
-                    <Grid container spacing={2} alignItems="center">
-                        <Grid item>
-                            <Tooltip title={`${t('back')}`}>
-                                <IconButton onClick={() => navigate(-1)}>
-                                    <KeyboardBackspaceIcon
-                                        color="inherit"
-                                        sx={{ display: 'block' }}
-                                    />
-                                </IconButton>
-                            </Tooltip>
-                        </Grid>
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-            <Container maxWidth="sm">
-                <Box
-                    sx={{
-                        padding: 1,
-                    }}
-                >
-                    <Content />
-                </Box>
-            </Container>
-        </HelmetProvider>
-    );
+  return (
+    <HelmetProvider>
+      <Helmet>
+        <title>{`YWP | ${t('worker.add_worker')}`}</title>
+      </Helmet>
+      <AppBar
+        position="static"
+        color="default"
+        elevation={0}
+        sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
+      >
+        <Toolbar>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item>
+              <Tooltip title={`${t('back')}`}>
+                <IconButton onClick={() => navigate(-1)}>
+                  <KeyboardBackspaceIcon
+                    color="inherit"
+                    sx={{ display: 'block' }}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="sm">
+        <Box
+          sx={{
+            padding: 1,
+          }}
+        >
+          <Content />
+        </Box>
+      </Container>
+    </HelmetProvider>
+  );
 };
 
 export default Worker;

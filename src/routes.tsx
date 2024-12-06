@@ -31,63 +31,63 @@ import Worker from './sections/mainContent/worker/layout/Worker';
 import Workers from './sections/mainContent/workers/layout/Workers';
 
 const Router: FC = () => {
-    const routers = useRoutes([
-        /* protected routes */
+  const routers = useRoutes([
+    /* protected routes */
+    {
+      //path: '/point',
+      element: <RequireAuth />,
+      children: [
         {
-            //path: '/point',
-            element: <RequireAuth />,
-            children: [
-                {
-                    path: '/',
-                    element: <Paperbase />,
-                    children: [
-                        { element: <Points />, index: true },
-                        { path: ':point_id', element: <TicketsByPoints /> },
-                        {
-                            path: '/createNewPoint',
-                            element: <CreateNewPoint />,
-                        },
-                        { path: '/addNewWorker', element: <AddNewWorker /> },
-                        {
-                            path: '/editPoint/:point_id',
-                            element: <EditPoint />,
-                        },
-                        { path: '/settings', element: <СompanySettings /> },
-                        {
-                            path: '/createTicket/:point_id?',
-                            element: <CreateNewTiket />,
-                        },
-                        { path: '/tickets', element: <Tickets /> },
-                        { path: '/workers', element: <Workers /> },
-                        {
-                            path: '/items/:ticket_id/:point_id?',
-                            element: <Ticket />,
-                        },
-                        { path: '/workers/:user_id', element: <Worker /> },
-                        { path: '/clients/:client_id', element: <Client /> },
-                        { path: '/clients', element: <Clients /> },
-                        { path: '/addClient', element: <AddNewClient /> },
-                    ],
-                },
-                //{ element: <Navigate to="/dashboard/app" />, index: true },
-                //{ path: 'products', element: <ProductsPage /> },
-                //{ path: 'blog', element: <BlogPage /> },
-            ],
+          path: '/',
+          element: <Paperbase />,
+          children: [
+            { element: <Points />, index: true },
+            { path: ':point_id', element: <TicketsByPoints /> },
+            {
+              path: '/createNewPoint',
+              element: <CreateNewPoint />,
+            },
+            { path: '/addNewWorker', element: <AddNewWorker /> },
+            {
+              path: '/editPoint/:point_id',
+              element: <EditPoint />,
+            },
+            { path: '/settings', element: <СompanySettings /> },
+            {
+              path: '/createTicket/:point_id?',
+              element: <CreateNewTiket />,
+            },
+            { path: '/tickets', element: <Tickets /> },
+            { path: '/workers', element: <Workers /> },
+            {
+              path: '/items/:ticket_id/:point_id?',
+              element: <Ticket />,
+            },
+            { path: '/workers/:user_id', element: <Worker /> },
+            { path: '/clients/:client_id', element: <Client /> },
+            { path: '/clients', element: <Clients /> },
+            { path: '/addClient', element: <AddNewClient /> },
+          ],
         },
-        {
-            path: 'createFirstPoint',
-            element: <AddFirstPoint />,
-        },
-        /* public routes */
-        {
-            path: 'auth/:typePage/:token?',
-            element: <AuthPage />,
-        },
-        {
-            path: '*',
-            element: <Page404 />,
-        },
-        /*{
+        //{ element: <Navigate to="/dashboard/app" />, index: true },
+        //{ path: 'products', element: <ProductsPage /> },
+        //{ path: 'blog', element: <BlogPage /> },
+      ],
+    },
+    {
+      path: 'createFirstPoint',
+      element: <AddFirstPoint />,
+    },
+    /* public routes */
+    {
+      path: 'auth/:typePage/:token?',
+      element: <AuthPage />,
+    },
+    {
+      path: '*',
+      element: <Page404 />,
+    },
+    /*{
       element: <SimpleLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" />, index: true },
@@ -95,9 +95,9 @@ const Router: FC = () => {
         { path: '*', element: <Navigate to="/404" /> },
       ],
     },*/
-    ]);
+  ]);
 
-    return routers;
+  return routers;
 };
 
 export default Router;

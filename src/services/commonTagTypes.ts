@@ -5,11 +5,11 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 export const tagTypes: string[] = ['Points', 'Point', 'Item'];
 
 const emptyApi = createApi({
-    reducerPath: 'pointAPI--',
-    baseQuery: baseQueryCheckAccessToken,
-    endpoints: () => ({}),
+  reducerPath: 'pointAPI--',
+  baseQuery: baseQueryCheckAccessToken,
+  endpoints: () => ({}),
 });
 
 export const apiWithCommonTags = emptyApi.enhanceEndpoints({
-    addTagTypes: tagTypes,
+  addTagTypes: tagTypes,
 });

@@ -15,21 +15,21 @@ const { TextDecoder, TextEncoder } = require('node:util');
 process.env.REACT_APP_API_URL = 'http://test.com/api/';
 
 Object.defineProperties(globalThis, {
-    TextDecoder: { value: TextDecoder },
-    TextEncoder: { value: TextEncoder },
+  TextDecoder: { value: TextDecoder },
+  TextEncoder: { value: TextEncoder },
 });
 
 const { Blob, File } = require('node:buffer');
 const { fetch, Headers, FormData, Request, Response } = require('undici');
 
 Object.defineProperties(globalThis, {
-    fetch: { value: fetch, writable: true },
-    Blob: { value: Blob },
-    File: { value: File },
-    Headers: { value: Headers },
-    FormData: { value: FormData },
-    Request: { value: Request },
-    Response: { value: Response },
+  fetch: { value: fetch, writable: true },
+  Blob: { value: Blob },
+  File: { value: File },
+  Headers: { value: Headers },
+  FormData: { value: FormData },
+  Request: { value: Request },
+  Response: { value: Response },
 });
 
 // Mock clearImmediate

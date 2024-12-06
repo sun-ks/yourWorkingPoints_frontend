@@ -7,14 +7,14 @@ import AppRouter from '../../routes';
 import { setupStore } from '../../store/store';
 
 export const renderTestApp = (component, options) => {
-    const store = setupStore(options?.initialState);
+  const store = setupStore(options?.initialState);
 
-    return (
-        <Provider store={store}>
-            <MemoryRouter initialEntries={[options?.route]}>
-                <AppRouter />
-                {component}
-            </MemoryRouter>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <MemoryRouter initialEntries={[options?.route]}>
+        <AppRouter />
+        {component}
+      </MemoryRouter>
+    </Provider>
+  );
 };
