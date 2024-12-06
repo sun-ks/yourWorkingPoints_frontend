@@ -1,5 +1,5 @@
-const headers = (token?:string) => ({
-  'Authorization': `Bearer ${token}`,
+const headers = (token?: string) => ({
+    Authorization: `Bearer ${token}`,
 });
 
 export default headers;
