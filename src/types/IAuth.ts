@@ -1,5 +1,5 @@
 export type ICredentials = {
-    accessToken: string;
-    refreshToken: string;
-    expirationTime: number;
+  accessToken: string;
+  refreshToken: string;
+  expirationTime: number;
 };

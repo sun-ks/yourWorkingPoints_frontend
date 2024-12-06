@@ -12,30 +12,26 @@ import { fetchUsers } from './store/reducers/ActionCreators';
 import { todosSlice } from './store/reducers/TodosSlice';
 
 function App() {
-    const state = useAppSelector((state) => state.testReducer);
+  const state = useAppSelector((state) => state.testReducer);
 
-    const { incriment, dicriment, todoFetcing } = todosSlice.actions;
+  const { incriment, dicriment, todoFetcing } = todosSlice.actions;
 
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchUsers());
-    }, []);
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
 
-    const {
-        data: posts,
-        error,
-        isLoading,
-    } = postAPI.useFetchAllPostsQuery(200);
+  const { data: posts, error, isLoading } = postAPI.useFetchAllPostsQuery(200);
 
-    return (
-        <div className="App">
-            <CssBaseline />
-            <BrowserRouter>
-                <Router />
-            </BrowserRouter>
-        </div>
-    );
+  return (
+    <div className="App">
+      <CssBaseline />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

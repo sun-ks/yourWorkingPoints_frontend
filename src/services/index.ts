@@ -6,10 +6,10 @@ import * as ticketAPI from './TicketService';
 import * as userAPI from './UserService';
 
 export default {
-    ...postAPI,
-    ...userAPI,
-    ...pointAPI,
-    ...ticketAPI,
-    ...companyAPI,
-    ...clientAPI,
+  ...postAPI,
+  ...userAPI,
+  ...pointAPI,
+  ...ticketAPI,
+  ...companyAPI,
+  ...clientAPI,
 };

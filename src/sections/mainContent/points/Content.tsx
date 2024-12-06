@@ -12,141 +12,121 @@ import { pointAPI } from '../../../services/PointService';
 import { IPoint } from '../../../types/IPoint';
 
 const Content: FC = () => {
-    const [deletePoint, { isError, error: errorDeletePoint }] =
-        pointAPI.useDeletePointMutation();
+  const [deletePoint] = pointAPI.useDeletePointMutation();
 
-    const { data: points, error, isLoading } = pointAPI.useGetPointsQuery('');
+  const [pointsWithHaveTickets] =
+    pointAPI.useGetPointsWithHaveTicketsMutation();
 
-    const [
-        pointsWithHaveTickets,
-        {
-            isError: pointsWithHaveTickets_iserr,
-            error: pointsWithHaveTickets_error,
-        },
-    ] = pointAPI.useGetPointsWithHaveTicketsMutation();
+  const [openAlertDelete, setOpenAlertDelete] = useState<{
+    open: boolean;
+    title?: string;
+    showSubmitBtn?: boolean;
+  }>({
+    open: false,
+  });
 
-    const [openAlertDelete, setOpenAlertDelete] = useState<{
-        open: boolean;
-        title?: string;
-        showSubmitBtn?: boolean;
-    }>({
-        open: false,
-    });
+  const { t } = useTranslation();
 
-    const { t } = useTranslation();
+  const [pointIdForDelete, setPointIdForDelete] = useState('');
 
-    const [pointIdForDelete, setPointIdForDelete] = useState('');
+  const navigate = useNavigate();
 
-    const [users, setUsers] = useState([]);
+  const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
 
-    const navigate = useNavigate();
-
-    const [pointsHasTickets, setPointsHasTickets] = useState<IPoint[] | []>([]);
-
-    async function fetchPoints() {
-        const { data } = (await pointsWithHaveTickets('')) as {
-            data: IPoint[] | [];
-        };
-        const points = await data;
-
-        setPointsHasTickets(points);
-    }
-
-    const DEFAULT_TITLE_ALERT = t('point.delete_title_default');
-    const HAS_TICKETS_TITLE_ALERT = t('point.delete_title_has_ticket');
-
-    useEffect(() => {
-        fetchPoints();
-    }, []);
-
-    const handleClose = () => {
-        setOpenAlertDelete((prev) => ({ ...prev, open: false }));
+  async function fetchPoints() {
+    const { data } = (await pointsWithHaveTickets('')) as {
+      data: IPoint[] | [];
     };
+    const points = await data;
 
-    const handleClickAgreeDelete = async () => {
-        await deletePoint({ point_id: pointIdForDelete });
-        fetchPoints();
-    };
+    setPointsHasTickets(points);
+  }
 
-    return (
-        <>
-            {users &&
-                users.map((user: any, i) => (
-                    <li key={user.id}>{user.first_name}</li>
-                ))}
-            <AlertDialog
-                handleClose={handleClose}
-                handleClickOk={handleClickAgreeDelete}
-                isOpen={openAlertDelete.open}
-                showSubmitBtn={openAlertDelete.showSubmitBtn}
-                title={
-                    openAlertDelete.title
-                        ? openAlertDelete.title
-                        : DEFAULT_TITLE_ALERT
-                }
-            />
+  const DEFAULT_TITLE_ALERT = t('point.delete_title_default');
+  const HAS_TICKETS_TITLE_ALERT = t('point.delete_title_has_ticket');
 
-            {pointsHasTickets ? (
-                pointsHasTickets.map((point, i) => {
-                    return (
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="center"
-                            data-testid="content-point"
-                            key={`point-id-${i}`}
-                            sx={{
-                                padding: 1,
-                            }}
-                        >
-                            <Typography
-                                sx={{ cursor: 'pointer', marginRight: 1 }}
-                                onClick={() => navigate(`/${point.point_id}`)}
-                            >
-                                {point.name}
-                            </Typography>
+  useEffect(() => {
+    fetchPoints();
+  }, []);
 
-                            <Tooltip
-                                onClick={() =>
-                                    navigate(`/editPoint/${point.point_id}`)
-                                }
-                                title={t(`point.edit`)}
-                            >
-                                <IconButton>
-                                    <EditIcon sx={{ fontSize: 14 }} />
-                                </IconButton>
-                            </Tooltip>
+  const handleClose = () => {
+    setOpenAlertDelete((prev) => ({ ...prev, open: false }));
+  };
 
-                            <Tooltip
-                                onClick={() => {
-                                    const alertModalTitle = point.hastickets
-                                        ? HAS_TICKETS_TITLE_ALERT
-                                        : undefined;
-                                    const showSubmitBtn = !point.hastickets;
+  const handleClickAgreeDelete = async () => {
+    await deletePoint({ point_id: pointIdForDelete });
+    fetchPoints();
+  };
 
-                                    setOpenAlertDelete({
-                                        open: true,
-                                        title: alertModalTitle,
-                                        showSubmitBtn,
-                                    });
-                                    setPointIdForDelete(point.point_id);
-                                }}
-                                title={t(`point.delete`)}
-                            >
-                                <IconButton>
-                                    <DeleteIcon sx={{ fontSize: 14 }} />
-                                </IconButton>
-                            </Tooltip>
-                        </Box>
-                    );
-                })
-            ) : isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <p>No items available.</p>
-            )}
-        </>
-    );
+  return (
+    <>
+      <AlertDialog
+        handleClose={handleClose}
+        handleClickOk={handleClickAgreeDelete}
+        isOpen={openAlertDelete.open}
+        showSubmitBtn={openAlertDelete.showSubmitBtn}
+        title={
+          openAlertDelete.title ? openAlertDelete.title : DEFAULT_TITLE_ALERT
+        }
+      />
+
+      {pointsHasTickets ? (
+        pointsHasTickets.map((point, i) => {
+          return (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              data-testid="content-point"
+              key={`point-id-${i}`}
+              sx={{
+                padding: 1,
+              }}
+            >
+              <Typography
+                sx={{ cursor: 'pointer', marginRight: 1 }}
+                onClick={() => navigate(`/${point.point_id}`)}
+              >
+                {point.name}
+              </Typography>
+
+              <Tooltip
+                onClick={() => navigate(`/editPoint/${point.point_id}`)}
+                title={t(`point.edit`)}
+              >
+                <IconButton>
+                  <EditIcon sx={{ fontSize: 14 }} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip
+                onClick={() => {
+                  const alertModalTitle = point.hastickets
+                    ? HAS_TICKETS_TITLE_ALERT
+                    : undefined;
+                  const showSubmitBtn = !point.hastickets;
+
+                  setOpenAlertDelete({
+                    open: true,
+                    title: alertModalTitle,
+                    showSubmitBtn,
+                  });
+                  setPointIdForDelete(point.point_id);
+                }}
+                title={t(`point.delete`)}
+              >
+                <IconButton>
+                  <DeleteIcon sx={{ fontSize: 14 }} />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          );
+        })
+      ) : (
+        <p>No items available.</p>
+      )}
+    </>
+  );
 };
 
 export default Content;

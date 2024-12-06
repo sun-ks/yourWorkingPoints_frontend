@@ -17,23 +17,23 @@ const store = setupStore();
 const persistor = persistStore(store);
 
 async function enableMocking() {
-    if (process.env.NODE_ENV !== 'development_test') {
-        return;
-    }
+  if (process.env.NODE_ENV !== 'development_test') {
+    return;
+  }
 
-    const { worker } = await import('./mocks/browser.js');
-    return worker.start();
+  const { worker } = await import('./mocks/browser.js');
+  return worker.start();
 }
 
 enableMocking().then(() => {
-    ReactDOM.render(
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <ThemeProvider theme={theme}>
-                    <App />
-                </ThemeProvider>
-            </PersistGate>
-        </Provider>,
-        document.getElementById('root'),
-    );
+  ReactDOM.render(
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>,
+    document.getElementById('root'),
+  );
 });
