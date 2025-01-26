@@ -9,8 +9,15 @@ import testReducer from './reducers/TodosSlice';
 
 //defaults to localStorage for web
 
-const { postAPI, userAPI, pointAPI, ticketAPI, companyAPI, clientAPI } =
-  services;
+const {
+  postAPI,
+  userAPI,
+  pointAPI,
+  ticketAPI,
+  companyAPI,
+  clientAPI,
+  warehouseAPI,
+} = services;
 
 const reducers = {
   testReducer,
@@ -21,6 +28,7 @@ const reducers = {
   [ticketAPI.reducerPath]: ticketAPI.reducer,
   [companyAPI.reducerPath]: companyAPI.reducer,
   [clientAPI.reducerPath]: clientAPI.reducer,
+  [warehouseAPI.reducerPath]: warehouseAPI.reducer,
 };
 
 const rootReducer = combineReducers(reducers);
@@ -53,7 +61,8 @@ export const setupStore = (initialState = {}) => {
         .concat(ticketAPI.middleware)
         .concat(companyAPI.middleware)
         .concat(companyAPI.middleware)
-        .concat(clientAPI.middleware),
+        .concat(clientAPI.middleware)
+        .concat(warehouseAPI.middleware),
     //devTools: true, // Enable Redux DevTools
   });
 };

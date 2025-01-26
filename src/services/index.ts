@@ -4,6 +4,7 @@ import * as pointAPI from './PointService';
 import * as postAPI from './PostService';
 import * as ticketAPI from './TicketService';
 import * as userAPI from './UserService';
+import * as warehouseAPI from './WarehouseService';
 
 export default {
   ...postAPI,
@@ -12,4 +13,5 @@ export default {
   ...ticketAPI,
   ...companyAPI,
   ...clientAPI,
+  ...warehouseAPI,
 };
