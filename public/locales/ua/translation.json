@@ -22,6 +22,11 @@
     "name": "Назва Компанії",
     "deactivated_user":"Цей користувач був деактивований!"
   },
+  "form": {
+    "required": "Це поле є обов'язковим для заповнення",
+    "default_label": "Інші",
+    "added_successfully": "Успішно додано!"
+  },
   "clients": {
     "clients_title_seo": "Всі клієнти",
     "add_client": "Додати клієнта",
@@ -34,6 +39,27 @@
     "phone": "Номер Телефону",
     "description":"Опис",
     "edit_client": "Редагувати кліента"
+  },
+  "warehouse": {
+    "clients_menu_item": "Склад",
+    "add_inventory_item": "Додати товар на склад",
+    "title": "Додати товар на склад",
+    "title_edit": "Редагувати товар ",
+    "field_name": "Назва продукту",
+    "fild_serial_number": "Серійний номер",
+    "fild_purchase_price": "Ціна закупівлі",
+    "field_retail_price": "Роздрібна ціна",
+    "field_warranty": "Гарантія (в днях)",
+    "received_date": "Дата отримання",
+    "field_quantity": "Кількість (в штуках)",
+    "description": "Опис",
+    "category": "Категорія",
+    "supplier": "Постачальник",
+    "phone": "Номер телефона",
+    "btn_add": "Додати",
+    "btn_edit": "Редагувати",
+    "delete_warehouse_item": "Видалити цей товар",
+    "alert_delete_title": "Ви справді хочете видалити цей товар?"
   },
   "statuses":{
     "inbox": "Взято на ремонт",
@@ -110,6 +136,16 @@
     "is_active_false": "Неактивний",
     "status": "Статус"
   },
+  "warehouseColumns": {
+    "created": "Створено",
+    "recived_date": "Дата отримання",
+    "category": "Категорія",
+    "supplier": "Постачальник",
+    "name": "Назва",
+    "warranty": "Гарантія (в днях)",
+    "quantity": "Кількість",
+    "point": "Точка"
+  },
   "tickets": {
     "create_ticket": "Створити Задачу",
     "client_approval": "Важливо! Ці задачі потребують комунікації з клієнтом:"
@@ -128,7 +164,8 @@
     "client_email": "Електрона Адреса",
     "client_name": "Ім'я Клієнта",
     "btn_create": "Створити Задачу",
-    "client_already_exist": "Цей кліент вже існує"
+    "client_already_exist": "Цей кліент вже існує",
+    "no_points_available": "Немає доступних точок"
   },
   "editTicket": {
     "guarantee_till": "Гарантія до",

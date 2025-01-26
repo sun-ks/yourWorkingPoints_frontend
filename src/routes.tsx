@@ -13,6 +13,8 @@ import AddFirstPoint from './pages/AddFirstPoint';
 import AuthPage from './pages/AuthPage';
 import Page404 from './pages/Page404';
 import RequireAuth from './pages/RequireAuth';
+import AddInventoryItem from './sections/mainContent/addInventoryItem/layout';
+import EditInventoryItem from './sections/mainContent/editInventoryItem/layout';
 import AddNewClient from './sections/mainContent/addNewClient/layout/AddNewClient';
 import AddNewWorker from './sections/mainContent/addNewWorker/layout/AddNewWorker';
 import Client from './sections/mainContent/client/layout/Client';
@@ -27,6 +29,7 @@ import Ticket from './sections/mainContent/editTicket/layout/Ticket';
 import Points from './sections/mainContent/points/layout/Points';
 import Tickets from './sections/mainContent/tickets/layout/Tickets';
 import TicketsByPoints from './sections/mainContent/ticketsByPoints/layout/TicketsByPoints';
+import Warehouse from './sections/mainContent/warehouse/layout';
 import Worker from './sections/mainContent/worker/layout/Worker';
 import Workers from './sections/mainContent/workers/layout/Workers';
 
@@ -48,6 +51,8 @@ const Router: FC = () => {
               element: <CreateNewPoint />,
             },
             { path: '/addNewWorker', element: <AddNewWorker /> },
+            { path: '/addInventoryItem', element: <AddInventoryItem /> },
+            { path: '/inventoryItem/:warehouse_id', element: <EditInventoryItem /> },
             {
               path: '/editPoint/:point_id',
               element: <EditPoint />,
@@ -67,11 +72,10 @@ const Router: FC = () => {
             { path: '/clients/:client_id', element: <Client /> },
             { path: '/clients', element: <Clients /> },
             { path: '/addClient', element: <AddNewClient /> },
+            { path: '/warehouse', element: <Warehouse /> },
+            
           ],
         },
-        //{ element: <Navigate to="/dashboard/app" />, index: true },
-        //{ path: 'products', element: <ProductsPage /> },
-        //{ path: 'blog', element: <BlogPage /> },
       ],
     },
     {

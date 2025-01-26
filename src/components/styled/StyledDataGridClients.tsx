@@ -12,12 +12,7 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid';
 
-const StyledDataGridClients: FC<any> = ({
-  clients,
-  error,
-  isLoading,
-  type,
-}) => {
+const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();

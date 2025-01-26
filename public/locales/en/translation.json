@@ -17,10 +17,15 @@
   "service_center": "Service Center",
   "updated": "Updated successfully!",
   "company": {
-    "company_settings":"Company Settings",
+    "company_settings": "Company Settings",
     "btn_edit": "Edit Company",
     "name": "Company Name",
-    "deactivated_user":"This user has been deactivated!"
+    "deactivated_user": "This user has been deactivated!"
+  },
+  "form": {
+    "required": "This field is required",
+    "default_label": "Others",
+    "added_successfully": "Added successfully!"
   },
   "clients": {
     "clients_title_seo": "All Clients",
@@ -30,12 +35,33 @@
     "add_client_title": "Add New Client",
     "client_added": "Client added successfully!",
     "email": "Email",
-    "name":"Name",
+    "name": "Name",
     "phone": "Phone",
-    "description":"Description",
+    "description": "Description",
     "edit_client": "Edit Client"
   },
-  "statuses":{
+  "warehouse": {
+    "clients_menu_item": "Warehouse",
+    "add_inventory_item": "Add Inventory Item",
+    "title": "Add Inventory Item",
+    "title_edit": "Edit Inventory Item",
+    "field_name": "Product name",
+    "fild_serial_number": "Serial number",
+    "fild_purchase_price": "Purchase price",
+    "field_retail_price": "Retail price",
+    "field_warranty": "Warranty (days)",
+    "received_date": "Received date",
+    "field_quantity": "Quantity (in pieces)",
+    "description": "Description",
+    "category": "Category",
+    "supplier": "Supplier",
+    "phone": "Phone number",
+    "btn_add": "Add",
+    "btn_edit": "Edit",
+    "delete_warehouse_item": "Delete Warehouse Item",
+    "alert_delete_title": "Do you really want to delete this Warehouse Item?"
+  },
+  "statuses": {
     "inbox": "Inbox",
     "in_progress": "In progress",
     "ask_client": "Ask client",
@@ -44,50 +70,50 @@
     "cancelled": "Cancelled",
     "hold": "Hold"
   },
-  
+
   "priorities": {
     "low": "Low",
     "high": "High",
     "medium": "Medium"
   },
-  "sign_in":{
+  "sign_in": {
     "meta": {
-      "title" : "YWP, Log In"
+      "title": "YWP, Log In"
     },
-    "title" : "Log In",
-    "btn_submit":"Log In",
+    "title": "Log In",
+    "btn_submit": "Log In",
     "do_not_account": "Don’t have an account?"
   },
-  "sign_up":{
+  "sign_up": {
     "meta": {
-      "title" : "YWP, Sign Up"
+      "title": "YWP, Sign Up"
     },
     "title": "Sign Up",
-    "btn_submit":"Sign Up",
+    "btn_submit": "Sign Up",
     "do_not_account": "Do you have an account?"
   },
   "forgot": {
     "meta": {
-      "title" : "YWP, Forgot password"
+      "title": "YWP, Forgot password"
     },
     "title": "Forgot password",
-    "btn_submit":"Send Recovery Link",
+    "btn_submit": "Send Recovery Link",
     "do_not_account": "Don’t have an account?"
   },
   "new_password": {
     "meta": {
-      "title" : "YWP, Set New Password"
+      "title": "YWP, Set New Password"
     },
     "title": "Set new password",
-    "btn_submit":"Set New Password",
+    "btn_submit": "Set New Password",
     "do_not_account": "Go to"
   },
   "add_worker": {
     "meta": {
-      "title" : "YWP, Hello New Member"
+      "title": "YWP, Hello New Member"
     },
     "title": "Set password",
-    "btn_submit":"Set Password",
+    "btn_submit": "Set Password",
     "do_not_account": "Go to"
   },
   "ticketsColumns": {
@@ -101,7 +127,7 @@
     "paid": "Paid",
     "assigned_at": "Assigned To"
   },
-  "usersColumns":{
+  "usersColumns": {
     "created": "Created",
     "role": "Role",
     "name": "Name",
@@ -110,6 +136,16 @@
     "is_active_true": "Active",
     "is_active_false": "Inactive",
     "status": "Status"
+  },
+  "warehouseColumns": {
+    "created": "Created",
+    "recived_date": "Recived Date",
+    "category":"Category",
+    "supplier":"Supplier",
+    "name": "Name",
+    "warranty": "Warranty (days)",
+    "quantity": "Quantity",
+    "point": "Point"
   },
   "tickets": {
     "create_ticket": "Create Ticket",
@@ -129,7 +165,8 @@
     "client_email": "Client Email",
     "client_name": "Client Name",
     "btn_create": "Create Ticket",
-    "client_already_exist": "This Client elready exists"
+    "client_already_exist": "This Client elready exists",
+    "no_points_available": "No points available"
   },
   "editTicket": {
     "guarantee_till": "Guarantee till",
@@ -143,13 +180,13 @@
     "device_name": "Device name",
     "sn": "Device S/N (imei)",
     "client_email": "Email",
-    "client_name":"Client name",
-    "first_payment":"Deposit",
-    "finish_payment":"Final payment",
+    "client_name": "Client name",
+    "first_payment": "Deposit",
+    "finish_payment": "Final payment",
     "description": "Description",
     "update_ticket": "Update Ticket",
     "delete_ticket": "Delete Ticket",
-    "current_point":"Current Point",
+    "current_point": "Current Point",
     "ticket_status": "Status",
     "ticket_priority": "Priority",
     "note": "Note",
@@ -159,7 +196,7 @@
   "printTicket": {
     "device": "Device",
     "will_in_print": "Important! This will be in print (Repair Order, Guarantee)",
-    "title_guarantee":"Guarantee",
+    "title_guarantee": "Guarantee",
     "title_order": "Repair Order",
     "service_information": "Service Information",
     "ticket_id": "Ticket Id",
@@ -172,7 +209,7 @@
     "point": "Point",
     "create_new_point": "Create New Point",
     "edit_point": "Edit Point",
-    "btn_edit":"Edit Point",
+    "btn_edit": "Edit Point",
     "successes_block": "Point updated successfully!",
     "name": "Name",
     "phone_number": "Point Phone Number",
@@ -181,9 +218,9 @@
     "edit": "Edit",
     "delete": "Delete",
     "delete_title_default": "Are you sure you want to delete this Point?",
-    "delete_title_has_ticket":"Only empty Points available for deletion"
+    "delete_title_has_ticket": "Only empty Points available for deletion"
   },
-  "account":{
+  "account": {
     "logout": "Logout"
   },
   "worker": {
@@ -196,6 +233,5 @@
     "description": "Description",
     "edit_worker": "Edit Worker",
     "save": "Save"
-    
   }
 }
