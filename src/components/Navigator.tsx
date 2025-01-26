@@ -11,7 +11,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
-import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import WarehouseIcon from '@mui/icons-material/Warehouse';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
@@ -83,6 +83,13 @@ export default function Navigator(props: DrawerProps) {
           avaliable: true,
           linkTo: '/clients',
           icon: <Diversity1Icon />,
+        },
+        {
+          id: t('warehouse.clients_menu_item'),
+          active: false,
+          avaliable: true,
+          linkTo: '/warehouse',
+          icon: <WarehouseIcon />,
         },
       ],
     },

@@ -12,7 +12,13 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid';
 
-const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
+const StyledDataGridWarehouse: FC<any> = ({
+  warehouse,
+  points,
+  error,
+  isLoading,
+  type,
+}) => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -20,35 +26,79 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const columns: GridColDef[] = [
     {
       field: 'created',
-      headerName: t('usersColumns.created'),
+      headerName: t('warehouseColumns.created'),
       width: 150,
       editable: true,
       valueGetter: (params: GridValueGetterParams) =>
         `${new Date(params.row.created).toLocaleDateString()}`,
     },
     {
-      field: 'phone',
-      headerName: t('usersColumns.status'),
+      field: 'received_date',
+      headerName: t('warehouseColumns.recived_date'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.received_date
+          ? `${new Date(params.row.received_date).toLocaleDateString()}`
+          : 'null',
+    },
+    {
+      field: 'point_id',
+      headerName: t('warehouseColumns.point'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) => {
+        if (!points) {
+          return 'no points';
+        }
+        const p = points.filter(
+          (point: { point_id: string }) =>
+            point.point_id === params.row.point_id,
+        );
+        return p[0].name;
+      },
+    },
+    {
+      field: 'category_id',
+      headerName: t('warehouseColumns.category'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.category_id === null ? '/' : params.row.category_id,
+    },
+    {
+      field: 'supplier_id',
+      headerName: t('warehouseColumns.supplier'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.supplier_id === null ? '/' : params.row.supplier_id,
+    },
+    {
+      field: 'warranty',
+      headerName: t('warehouseColumns.warranty'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        params.row.warranty ? params.row.warranty : 'null',
+    },
+    {
+      field: 'name',
+      headerName: t('warehouseColumns.name'),
       width: 150,
       editable: true,
     },
     {
-      field: 'name',
-      headerName: t('usersColumns.name'),
-      width: 200,
-      editable: true,
-    },
-    {
-      field: 'email',
-      headerName: t('usersColumns.email'),
+      field: 'quantity',
+      headerName: t('warehouseColumns.quantity'),
       width: 200,
       editable: true,
     },
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    const client_id = params.row.client_id;
-    navigate(`/clients/${client_id}`);
+    const user_id = params.row.user_id;
+    navigate(`/${type}/${user_id}`);
   };
 
   return (
@@ -61,7 +111,7 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
 
       {isLoading ? (
         <p>Loading...</p>
-      ) : clients && clients.length > 0 ? (
+      ) : warehouse.data && warehouse.data.length > 0 ? (
         <>
           <Box
             sx={{
@@ -71,9 +121,9 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
           >
             <DataGrid
               scrollbarSize={53}
-              rows={clients || []}
+              rows={warehouse.data || []}
               columns={columns}
-              getRowId={(row) => row.client_id}
+              getRowId={(row) => row.id}
               initialState={{
                 pagination: {
                   paginationModel: {
@@ -99,10 +149,10 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
           </Box>
         </>
       ) : (
-        'Clients List is empty'
+        'List is empty'
       )}
     </>
   );
 };
 
-export default StyledDataGridClients;
+export default StyledDataGridWarehouse;
