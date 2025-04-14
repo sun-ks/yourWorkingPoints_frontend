@@ -7,7 +7,7 @@ export interface IWarehouseItem {
   serial_number: string;
   purchase_price: number;
   retail_price: number;
-  warranty: number;
+  warranty: number | null;
   received_date: Date;
   quantity: number;
   description: string;

@@ -42,8 +42,13 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Custom middleware for logging
-const loggingMiddleware: Middleware = () => (next) => (action) => {
+const loggingMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);
+
+  if (action.type === 'auth/logOut') {
+    console.log('Persisted state cleared due to logout', store);
+  }
+
   return result;
 };
 

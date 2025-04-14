@@ -21,6 +21,7 @@ import Clients from './sections/mainContent/clients/layout/Clients';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket';
 import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
+import EditInventoryItem from './sections/mainContent/editInventoryItem/layout';
 import EditPoint from './sections/mainContent/editPoint/layout/EditPoint';
 import Ticket from './sections/mainContent/editTicket/layout/Ticket';
 //import ProductsPage from './pages/ProductsPage';
@@ -51,6 +52,10 @@ const Router: FC = () => {
             },
             { path: '/addNewWorker', element: <AddNewWorker /> },
             { path: '/addInventoryItem', element: <AddInventoryItem /> },
+            {
+              path: '/inventoryItem/:warehouse_id',
+              element: <EditInventoryItem />,
+            },
             {
               path: '/editPoint/:point_id',
               element: <EditPoint />,

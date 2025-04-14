@@ -44,6 +44,7 @@
     "clients_menu_item": "Склад",
     "add_inventory_item": "Додати товар на склад",
     "title": "Додати товар на склад",
+    "title_edit": "Редагувати товар ",
     "field_name": "Назва продукту",
     "fild_serial_number": "Серійний номер",
     "fild_purchase_price": "Ціна закупівлі",
@@ -55,7 +56,10 @@
     "category": "Категорія",
     "supplier": "Постачальник",
     "phone": "Номер телефона",
-    "btn_add": "Додати"
+    "btn_add": "Додати",
+    "btn_edit": "Редагувати",
+    "delete_warehouse_item": "Видалити цей товар",
+    "alert_delete_title": "Ви справді хочете видалити цей товар?"
   },
   "statuses":{
     "inbox": "Взято на ремонт",

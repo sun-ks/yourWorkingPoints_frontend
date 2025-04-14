@@ -17,7 +17,6 @@ const StyledDataGridWarehouse: FC<any> = ({
   points,
   error,
   isLoading,
-  type,
 }) => {
   const navigate = useNavigate();
 
@@ -55,6 +54,11 @@ const StyledDataGridWarehouse: FC<any> = ({
           (point: { point_id: string }) =>
             point.point_id === params.row.point_id,
         );
+
+        if (p.length === 0) {
+          return 'no points';
+        }
+
         return p[0].name;
       },
     },
@@ -97,8 +101,8 @@ const StyledDataGridWarehouse: FC<any> = ({
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    const user_id = params.row.user_id;
-    navigate(`/${type}/${user_id}`);
+    const id = params.row.id;
+    navigate(`/inventoryItem/${id}`);
   };
 
   return (

@@ -44,6 +44,7 @@
     "clients_menu_item": "Warehouse",
     "add_inventory_item": "Add Inventory Item",
     "title": "Add Inventory Item",
+    "title_edit": "Edit Inventory Item",
     "field_name": "Product name",
     "fild_serial_number": "Serial number",
     "fild_purchase_price": "Purchase price",
@@ -55,7 +56,10 @@
     "category": "Category",
     "supplier": "Supplier",
     "phone": "Phone number",
-    "btn_add": "Add"
+    "btn_add": "Add",
+    "btn_edit": "Edit",
+    "delete_warehouse_item": "Delete Warehouse Item",
+    "alert_delete_title": "Do you really want to delete this Warehouse Item?"
   },
   "statuses": {
     "inbox": "Inbox",
