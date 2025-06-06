@@ -24,6 +24,7 @@
   },
   "form": {
     "required": "This field is required",
+    "available": "Available",
     "default_label": "Others",
     "added_successfully": "Added successfully!"
   },
@@ -169,6 +170,7 @@
     "no_points_available": "No points available"
   },
   "editTicket": {
+    "choose_part": "Choose Part from Warehouse",
     "guarantee_till": "Guarantee till",
     "set_status_paid": "After reaching the status 'Paid,' printing the Guarantee will be possible",
     "print_guarantee": "Print Guarantee",

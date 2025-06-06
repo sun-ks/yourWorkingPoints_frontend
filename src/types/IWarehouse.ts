@@ -1,4 +1,5 @@
 export interface IWarehouseItem {
+  id: string;
   name: string;
   category_id: string;
   supplier_id: string;
@@ -11,4 +12,5 @@ export interface IWarehouseItem {
   received_date: Date;
   quantity: number;
   description: string;
+  count?: number;
 }

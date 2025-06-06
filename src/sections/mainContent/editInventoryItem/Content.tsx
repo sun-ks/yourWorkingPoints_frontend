@@ -24,11 +24,7 @@ import { selectCurrentUser } from '../../../store/reducers/AuthSlice';
 import { IWarehouseItem } from '../../../types/IWarehouse';
 
 interface ContentProps {
-  data: IWarehouseItemRes;
-}
-
-interface IWarehouseItemRes<T = string> extends IWarehouseItem {
-  id: T;
+  data: IWarehouseItem;
 }
 
 const Content: FC<ContentProps> = ({ data }) => {

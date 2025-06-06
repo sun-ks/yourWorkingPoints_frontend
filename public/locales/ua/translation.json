@@ -24,6 +24,7 @@
   },
   "form": {
     "required": "Це поле є обов'язковим для заповнення",
+    "available": "Доступно",
     "default_label": "Інші",
     "added_successfully": "Успішно додано!"
   },
@@ -168,6 +169,7 @@
     "no_points_available": "Немає доступних точок"
   },
   "editTicket": {
+    "choose_part": "Оберіть деталь зі складу",
     "guarantee_till": "Гарантія до",
     "set_status_paid": "Після досягнення статусу 'Сплачено' буде можливий друк гарантії",
     "print_guarantee": "Друк гарантії",

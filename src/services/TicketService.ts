@@ -6,13 +6,13 @@ import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 export const ticketAPI = createApi({
   reducerPath: 'ticketAPI',
   baseQuery: baseQueryCheckAccessToken,
-  tagTypes: ['Iticket'],
+  tagTypes: ['Ticket', 'Warehouse'],
   endpoints: (build) => ({
     getAllItemsTickets: build.query<IItem[], any>({
       query: () => ({
         url: `/tickets/allTickets`,
       }),
-      providesTags: () => ['Iticket'],
+      providesTags: () => ['Ticket'],
     }),
     getTicketsByPoint: build.query<IItem[], any>({
       query: ({ point_id }) => ({
@@ -21,7 +21,7 @@ export const ticketAPI = createApi({
           point_id,
         },
       }),
-      providesTags: () => ['Iticket'],
+      providesTags: () => ['Ticket'],
     }),
     getTicket: build.query<IItem, any>({
       query: (ticket_id) => ({
@@ -30,7 +30,7 @@ export const ticketAPI = createApi({
           ticket_id,
         },
       }),
-      providesTags: () => ['Iticket'],
+      providesTags: () => ['Ticket', 'Warehouse'],
     }),
     createTicket: build.mutation<IItem, any>({
       query: (body) => ({
@@ -38,7 +38,7 @@ export const ticketAPI = createApi({
         method: 'POST',
         body: body,
       }),
-      invalidatesTags: ['Iticket'],
+      invalidatesTags: ['Ticket'],
     }),
     updateTicket: build.mutation<IItem, any>({
       query: (body) => ({
@@ -46,14 +46,14 @@ export const ticketAPI = createApi({
         method: 'PUT',
         body: body,
       }),
-      invalidatesTags: ['Iticket'],
+      invalidatesTags: ['Ticket', 'Warehouse'],
     }),
     deleteTicket: build.mutation<IItem, any>({
       query: (id) => ({
         url: `/tickets/deleteTicket/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Iticket'],
+      invalidatesTags: ['Ticket'],
     }),
   }),
 });

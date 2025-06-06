@@ -1,18 +1,17 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
 
+import { IApiResponse } from '../types/IApiResponse';
 import { IWarehouseItem } from '../types/IWarehouse';
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
-interface IWarehouseItemRest<T = string> extends IWarehouseItem {
-  id: T;
-}
+type TWarehouseResponse = IApiResponse<IWarehouseItem>;
 
 export const warehouseAPI = createApi({
   reducerPath: 'warehouse',
   baseQuery: baseQueryCheckAccessToken,
   tagTypes: ['Warehouse'],
   endpoints: (build) => ({
-    createWarehouseItem: build.mutation<IWarehouseItemRest, IWarehouseItem>({
+    createWarehouseItem: build.mutation<IWarehouseItem, IWarehouseItem>({
       query: (body) => ({
         url: `/warehouse`,
         method: 'POST',
@@ -21,7 +20,7 @@ export const warehouseAPI = createApi({
       invalidatesTags: ['Warehouse'],
     }),
 
-    editWarehouseItem: build.mutation<any, IWarehouseItemRest>({
+    editWarehouseItem: build.mutation<any, IWarehouseItem>({
       query: (body) => ({
         url: `/warehouse`,
         method: 'PUT',
@@ -37,17 +36,28 @@ export const warehouseAPI = createApi({
       }),
       invalidatesTags: ['Warehouse'],
     }),
-    getInventoryItemById: build.query<IWarehouseItemRest, string>({
+    getInventoryItemById: build.query<IWarehouseItem, string>({
       query: (warehouse_id) => ({
-        url: `/warehouse/getInventoryItemById`,
+        url: `/warehouse/getInventoryItemsById`,
         params: {
           warehouse_id,
         },
       }),
       providesTags: () => ['Warehouse'],
     }),
-
-    getWarehouseItemsByCompanyId: build.query<IWarehouseItem, undefined>({
+    getInventoryItemsByCompanyIdAndTicketId: build.query<
+      TWarehouseResponse,
+      string
+    >({
+      query: (ticket_id) => ({
+        url: `/warehouse/getInventoryItemsByTicketId`,
+        params: {
+          ticket_id,
+        },
+      }),
+      providesTags: () => ['Warehouse'],
+    }),
+    getWarehouseItemsByCompanyId: build.query<TWarehouseResponse, undefined>({
       query: () => ({
         url: `/warehouse`,
       }),

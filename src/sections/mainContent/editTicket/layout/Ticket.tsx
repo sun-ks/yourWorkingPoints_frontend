@@ -29,6 +29,7 @@ import { makeStyles } from '@mui/styles';
 import { companyAPI } from '../../../../services/CompanyService';
 import { pointAPI } from '../../../../services/PointService';
 import { ticketAPI } from '../../../../services/TicketService';
+import { warehouseAPI } from '../../../../services/WarehouseService';
 import Content from '../Content';
 
 const siteUrl = process.env.REACT_APP_BASE_URL;
@@ -58,7 +59,16 @@ const Ticket: FC = () => {
 
   const { data: ticket } = ticketAPI.useGetTicketQuery(ticket_id);
 
-  const [status, setStatus] = useState();
+  const {
+    data: inventoryData,
+    refetch: refetchSavedInventoryItemsForCurrentTicket,
+  } = warehouseAPI.useGetInventoryItemsByCompanyIdAndTicketIdQuery(ticket_id!, {
+    skip: !ticket_id,
+  });
+
+  const savedInventoryItemsForCurrentTicket = inventoryData?.data;
+
+  const [status, setStatus] = useState<string>();
 
   const [printType, setPrintType] = useState<'qr' | 'order' | false>(false);
 
@@ -172,7 +182,16 @@ const Ticket: FC = () => {
               padding: 1,
             }}
           >
-            <Content ticket={ticket} setStatus={setStatus} />
+            <Content
+              ticket={ticket}
+              setStatus={setStatus}
+              refetchSavedInventoryItemsForCurrentTicket={
+                refetchSavedInventoryItemsForCurrentTicket
+              }
+              savedInventoryItemsForCurrentTicket={
+                savedInventoryItemsForCurrentTicket
+              }
+            />
           </Box>
         </Container>
       </div>
