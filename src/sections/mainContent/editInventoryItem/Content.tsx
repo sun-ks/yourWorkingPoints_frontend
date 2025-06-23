@@ -345,7 +345,7 @@ const Content: FC<ContentProps> = ({ data }) => {
                 return (
                   <TextField
                     sx={{ paddingRight: 1, display: 'flex' }}
-                    inputProps={{ min: 0 }}
+                    inputProps={{ min: 0, step: '0.01' }}
                     type="number"
                     label={`${t('warehouse.fild_purchase_price')} *`}
                     {...field}
@@ -364,7 +364,7 @@ const Content: FC<ContentProps> = ({ data }) => {
                 return (
                   <TextField
                     sx={{ paddingLeft: 1, display: 'flex' }}
-                    inputProps={{ min: 0 }}
+                    inputProps={{ min: 0, step: '0.01' }}
                     type="number"
                     label={`${t('warehouse.field_retail_price')} `}
                     {...field}
