@@ -192,7 +192,8 @@
     "ticket_priority": "Пріорітет",
     "note": "Нотатки",
     "assigned_at": "Назначен на",
-    "alert_delete_title": "Ви справді хочете видалити цю задачу?"
+    "alert_delete_title": "Ви справді хочете видалити цю задачу?",
+    "alert_delete_title_with_parts": "Ця задача використовуе деталі з складу, тому її не можна видалити!"
   },
   "printTicket": {
     "device": "Пристрій",

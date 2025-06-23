@@ -29,12 +29,13 @@ import { IWarehouseItem } from '../../../types/IWarehouse';
 type TWarehouseResponse = IApiResponse<IWarehouseItem>;
 
 export const PartsList: FC<{
+  savedInventoryItemsForCurrentTicket?: IWarehouseItem[];
   availableInventoryItemsForCurrentTicket?: TWarehouseResponse;
   canAddMoreParts: boolean;
   setDelayedRequestGetWarehouseItemsByCompanyId: (val: boolean) => void;
   setValue: UseFormSetValue<IItem>;
   removeField: (val: number) => void;
-  partsFields: string[] ;
+  partsFields: string[];
   getValues: UseFormGetValues<IItem>;
   control: Control<IItem>;
   resetField: UseFormResetField<IItem>;
@@ -43,6 +44,7 @@ export const PartsList: FC<{
   t: (key: string) => string;
   warehouseDataFiltered: IWarehouseItem[] | undefined;
 }> = ({
+  savedInventoryItemsForCurrentTicket,
   availableInventoryItemsForCurrentTicket,
   partsFields,
   getValues,
@@ -57,6 +59,16 @@ export const PartsList: FC<{
   canAddMoreParts,
   setDelayedRequestGetWarehouseItemsByCompanyId,
 }) => {
+  const getUsedInventoryCountForTicket = (
+    warehouseItem?: IWarehouseItem,
+    savedItems: IWarehouseItem[] = [],
+  ): number => {
+    if (!warehouseItem) return 0;
+
+    const matchedItem = savedItems.find((item) => item.id === warehouseItem.id);
+    return matchedItem?.used_count_this_ticket ?? 0;
+  };
+
   return (
     <>
       {availableInventoryItemsForCurrentTicket?.data &&
@@ -65,6 +77,18 @@ export const PartsList: FC<{
             availableInventoryItemsForCurrentTicket.data.find(
               (item) => item.id === getValues(`parts.${index}.id`),
             );
+
+          const used_count_this_ticket = getUsedInventoryCountForTicket(
+            currentWarehouseData,
+            savedInventoryItemsForCurrentTicket,
+          );
+
+          const quantityUsed = currentWarehouseData?.quantity_used ?? 0;
+
+          const quantity = currentWarehouseData?.quantity ?? 0;
+
+          const quantityMax =
+            quantity - (quantityUsed - used_count_this_ticket);
 
           return (
             <Grid
@@ -88,6 +112,14 @@ export const PartsList: FC<{
                       options={warehouseDataFiltered || []}
                       getOptionLabel={(option) => option.name}
                       renderOption={(props, option) => {
+                        const quantityMax =
+                          option.quantity -
+                          (option.quantity_used -
+                            getUsedInventoryCountForTicket(
+                              option,
+                              savedInventoryItemsForCurrentTicket,
+                            ));
+
                         if (option.quantity < 1) {
                           return null;
                         }
@@ -99,8 +131,8 @@ export const PartsList: FC<{
                               sx={{ pl: 1 }}
                               variant="caption"
                             >
-                              ({option.quantity}{' '}
-                              {t('form.available').toLowerCase()})
+                              ({quantityMax} {t('form.available').toLowerCase()}
+                              )
                             </Typography>
                           </li>
                         );
@@ -108,7 +140,9 @@ export const PartsList: FC<{
                       onChange={(_, newValue) => {
                         controllerField.onChange(newValue?.id);
 
-                        const currentCount = getValues(`parts.${index}.count`);
+                        const currentCount = getValues(
+                          `parts.${index}.used_count_this_ticket`,
+                        );
 
                         setValue(
                           `parts.${index}.price_at_use`,
@@ -119,7 +153,7 @@ export const PartsList: FC<{
                           currentCount !== undefined &&
                           currentCount !== null
                         ) {
-                          resetField(`parts.${index}.count`, {
+                          resetField(`parts.${index}.used_count_this_ticket`, {
                             defaultValue: 1,
                           });
                         }
@@ -140,7 +174,7 @@ export const PartsList: FC<{
               <Grid item xs={2} sm={2}>
                 <Controller
                   control={control}
-                  name={`parts.${index}.count`}
+                  name={`parts.${index}.used_count_this_ticket`}
                   rules={{
                     required: `${t('form.required')}`,
                   }}
@@ -151,17 +185,21 @@ export const PartsList: FC<{
                       type="number"
                       label="Count"
                       fullWidth
-                      error={!!errors?.parts && !!errors?.parts[index]?.count}
-                      helperText={errors?.parts?.[index]?.count?.message}
+                      error={
+                        !!errors?.parts &&
+                        !!errors?.parts[index]?.used_count_this_ticket
+                      }
+                      helperText={
+                        errors?.parts?.[index]?.used_count_this_ticket?.message
+                      }
                       inputProps={{
                         min: 1,
-                        max: currentWarehouseData?.quantity,
+                        max: quantityMax,
                       }}
                     />
                   )}
                 />
               </Grid>
-
               <Grid item xs={2} sm={2} sx={{ display: 'none' }}>
                 <Controller
                   control={control}

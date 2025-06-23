@@ -48,7 +48,7 @@ export const ticketAPI = createApi({
       }),
       invalidatesTags: ['Ticket', 'Warehouse'],
     }),
-    deleteTicket: build.mutation<IItem, any>({
+    deleteTicket: build.mutation<any, any>({
       query: (id) => ({
         url: `/tickets/deleteTicket/${id}`,
         method: 'DELETE',

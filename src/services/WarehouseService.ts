@@ -38,7 +38,7 @@ export const warehouseAPI = createApi({
     }),
     getInventoryItemById: build.query<IWarehouseItem, string>({
       query: (warehouse_id) => ({
-        url: `/warehouse/getInventoryItemsById`,
+        url: `/warehouse/getInventoryItemById`,
         params: {
           warehouse_id,
         },

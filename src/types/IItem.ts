@@ -20,7 +20,7 @@ export interface IItem {
   assigned_at: string | null;
   guarantee_till: string | number | Date | null;
   parts?: {
-    count?: number;
+    used_count_this_ticket?: number;
     id: string;
     price_at_use?: number;
   }[];

@@ -12,5 +12,6 @@ export interface IWarehouseItem {
   received_date: Date;
   quantity: number;
   description: string;
-  count?: number;
+  used_count_this_ticket?: number;
+  quantity_used: number;
 }

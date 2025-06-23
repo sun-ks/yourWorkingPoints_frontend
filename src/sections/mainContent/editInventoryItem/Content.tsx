@@ -423,8 +423,8 @@ const Content: FC<ContentProps> = ({ data }) => {
                   setTimeout(() => {
                     navigate(`/warehouse`);
                   }, REDIRECT_TIMEOUT);
-                } catch (e) {
-                  showSnackbar('An error occurred', true);
+                } catch (error: any) {
+                  showSnackbar(error?.data?.error, true);
                 }
               }}
               isOpen={openDeleteAlertDialog}

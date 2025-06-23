@@ -13,7 +13,6 @@ const mutex = new Mutex();
 const baseUrl = process.env.REACT_APP_API_URL;
 
 function setBaseUrl() {
-  console.log('baseUrl', baseUrl);
   return baseUrl;
 }
 

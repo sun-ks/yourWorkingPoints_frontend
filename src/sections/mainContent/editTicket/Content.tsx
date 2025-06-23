@@ -1,5 +1,4 @@
 import {
-  Controller,
   SubmitHandler,
   useFieldArray,
   useForm,
@@ -10,12 +9,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { LoadingButton } from '@mui/lab';
-import { Box, Grid, Paper, Stack } from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
@@ -33,7 +31,9 @@ import { selectCurrentUser } from '../../../store/reducers/AuthSlice';
 import { IItem } from '../../../types/IItem';
 import { IWarehouseItem } from '../../../types/IWarehouse';
 import { PartsList } from './PartsList';
+import { TicketNoteAndPaymentFields } from './TicketNoteAndPaymentFields';
 import { TopFields } from './TopFields';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -68,15 +68,20 @@ const Content: FC<{
   const [
     delayedRequestGetWarehouseItemsByCompanyId,
     setDelayedRequestGetWarehouseItemsByCompanyId,
-  ] = useState(
-    savedInventoryItemsForCurrentTicket &&
-      savedInventoryItemsForCurrentTicket.length > 0,
-  );
+  ] = useState(false);
 
-  const { data: availableInventoryItemsForCurrentTicket } =
-    warehouseAPI.useGetWarehouseItemsByCompanyIdQuery(undefined, {
-      skip: delayedRequestGetWarehouseItemsByCompanyId,
-    });
+  useEffect(() => {
+    if (savedInventoryItemsForCurrentTicket) {
+      setDelayedRequestGetWarehouseItemsByCompanyId(false);
+    }
+  }, [savedInventoryItemsForCurrentTicket]);
+
+  const {
+    data: availableInventoryItemsForCurrentTicket,
+    refetch: refetchAvailableInventoryItemsForCurrentTicket,
+  } = warehouseAPI.useGetWarehouseItemsByCompanyIdQuery(undefined, {
+    skip: delayedRequestGetWarehouseItemsByCompanyId,
+  });
 
   const [partsFields, setPartsFields] = useState<string[]>([]);
 
@@ -87,7 +92,10 @@ const Content: FC<{
       savedInventoryItemsForCurrentTicket.forEach((item, index) => {
         setValue(`parts.${index}.id`, item.id);
 
-        setValue(`parts.${index}.count`, item.count);
+        setValue(
+          `parts.${index}.used_count_this_ticket`,
+          item.used_count_this_ticket,
+        );
 
         setPartsFields((prev) => [...prev, uuidv4()]);
       });
@@ -130,11 +138,11 @@ const Content: FC<{
     name: 'parts',
   });
 
-const status = watch('status');
+  const status = watch('status');
 
-useEffect(() => {
-  setStatus(status);
-}, [status]);
+  useEffect(() => {
+    setStatus(status);
+  }, [status]);
 
   useEffect(() => {
     if (ticket) {
@@ -153,6 +161,13 @@ useEffect(() => {
     }
   }, [status]);
 
+  const hasSavedInventoryItemsForCurrentTicket = useMemo(() => {
+    return (
+      savedInventoryItemsForCurrentTicket &&
+      savedInventoryItemsForCurrentTicket.length > 0
+    );
+  }, [savedInventoryItemsForCurrentTicket]);
+
   const watchedParts = useWatch({ control, name: 'parts' });
 
   const warehouseDataFiltered = useMemo(() => {
@@ -161,10 +176,7 @@ useEffect(() => {
     return availableInventoryItemsForCurrentTicket.data.filter((item) => {
       return !watchedParts?.some((part) => part?.id === item.id);
     });
-  }, [
-    watchedParts,
-    availableInventoryItemsForCurrentTicket,
-  ]);
+  }, [watchedParts, availableInventoryItemsForCurrentTicket]);
 
   const dataFromError: any =
     errorUpdateTicket && 'data' in errorUpdateTicket
@@ -182,6 +194,8 @@ useEffect(() => {
         ticket_id: ticket?.ticket_id,
       }).unwrap();
 
+      await refetchAvailableInventoryItemsForCurrentTicket();
+
       await refetchSavedInventoryItemsForCurrentTicket();
 
       showSnackbar(t('update_successful'), false);
@@ -191,25 +205,33 @@ useEffect(() => {
     }
   };
 
-  let workersList = [
-    {
-      user_id: null,
-      name: 'None',
-    },
-  ];
+  const workersList = useMemo(() => {
+    return [
+      {
+        user_id: null,
+        name: 'None',
+      },
+      ...(workers ?? []),
+    ];
+  }, [workers]);
 
-  if (workers) workersList = [...workersList, ...workers];
-
-  const handleDeleteTicket = async () => {
+  const handleDeleteTicket = useCallback(async () => {
     setOpenDeleteAlertDialog(false);
-    await deleteTicket(ticket?.ticket_id).unwrap();
-    navigate(`/tickets`);
-  };
 
-  const canAddMoreParts =
-    !availableInventoryItemsForCurrentTicket?.data ||
-    availableInventoryItemsForCurrentTicket.data.length > partsFields.length;
+    try {
+      await deleteTicket(ticket?.ticket_id).unwrap();
+      navigate(`/tickets`);
+    } catch (error: any) {
+      showSnackbar(error?.data?.error, true);
+    }
+  }, [ticket?.ticket_id, deleteTicket, navigate]);
 
+  const canAddMoreParts = useMemo(() => {
+    return (
+      !availableInventoryItemsForCurrentTicket?.data ||
+      availableInventoryItemsForCurrentTicket.data.length > partsFields.length
+    );
+  }, [availableInventoryItemsForCurrentTicket, partsFields]);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h6" gutterBottom margin={4}>
@@ -217,20 +239,23 @@ useEffect(() => {
       </Typography>
 
       <Stack spacing={3} sx={{ textAlign: 'left', marginBottom: 4 }}>
-      <TopFields
-        t={t}
-        control={control}
-        ticket={ticket}
-        status={status}
-        ticketStatuses={ticketStatuses}
-        ticketPriorities={ticketPriorities}
-        points={points}
-        workersList={workersList}
-        Item={Item}
-      />
+        <TopFields
+          t={t}
+          control={control}
+          ticket={ticket}
+          status={status}
+          ticketStatuses={ticketStatuses}
+          ticketPriorities={ticketPriorities}
+          points={points}
+          workersList={workersList}
+          Item={Item}
+        />
         <div></div>
 
         <PartsList
+          savedInventoryItemsForCurrentTicket={
+            savedInventoryItemsForCurrentTicket
+          }
           availableInventoryItemsForCurrentTicket={
             availableInventoryItemsForCurrentTicket
           }
@@ -250,54 +275,7 @@ useEffect(() => {
           }
         />
 
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={12}>
-            <Controller
-              control={control}
-              name="note"
-              render={({ field }) => {
-                return (
-                  <TextField
-                    fullWidth
-                    label={t('editTicket.note')}
-                    multiline
-                    variant="outlined"
-                    size="small"
-                    rows={4}
-                    {...field}
-                    error={!!errors.note}
-                    helperText={errors.note?.message}
-                  />
-                );
-              }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container spacing={1}>
-          <Grid item xs={4} sm={4}>
-            <Box>
-              <Controller
-                control={control}
-                name="last_part_payment"
-                render={({ field }) => {
-                  return (
-                    <TextField
-                      label={t('editTicket.finish_payment')}
-                      {...field}
-                      type="number"
-                      variant="outlined"
-                      size="small"
-                      error={!!errors.last_part_payment}
-                      helperText={errors.last_part_payment?.message}
-                      inputProps={{ min: 0 }}
-                    />
-                  );
-                }}
-              />
-            </Box>
-          </Grid>
-        </Grid>
+        <TicketNoteAndPaymentFields control={control} errors={errors} t={t} />
 
         {isError && <Typography color="error">{dataFromError}</Typography>}
 
@@ -328,7 +306,12 @@ useEffect(() => {
                 handleClose={() => setOpenDeleteAlertDialog(false)}
                 handleClickOk={handleDeleteTicket}
                 isOpen={openDeleteAlertDialog}
-                title={t('editTicket.alert_delete_title')}
+                showSubmitBtn={!hasSavedInventoryItemsForCurrentTicket}
+                title={
+                  !hasSavedInventoryItemsForCurrentTicket
+                    ? t('editTicket.alert_delete_title')
+                    : t('editTicket.alert_delete_title_with_parts')
+                }
               />
             </>
           )}
