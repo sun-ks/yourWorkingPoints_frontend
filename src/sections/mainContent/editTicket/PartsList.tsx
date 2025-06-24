@@ -161,7 +161,7 @@ export const PartsList: FC<{
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          label="Select Part"
+                          label={t('editTicket.select_part')}
                           error={!!errors?.parts?.[index]?.id}
                           helperText={errors?.parts?.[index]?.id?.message}
                         />
@@ -183,7 +183,7 @@ export const PartsList: FC<{
                       size="small"
                       {...controllerField}
                       type="number"
-                      label="Count"
+                      label={t('editTicket.count')}
                       fullWidth
                       error={
                         !!errors?.parts &&

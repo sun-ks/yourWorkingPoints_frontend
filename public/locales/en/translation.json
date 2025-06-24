@@ -194,7 +194,9 @@
     "note": "Note",
     "assigned_at": "Assigned To",
     "alert_delete_title": "Do you really want to delete this ticket?",
-    "alert_delete_title_with_parts": "This ticket has parts from the warehouse, so it cannot be deleted!"
+    "alert_delete_title_with_parts": "This ticket has parts from the warehouse, so it cannot be deleted!",
+    "select_part": "Select Part",
+    "count": "Count"
   },
   "printTicket": {
     "device": "Device",
