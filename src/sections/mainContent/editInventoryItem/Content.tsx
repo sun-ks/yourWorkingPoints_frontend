@@ -104,7 +104,7 @@ const Content: FC<ContentProps> = ({ data }) => {
         setBlockSubmitBtn(false);
       }, REDIRECT_TIMEOUT);
     } catch (err: any) {
-      const dataFromError = err?.data || 'An error occurred';
+      const dataFromError = err?.data.error || 'An error occurred';
       showSnackbar(dataFromError, true);
     }
   };
@@ -325,7 +325,7 @@ const Content: FC<ContentProps> = ({ data }) => {
                 type="number"
                 label={`${t('warehouse.field_quantity')} *`}
                 {...field}
-                inputProps={{ min: 1 }}
+                inputProps={{ min: data.quantity_used }}
                 error={!!errors.quantity}
                 helperText={errors.quantity?.message}
               />
