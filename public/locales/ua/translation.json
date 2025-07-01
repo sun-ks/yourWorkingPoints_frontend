@@ -52,7 +52,8 @@
     "field_retail_price": "Роздрібна ціна",
     "field_warranty": "Гарантія (в днях)",
     "received_date": "Дата отримання",
-    "field_quantity": "Кількість (в штуках)",
+    "field_quantity": "Загальна кількість (в штуках)",
+    "field_used_quantity": "Витрачена кількість (в штуках)",
     "description": "Опис",
     "category": "Категорія",
     "supplier": "Постачальник",
@@ -60,7 +61,9 @@
     "btn_add": "Додати",
     "btn_edit": "Редагувати",
     "delete_warehouse_item": "Видалити цей товар",
-    "alert_delete_title": "Ви справді хочете видалити цей товар?"
+    "alert_delete_title": "Ви справді хочете видалити цей товар?",
+    "used_in_tickets": "Цю запчастину було використано в цих задачах:",
+    "quantity": "Кількість"
   },
   "statuses":{
     "inbox": "Взято на ремонт",
