@@ -52,7 +52,8 @@
     "field_retail_price": "Retail price",
     "field_warranty": "Warranty (days)",
     "received_date": "Received date",
-    "field_quantity": "Quantity (in pieces)",
+    "field_quantity": "Total quantity (in pieces)",
+    "field_used_quantity": "Used quantity (in pieces)",
     "description": "Description",
     "category": "Category",
     "supplier": "Supplier",
@@ -60,7 +61,9 @@
     "btn_add": "Add",
     "btn_edit": "Edit",
     "delete_warehouse_item": "Delete Warehouse Item",
-    "alert_delete_title": "Do you really want to delete this Warehouse Item?"
+    "alert_delete_title": "Do you really want to delete this Warehouse Item?",
+    "used_in_tickets": "This spare part was used in these tasks:",
+    "quantity": "Quantity"
   },
   "statuses": {
     "inbox": "Inbox",

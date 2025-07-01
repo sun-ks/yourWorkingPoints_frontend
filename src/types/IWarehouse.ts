@@ -14,4 +14,5 @@ export interface IWarehouseItem {
   description: string;
   used_count_this_ticket?: number;
   quantity_used: number;
+  used_in_tickets?: any[];
 }
