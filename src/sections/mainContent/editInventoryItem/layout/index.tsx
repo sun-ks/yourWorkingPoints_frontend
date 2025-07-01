@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Box, Container, Tooltip } from '@mui/material';
@@ -24,7 +24,14 @@ const EditInventoryItem: FC = () => {
     ? warehouseAPI.useGetInventoryItemByIdQuery(warehouse_id)
     : undefined;
 
-  const inventoryItem = queryResult?.data ? queryResult.data : null;
+  const inventoryItem = queryResult?.data ?? null;
+  const refetch = queryResult?.refetch;
+
+  useEffect(() => {
+    if (warehouse_id) {
+      refetch?.();
+    }
+  }, [warehouse_id]);
 
   if (!inventoryItem) return null;
 

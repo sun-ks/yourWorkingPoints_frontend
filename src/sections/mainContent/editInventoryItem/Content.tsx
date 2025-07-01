@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 
 import { LoadingButton } from '@mui/lab';
 import { Stack } from '@mui/material';
@@ -22,6 +22,7 @@ import { pointAPI } from '../../../services/PointService';
 import { warehouseAPI } from '../../../services/WarehouseService';
 import { selectCurrentUser } from '../../../store/reducers/AuthSlice';
 import { IWarehouseItem } from '../../../types/IWarehouse';
+import { UsedInventoryItems } from './usedInventoryItems';
 
 interface ContentProps {
   data: IWarehouseItem;
@@ -29,12 +30,15 @@ interface ContentProps {
 
 const Content: FC<ContentProps> = ({ data }) => {
   const currentUser = useSelector(selectCurrentUser);
-
   const isOwner = currentUser?.userInfo.role === 'owner';
   const REDIRECT_TIMEOUT = 2000;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: points } = pointAPI.useGetPointsQuery('');
+
+  const usedInTickets = useMemo(() => {
+    return data.used_in_tickets;
+  }, [data]);
 
   const [blockSubmitBtn, setBlockSubmitBtn] = useState(false);
   const [openDeleteAlertDialog, setOpenDeleteAlertDialog] = useState(false);
@@ -43,6 +47,8 @@ const Content: FC<ContentProps> = ({ data }) => {
     warehouseAPI.useEditWarehouseItemMutation();
 
   const [deleteWarehouseItem] = warehouseAPI.useDeleteWarehouseItemMutation();
+
+  const quantityUsed = data.quantity_used;
 
   const {
     reset,
@@ -262,7 +268,7 @@ const Content: FC<ContentProps> = ({ data }) => {
         />
 
         <Grid container spacing={0}>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <Controller
               control={control}
               name="warranty"
@@ -281,7 +287,7 @@ const Content: FC<ContentProps> = ({ data }) => {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8}>
             <Controller
               name="received_date"
               control={control}
@@ -332,9 +338,16 @@ const Content: FC<ContentProps> = ({ data }) => {
             );
           }}
         />
+        {quantityUsed > 0 && (
+          <UsedInventoryItems
+            t={t}
+            quantityUsed={quantityUsed}
+            usedInTickets={usedInTickets}
+          />
+        )}
 
         <Grid container spacing={0}>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <Controller
               control={control}
               name="purchase_price"
@@ -356,7 +369,7 @@ const Content: FC<ContentProps> = ({ data }) => {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <Controller
               control={control}
               name="retail_price"
