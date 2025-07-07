@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 
 import UserMenu from './UserMenu';
 
@@ -20,16 +22,26 @@ interface HeaderProps {
   isAuthPage?: boolean;
 }
 
+const useStyles = makeStyles(() => ({
+  languageSwitch: { fontSize: 14, color: lightColor },
+  languageSwitchItem: {
+    cursor: 'pointer',
+    padding: '0 2px',
+    '&:hover': {
+      color: 'white',
+    },
+  },
+  active: {
+    fontWeight: 'bold !important',
+    color: 'white',
+  },
+}));
+
 export default function Header(props: HeaderProps) {
   const { onDrawerToggle, isAuthPage = false } = props;
+  const classes = useStyles();
 
   const { i18n, t } = useTranslation();
-
-  const handleLanguageChange = (evt: any) => {
-    const lang = evt.target.value;
-    // setLanguage(lang);
-    i18n.changeLanguage(lang);
-  };
 
   return (
     <React.Fragment>
@@ -59,8 +71,7 @@ export default function Header(props: HeaderProps) {
                 {t('company_name')}
               </Grid>
             )}
-            <Grid item xs />
-            <Grid item>
+            <Grid item xs sx={{ textAlign: 'left' }}>
               <Link
                 href="https://buymeacoffee.com/storozhukud"
                 target="_blank"
@@ -74,15 +85,33 @@ export default function Header(props: HeaderProps) {
                 }}
                 rel="noopener noreferrer"
               >
-                Donate For Us
+                Make a contribution
               </Link>
             </Grid>
+            <Grid item></Grid>
 
-            <Grid item>
-              <select value={i18n.language} onChange={handleLanguageChange}>
-                <option value="en">en</option>
-                <option value="ua">ua</option>
-              </select>
+            <Grid item className={classes.languageSwitch}>
+              <Typography
+                className={`${classes.languageSwitchItem} ${i18n.language === 'en' ? classes.active : ''}`}
+                component="span"
+                variant="inherit"
+                onClick={() => {
+                  i18n.changeLanguage('en');
+                }}
+              >
+                En
+              </Typography>
+              /
+              <Typography
+                className={`${classes.languageSwitchItem} ${i18n.language === 'ua' ? classes.active : ''}`}
+                component="span"
+                variant="inherit"
+                onClick={() => {
+                  i18n.changeLanguage('ua');
+                }}
+              >
+                Ua
+              </Typography>
             </Grid>
 
             {!isAuthPage && (
