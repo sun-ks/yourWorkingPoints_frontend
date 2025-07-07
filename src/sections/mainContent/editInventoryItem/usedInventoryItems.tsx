@@ -39,7 +39,11 @@ export const UsedInventoryItems: FC<{
             {usedInTickets &&
               usedInTickets.map((ticket, index) => (
                 <Typography
-                  sx={{ fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+                  sx={{
+                    fontSize: 14,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                  }}
                   onClick={() => navigate(`/items/${ticket.ticket_id}`)}
                   key={index}
                   component="div"
