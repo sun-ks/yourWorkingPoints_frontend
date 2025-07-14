@@ -1,6 +1,5 @@
-import { TFunction } from 'i18next';
 
-export const getTicketStatuses = (t: TFunction) => [
+export const getTicketStatuses = (t: (key: string) => string ) => [
   { value: 'inbox', text: t('statuses.inbox') },
   { value: 'in progress', text: t('statuses.in_progress') },
   { value: 'ask client', text: t('statuses.ask_client') },
@@ -10,7 +9,7 @@ export const getTicketStatuses = (t: TFunction) => [
   { value: 'hold', text: t('statuses.hold') },
 ];
 
-export const getTicketPriorities = (t: TFunction) => [
+export const getTicketPriorities = (t: (key: string) => string) => [
   { value: 'low', text: t('priorities.low') },
   { value: 'high', text: t('priorities.high') },
   { value: 'medium', text: t('priorities.medium') },
