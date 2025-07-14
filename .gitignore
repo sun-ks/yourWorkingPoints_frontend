@@ -75,3 +75,5 @@ yarn-error.log*
 .firebaserc
 .github/
 firebase.json
+
+*.log
