@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { SnackbarCloseReason } from '@mui/material';
 
@@ -12,7 +12,7 @@ interface SnackbarConfig {
 
 interface UseSnackbarResult {
   showSnackbar: (message: string, isError?: boolean, open?: boolean) => void;
-  SnackbarComponent: () => JSX.Element;
+  SnackbarComponent: () => React.JSX.Element;
 }
 
 export const useSnackbar = (): UseSnackbarResult => {
@@ -40,7 +40,7 @@ export const useSnackbar = (): UseSnackbarResult => {
     [],
   );
 
-  const SnackbarComponent = (): JSX.Element => {
+  const SnackbarComponent = (): React.JSX.Element => {
     return (
       <CustomSnackbar
         open={snackbarConfig.open}
