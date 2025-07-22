@@ -37,7 +37,7 @@ const Content: FC = () => {
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     const { data } = (await inviteUser(args)) as { data: any };
 
-    setWorker(data);
+    setWorker(data); 
   };
 
   return (
@@ -130,11 +130,14 @@ const Content: FC = () => {
           }}
         />
 
-        {isError && <Typography color="error">{dataFromError}</Typography>}
+        {isError && dataFromError?.message && (
+  <Typography color="error">{dataFromError.message}</Typography>
+)}
 
-        {worker?.email && (
+
+        {worker?.success && (
           <Typography color="green">
-            Invitation sent to "{worker?.email}" successfully!
+            Invitation sent to "{worker?.body.email}" successfully!
           </Typography>
         )}
 
