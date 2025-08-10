@@ -11,10 +11,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { companyAPI } from '../../../services/CompanyService';
-import { selectAccessToken } from '../../../store/reducers/AuthSlice';
-import { IPoint } from '../../../types/IPoint';
-import getAuthorizationHeaders from '../../../utils/api/getAuthorizationHeaders';
-
+import { isOwner } from '../../../store/reducers/AuthSlice';
 interface IFormInputs {
   company_name: string;
 }
@@ -30,6 +27,8 @@ const Content: FC = () => {
 
   const [updateCompany, { isError, error: errorupdatePoint }] =
     companyAPI.useUpdateCompanyMutation();
+  
+  const isOwnerVal = useSelector(isOwner);
 
   const {
     handleSubmit,
@@ -100,7 +99,7 @@ const Content: FC = () => {
           <Typography color="green">{t('updated')}</Typography>
         )}
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained">
+        <LoadingButton fullWidth size="large" type="submit" variant="contained" disabled={!isOwnerVal}>
           {t('company.btn_edit')}
         </LoadingButton>
       </Stack>

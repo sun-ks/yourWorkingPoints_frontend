@@ -40,7 +40,6 @@ const Clients: FC = () => {
                 to={`/addClient`}
                 variant="contained"
                 sx={{ mr: 1 }}
-                disabled={!isOwnerVal}
               >
                 {t('clients.add_client')}
               </Button>

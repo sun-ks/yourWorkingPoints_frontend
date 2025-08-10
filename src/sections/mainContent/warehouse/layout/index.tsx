@@ -40,7 +40,6 @@ const Warehouse: FC = () => {
                 to={`/addInventoryItem`}
                 variant="contained"
                 sx={{ mr: 1 }}
-                disabled={!isOwnerVal}
               >
                 {t('warehouse.add_inventory_item')}
               </Button>

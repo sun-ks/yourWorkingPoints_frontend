@@ -12,6 +12,8 @@ import {
   GridValueGetterParams,
 } from '@mui/x-data-grid';
 
+import { CustomToolbar } from './CustomToolbar';
+
 const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const navigate = useNavigate();
 
@@ -87,13 +89,7 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
               disableColumnFilter
               disableColumnSelector
               disableDensitySelector
-              slots={{ toolbar: GridToolbar }}
-              slotProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 500 },
-                },
-              }}
+              slots={{ toolbar: CustomToolbar }}
               onRowClick={handleRowClick}
             />
           </Box>
