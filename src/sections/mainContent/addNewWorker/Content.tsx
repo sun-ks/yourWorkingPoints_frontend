@@ -37,7 +37,7 @@ const Content: FC = () => {
   const onSubmit: SubmitHandler<IFormInputs> = async (args) => {
     const { data } = (await inviteUser(args)) as { data: any };
 
-    setWorker(data); 
+    setWorker(data);
   };
 
   return (
@@ -131,9 +131,8 @@ const Content: FC = () => {
         />
 
         {isError && dataFromError?.message && (
-  <Typography color="error">{dataFromError.message}</Typography>
-)}
-
+          <Typography color="error">{dataFromError.message}</Typography>
+        )}
 
         {worker?.success && (
           <Typography color="green">

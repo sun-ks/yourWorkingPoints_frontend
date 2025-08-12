@@ -1,4 +1,14 @@
 import { createTheme } from '@mui/material/styles';
+import { DataGridProps } from '@mui/x-data-grid';
+
+declare module '@mui/material/styles' {
+  interface Components {
+    MuiDataGrid?: {
+      defaultProps?: Partial<DataGridProps>;
+      styleOverrides?: Record<string, any>;
+    };
+  }
+}
 
 let theme = createTheme({
   palette: {
@@ -53,6 +63,39 @@ theme = {
             boxShadow: 'none',
           },
         },
+      },
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          border: 'none',
+          fontSize: 14,
+          '& [data-grid-priority="high"]': {
+            color: theme.palette.error.main,
+          },
+          '& [data-grid-priority="medium"]': {
+            color: theme.palette.info.main,
+          },
+          '& [data-grid-priority="low"]': {
+            color: theme.palette.grey[700],
+          },
+          '& [data-grid-status="ask client"]': {
+            color: theme.palette.error.main,
+          },
+          '& [data-grid-status="in progress"]': {
+            color: theme.palette.success.light,
+          },
+          '& [data-grid-status="done"]': {
+            color: 'orange',
+          },
+          '& [data-grid-status="paid"]': {
+            color: theme.palette.success.main,
+            fontWeight: theme.typography.fontWeightBold,
+          },
+        },
+      },
+      defaultProps: {
+        pageSizeOptions: [10, 25, 50],
       },
     },
     MuiTabs: {

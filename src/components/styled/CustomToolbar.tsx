@@ -1,11 +1,13 @@
+import { useSelector } from 'react-redux';
+
 import React, { FC } from 'react';
+
 import {
   GridToolbarContainer,
-  GridToolbarQuickFilter,
   GridToolbarExport,
+  GridToolbarQuickFilter,
 } from '@mui/x-data-grid';
 
-import { useSelector } from 'react-redux';
 import { isOwner } from '../../store/reducers/AuthSlice';
 
 export const CustomToolbar: FC = () => {

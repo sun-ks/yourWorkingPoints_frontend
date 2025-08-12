@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import { companyAPI } from '../../../services/CompanyService';
 import { isOwner } from '../../../store/reducers/AuthSlice';
+
 interface IFormInputs {
   company_name: string;
 }
@@ -27,7 +28,7 @@ const Content: FC = () => {
 
   const [updateCompany, { isError, error: errorupdatePoint }] =
     companyAPI.useUpdateCompanyMutation();
-  
+
   const isOwnerVal = useSelector(isOwner);
 
   const {
@@ -99,7 +100,13 @@ const Content: FC = () => {
           <Typography color="green">{t('updated')}</Typography>
         )}
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" disabled={!isOwnerVal}>
+        <LoadingButton
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+          disabled={!isOwnerVal}
+        >
           {t('company.btn_edit')}
         </LoadingButton>
       </Stack>

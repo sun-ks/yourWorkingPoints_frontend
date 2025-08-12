@@ -1,5 +1,4 @@
-
-export const getTicketStatuses = (t: (key: string) => string ) => [
+export const getTicketStatuses = (t: (key: string) => string) => [
   { value: 'inbox', text: t('statuses.inbox') },
   { value: 'in progress', text: t('statuses.in_progress') },
   { value: 'ask client', text: t('statuses.ask_client') },
