@@ -172,7 +172,6 @@ const Content: FC = () => {
 
         <LoadingButton
           title={!isOwnerVal ? t('only_for_owner') : ''}
-          disabled={!isOwnerVal}
           fullWidth
           size="large"
           type="submit"

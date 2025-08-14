@@ -21,7 +21,7 @@ const AddNewClient: FC = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{`YWP | ${t('worker.add_worker')}`}</title>
+        <title>{`YWP | ${t('clients.add_client')}`}</title>
       </Helmet>
       <AppBar
         position="static"

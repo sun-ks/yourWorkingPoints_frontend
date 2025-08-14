@@ -5,18 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
 import { Box, Typography } from '@mui/material';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import { styled } from '@mui/material/styles';
 import {
   DataGrid,
   GridColDef,
   GridEventListener,
-  GridToolbar,
+  GridToolbarExport,
   GridValueGetterParams,
 } from '@mui/x-data-grid';
+
+import { CustomToolbar } from './CustomToolbar';
 
 const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   color: theme.palette.error.light,
@@ -115,13 +113,7 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               disableColumnFilter
               disableColumnSelector
               disableDensitySelector
-              slots={{ toolbar: GridToolbar }}
-              slotProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 500 },
-                },
-              }}
+              slots={{ toolbar: CustomToolbar }}
               onRowClick={handleRowClick}
             />
           </Box>

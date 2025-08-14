@@ -24,6 +24,12 @@ const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   marginBottom: 8,
 }));
 
+function getPrintStatus(status: string, t: any): string {
+  if (status === 'in progress') status = 'in_progress';
+  else if (status === 'ask client') status = 'ask_client';
+  return t(`statuses.${status}`);
+}
+
 const StyledDataGridTckets: FC<any> = ({ tickets, error, isLoading }) => {
   const navigate = useNavigate();
 
@@ -43,11 +49,9 @@ const StyledDataGridTckets: FC<any> = ({ tickets, error, isLoading }) => {
       headerName: t('ticketsColumns.status'),
       width: 150,
       editable: true,
-      valueGetter: (params: GridValueGetterParams) => {
-        let status = params.row.status;
-        if (status === 'in progress') status = 'in_progress';
-        else if (status === 'ask client') status = 'ask_client';
-        return t(`statuses.${status}`);
+      renderCell: (params) => {
+        const value = getPrintStatus(params.row.status, t);
+        return <div data-grid-status={`${params.row.status}`}>{value}</div>;
       },
     },
     {
@@ -57,6 +61,10 @@ const StyledDataGridTckets: FC<any> = ({ tickets, error, isLoading }) => {
       editable: true,
       valueGetter: (params: GridValueGetterParams) =>
         t(`priorities.${params.row.priority}`),
+      renderCell: (params) => {
+        const value = t(`priorities.${params.row.priority}`);
+        return <div data-grid-priority={`${params.row.priority}`}>{value}</div>;
+      },
     },
     {
       field: 'assigned_at',
