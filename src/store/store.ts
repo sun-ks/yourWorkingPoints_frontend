@@ -2,12 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
 import services from '../services/index';
 import authReducer from './reducers/AuthSlice';
 import dataGridOrderReducer from './reducers/dataGridOrder/DataGridOrderSlice';
 import testReducer from './reducers/TodosSlice';
-
+import { migrations } from './migrations';
+import { createMigrate } from 'redux-persist';
 //defaults to localStorage for web
 
 const {
@@ -39,6 +39,7 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['testReducer', 'authReducer', 'dataGridOrderReducer'], 
+  migrate: createMigrate(migrations, { debug: false }),
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -60,7 +61,9 @@ export const setupStore = (initialState = {}) => {
     reducer: persistedReducer,
     preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
+      getDefaultMiddleware({
+      serializableCheck: false, // avoid errs with non-serializable
+    })
         .concat(loggingMiddleware)
         .concat(postAPI.middleware)
         .concat(userAPI.middleware)
