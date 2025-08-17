@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import StyledDataGridUsers from '../../../components/styled/StyledDataGridUsers';
+import StyledDataGridUsers from '../../../components/styled/dataGrid/StyledDataGridUsers';
 import { userAPI } from '../../../services/UserService';
 
 const Content: FC = () => {

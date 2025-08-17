@@ -7,7 +7,14 @@ export interface IItem {
   client_last_name?: string;
   client_name?: string;
   client_phone: string;
-  status: 'inbox' | 'in progress' | 'done' | 'paid' | 'cancelled' | 'hold';
+  status:
+    | 'inbox'
+    | 'in progress'
+    | 'done'
+    | 'paid'
+    | 'cancelled'
+    | 'hold'
+    | 'ask client';
   email: string;
   client_email?: string;
   device_sn: string;

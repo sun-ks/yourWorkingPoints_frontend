@@ -1,8 +1,8 @@
-import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -10,11 +10,13 @@ import {
   DataGrid,
   GridColDef,
   GridEventListener,
-  GridToolbarExport,
   GridValueGetterParams,
 } from '@mui/x-data-grid';
 
-import { CustomToolbar } from './CustomToolbar';
+import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
+import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { selectUsersDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { CustomToolbar } from '../CustomToolbar';
 
 const StyledHeaderAskClient = styled('span')(({ theme }) => ({
   color: theme.palette.error.light,
@@ -26,11 +28,11 @@ const StyledHeaderAskClient = styled('span')(({ theme }) => ({
 
 const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
   const navigate = useNavigate();
-
+  const { setColumnsOrderUsers } = dataGridOrderSlice.actions;
   const { t } = useTranslation();
-
-  const columns: GridColDef[] = [
-    {
+  const dispatch = useDispatch();
+  const columnDefs: Record<string, GridColDef> = {
+    created: {
       field: 'created',
       headerName: t('usersColumns.created'),
       width: 150,
@@ -38,7 +40,7 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
       valueGetter: (params: GridValueGetterParams) =>
         `${new Date(params.row.created).toLocaleDateString()}`,
     },
-    {
+    is_active: {
       field: 'is_active',
       headerName: t('usersColumns.status'),
       width: 150,
@@ -46,32 +48,37 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
       valueGetter: (params: GridValueGetterParams) =>
         t(`usersColumns.is_active_${params.row.is_active}`),
     },
-    {
+    role: {
       field: 'role',
       headerName: t('usersColumns.role'),
       width: 150,
       editable: true,
     },
-    {
+    name: {
       field: 'name',
       headerName: t('usersColumns.name'),
       width: 200,
       editable: true,
     },
-    {
+    phone: {
       field: 'phone',
       headerName: t('usersColumns.phone'),
       width: 200,
       editable: true,
     },
-    {
+    email: {
       field: 'email',
       headerName: t('usersColumns.email'),
       width: 200,
       editable: true,
     },
-  ];
+  };
 
+  const columnOrderDefs = useSelector(selectUsersDataGridColumnsOrder);
+  const [columnOrder, setColumnOrder] = useState(columnOrderDefs);
+  useEffect(() => {
+    dispatch(setColumnsOrderUsers(columnOrder));
+  }, [columnOrder]);
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
     const user_id = params.row.user_id;
     navigate(`/${type}/${user_id}`);
@@ -95,10 +102,9 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               overflow: 'auto',
             }}
           >
-            <DataGrid
+            <DataGridWithDraggableColumns
               scrollbarSize={53}
               rows={users || []}
-              columns={columns}
               getRowId={(row) => row.user_id}
               initialState={{
                 pagination: {
@@ -115,6 +121,9 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               disableDensitySelector
               slots={{ toolbar: CustomToolbar }}
               onRowClick={handleRowClick}
+              columnDefs={columnDefs}
+              columnOrder={columnOrder}
+              setColumnOrder={setColumnOrder}
             />
           </Box>
         </>

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import StyledDataGridWarehouse from '../../../components/styled/StyledDataGridWarehouse';
+import StyledDataGridWarehouse from '../../../components/styled/dataGrid/StyledDataGridWarehouse';
 import { pointAPI } from '../../../services/PointService';
 import { warehouseAPI } from '../../../services/WarehouseService';
 
