@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import StyledDataGridtTckets from '../../../components/styled/StyledDataGridTckets';
+import StyledDataGridtTckets from '../../../components/styled/dataGrid/StyledDataGridTckets';
 import { ticketAPI } from '../../../services/TicketService';
 
 const Content: FC = () => {

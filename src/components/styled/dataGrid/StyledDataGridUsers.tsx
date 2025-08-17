@@ -1,20 +1,30 @@
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { FC } from 'react';
 
 import { Box, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   DataGrid,
   GridColDef,
   GridEventListener,
-  GridToolbar,
+  GridToolbarExport,
   GridValueGetterParams,
 } from '@mui/x-data-grid';
 
-import { CustomToolbar } from './CustomToolbar';
+import { CustomToolbar } from '../CustomToolbar';
 
-const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
+const StyledHeaderAskClient = styled('span')(({ theme }) => ({
+  color: theme.palette.error.light,
+  textAlign: 'left',
+  display: 'block',
+  fontSize: 14,
+  marginBottom: 8,
+}));
+
+const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
@@ -29,14 +39,28 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
         `${new Date(params.row.created).toLocaleDateString()}`,
     },
     {
-      field: 'phone',
+      field: 'is_active',
       headerName: t('usersColumns.status'),
+      width: 150,
+      editable: true,
+      valueGetter: (params: GridValueGetterParams) =>
+        t(`usersColumns.is_active_${params.row.is_active}`),
+    },
+    {
+      field: 'role',
+      headerName: t('usersColumns.role'),
       width: 150,
       editable: true,
     },
     {
       field: 'name',
       headerName: t('usersColumns.name'),
+      width: 200,
+      editable: true,
+    },
+    {
+      field: 'phone',
+      headerName: t('usersColumns.phone'),
       width: 200,
       editable: true,
     },
@@ -49,8 +73,8 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   ];
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
-    const client_id = params.row.client_id;
-    navigate(`/clients/${client_id}`);
+    const user_id = params.row.user_id;
+    navigate(`/${type}/${user_id}`);
   };
 
   return (
@@ -63,7 +87,7 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
 
       {isLoading ? (
         <p>Loading...</p>
-      ) : clients && clients.length > 0 ? (
+      ) : users && users.length > 0 ? (
         <>
           <Box
             sx={{
@@ -73,9 +97,9 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
           >
             <DataGrid
               scrollbarSize={53}
-              rows={clients || []}
+              rows={users || []}
               columns={columns}
-              getRowId={(row) => row.client_id}
+              getRowId={(row) => row.user_id}
               initialState={{
                 pagination: {
                   paginationModel: {
@@ -95,10 +119,10 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
           </Box>
         </>
       ) : (
-        'Clients List is empty'
+        'Workers List is empty'
       )}
     </>
   );
 };
 
-export default StyledDataGridClients;
+export default StyledDataGridUsers;

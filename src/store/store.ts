@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 
 import services from '../services/index';
 import authReducer from './reducers/AuthSlice';
+import dataGridOrderReducer from './reducers/DataGridOrderSlice';
 import testReducer from './reducers/TodosSlice';
 
 //defaults to localStorage for web
@@ -22,6 +23,7 @@ const {
 const reducers = {
   testReducer,
   authReducer,
+  dataGridOrderReducer,
   [postAPI.reducerPath]: postAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [pointAPI.reducerPath]: pointAPI.reducer,
@@ -36,7 +38,7 @@ const rootReducer = combineReducers(reducers);
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['testReducer', 'authReducer'], //only navigation will be persisted
+  whitelist: ['testReducer', 'authReducer', 'dataGridOrderReducer'], //only navigation will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
