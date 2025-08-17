@@ -16,8 +16,8 @@ import { styled } from '@mui/material/styles';
 import { GridEventListener, GridToolbar } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
-import { dataGridOrderSlice } from '../../../store/reducers/DataGridOrderSlice';
-import { selectTicketsDataGridColumnsOrder } from '../../../store/reducers/DataGridOrderSlice';
+import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { selectTicketsDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { IItem } from '../../../types/IItem';
 import { getTicketColumns } from './columns/ticketsColumns';
 

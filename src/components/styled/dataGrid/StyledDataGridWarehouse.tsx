@@ -10,8 +10,8 @@ import { Box, Typography } from '@mui/material';
 import { GridEventListener, GridToolbar } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
-import { dataGridOrderSlice } from '../../../store/reducers/DataGridOrderSlice';
-import { selectWarehouseDataGridColumnsOrder } from '../../../store/reducers/DataGridOrderSlice';
+import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { selectWarehouseDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { getWarehouseColumns } from './columns/warehouseColumns';
 
 const StyledDataGridWarehouse: FC<any> = ({
