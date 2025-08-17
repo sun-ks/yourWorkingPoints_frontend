@@ -64,7 +64,7 @@ const baseQueryWithReauth: BaseQueryFn<
           // retry the initial query
           result = await baseQuery(args, api, extraOptions);
         } else {
-          api.dispatch(logOut());
+          api.dispatch({ type: 'RESET_APP_STATE' });
         }
       } finally {
         // release must be called once the mutex should be released again.

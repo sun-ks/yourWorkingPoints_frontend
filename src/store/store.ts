@@ -1,13 +1,16 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import services from '../services/index';
-import authReducer from './reducers/AuthSlice';
-import dataGridOrderReducer from './reducers/dataGridOrder/DataGridOrderSlice';
-import testReducer from './reducers/TodosSlice';
-import { migrations } from './migrations';
 import { createMigrate } from 'redux-persist';
+import { persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+import services from '../services/index';
+import { migrations } from './migrations';
+import authReducer from './reducers/AuthSlice';
+import testReducer from './reducers/TodosSlice';
+import dataGridOrderReducer from './reducers/dataGridOrder/DataGridOrderSlice';
+
 //defaults to localStorage for web
 
 const {
@@ -33,12 +36,19 @@ const reducers = {
   [warehouseAPI.reducerPath]: warehouseAPI.reducer,
 };
 
-const rootReducer = combineReducers(reducers);
+const appReducer = combineReducers(reducers);
+
+const rootReducer = (state: any, action: any) => {
+  if (action.type === 'RESET_APP_STATE') {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['testReducer', 'authReducer', 'dataGridOrderReducer'], 
+  whitelist: ['testReducer', 'authReducer', 'dataGridOrderReducer'],
   migrate: createMigrate(migrations, { debug: false }),
 };
 
@@ -62,8 +72,8 @@ export const setupStore = (initialState = {}) => {
     preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
-      serializableCheck: false, // avoid errs with non-serializable
-    })
+        serializableCheck: false, // avoid errors with non-serializable
+      })
         .concat(loggingMiddleware)
         .concat(postAPI.middleware)
         .concat(userAPI.middleware)
@@ -73,9 +83,12 @@ export const setupStore = (initialState = {}) => {
         .concat(companyAPI.middleware)
         .concat(clientAPI.middleware)
         .concat(warehouseAPI.middleware),
-    //devTools: true, // Enable Redux DevTools
+    devTools: true, // Enable Redux DevTools
   });
 };
+
+export const store = setupStore();
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
