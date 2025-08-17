@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { authSlice } from '../store/reducers/AuthSlice';
+import { persistor } from '../store/store';
 
 const LanguageMenu: FC<any> = () => {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ const LanguageMenu: FC<any> = () => {
 
   return (
     <>
+      ееееее
       <IconButton
         onClick={handleClick}
         size="small"
@@ -80,8 +82,10 @@ const LanguageMenu: FC<any> = () => {
       >
         <MenuItem
           onClick={() => {
-            dispatch(logOut());
-            handleClose();
+            // persistor.purge();
+            //dispatch(logOut());
+            //console.log('User logged out');
+            //handleClose();
           }}
         >
           <ListItemIcon>

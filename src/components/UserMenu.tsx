@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles';
 
 import { authSlice } from '../store/reducers/AuthSlice';
 import { selectCurrentUser } from '../store/reducers/AuthSlice';
+import { persistor } from '../store/store';
 
 const UserMenu: FC<any> = () => {
   const { t } = useTranslation();
@@ -112,8 +113,10 @@ const UserMenu: FC<any> = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem
-          onClick={() => {
-            dispatch(logOut());
+          onClick={async () => {
+            await persistor.purge();
+            dispatch({ type: 'RESET_APP_STATE' });
+
             handleClose();
           }}
           sx={{ fontSize: 14 }}

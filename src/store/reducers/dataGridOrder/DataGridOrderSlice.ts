@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { initialDataGridOrderState } from './initialState';
 
 export const dataGridOrderSlice = createSlice({
   name: 'ticketsDataGridOrder',
-    initialState: initialDataGridOrderState,
+  initialState: initialDataGridOrderState,
   reducers: {
     setColumnsOrderTickets: (state, action: PayloadAction<string[]>) => {
       state.ticketsDataGridColumnsOrder = action.payload;
