@@ -100,7 +100,7 @@ export default function Header(props: HeaderProps) {
                   i18n.changeLanguage('en');
                 }}
               >
-                En
+                en
               </Typography>
               /
               <Typography
@@ -111,7 +111,7 @@ export default function Header(props: HeaderProps) {
                   i18n.changeLanguage('ua');
                 }}
               >
-                Ua
+                ua
               </Typography>
             </Grid>
 
