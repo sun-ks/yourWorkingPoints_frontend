@@ -1,0 +1,235 @@
+{
+  "choise_point": "Selectați Punctul",
+  "create_point": "Creați Punctul",
+  "all_tickets": "Toate Sarcinile",
+  "points": "Toate punctele",
+  "only_for_owner": "Numai pentru utilizatorii cu rolul „Owner”",
+  "update_successful": "Actualizat cu succes!",
+  "will_be_soon": "În curând:",
+  "workers": "Personal",
+  "statistics": "Statistici",
+  "shop": "Magazin",
+  "company_name": "Your Working Points",
+  "company_name_short": "YWP",
+  "forgot_password": "Ați uitat parola?",
+  "back": "Înapoi",
+  "create_first": "Creați unul nou",
+  "service_center": "Centru de service",
+  "updated": "Actualizat cu succes!",
+  "make_contribution": "Devino susținător",
+  "company": {
+    "company_settings": "Setări Companie",
+    "btn_edit": "Editează Compania",
+    "name": "Denumire Companie",
+    "deactivated_user": "Acest utilizator a fost dezactivat!"
+  },
+  "form": {
+    "required": "Acest câmp este obligatoriu",
+    "available": "Disponibil",
+    "default_label": "Altele",
+    "added_successfully": "Adăugat cu succes!"
+  },
+  "clients": {
+    "clients_title_seo": "Toți clienții",
+    "add_client": "Adăugați client",
+    "clients_menu_item": "Toți Clienții",
+    "add_client_btn": "Adăugați Client",
+    "add_client_title": "Adăugați Client Nou",
+    "client_added": "Client adăugat cu succes!",
+    "email": "Adresă de Email",
+    "name": "Nume",
+    "phone": "Număr de Telefon",
+    "description": "Descriere",
+    "edit_client": "Editează clientul"
+  },
+  "warehouse": {
+    "clients_menu_item": "Departament",
+    "add_inventory_item": "Adăugați articol în stoc",
+    "title": "Adăugați articol în stoc",
+    "title_edit": "Editează articolul",
+    "field_name": "Denumire produs",
+    "fild_serial_number": "Număr serial",
+    "fild_purchase_price": "Preț de achiziție",
+    "field_retail_price": "Preț de vânzare",
+    "field_warranty": "Garanție (în zile)",
+    "received_date": "Data primirii",
+    "field_quantity": "Cantitate totală (bucăți)",
+    "field_used_quantity": "Cantitate utilizată (bucăți)",
+    "description": "Descriere",
+    "category": "Categorie",
+    "supplier": "Furnizor",
+    "phone": "Număr de telefon",
+    "btn_add": "Adăugați",
+    "btn_edit": "Editează",
+    "delete_warehouse_item": "Șterge acest articol",
+    "alert_delete_title": "Sigur doriți să ștergeți acest articol?",
+    "used_in_tickets": "Acest articol a fost folosit în aceste sarcini:",
+    "quantity": "Cantitate"
+  },
+  "statuses": {
+    "inbox": "Preluată pentru reparație",
+    "in_progress": "În lucru",
+    "ask_client": "Întrebați clientul",
+    "done": "Finalizat",
+    "paid": "Plătit",
+    "cancelled": "Anulat",
+    "hold": "Suspendat"
+  },
+  "priorities": {
+    "low": "Scăzut",
+    "high": "Ridicat",
+    "medium": "Mediu"
+  },
+  "sign_in": {
+    "meta": { "title": "YWP, Autentificare" },
+    "title": "Autentificare",
+    "btn_sign_in": "Autentificare",
+    "do_not_account": "Nu aveți un cont?"
+  },
+  "sign_up": {
+    "meta": { "title": "YWP, Înregistrare" },
+    "title": "Înregistrare",
+    "btn_sign_in": "Înregistrează‑te",
+    "do_not_account": "Aveți un cont?"
+  },
+  "forgot": {
+    "meta": { "title": "YWP, Ați uitat parola?" },
+    "title": "Ați uitat parola?",
+    "btn_sign_in": "Trimite link de resetare",
+    "do_not_account": "Nu aveți un cont?"
+  },
+  "new_password": {
+    "meta": { "title": "YWP, Setare Parolă Nouă" },
+    "title": "Setare parolă nouă",
+    "btn_sign_in": "Setează parola nouă",
+    "do_not_account": "Mergi la"
+  },
+  "add_worker": {
+    "meta": { "title": "YWP, Bun venit!" },
+    "title": "Setare parolă",
+    "btn_sign_in": "Setează parola",
+    "do_not_account": "Mergi la"
+  },
+  "ticketsColumns": {
+    "created": "Creat",
+    "status": "Status",
+    "priority": "Prioritate",
+    "device_sn": "Număr serial",
+    "name": "Dispozitiv",
+    "client_phone": "Telefon client",
+    "client": "Client",
+    "paid": "Plătit",
+    "assigned_at": "Alocat la"
+  },
+  "usersColumns": {
+    "created": "Creat",
+    "role": "Rol",
+    "name": "Nume",
+    "phone": "Telefon",
+    "email": "Adresă de Email",
+    "is_active_true": "Activ",
+    "is_active_false": "Inactiv",
+    "status": "Status"
+  },
+  "warehouseColumns": {
+    "created": "Creat",
+    "recived_date": "Data primirii",
+    "category": "Categorie",
+    "supplier": "Furnizor",
+    "name": "Denumire",
+    "warranty": "Garanție (zile)",
+    "quantity": "Cantitate",
+    "point": "Punct"
+  },
+  "tickets": {
+    "create_ticket": "Creează Sarcină",
+    "client_approval": "Important! Aceste sarcini necesită comunicare cu clientul:"
+  },
+  "createPoint": {
+    "create_point": "Creează Punct"
+  },
+  "createTicket": {
+    "head_line": "Creează Sarcină",
+    "select_point": "Selectați Punct",
+    "device_name": "Nume dispozitiv",
+    "device_sn": "Număr S/N (imei)",
+    "description": "Descriere",
+    "client_phone": "Telefon client",
+    "first_payment": "Prima plată",
+    "client_email": "Adresă de Email",
+    "client_name": "Nume client",
+    "btn_create": "Creează Sarcina",
+    "client_already_exist": "Acest client există deja",
+    "no_points_available": "Nu există puncte disponibile"
+  },
+  "editTicket": {
+    "choose_part": "Selectați piesă din stoc",
+    "guarantee_till": "Garanție până",
+    "set_status_paid": "După starea „Plătit” puteți tipări garanția",
+    "print_guarantee": "Tipărește garanția",
+    "print_repair_order": "Tipărește ordin de reparație",
+    "print_qr_for_service": "Tipărește cod QR pentru identificarea telefonului la service",
+    "title": "Editează Sarcina",
+    "ticket_created": "Sarcina a fost creată",
+    "client_phone": "Telefon client",
+    "device_name": "Nume dispozitiv",
+    "sn": "Număr serial (imei)",
+    "client_email": "Adresă de Email",
+    "client_name": "Nume client",
+    "first_payment": "Prima plată",
+    "finish_payment": "Plața finală",
+    "description": "Descriere",
+    "update_ticket": "Actualizează sarcina",
+    "delete_ticket": "Șterge sarcina",
+    "current_point": "Punct curent",
+    "ticket_status": "Status sarcină",
+    "ticket_priority": "Prioritate sarcină",
+    "note": "Notă",
+    "assigned_at": "Alocat la",
+    "alert_delete_title": "Sigur doriți să ștergeți această sarcină?",
+    "alert_delete_title_with_parts": "Această sarcină folosește piese din stoc, deci nu poate fi ștearsă!",
+    "select_part": "Selectați piesa",
+    "count": "Cantitate"
+  },
+  "printTicket": {
+    "device": "Dispozitiv",
+    "will_in_print": "Important! Se va printa (Bon de primire, Garanție)",
+    "title_guarantee": "Garanție",
+    "title_order": "Bon de recepție",
+    "service_information": "Informații despre service",
+    "ticket_id": "ID sarcină",
+    "client": "Client",
+    "ticket_qr_code": "Cod QR sarcină",
+    "PhoneNumber": "Telefon",
+    "rule01": "1. Centrul service nu este responsabil pentru pierderea datelor din memoria dispozitivului sau pentru SIM-uri rămase. Asigurați-vă că faceți backup cu promptitudine."
+  },
+  "point": {
+    "point": "Punct",
+    "create_new_point": "Creează Punct Nou",
+    "edit_point": "Editează Punct",
+    "btn_edit": "Editează Punct",
+    "successes_block": "Punct actualizat cu succes!",
+    "name": "Denumire",
+    "phone_number": "Număr de telefon al punctului",
+    "description": "Descriere",
+    "btn_create": "Creează Punct",
+    "edit": "Editează",
+    "delete": "Șterge",
+    "delete_title_default": "Sunteți sigur că doriți să ștergeți acest punct?",
+    "delete_title_has_ticket": "Se pot șterge doar punctele fără sarcini"
+  },
+  "account": {
+    "logout": "Deconectare"
+  },
+  "worker": {
+    "workers_title_seo": "Lucrători",
+    "add_worker": "Adăugați lucrător",
+    "email": "Email lucrător",
+    "invite": "Trimite invitație",
+    "name": "Nume",
+    "phone": "Telefon",
+    "description": "Descriere",
+    "edit_worker": "Editează lucrător",
+    "save": "Salvează"
+  }
+}

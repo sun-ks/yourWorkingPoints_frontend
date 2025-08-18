@@ -10,7 +10,7 @@ i18n
   .init({
     debug: true,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'ua'],
+    supportedLngs: ['en', 'ua', 'ro'],
     interpolation: { escapeValue: false },
     react: { useSuspense: false },
   });

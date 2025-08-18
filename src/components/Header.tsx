@@ -113,6 +113,17 @@ export default function Header(props: HeaderProps) {
               >
                 ua
               </Typography>
+              /
+              <Typography
+                className={`${classes.languageSwitchItem} ${i18n.language === 'ro' ? classes.active : ''}`}
+                component="span"
+                variant="inherit"
+                onClick={() => {
+                  i18n.changeLanguage('ro');
+                }}
+              >
+                ro
+              </Typography>
             </Grid>
 
             {!isAuthPage && (
