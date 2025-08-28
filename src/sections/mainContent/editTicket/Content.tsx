@@ -250,7 +250,6 @@ const Content: FC<{
           workersList={workersList}
           Item={Item}
         />
-        <div></div>
 
         <PartsList
           savedInventoryItemsForCurrentTicket={

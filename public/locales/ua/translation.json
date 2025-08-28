@@ -199,7 +199,13 @@
     "alert_delete_title": "Ви справді хочете видалити цю задачу?",
     "alert_delete_title_with_parts": "Ця задача використовуе деталі з складу, тому її не можна видалити!",
     "select_part": "Оберіть деталь",
-    "count": "Кількість"
+    "count": "Кількість",
+    "ticket_changes_title": "Історія змін задачі",
+    "changed_by": "Змінив",
+    "changed_at": "в",
+    "changed_priority": "Пріорітет",
+    "changed_assigned_at": "Назначен на",
+    "changed_status": "Статус"
   },
   "printTicket": {
     "device": "Пристрій",

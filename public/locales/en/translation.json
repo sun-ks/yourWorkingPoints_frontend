@@ -200,7 +200,13 @@
     "alert_delete_title": "Do you really want to delete this ticket?",
     "alert_delete_title_with_parts": "This ticket has parts from the warehouse, so it cannot be deleted!",
     "select_part": "Select Part",
-    "count": "Count"
+    "count": "Count",
+    "ticket_changes_title": "Ticket Changes History",
+    "changed_by": "Changed by",
+    "changed_at": "At",
+    "changed_priority": "Priority",
+    "changed_assigned_at": "Assigned to",
+    "changed_status": "Status"
   },
   "printTicket": {
     "device": "Device",

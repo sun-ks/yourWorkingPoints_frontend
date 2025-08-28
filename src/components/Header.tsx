@@ -86,7 +86,6 @@ export default function Header(props: HeaderProps) {
                 rel="noopener noreferrer"
               >
                 {t('make_contribution')}
-                
               </Link>
             </Grid>
             <Grid item></Grid>
