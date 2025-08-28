@@ -231,7 +231,13 @@ export const PartsList: FC<{
         })}
 
       {canAddMoreParts && (
-        <Box sx={{ marginBottom: 4 }}>
+        <Box
+          sx={{
+            marginBottom: 4,
+            marginTop: '0 !important',
+            textAlign: 'right',
+          }}
+        >
           <Button
             variant="text"
             endIcon={<AddIcon />}

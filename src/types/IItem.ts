@@ -1,3 +1,17 @@
+export interface ITicket_change {
+  status: string;
+  changed_at: Date;
+  note: string;
+  priority: string;
+  assigned_at: {
+    name: string;
+    email: string;
+  };
+  changed_by: {
+    name: string;
+    email: string;
+  };
+}
 export interface IItem {
   ticket_id: string;
   name?: string;
@@ -31,6 +45,7 @@ export interface IItem {
     id: string;
     price_at_use?: number;
   }[];
+  ticket_changes?: ITicket_change[];
 }
 
 export interface IClientPhone {

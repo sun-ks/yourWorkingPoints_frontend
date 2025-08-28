@@ -189,7 +189,13 @@
     "alert_delete_title": "Sigur doriți să ștergeți această sarcină?",
     "alert_delete_title_with_parts": "Această sarcină folosește piese din stoc, deci nu poate fi ștearsă!",
     "select_part": "Selectați piesa",
-    "count": "Cantitate"
+    "count": "Cantitate",
+    "ticket_changes_title": "Istoric modificări sarcină",
+    "changed_by": "Modificat de",
+    "changed_at": "la",
+    "changed_priority": "Prioritate",
+    "changed_assigned_at": "Alocat la",
+    "changed_status": "Status"
   },
   "printTicket": {
     "device": "Dispozitiv",
