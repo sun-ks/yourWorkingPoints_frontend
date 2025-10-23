@@ -129,8 +129,9 @@ const Ticket: FC = () => {
               spacing={2}
               alignItems="center"
               justifyContent="space-between"
+              sx={{ width: '100%' }}
             >
-              <Grid item>
+              <Grid>
                 <Tooltip title={t('back')}>
                   <IconButton onClick={() => navigate(`/${ticket?.point_id}`)}>
                     <KeyboardBackspaceIcon
@@ -141,7 +142,7 @@ const Ticket: FC = () => {
                 </Tooltip>
               </Grid>
 
-              <Grid item display="flex" alignItems="center">
+              <Grid display="flex" alignItems="center">
                 <Box sx={{ marginRight: 1 }}>
                   <Tooltip title={t('editTicket.print_qr_for_service')}>
                     <IconButton

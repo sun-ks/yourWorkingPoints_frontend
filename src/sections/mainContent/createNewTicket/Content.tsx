@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 
 import React, { FC, useEffect, useState } from 'react';
 
-import { Autocomplete } from '@mui/lab';
 import { LoadingButton } from '@mui/lab';
+import { Autocomplete } from '@mui/material';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';

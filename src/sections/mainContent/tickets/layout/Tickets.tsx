@@ -30,12 +30,13 @@ const Tickets: FC = () => {
             spacing={2}
             alignItems="center"
             justifyContent="space-between"
+            sx={{ width: '100%' }}
           >
-            <Grid item>
+            <Grid>
               <StyledRouterLink to={`/`}>{t('points')}</StyledRouterLink> /{' '}
               {t('all_tickets')}
             </Grid>
-            <Grid item>
+            <Grid>
               <Button
                 component={Link}
                 to={`/createTicket`}

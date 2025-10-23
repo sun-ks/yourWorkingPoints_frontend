@@ -29,9 +29,10 @@ const Points: FC = () => {
             spacing={2}
             alignItems="center"
             justifyContent="space-between"
+            sx={{ width: '100%' }}
           >
-            <Grid item>{t('choise_point')}</Grid>
-            <Grid item>
+            <Grid>{t('choise_point')}</Grid>
+            <Grid>
               <Button
                 component={Link}
                 to="/createNewPoint"

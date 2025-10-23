@@ -31,7 +31,7 @@ const AddNewWorker: FC = () => {
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
-            <Grid item>
+            <Grid>
               <Tooltip title={`${t('back')}`}>
                 <IconButton onClick={() => navigate(-1)}>
                   <KeyboardBackspaceIcon

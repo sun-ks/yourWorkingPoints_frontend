@@ -23,6 +23,9 @@
     "name": "Company Name",
     "deactivated_user": "This user has been deactivated!"
   },
+  "data_grid": {
+    "paginationRowsPerPage": "Rows per page:"
+  },
   "form": {
     "required": "This field is required",
     "available": "Available",

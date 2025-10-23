@@ -30,8 +30,14 @@ const Worker: FC = () => {
         sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
       >
         <Toolbar>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            sx={{ width: '100%' }}
+            justifyContent="space-between"
+          >
+            <Grid>
               <Tooltip title={`${t('back')}`}>
                 <IconButton onClick={() => navigate(-1)}>
                   <KeyboardBackspaceIcon

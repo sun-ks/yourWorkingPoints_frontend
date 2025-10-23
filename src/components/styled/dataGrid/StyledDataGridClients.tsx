@@ -8,7 +8,7 @@ import { Box, Typography } from '@mui/material';
 import {
   GridColDef,
   GridEventListener,
-  GridValueGetterParams,
+  GridValueGetter,
 } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
@@ -33,8 +33,7 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
       headerName: t('usersColumns.created'),
       width: 150,
       editable: true,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${new Date(params.row.created).toLocaleDateString()}`,
+      valueGetter: (_v, row) => `${new Date(row.created).toLocaleDateString()}`,
     },
     phone: {
       field: 'phone',
@@ -90,7 +89,7 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
                   },
                 },
               }}
-              pageSizeOptions={[50]}
+              //pageSizeOptions={[50]}
               disableRowSelectionOnClick
               disableColumnFilter
               disableColumnSelector

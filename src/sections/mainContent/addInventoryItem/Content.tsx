@@ -123,7 +123,7 @@ const Content: FC = () => {
           }}
         />
         <Grid container spacing={0}>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <Controller
               control={control}
               name="supplier_id"
@@ -152,7 +152,7 @@ const Content: FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <Controller
               control={control}
               name="category_id"
@@ -216,7 +216,7 @@ const Content: FC = () => {
         />
 
         <Grid container spacing={0}>
-          <Grid item xs={4}>
+          <Grid size={{ xs: 4 }}>
             <Controller
               control={control}
               name="warranty"
@@ -235,7 +235,7 @@ const Content: FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Controller
               name="received_date"
               control={control}
@@ -267,7 +267,7 @@ const Content: FC = () => {
           </Grid>
         </Grid>
         <Grid container spacing={0}>
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Controller
               control={control}
               name="quantity"
@@ -292,7 +292,7 @@ const Content: FC = () => {
         </Grid>
 
         <Grid container spacing={0}>
-          <Grid item xs={4}>
+          <Grid size={{ xs: 4 }}>
             <Controller
               control={control}
               name="purchase_price"
@@ -314,7 +314,7 @@ const Content: FC = () => {
               }}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid size={{ xs: 4 }}>
             <Controller
               control={control}
               name="retail_price"

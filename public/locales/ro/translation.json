@@ -23,6 +23,9 @@
     "name": "Denumire Companie",
     "deactivated_user": "Acest utilizator a fost dezactivat!"
   },
+  "data_grid": {
+    "paginationRowsPerPage": "Rânduri pe pagină:"
+  },
   "form": {
     "required": "Acest câmp este obligatoriu",
     "available": "Disponibil",

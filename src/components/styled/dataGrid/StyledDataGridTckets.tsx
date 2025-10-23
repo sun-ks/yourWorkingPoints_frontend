@@ -108,7 +108,7 @@ const StyledDataGridTckets: FC<{
             rows={tickets || []}
             getRowId={(row: IItem) => row.ticket_id}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
-            pageSizeOptions={[50]}
+            //pageSizeOptions={[10, 25, 50, 100]}
             disableRowSelectionOnClick
             disableColumnSelector
             disableDensitySelector

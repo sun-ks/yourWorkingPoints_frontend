@@ -67,7 +67,7 @@ const StyledDataGridWarehouse: FC<any> = ({
                   },
                 },
               }}
-              pageSizeOptions={[50]}
+              //pageSizeOptions={[50]}
               disableRowSelectionOnClick
               disableColumnFilter
               disableColumnSelector

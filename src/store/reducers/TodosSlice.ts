@@ -3,36 +3,38 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ITodos } from '../../types/ITodos';
 import { fetchUsers } from './ActionCreators';
 
-//import {fetchUsers} from "./ActionCreators";
-
 interface TodosState {
   todos: ITodos[];
   isLoading: boolean;
-  error: string;
+  error: string | null;
   count: number;
 }
 
 const initialState: TodosState = {
   todos: [],
   isLoading: false,
-  error: '',
+  error: null,
   count: 0,
 };
 
 export const todosSlice = createSlice({
-  name: 'user',
+  name: 'todos',
   initialState,
   reducers: {
-    incriment(state, action: PayloadAction<number>) {
-      state.count = ++action.payload;
+    // якщо хочеш змінювати на +1/-1 без payload — зроби без PayloadAction<number>
+    increment(state, action: PayloadAction<number>) {
+      state.count += action.payload;
     },
-    dicriment(state, action: PayloadAction<number>) {
-      state.count = action.payload - 1;
+    decrement(state, action: PayloadAction<number>) {
+      state.count -= action.payload;
     },
-    todoFetcing(state) {
+
+    // якщо залишаєш ручні фетч-редʼюсери — ок, але зазвичай їх замінює asyncThunk
+    todoFetching(state) {
       state.isLoading = true;
+      state.error = null;
     },
-    todoFetchSucsses(state, action: PayloadAction<ITodos[]>) {
+    todoFetchSuccess(state, action: PayloadAction<ITodos[]>) {
       state.isLoading = false;
       state.todos = action.payload;
     },
@@ -41,19 +43,36 @@ export const todosSlice = createSlice({
       state.error = action.payload;
     },
   },
-  extraReducers: {
-    [fetchUsers.fulfilled.type]: (state, action: PayloadAction<ITodos[]>) => {
-      state.isLoading = false;
-      state.todos = action.payload;
-    },
-    [fetchUsers.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [fetchUsers.pending.type]: (state) => {
-      state.isLoading = true;
-    },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchUsers.fulfilled,
+        (state, action: PayloadAction<ITodos[]>) => {
+          state.isLoading = false;
+          state.todos = action.payload;
+        },
+      )
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          (action.payload as string | undefined) ??
+          action.error.message ??
+          'Unknown error';
+      });
   },
 });
+
+export const {
+  increment,
+  decrement,
+  todoFetching,
+  todoFetchSuccess,
+  todoFetchErr,
+} = todosSlice.actions;
 
 export default todosSlice.reducer;

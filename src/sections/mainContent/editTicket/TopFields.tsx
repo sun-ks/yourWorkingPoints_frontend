@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { Control, Controller } from 'react-hook-form';
 
 import React, { FC } from 'react';
-import {ChangesTable} from './ChangesTable';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -21,6 +20,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import { IItem } from '../../../types/IItem';
 import { IPoint } from '../../../types/IPoint';
+import { ChangesTable } from './ChangesTable';
 
 export const TopFields: FC<{
   t: (key: string) => string;
@@ -46,7 +46,7 @@ export const TopFields: FC<{
   return (
     <>
       <Grid container spacing={1}>
-        <Grid xs={12} sm={7}>
+        <Grid size={{ xs: 12, sm: 7 }}>
           <Item sx={{ textAlign: 'left', boxShadow: 0 }}>
             {ticket && (
               <Typography fontSize={13}>
@@ -73,7 +73,7 @@ export const TopFields: FC<{
             )}
           </Item>
         </Grid>
-        <Grid xs={12} sm={5}>
+        <Grid size={{ xs: 12, sm: 5 }}>
           <Item sx={{ textAlign: 'left', boxShadow: 0, padding: 0 }}>
             <Box sx={{ marginBottom: 2 }}>
               <Controller
@@ -232,7 +232,6 @@ export const TopFields: FC<{
                     sx={{
                       textAlign: 'right !important',
                       width: '100%',
-                      
                     }}
                   >
                     <Button variant="text">
@@ -242,19 +241,25 @@ export const TopFields: FC<{
                 </AccordionSummary>
                 <AccordionDetails sx={{ padding: '0' }}>
                   {[...ticket.ticket_changes].reverse().map((change, index) => {
+                    if (
+                      change.assigned_at === null &&
+                      change.status === null &&
+                      change.priority === null
+                    )
+                      return null;
 
-                    if (change.assigned_at === null && change.status === null && change.priority === null) return null;
-                                  
-                    return <ChangesTable
-                      change={change}
-                      t={t}
-                      key={`${index}_ticket_change`}
-                      ticketStatuses={ticketStatuses}
-                      ticketPriorities={ticketPriorities}
-                      isLast={
-                        index === (ticket.ticket_changes?.length ?? 0) - 1
-                      }
-                    />
+                    return (
+                      <ChangesTable
+                        change={change}
+                        t={t}
+                        key={`${index}_ticket_change`}
+                        ticketStatuses={ticketStatuses}
+                        ticketPriorities={ticketPriorities}
+                        isLast={
+                          index === (ticket.ticket_changes?.length ?? 0) - 1
+                        }
+                      />
+                    );
                   })}
                 </AccordionDetails>
               </Accordion>

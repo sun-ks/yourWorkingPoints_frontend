@@ -175,7 +175,7 @@ const Content: FC<ContentProps> = ({ data }) => {
           }}
         />
         <Grid container spacing={0}>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <Controller
               control={control}
               name="supplier_id"
@@ -204,7 +204,7 @@ const Content: FC<ContentProps> = ({ data }) => {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid size={{ xs: 6 }}>
             <Controller
               control={control}
               name="category_id"
@@ -268,7 +268,7 @@ const Content: FC<ContentProps> = ({ data }) => {
         />
 
         <Grid container spacing={0}>
-          <Grid item xs={4}>
+          <Grid size={{ xs: 4 }}>
             <Controller
               control={control}
               name="warranty"
@@ -287,7 +287,7 @@ const Content: FC<ContentProps> = ({ data }) => {
               }}
             />
           </Grid>
-          <Grid item xs={8}>
+          <Grid size={{ xs: 8 }}>
             <Controller
               name="received_date"
               control={control}
@@ -347,7 +347,7 @@ const Content: FC<ContentProps> = ({ data }) => {
         )}
 
         <Grid container spacing={0}>
-          <Grid item xs={3}>
+          <Grid size={{ xs: 3 }}>
             <Controller
               control={control}
               name="purchase_price"
@@ -369,7 +369,7 @@ const Content: FC<ContentProps> = ({ data }) => {
               }}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid size={{ xs: 3 }}>
             <Controller
               control={control}
               name="retail_price"

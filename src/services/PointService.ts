@@ -1,4 +1,4 @@
-import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { IPoint } from '../types/IPoint';
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';

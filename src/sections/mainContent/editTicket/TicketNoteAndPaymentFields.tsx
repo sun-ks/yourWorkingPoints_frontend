@@ -20,7 +20,7 @@ export const TicketNoteAndPaymentFields: FC<Props> = ({
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={12}>
+        <Grid size={{ xs: 12, sm: 12 }}>
           <Controller
             control={control}
             name="note"
@@ -42,7 +42,7 @@ export const TicketNoteAndPaymentFields: FC<Props> = ({
       </Grid>
 
       <Grid container spacing={1}>
-        <Grid item xs={4} sm={4}>
+        <Grid size={{ xs: 4, sm: 4 }}>
           <Box>
             <Controller
               control={control}

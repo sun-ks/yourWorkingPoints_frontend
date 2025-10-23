@@ -23,6 +23,9 @@
     "name": "Назва Компанії",
     "deactivated_user":"Цей користувач був деактивований!"
   },
+  "data_grid": {
+    "paginationRowsPerPage": "Рядків на сторінці:"
+  },
   "form": {
     "required": "Це поле є обов'язковим для заповнення",
     "available": "Доступно",

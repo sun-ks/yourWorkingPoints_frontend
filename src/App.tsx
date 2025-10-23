@@ -14,7 +14,11 @@ import { todosSlice } from './store/reducers/TodosSlice';
 function App() {
   const state = useAppSelector((state) => state.testReducer);
 
-  const { incriment, dicriment, todoFetcing } = todosSlice.actions;
+  const {
+    increment: incriment,
+    decrement: dicriment,
+    todoFetching: todoFetcing,
+  } = todosSlice.actions;
 
   const dispatch = useAppDispatch();
 

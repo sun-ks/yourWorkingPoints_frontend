@@ -1,4 +1,4 @@
-import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { IApiResponse } from '../types/IApiResponse';
 import { IWarehouseItem } from '../types/IWarehouse';

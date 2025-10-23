@@ -55,7 +55,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Custom middleware for logging
-const loggingMiddleware: Middleware = (store) => (next) => (action) => {
+const loggingMiddleware: Middleware = (store) => (next) => (action: any) => {
   const result = next(action);
 
   if (action.type === 'auth/logOut') {
@@ -65,11 +65,11 @@ const loggingMiddleware: Middleware = (store) => (next) => (action) => {
   return result;
 };
 
-export const setupStore = (initialState = {}) => {
+export const setupStore = () => {
   return configureStore({
     //reducer: rootReducer,
     reducer: persistedReducer,
-    preloadedState: initialState,
+    //preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false, // avoid errors with non-serializable
@@ -79,7 +79,6 @@ export const setupStore = (initialState = {}) => {
         .concat(userAPI.middleware)
         .concat(pointAPI.middleware)
         .concat(ticketAPI.middleware)
-        .concat(companyAPI.middleware)
         .concat(companyAPI.middleware)
         .concat(clientAPI.middleware)
         .concat(warehouseAPI.middleware),

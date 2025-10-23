@@ -11,6 +11,7 @@ import React, { Dispatch, SetStateAction, useMemo } from 'react';
 
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import zIndex from '@mui/material/styles/zIndex';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 
 const SortableHeader = ({
@@ -35,6 +36,7 @@ const SortableHeader = ({
     cursor: 'grab',
     color: isDragging ? ' #030393ff' : 'inherit',
     padding: '0',
+    zIndex: 1,
   };
 
   return (
@@ -53,10 +55,13 @@ function draggableDataGrid(
         overflow: 'visible',
       },
   });
+  const pageSizeOptionsDefault = [10, 25, 50, 100];
+
   return function DraggableColumnsWrapper({
     columnDefs,
     columnOrder,
     setColumnOrder,
+    pageSizeOptions = pageSizeOptionsDefault,
     ...props
   }: {
     columnDefs: Record<string, GridColDef>;
@@ -76,7 +81,7 @@ function draggableDataGrid(
         return newOrder;
       });
     };
-
+    const { t } = useTranslation();
     const columns = useMemo(
       () =>
         columnOrder.map((key: string) => {
@@ -99,7 +104,14 @@ function draggableDataGrid(
           strategy={horizontalListSortingStrategy}
         >
           <Box sx={{ width: '100%' }}>
-            <StyledDataGrid {...props} columns={columns} />
+            <StyledDataGrid
+              {...props}
+              columns={columns}
+              pageSizeOptions={pageSizeOptions}
+              localeText={{
+                paginationRowsPerPage: t('data_grid.paginationRowsPerPage'),
+              }}
+            />
           </Box>
         </SortableContext>
       </DndContext>

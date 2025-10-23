@@ -52,9 +52,14 @@ export default function Header(props: HeaderProps) {
         data-testid="header"
       >
         <Toolbar>
-          <Grid container spacing={1} alignItems="center">
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            sx={{ width: '100%' }}
+          >
             {!isAuthPage && (
-              <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
+              <Grid sx={{ display: { sm: 'none', xs: 'block' } }}>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -67,11 +72,11 @@ export default function Header(props: HeaderProps) {
             )}
 
             {isAuthPage && (
-              <Grid item sx={{ fontSize: 18, color: '#fff' }}>
+              <Grid sx={{ fontSize: 18, color: '#fff' }}>
                 {t('company_name')}
               </Grid>
             )}
-            <Grid item xs sx={{ textAlign: 'left' }}>
+            <Grid size="grow" sx={{ textAlign: 'left' }}>
               <Link
                 href="https://buymeacoffee.com/storozhukud"
                 target="_blank"
@@ -88,9 +93,9 @@ export default function Header(props: HeaderProps) {
                 {t('make_contribution')}
               </Link>
             </Grid>
-            <Grid item></Grid>
+            <Grid></Grid>
 
-            <Grid item className={classes.languageSwitch}>
+            <Grid className={classes.languageSwitch}>
               <Typography
                 className={`${classes.languageSwitchItem} ${i18n.language === 'en' ? classes.active : ''}`}
                 component="span"
@@ -127,14 +132,14 @@ export default function Header(props: HeaderProps) {
 
             {!isAuthPage && (
               <>
-                <Grid item>
+                <Grid>
                   <Tooltip title="Alerts • No alerts">
                     <IconButton color="inherit">
                       <NotificationsIcon />
                     </IconButton>
                   </Tooltip>
                 </Grid>
-                <Grid item>
+                <Grid>
                   <UserMenu />
                 </Grid>
               </>

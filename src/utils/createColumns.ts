@@ -1,4 +1,4 @@
-import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { GridColDef, GridValueGetter } from '@mui/x-data-grid';
 
 import i18n from '../i18n';
 
@@ -8,8 +8,7 @@ export const columns: GridColDef[] = [
     headerName: i18n.t('ticketsColumns.created'),
     width: 150,
     editable: true,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${new Date(params.row.created).toLocaleDateString()}`,
+    valueGetter: (_v, row) => `${new Date(row.created).toLocaleDateString()}`,
   },
   {
     field: 'status',
@@ -47,8 +46,8 @@ export const columns: GridColDef[] = [
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 100,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.client_first_name || ''} ${params.row.client_lasrt_name || ''}`,
+    valueGetter: (_v, row) =>
+      `${row.client_first_name || ''} ${row.client_lasrt_name || ''}`,
   },
   {
     field: 'parseInt(',
@@ -56,7 +55,7 @@ export const columns: GridColDef[] = [
     type: 'number',
     width: 100,
     editable: true,
-    valueGetter: (params: GridValueGetterParams) =>
-      parseInt(params.row.paid) + parseInt(params.row.last_part_payment),
+    valueGetter: (_v, row) =>
+      parseInt(row.paid) + parseInt(row.last_part_payment),
   },
 ];

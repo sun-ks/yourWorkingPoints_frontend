@@ -32,9 +32,10 @@ const Clients: FC = () => {
             spacing={2}
             alignItems="center"
             justifyContent="space-between"
+            sx={{ width: '100%' }}
           >
-            <Grid item></Grid>
-            <Grid item>
+            <Grid></Grid>
+            <Grid>
               <Button
                 component={Link}
                 to={`/addClient`}

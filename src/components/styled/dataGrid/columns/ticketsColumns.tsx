@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 
-import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 
 function getPrintStatus(status: string, t: TFunction): string {
   if (status === 'in progress') status = 'in_progress';
@@ -13,8 +13,7 @@ export const getTicketColumns = (t: TFunction): Record<string, GridColDef> => ({
     field: 'created',
     headerName: t('ticketsColumns.created'),
     width: 150,
-    valueGetter: (params: GridValueGetterParams) =>
-      new Date(params.row.created).toLocaleDateString(),
+    valueGetter: (_v, row) => new Date(row.created).toLocaleDateString(),
   },
   status: {
     field: 'status',
@@ -30,7 +29,7 @@ export const getTicketColumns = (t: TFunction): Record<string, GridColDef> => ({
     field: 'priority',
     headerName: t('ticketsColumns.priority'),
     width: 150,
-    valueGetter: (params) => t(`priorities.${params.row.priority}`),
+    valueGetter: (_v, row) => t(`priorities.${row.priority}`),
     renderCell: (params) => {
       const value = t(`priorities.${params.row.priority}`);
       return <div data-grid-priority={`${params.row.priority}`}>{value}</div>;
@@ -40,8 +39,7 @@ export const getTicketColumns = (t: TFunction): Record<string, GridColDef> => ({
     field: 'assigned_at',
     width: 150,
     headerName: t('ticketsColumns.assigned_at'),
-    valueGetter: (params) =>
-      params.row.user_name || params.row.user_email || 'None',
+    valueGetter: (_v, row) => row.user_name || row.user_email || 'None',
   },
   device_sn: {
     field: 'device_sn',
@@ -62,14 +60,14 @@ export const getTicketColumns = (t: TFunction): Record<string, GridColDef> => ({
     field: 'client_first_name',
     headerName: t('ticketsColumns.client'),
     width: 100,
-    valueGetter: (params) => params.row.client_name || '',
+    valueGetter: (_v, row) => row.client_name || '',
   },
   paid: {
     field: 'paid',
     headerName: t('ticketsColumns.paid'),
     width: 100,
     type: 'number',
-    valueGetter: (params) =>
-      parseInt(params.row.paid) + parseInt(params.row.last_part_payment),
+    valueGetter: (_v, row) =>
+      parseInt(row.paid) + parseInt(row.last_part_payment),
   },
 });

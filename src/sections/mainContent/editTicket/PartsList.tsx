@@ -97,7 +97,7 @@ export const PartsList: FC<{
               sx={{ marginTop: '0 !important' }}
               key={fieldId}
             >
-              <Grid item xs={9} sm={9}>
+              <Grid size={{ xs: 9, sm: 9 }}>
                 <Controller
                   control={control}
                   name={`parts.${index}.id`}
@@ -171,7 +171,7 @@ export const PartsList: FC<{
                 />
               </Grid>
 
-              <Grid item xs={2} sm={2}>
+              <Grid size={{ xs: 2, sm: 2 }}>
                 <Controller
                   control={control}
                   name={`parts.${index}.used_count_this_ticket`}
@@ -200,7 +200,7 @@ export const PartsList: FC<{
                   )}
                 />
               </Grid>
-              <Grid item xs={2} sm={2} sx={{ display: 'none' }}>
+              <Grid size={{ xs: 2, sm: 2 }} sx={{ display: 'none' }}>
                 <Controller
                   control={control}
                   defaultValue={currentWarehouseData?.retail_price}
@@ -209,7 +209,7 @@ export const PartsList: FC<{
                 />
               </Grid>
 
-              <Grid item xs={1} sm={1}>
+              <Grid size={{ xs: 1, sm: 1 }}>
                 <IconButton
                   onClick={() => {
                     setPartsFields((prev) =>

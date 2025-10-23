@@ -10,7 +10,7 @@ import {
   DataGrid,
   GridColDef,
   GridEventListener,
-  GridValueGetterParams,
+  GridValueGetter,
 } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
@@ -37,16 +37,14 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
       headerName: t('usersColumns.created'),
       width: 150,
       editable: true,
-      valueGetter: (params: GridValueGetterParams) =>
-        `${new Date(params.row.created).toLocaleDateString()}`,
+      valueGetter: (_v, row) => `${new Date(row.created).toLocaleDateString()}`,
     },
     is_active: {
       field: 'is_active',
       headerName: t('usersColumns.status'),
       width: 150,
       editable: true,
-      valueGetter: (params: GridValueGetterParams) =>
-        t(`usersColumns.is_active_${params.row.is_active}`),
+      valueGetter: (_v, row) => t(`usersColumns.is_active_${row.is_active}`),
     },
     role: {
       field: 'role',
@@ -113,7 +111,7 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
                   },
                 },
               }}
-              pageSizeOptions={[50]}
+              //pageSizeOptions={[50]}
               //checkboxSelection
               disableRowSelectionOnClick
               disableColumnFilter
