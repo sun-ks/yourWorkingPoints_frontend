@@ -90,20 +90,21 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
                 },
               }}
               //pageSizeOptions={[50]}
-              disableRowSelectionOnClick
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              slotProps={{
+              //disableRowSelectionOnClick
+              //disableColumnFilter
+              //disableColumnSelector
+              //disableDensitySelector
+              /*lotProps={{
                 toolbar: {
                   showQuickFilter: true,
                   quickFilterProps: { debounceMs: 500 },
                 },
-              }}
+              }}*/
               onRowClick={handleRowClick}
               columnOrder={columnOrder}
               setColumnOrder={setColumnOrder}
-              slots={{ toolbar: CustomToolbar }}
+              //slots={{ toolbar: CustomToolbar }}
+              showToolbar={true}
               columnDefs={columnDefs}
             />
           </Box>

@@ -68,17 +68,18 @@ const StyledDataGridWarehouse: FC<any> = ({
                 },
               }}
               //pageSizeOptions={[50]}
-              disableRowSelectionOnClick
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              slots={{ toolbar: GridToolbar }}
-              slotProps={{
+              //disableRowSelectionOnClick
+              //disableColumnFilter
+              //disableColumnSelector
+              //disableDensitySelector
+              //slots={{ toolbar: GridToolbar }}
+              /*slotProps={{
                 toolbar: {
                   showQuickFilter: true,
                   quickFilterProps: { debounceMs: 500 },
                 },
-              }}
+              }}*/
+              showToolbar={true}
               onRowClick={handleRowClick}
               columnOrder={columnOrder}
               setColumnOrder={setColumnOrder}

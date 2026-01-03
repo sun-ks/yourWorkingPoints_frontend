@@ -104,24 +104,25 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               scrollbarSize={53}
               rows={users || []}
               getRowId={(row) => row.user_id}
-              initialState={{
+              /*initialState={{
                 pagination: {
                   paginationModel: {
                     pageSize: 10,
                   },
                 },
-              }}
+              }}*/
               //pageSizeOptions={[50]}
               //checkboxSelection
-              disableRowSelectionOnClick
-              disableColumnFilter
-              disableColumnSelector
-              disableDensitySelector
-              slots={{ toolbar: CustomToolbar }}
+              //disableRowSelectionOnClick
+              //disableColumnFilter
+              //disableColumnSelector
+              //disableDensitySelector
+              //slots={{ toolbar: CustomToolbar }}
               onRowClick={handleRowClick}
               columnDefs={columnDefs}
               columnOrder={columnOrder}
               setColumnOrder={setColumnOrder}
+              showToolbar={true}
             />
           </Box>
         </>

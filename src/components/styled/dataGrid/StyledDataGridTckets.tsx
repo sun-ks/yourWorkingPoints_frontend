@@ -109,16 +109,17 @@ const StyledDataGridTckets: FC<{
             getRowId={(row: IItem) => row.ticket_id}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
             //pageSizeOptions={[10, 25, 50, 100]}
-            disableRowSelectionOnClick
-            disableColumnSelector
-            disableDensitySelector
-            slots={{ toolbar: GridToolbar }}
+            //disableRowSelectionOnClick
+            //disableColumnSelector
+            //disableDensitySelector
+            /*slots={{ toolbar: GridToolbar }}
             slotProps={{
               toolbar: {
                 showQuickFilter: true,
                 quickFilterProps: { debounceMs: 500 },
               },
-            }}
+            }}*/
+            showToolbar={true}
             onRowClick={handleRowClick}
             columnOrder={columnOrder}
             setColumnOrder={setColumnOrder}
