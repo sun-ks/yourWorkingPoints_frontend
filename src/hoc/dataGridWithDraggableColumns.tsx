@@ -11,7 +11,6 @@ import React, { Dispatch, SetStateAction, useMemo } from 'react';
 
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import zIndex from '@mui/material/styles/zIndex';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 
 const SortableHeader = ({

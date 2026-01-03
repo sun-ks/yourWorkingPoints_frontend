@@ -5,36 +5,27 @@ import React, { useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import './App.css';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { WebSocketProvider } from './context/WebSocketProvider';
+import { useAppDispatch } from './hooks/redux';
 import Router from './routes';
-import { postAPI } from './services/PostService';
 import { fetchUsers } from './store/reducers/ActionCreators';
-import { todosSlice } from './store/reducers/TodosSlice';
 
 function App() {
-  const state = useAppSelector((state) => state.testReducer);
-
-  const {
-    increment: incriment,
-    decrement: dicriment,
-    todoFetching: todoFetcing,
-  } = todosSlice.actions;
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
 
-  const { data: posts, error, isLoading } = postAPI.useFetchAllPostsQuery(200);
-
   return (
-    <div className="App">
-      <CssBaseline />
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </div>
+    <WebSocketProvider>
+      <div className="App">
+        <CssBaseline />
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </div>
+    </WebSocketProvider>
   );
 }
 
