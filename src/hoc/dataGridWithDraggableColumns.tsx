@@ -11,7 +11,6 @@ import React, { Dispatch, SetStateAction, useMemo } from 'react';
 
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import zIndex from '@mui/material/styles/zIndex';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
 
 const SortableHeader = ({
@@ -61,12 +60,22 @@ function draggableDataGrid(
     columnDefs,
     columnOrder,
     setColumnOrder,
+    columnVisibilityModel,
+    setColumnVisibilityModel,
     pageSizeOptions = pageSizeOptionsDefault,
+    columnWidths,
+    setColumnWidths,
     ...props
   }: {
     columnDefs: Record<string, GridColDef>;
     columnOrder: string[];
+    columnVisibilityModel?: { [key: string]: boolean };
     setColumnOrder: Dispatch<SetStateAction<string[]>>;
+    setColumnVisibilityModel: Dispatch<
+      SetStateAction<{ [key: string]: boolean }>
+    >;
+    columnWidths?: Record<string, number>;
+    setColumnWidths?: Dispatch<SetStateAction<Record<string, number>>>;
   } & Omit<DataGridProps, 'columns'>) {
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event;
@@ -97,6 +106,15 @@ function draggableDataGrid(
       [columnOrder, columnDefs],
     );
 
+    const columnsSavedWithWidths = useMemo(
+      () =>
+        columns.map((col) => ({
+          ...col,
+          width: (columnWidths && columnWidths[col.field]) ?? col.width,
+        })),
+      [columns, columnWidths],
+    );
+
     return (
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext
@@ -106,10 +124,21 @@ function draggableDataGrid(
           <Box sx={{ width: '100%' }}>
             <StyledDataGrid
               {...props}
-              columns={columns}
+              columns={columnsSavedWithWidths}
               pageSizeOptions={pageSizeOptions}
               localeText={{
                 paginationRowsPerPage: t('data_grid.paginationRowsPerPage'),
+              }}
+              onColumnWidthChange={(params) => {
+                if (!setColumnWidths) return;
+                setColumnWidths((prev) => ({
+                  ...prev,
+                  [params.colDef.field]: params.width,
+                }));
+              }}
+              columnVisibilityModel={columnVisibilityModel}
+              onColumnVisibilityModelChange={(newModel) => {
+                setColumnVisibilityModel(newModel);
               }}
             />
           </Box>

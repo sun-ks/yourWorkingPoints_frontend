@@ -9,6 +9,8 @@ import services from '../services/index';
 import { migrations } from './migrations';
 import authReducer from './reducers/AuthSlice';
 import testReducer from './reducers/TodosSlice';
+import dataGridColumnVisibilityModelReducer from './reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
+import dataGridColumnWidthsReducer from './reducers/dataGridColumnWidths/dataGridColumnWidths';
 import dataGridOrderReducer from './reducers/dataGridOrder/DataGridOrderSlice';
 
 //defaults to localStorage for web
@@ -27,6 +29,8 @@ const reducers = {
   testReducer,
   authReducer,
   dataGridOrderReducer,
+  dataGridColumnVisibilityModelReducer,
+  dataGridColumnWidthsReducer,
   [postAPI.reducerPath]: postAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [pointAPI.reducerPath]: pointAPI.reducer,
@@ -48,7 +52,13 @@ const rootReducer = (state: any, action: any) => {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['testReducer', 'authReducer', 'dataGridOrderReducer'],
+  whitelist: [
+    'testReducer',
+    'authReducer',
+    'dataGridOrderReducer',
+    'dataGridColumnVisibilityModelReducer',
+    'dataGridColumnWidthsReducer',
+  ],
   migrate: createMigrate(migrations, { debug: false }),
 };
 
