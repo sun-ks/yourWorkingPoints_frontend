@@ -5,32 +5,34 @@ import { useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import {
-  DataGrid,
-  GridColDef,
-  GridEventListener,
-  GridValueGetter,
-} from '@mui/x-data-grid';
+import { GridColDef, GridEventListener } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
+import { dataGridColumnVisibilityModelSlice } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
+import { selectDataGridColumnVisibilityModeUsers } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
+import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
+import { selectDataGridColumnWidthsClients } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectUsersDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
-import { CustomToolbar } from '../CustomToolbar';
-
-const StyledHeaderAskClient = styled('span')(({ theme }) => ({
-  color: theme.palette.error.light,
-  textAlign: 'left',
-  display: 'block',
-  fontSize: 14,
-  marginBottom: 8,
-}));
 
 const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
   const navigate = useNavigate();
   const { setColumnsOrderUsers } = dataGridOrderSlice.actions;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { setColumnsVisibilityModelUsers } =
+    dataGridColumnVisibilityModelSlice.actions;
+
+  const { setdataGridColumnWidthsClients } = dataGridColumnWidthsSlice.actions;
+
+  const columnVisibilityModelDefs = useSelector(
+    selectDataGridColumnVisibilityModeUsers,
+  );
+
+  const [columnVisibilityModel, setColumnVisibilityModel] = useState<{
+    [key: string]: boolean;
+  }>(columnVisibilityModelDefs);
+
   const columnDefs: Record<string, GridColDef> = {
     created: {
       field: 'created',
@@ -71,12 +73,24 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
       editable: true,
     },
   };
-
+  const columnWidthsDefs = useSelector(selectDataGridColumnWidthsClients);
   const columnOrderDefs = useSelector(selectUsersDataGridColumnsOrder);
   const [columnOrder, setColumnOrder] = useState(columnOrderDefs);
+  const [columnWidths, setColumnWidths] =
+    useState<Record<string, number>>(columnWidthsDefs);
+
   useEffect(() => {
     dispatch(setColumnsOrderUsers(columnOrder));
   }, [columnOrder]);
+
+  useEffect(() => {
+    dispatch(setColumnsVisibilityModelUsers(columnVisibilityModel));
+  }, [columnVisibilityModel]);
+
+  useEffect(() => {
+    dispatch(setdataGridColumnWidthsClients(columnWidths));
+  }, [columnWidths]);
+
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
     const user_id = params.row.user_id;
     navigate(`/${type}/${user_id}`);
@@ -104,25 +118,15 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               scrollbarSize={53}
               rows={users || []}
               getRowId={(row) => row.user_id}
-              /*initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 10,
-                  },
-                },
-              }}*/
-              //pageSizeOptions={[50]}
-              //checkboxSelection
-              //disableRowSelectionOnClick
-              //disableColumnFilter
-              //disableColumnSelector
-              //disableDensitySelector
-              //slots={{ toolbar: CustomToolbar }}
               onRowClick={handleRowClick}
               columnDefs={columnDefs}
               columnOrder={columnOrder}
               setColumnOrder={setColumnOrder}
               showToolbar={true}
+              columnVisibilityModel={columnVisibilityModel}
+              setColumnVisibilityModel={setColumnVisibilityModel}
+              columnWidths={columnWidths}
+              setColumnWidths={setColumnWidths}
             />
           </Box>
         </>

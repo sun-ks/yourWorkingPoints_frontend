@@ -13,9 +13,13 @@ import { Box, Typography } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import { styled } from '@mui/material/styles';
-import { GridEventListener, GridToolbar } from '@mui/x-data-grid';
+import { GridEventListener } from '@mui/x-data-grid';
 
 import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggableColumns';
+import { dataGridColumnVisibilityModelSlice } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
+import { selectDataGridColumnVisibilityModeTickets } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
+import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
+import { selectDataGridColumnWidthsTickets } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectTicketsDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { IItem } from '../../../types/IItem';
@@ -38,13 +42,40 @@ const StyledDataGridTckets: FC<{
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setColumnsOrderTickets } = dataGridOrderSlice.actions;
+
+  const { setColumnsVisibilityModelTickets } =
+    dataGridColumnVisibilityModelSlice.actions;
+
+  const { setdataGridColumnWidthsTickets } = dataGridColumnWidthsSlice.actions;
+
   const columnOrderDefs = useSelector(selectTicketsDataGridColumnsOrder);
 
+  const columnVisibilityModelDefs = useSelector(
+    selectDataGridColumnVisibilityModeTickets,
+  );
+
+  const columnWidthsDefs = useSelector(selectDataGridColumnWidthsTickets);
+
   const [columnOrder, setColumnOrder] = useState(columnOrderDefs);
+
+  const [columnVisibilityModel, setColumnVisibilityModel] = useState<{
+    [key: string]: boolean;
+  }>(columnVisibilityModelDefs);
+
+  const [columnWidths, setColumnWidths] =
+    useState<Record<string, number>>(columnWidthsDefs);
 
   useEffect(() => {
     dispatch(setColumnsOrderTickets(columnOrder));
   }, [columnOrder]);
+
+  useEffect(() => {
+    dispatch(setColumnsVisibilityModelTickets(columnVisibilityModel));
+  }, [columnVisibilityModel]);
+
+  useEffect(() => {
+    dispatch(setdataGridColumnWidthsTickets(columnWidths));
+  }, [columnWidths]);
 
   const columnDefs = getTicketColumns(t);
 
@@ -108,21 +139,14 @@ const StyledDataGridTckets: FC<{
             rows={tickets || []}
             getRowId={(row: IItem) => row.ticket_id}
             initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
-            //pageSizeOptions={[10, 25, 50, 100]}
-            //disableRowSelectionOnClick
-            //disableColumnSelector
-            //disableDensitySelector
-            /*slots={{ toolbar: GridToolbar }}
-            slotProps={{
-              toolbar: {
-                showQuickFilter: true,
-                quickFilterProps: { debounceMs: 500 },
-              },
-            }}*/
             showToolbar={true}
             onRowClick={handleRowClick}
             columnOrder={columnOrder}
             setColumnOrder={setColumnOrder}
+            columnVisibilityModel={columnVisibilityModel}
+            setColumnVisibilityModel={setColumnVisibilityModel}
+            columnWidths={columnWidths}
+            setColumnWidths={setColumnWidths}
           />
         </>
       ) : (
