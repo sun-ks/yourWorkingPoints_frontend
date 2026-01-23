@@ -12,6 +12,7 @@ import testReducer from './reducers/TodosSlice';
 import dataGridColumnVisibilityModelReducer from './reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
 import dataGridColumnWidthsReducer from './reducers/dataGridColumnWidths/dataGridColumnWidths';
 import dataGridOrderReducer from './reducers/dataGridOrder/DataGridOrderSlice';
+import dataGridRowsForPageReducer from './reducers/dataGridRowsForPage/dataGridRowsForPage';
 
 //defaults to localStorage for web
 
@@ -31,6 +32,7 @@ const reducers = {
   dataGridOrderReducer,
   dataGridColumnVisibilityModelReducer,
   dataGridColumnWidthsReducer,
+  dataGridRowsForPageReducer,
   [postAPI.reducerPath]: postAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,
   [pointAPI.reducerPath]: pointAPI.reducer,
@@ -58,6 +60,7 @@ const persistConfig = {
     'dataGridOrderReducer',
     'dataGridColumnVisibilityModelReducer',
     'dataGridColumnWidthsReducer',
+    'dataGridRowsForPageReducer',
   ],
   migrate: createMigrate(migrations, { debug: false }),
 };

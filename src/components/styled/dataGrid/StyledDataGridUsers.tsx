@@ -11,13 +11,16 @@ import { DataGridWithDraggableColumns } from '../../../hoc/dataGridWithDraggable
 import { dataGridColumnVisibilityModelSlice } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
 import { selectDataGridColumnVisibilityModeUsers } from '../../../store/reducers/dataGridColumnVisibilityModel/dataGridColumnVisibilityModelSlice';
 import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
-import { selectDataGridColumnWidthsClients } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
+import { selectDataGridColumnWidthsUsers } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectUsersDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { dataGridRowsForPageSlice } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
+import { selectDataGridRowsForPageUsers } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
 
 const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
   const navigate = useNavigate();
   const { setColumnsOrderUsers } = dataGridOrderSlice.actions;
+  const { setdataGridRowsForPageUsers } = dataGridRowsForPageSlice.actions;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setColumnsVisibilityModelUsers } =
@@ -73,11 +76,15 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
       editable: true,
     },
   };
-  const columnWidthsDefs = useSelector(selectDataGridColumnWidthsClients);
+  const columnWidthsDefs = useSelector(selectDataGridColumnWidthsUsers);
   const columnOrderDefs = useSelector(selectUsersDataGridColumnsOrder);
+  const rowsForPageDef = useSelector(selectDataGridRowsForPageUsers);
+
   const [columnOrder, setColumnOrder] = useState(columnOrderDefs);
   const [columnWidths, setColumnWidths] =
     useState<Record<string, number>>(columnWidthsDefs);
+
+  const [rowsForPage, setRowsForPage] = useState<number>(rowsForPageDef);
 
   useEffect(() => {
     dispatch(setColumnsOrderUsers(columnOrder));
@@ -90,6 +97,10 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
   useEffect(() => {
     dispatch(setdataGridColumnWidthsClients(columnWidths));
   }, [columnWidths]);
+
+  useEffect(() => {
+    dispatch(setdataGridRowsForPageUsers(rowsForPage));
+  }, [rowsForPage]);
 
   const handleRowClick: GridEventListener<'rowClick'> = (params) => {
     const user_id = params.row.user_id;
@@ -127,6 +138,8 @@ const StyledDataGridUsers: FC<any> = ({ users, error, isLoading, type }) => {
               setColumnVisibilityModel={setColumnVisibilityModel}
               columnWidths={columnWidths}
               setColumnWidths={setColumnWidths}
+              setRowsForPage={setRowsForPage}
+              rowsForPage={rowsForPage}
             />
           </Box>
         </>

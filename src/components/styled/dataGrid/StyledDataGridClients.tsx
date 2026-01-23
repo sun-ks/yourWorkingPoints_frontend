@@ -14,6 +14,8 @@ import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColum
 import { selectDataGridColumnWidthsClients } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectClientDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { selectDataGridRowsForPageClients } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
+import { dataGridRowsForPageSlice } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
 
 const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const navigate = useNavigate();
@@ -21,11 +23,14 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setColumnsOrderClients } = dataGridOrderSlice.actions;
+  const { setdataGridRowsForPageClients } = dataGridRowsForPageSlice.actions;
   const columnOrderDefs = useSelector(selectClientDataGridColumnsOrder);
   const columnVisibilityModelDefs = useSelector(
     selectDataGridColumnVisibilityModeClients,
   );
   const columnWidthsDefs = useSelector(selectDataGridColumnWidthsClients);
+
+  const rowsForPageDef = useSelector(selectDataGridRowsForPageClients);
 
   const { setColumnsVisibilityModelClients } =
     dataGridColumnVisibilityModelSlice.actions;
@@ -41,6 +46,8 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   const [columnWidths, setColumnWidths] =
     useState<Record<string, number>>(columnWidthsDefs);
 
+  const [rowsForPage, setRowsForPage] = useState<number>(rowsForPageDef);
+
   useEffect(() => {
     dispatch(setColumnsOrderClients(columnOrder));
   }, [columnOrder]);
@@ -52,6 +59,10 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
   useEffect(() => {
     dispatch(setdataGridColumnWidthsClients(columnWidths));
   }, [columnWidths]);
+
+  useEffect(() => {
+    dispatch(setdataGridRowsForPageClients(rowsForPage));
+  }, [rowsForPage]);
 
   const columnDefs: Record<string, GridColDef> = {
     created: {
@@ -124,6 +135,8 @@ const StyledDataGridClients: FC<any> = ({ clients, error, isLoading }) => {
               setColumnVisibilityModel={setColumnVisibilityModel}
               columnWidths={columnWidths}
               setColumnWidths={setColumnWidths}
+              setRowsForPage={setRowsForPage}
+              rowsForPage={rowsForPage}
             />
           </Box>
         </>

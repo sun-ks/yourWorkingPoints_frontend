@@ -65,6 +65,8 @@ function draggableDataGrid(
     pageSizeOptions = pageSizeOptionsDefault,
     columnWidths,
     setColumnWidths,
+    setRowsForPage,
+    rowsForPage = 10,
     ...props
   }: {
     columnDefs: Record<string, GridColDef>;
@@ -76,6 +78,8 @@ function draggableDataGrid(
     >;
     columnWidths?: Record<string, number>;
     setColumnWidths?: Dispatch<SetStateAction<Record<string, number>>>;
+    setRowsForPage?: Dispatch<SetStateAction<number>>;
+    rowsForPage?: number;
   } & Omit<DataGridProps, 'columns'>) {
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event;
@@ -124,6 +128,7 @@ function draggableDataGrid(
           <Box sx={{ width: '100%' }}>
             <StyledDataGrid
               {...props}
+              paginationModel={{ pageSize: rowsForPage, page: 0 }}
               columns={columnsSavedWithWidths}
               pageSizeOptions={pageSizeOptions}
               localeText={{
@@ -139,6 +144,10 @@ function draggableDataGrid(
               columnVisibilityModel={columnVisibilityModel}
               onColumnVisibilityModelChange={(newModel) => {
                 setColumnVisibilityModel(newModel);
+              }}
+              onPaginationModelChange={(newModel) => {
+                if (!setRowsForPage) return;
+                setRowsForPage(newModel.pageSize);
               }}
             />
           </Box>
