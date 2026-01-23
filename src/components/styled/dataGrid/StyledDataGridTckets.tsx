@@ -22,6 +22,8 @@ import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColum
 import { selectDataGridColumnWidthsTickets } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectTicketsDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { dataGridRowsForPageSlice } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
+import { selectDataGridRowsForPageTickets } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
 import { IItem } from '../../../types/IItem';
 import { getTicketColumns } from './columns/ticketsColumns';
 
@@ -48,7 +50,11 @@ const StyledDataGridTckets: FC<{
 
   const { setdataGridColumnWidthsTickets } = dataGridColumnWidthsSlice.actions;
 
+  const { setdataGridRowsForPageTickets } = dataGridRowsForPageSlice.actions;
+
   const columnOrderDefs = useSelector(selectTicketsDataGridColumnsOrder);
+
+  const rowsForPageDef = useSelector(selectDataGridRowsForPageTickets);
 
   const columnVisibilityModelDefs = useSelector(
     selectDataGridColumnVisibilityModeTickets,
@@ -65,6 +71,8 @@ const StyledDataGridTckets: FC<{
   const [columnWidths, setColumnWidths] =
     useState<Record<string, number>>(columnWidthsDefs);
 
+  const [rowsForPage, setRowsForPage] = useState<number>(rowsForPageDef);
+
   useEffect(() => {
     dispatch(setColumnsOrderTickets(columnOrder));
   }, [columnOrder]);
@@ -76,6 +84,10 @@ const StyledDataGridTckets: FC<{
   useEffect(() => {
     dispatch(setdataGridColumnWidthsTickets(columnWidths));
   }, [columnWidths]);
+
+  useEffect(() => {
+    dispatch(setdataGridRowsForPageTickets(rowsForPage));
+  }, [rowsForPage]);
 
   const columnDefs = getTicketColumns(t);
 
@@ -147,6 +159,8 @@ const StyledDataGridTckets: FC<{
             setColumnVisibilityModel={setColumnVisibilityModel}
             columnWidths={columnWidths}
             setColumnWidths={setColumnWidths}
+            setRowsForPage={setRowsForPage}
+            rowsForPage={rowsForPage}
           />
         </>
       ) : (

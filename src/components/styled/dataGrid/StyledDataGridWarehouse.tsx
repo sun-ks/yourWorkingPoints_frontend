@@ -16,6 +16,8 @@ import { selectDataGridColumnWidthsWarehouses } from '../../../store/reducers/da
 import { dataGridColumnWidthsSlice } from '../../../store/reducers/dataGridColumnWidths/dataGridColumnWidths';
 import { dataGridOrderSlice } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
 import { selectWarehouseDataGridColumnsOrder } from '../../../store/reducers/dataGridOrder/DataGridOrderSlice';
+import { selectDataGridRowsForPageWarehouses } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
+import { dataGridRowsForPageSlice } from '../../../store/reducers/dataGridRowsForPage/dataGridRowsForPage';
 import { getWarehouseColumns } from './columns/warehouseColumns';
 
 const StyledDataGridWarehouse: FC<any> = ({
@@ -29,8 +31,10 @@ const StyledDataGridWarehouse: FC<any> = ({
   const { t } = useTranslation();
   const columnOrderDefs = useSelector(selectWarehouseDataGridColumnsOrder);
   const columnWidthsDefs = useSelector(selectDataGridColumnWidthsWarehouses);
+  const rowsForPageDef = useSelector(selectDataGridRowsForPageWarehouses);
   const [columnOrder, setColumnOrder] = useState(columnOrderDefs);
   const { setColumnsOrderWarehouse } = dataGridOrderSlice.actions;
+  const { setdataGridRowsForPageWarehouses } = dataGridRowsForPageSlice.actions;
   const columnVisibilityModelDefs = useSelector(
     selectDataGridColumnVisibilityModeWarehouse,
   );
@@ -47,6 +51,8 @@ const StyledDataGridWarehouse: FC<any> = ({
   const [columnWidths, setColumnWidths] =
     useState<Record<string, number>>(columnWidthsDefs);
 
+  const [rowsForPage, setRowsForPage] = useState<number>(rowsForPageDef);
+
   useEffect(() => {
     dispatch(setColumnsOrderWarehouse(columnOrder));
   }, [columnOrder]);
@@ -58,6 +64,10 @@ const StyledDataGridWarehouse: FC<any> = ({
   useEffect(() => {
     dispatch(setdataGridColumnWidthsWarehouses(columnWidths));
   }, [columnWidths]);
+
+  useEffect(() => {
+    dispatch(setdataGridRowsForPageWarehouses(rowsForPage));
+  }, [rowsForPage]);
 
   const columnDefs = getWarehouseColumns(t, points);
 
@@ -104,6 +114,8 @@ const StyledDataGridWarehouse: FC<any> = ({
               setColumnVisibilityModel={setColumnVisibilityModel}
               columnWidths={columnWidths}
               setColumnWidths={setColumnWidths}
+              setRowsForPage={setRowsForPage}
+              rowsForPage={rowsForPage}
             />
           </Box>
         </>
