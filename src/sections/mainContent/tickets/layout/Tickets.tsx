@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import StyledRouterLink from '../../../../components/styled/RouterLink';
 import { WebSocketContext } from '../../../../context/WebSocketContext';
 import Content from '../Content';
+import { TNewTicketsCreatedByOtherUser } from '../types';
 
 const Tickets: FC = () => {
   const { t } = useTranslation();
@@ -22,14 +23,18 @@ const Tickets: FC = () => {
 
   const ws = wsContext?.ws;
 
-  const [isNewTicketAlertOpen, setIsNewTicketAlertOpen] = useState(false);
+  const [newTicketsCreatedByOtherUser, setNewTicketsCreatedByOtherUser] =
+    useState<TNewTicketsCreatedByOtherUser[]>([]);
 
   useEffect(() => {
     if (!ws) return;
     const handleMessage = (e: MessageEvent) => {
       const info = JSON.parse(e?.data);
       if (info?.type === 'TICKET_CREATED') {
-        setIsNewTicketAlertOpen(true);
+        setNewTicketsCreatedByOtherUser((prev) => [
+          ...prev,
+          { ...info.payload },
+        ]);
       }
     };
 
@@ -39,6 +44,10 @@ const Tickets: FC = () => {
       ws.removeEventListener('message', handleMessage);
     };
   }, [ws]);
+
+  useEffect(() => {
+    console.log('NewTicketsCreatedByOtherUser', newTicketsCreatedByOtherUser);
+  }, [newTicketsCreatedByOtherUser]);
 
   return (
     <HelmetProvider>
@@ -77,7 +86,7 @@ const Tickets: FC = () => {
         </Toolbar>
       </AppBar>
       <Container>
-        {isNewTicketAlertOpen && (
+        {newTicketsCreatedByOtherUser.length > 0 && (
           <Alert
             action={
               <IconButton
@@ -85,7 +94,7 @@ const Tickets: FC = () => {
                 color="inherit"
                 size="small"
                 onClick={() => {
-                  setIsNewTicketAlertOpen(false);
+                  setNewTicketsCreatedByOtherUser([]);
                 }}
               >
                 <CloseIcon fontSize="inherit" />
@@ -102,6 +111,16 @@ const Tickets: FC = () => {
             severity="info"
           >
             {t('tickets.new_ticket_created_by_other_user_alert')}
+            {newTicketsCreatedByOtherUser.map((ticket) => (
+              <Box
+                key={ticket.ticketId}
+                sx={{ textAlign: 'left', marginTop: 1 }}
+              >
+                <StyledRouterLink to={`/items/${ticket.ticketId}`}>
+                  {ticket.ticketName}, {ticket.ticketPriority}
+                </StyledRouterLink>
+              </Box>
+            ))}
           </Alert>
         )}
         <Box
@@ -109,7 +128,9 @@ const Tickets: FC = () => {
             padding: 1,
           }}
         >
-          <Content />
+          <Content
+            newTicketsCreatedByOtherUser={newTicketsCreatedByOtherUser}
+          />
         </Box>
       </Container>
     </HelmetProvider>
