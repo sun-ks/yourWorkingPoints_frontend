@@ -24,6 +24,7 @@ const {
   companyAPI,
   clientAPI,
   warehouseAPI,
+  refreshTokenAPI,
 } = services;
 
 const reducers = {
@@ -40,6 +41,7 @@ const reducers = {
   [companyAPI.reducerPath]: companyAPI.reducer,
   [clientAPI.reducerPath]: clientAPI.reducer,
   [warehouseAPI.reducerPath]: warehouseAPI.reducer,
+  [refreshTokenAPI.reducerPath]: refreshTokenAPI.reducer,
 };
 
 const appReducer = combineReducers(reducers);
@@ -94,7 +96,8 @@ export const setupStore = () => {
         .concat(ticketAPI.middleware)
         .concat(companyAPI.middleware)
         .concat(clientAPI.middleware)
-        .concat(warehouseAPI.middleware),
+        .concat(warehouseAPI.middleware)
+        .concat(refreshTokenAPI.middleware),
     devTools: true, // Enable Redux DevTools
   });
 };

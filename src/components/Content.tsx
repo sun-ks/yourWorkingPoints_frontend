@@ -6,7 +6,7 @@ import Paper from '@mui/material/Paper';
 
 export default function Content() {
   return (
-    <Paper sx={{ margin: 'auto 10px auto 10px', overflow: 'hidden' }}>
+    <Paper sx={{ margin: 'auto 10px auto 10px' }}>
       <Outlet />
     </Paper>
   );
