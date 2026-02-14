@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
 import React, { FC } from 'react';
 
@@ -18,6 +18,7 @@ import AddNewClient from './sections/mainContent/addNewClient/layout/AddNewClien
 import AddNewWorker from './sections/mainContent/addNewWorker/layout/AddNewWorker';
 import Client from './sections/mainContent/client/layout/Client';
 import Clients from './sections/mainContent/clients/layout/Clients';
+import ContactUs from './sections/mainContent/contactUs/index';
 import CreateNewPoint from './sections/mainContent/createNewPoint/layout/CreateNewPoint';
 import CreateNewTiket from './sections/mainContent/createNewTicket/layout/CreateNewTicket';
 import СompanySettings from './sections/mainContent/editCompany/layout/СompanySettings';
@@ -76,6 +77,7 @@ const Router: FC = () => {
             { path: '/clients', element: <Clients /> },
             { path: '/addClient', element: <AddNewClient /> },
             { path: '/warehouse', element: <Warehouse /> },
+            { path: '/contact-us', element: <ContactUs /> },
           ],
         },
       ],

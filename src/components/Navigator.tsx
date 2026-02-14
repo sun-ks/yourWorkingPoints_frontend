@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import * as React from 'react';
 
 import AlbumIcon from '@mui/icons-material/Album';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
@@ -15,15 +15,14 @@ import WarehouseIcon from '@mui/icons-material/Warehouse';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer, { DrawerProps } from '@mui/material/Drawer';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { pointAPI } from '../services/PointService';
-import { selectAccessToken } from '../store/reducers/AuthSlice';
 
 const item = {
   py: '2px',
@@ -43,12 +42,10 @@ const itemCategory = {
 export default function Navigator(props: DrawerProps) {
   const { ...other } = props;
   const { point_id } = useParams<{ point_id: string }>();
-  const accessToken = useSelector(selectAccessToken);
-  const {
-    data: point,
-    error,
-    isLoading: isLoading_point,
-  } = pointAPI.useGetPointByPointIdQuery(point_id);
+  const isPhone = useMediaQuery('(max-width:760px)');
+
+  const { data: point, isLoading: isLoading_point } =
+    pointAPI.useGetPointByPointIdQuery(point_id);
 
   const { t } = useTranslation();
   const theme = useTheme();
@@ -94,14 +91,13 @@ export default function Navigator(props: DrawerProps) {
       ],
     },
     {
-      text: t('will_be_soon'),
       children: [
         {
-          id: t('statistics'),
+          id: t('contact_us'),
           active: false,
-          avaliable: false,
-          linkTo: '/',
-          icon: <PermMediaOutlinedIcon />,
+          avaliable: true,
+          linkTo: '/contact-us',
+          icon: <ContactSupportIcon />,
         },
       ],
     },
@@ -109,17 +105,26 @@ export default function Navigator(props: DrawerProps) {
 
   return (
     <Drawer variant="permanent" {...other} data-testid="navigator">
-      <List disablePadding>
-        <ListItem
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+        }}
+      >
+        <Box
           sx={{
             ...item,
             ...itemCategory,
             fontSize: 16,
             color: '#fff',
+            pt: { xs: 1, sm: 2 },
+            pb: { xs: 1, sm: 2 },
+            textAlign: 'center',
           }}
         >
-          {t('company_name')}
-        </ListItem>
+          {isPhone ? t('company_name_short') : t('company_name')}
+        </Box>
         <NavLink to="/" style={{ textDecoration: 'none' }}>
           <ListItem
             sx={{
@@ -144,38 +149,57 @@ export default function Navigator(props: DrawerProps) {
             </ListItemText>
           </ListItem>
         </NavLink>
-
-        {categories.map(({ children, text }, i) => (
-          <Box key={`main-menu-item-${i}`} sx={{ bgcolor: '#101F33' }}>
-            <ListItem sx={{ py: 2, px: 3 }}>
-              <ListItemText sx={{ color: '#fff' }}>{text}</ListItemText>
-            </ListItem>
-            {children.map(
-              ({ id: childId, icon, active, avaliable, linkTo }) => (
-                <NavLink
-                  key={childId}
-                  to={linkTo}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <ListItem
-                    disablePadding
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100%',
+            '& > :first-child': { pt: { xs: 2, sm: 3 } },
+            '& > :last-child': {
+              mt: 'auto',
+              background: 'transparent',
+              '& .MuiListItemButton-gutters': {
+                '&:hover, &:focus, &:active': {
+                  background: 'transparent',
+                  color: theme.palette.info.light,
+                },
+              },
+            },
+          }}
+        >
+          {categories.map(({ children }, i) => (
+            <Box key={`main-menu-item-${i}`} sx={{ bgcolor: '#101F33' }}>
+              {children.map(
+                ({ id: childId, icon, active, avaliable, linkTo }) => (
+                  <NavLink
                     key={childId}
-                    sx={{
-                      opacity: !avaliable ? 0.2 : undefined,
+                    to={linkTo}
+                    style={{
+                      textDecoration: 'none',
+                      marginBottom: 0,
+                      display: 'block',
                     }}
                   >
-                    <ListItemButton selected={active} sx={item}>
-                      <ListItemIcon>{icon}</ListItemIcon>
-                      <ListItemText>{childId}</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                </NavLink>
-              ),
-            )}
-            <Divider sx={{ mt: 2 }} />
-          </Box>
-        ))}
-      </List>
+                    <ListItem
+                      disablePadding
+                      key={childId}
+                      sx={{
+                        opacity: !avaliable ? 0.2 : undefined,
+                      }}
+                    >
+                      <ListItemButton selected={active} sx={item}>
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText>{childId}</ListItemText>
+                      </ListItemButton>
+                    </ListItem>
+                  </NavLink>
+                ),
+              )}
+              <Divider sx={{ mt: 2 }} />
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Drawer>
   );
 }
