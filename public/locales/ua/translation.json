@@ -32,10 +32,15 @@
     "default_label": "Інші",
     "added_successfully": "Успішно додано!"
   },
+  "contactUs": {
+    "title_seo": "Контакти",
+    "text1": "Маєте ідею нової функції, запитання або знайшли помилку?",
+    "text2": "Наша команда із задоволенням допоможе — напишіть нам у будь-який час."
+  },
   "clients": {
-    "clients_title_seo": "Всі клієнти",
+    "clients_title_seo": "Клієнти",
     "add_client": "Додати клієнта",
-    "clients_menu_item": "Всі Кліенти",
+    "clients_menu_item": "Клієнти",
     "add_client_btn": "Додати Клієнта",
     "add_client_title": "Додати Нового Клієнта",
     "client_added": "Клієнт додан успішно!",
@@ -46,6 +51,7 @@
     "edit_client": "Редагувати кліента"
   },
   "warehouse": {
+    "title_seo": "Склад",
     "clients_menu_item": "Склад",
     "add_inventory_item": "Додати товар на склад",
     "title": "Додати товар на склад",

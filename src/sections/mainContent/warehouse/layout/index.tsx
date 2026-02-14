@@ -1,24 +1,21 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { Box, Button, Container, Grid, Toolbar } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 
-import { isOwner } from '../../../../store/reducers/AuthSlice';
 import Content from '../Content';
 
 const Warehouse: FC = () => {
   const { t } = useTranslation();
-  const isOwnerVal = useSelector(isOwner);
 
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{`YWP | ${t('clients.clients_title_seo')}`}</title>
+        <title>{`YWP | ${t('warehouse.title_seo')}`}</title>
       </Helmet>
       <AppBar
         position="static"

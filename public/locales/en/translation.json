@@ -8,6 +8,7 @@
   "will_be_soon": "Will be soon:",
   "workers": "Workers",
   "statistics": "Statistics",
+  "contact_us": "Contact Us",
   "shop": "Shop",
   "company_name": "Your Working Points",
   "company_name_short": "YWP",
@@ -32,10 +33,15 @@
     "default_label": "Others",
     "added_successfully": "Added successfully!"
   },
+  "contactUs": {
+    "title_seo": "Contact us",
+    "text1": "Have a feature request, a question, or spotted a bug?",
+    "text2": "Our team is happy to help - drop us a message anytime."
+  },
   "clients": {
-    "clients_title_seo": "All Clients",
+    "clients_title_seo": "Clients",
     "add_client": "Add Client",
-    "clients_menu_item": "All Clients",
+    "clients_menu_item": "Clients",
     "add_client_btn": "Add Client",
     "add_client_title": "Add New Client",
     "client_added": "Client added successfully!",
@@ -46,6 +52,7 @@
     "edit_client": "Edit Client"
   },
   "warehouse": {
+    "title_seo": "Warehouse",
     "clients_menu_item": "Warehouse",
     "add_inventory_item": "Add Inventory Item",
     "title": "Add Inventory Item",

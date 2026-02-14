@@ -21,7 +21,7 @@ const СompanySettings: FC = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>{`YWP | ${t('createPoint.create_point')}`}</title>
+        <title>{`YWP | ${t('company.company_settings')}`}</title>
       </Helmet>
       <AppBar
         position="static"

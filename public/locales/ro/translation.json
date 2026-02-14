@@ -32,10 +32,15 @@
     "default_label": "Altele",
     "added_successfully": "Adăugat cu succes!"
   },
+  "contactUs": {
+    "title_seo": "Contactați‑ne",
+    "text1": "Ai o idee pentru o funcție nouă, o întrebare sau ai găsit o eroare?",
+    "text2": "Echipa noastră este bucuroasă să te ajute — scrie-ne oricând."
+  },
   "clients": {
-    "clients_title_seo": "Toți clienții",
+    "clients_title_seo": "Clienții",
     "add_client": "Adăugați client",
-    "clients_menu_item": "Toți Clienții",
+    "clients_menu_item": "Clienții",
     "add_client_btn": "Adăugați Client",
     "add_client_title": "Adăugați Client Nou",
     "client_added": "Client adăugat cu succes!",
@@ -46,6 +51,7 @@
     "edit_client": "Editează clientul"
   },
   "warehouse": {
+    "title_seo": "Depozit",
     "clients_menu_item": "Departament",
     "add_inventory_item": "Adăugați articol în stoc",
     "title": "Adăugați articol în stoc",
