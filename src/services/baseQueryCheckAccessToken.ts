@@ -7,6 +7,7 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
 
 import { authSlice } from '../store/reducers/AuthSlice';
+import { refreshTokenQuery } from './auth/refreshTokenQuery';
 
 const mutex = new Mutex();
 
@@ -40,7 +41,7 @@ const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  const { logOut, setCredentials } = authSlice.actions;
+  const { setCredentials } = authSlice.actions;
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
 
@@ -54,7 +55,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
       try {
         const refreshResult: any = await baseQuery(
-          '/auth/refresh_token',
+          refreshTokenQuery(),
           api,
           extraOptions,
         );

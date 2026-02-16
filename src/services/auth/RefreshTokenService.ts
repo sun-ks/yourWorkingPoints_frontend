@@ -1,6 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+import { refreshTokenQuery } from './refreshTokenQuery';
+
 export const refreshTokenAPI = createApi({
   reducerPath: 'refresh_token',
   baseQuery: fetchBaseQuery({
@@ -10,10 +12,7 @@ export const refreshTokenAPI = createApi({
   tagTypes: ['Auth'],
   endpoints: (build) => ({
     refreshToken: build.query<any, any>({
-      query: () => ({
-        url: `/auth/refresh_token`,
-        method: 'GET',
-      }),
+      query: () => refreshTokenQuery(),
     }),
   }),
 });
