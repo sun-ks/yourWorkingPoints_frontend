@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { refreshTokenAPI } from '../services/RefreshTokenService';
+import { refreshTokenAPI } from '../services/auth/RefreshTokenService';
 import { authSlice } from '../store/reducers/AuthSlice';
 
 type UseWebSocketOptions = {
