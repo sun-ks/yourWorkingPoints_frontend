@@ -128,7 +128,11 @@ function draggableDataGrid(
           <Box sx={{ width: '100%' }}>
             <StyledDataGrid
               {...props}
-              paginationModel={{ pageSize: rowsForPage, page: 0 }}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: rowsForPage, page: 0 },
+                },
+              }}
               columns={columnsSavedWithWidths}
               pageSizeOptions={pageSizeOptions}
               localeText={{
