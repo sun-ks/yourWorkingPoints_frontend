@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 import React, { FC, useEffect, useState } from 'react';
 
@@ -34,33 +35,34 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
   const {
     handleSubmit,
     control,
-    reset: resetForm,
-    clearErrors,
-    formState,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IFormInputs>();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [showForgotSendInfo, setShowForgotSendInfo] = useState<any>('');
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsActiveUser(true);
+  }, [location.pathname]);
 
   const [isActiveUser, setIsActiveUser] = useState<any>(true);
 
-  const [signUp, { isError: isError_sign_up, error: error_sign_up }] =
+  const [signUp, { error: error_sign_up }] =
     userAPI.useSignUpMutation();
 
-  const [addWorker, { isError: isError_add_worker, error: error_add_worker }] =
+  const [addWorker, { error: error_add_worker }] =
     userAPI.useAddWorkerMutation();
 
-  const [login, { isError: isError_sign_in, error: error_sign_in }] =
+  const [login, { error: error_sign_in }] =
     userAPI.useLoginMutation();
 
-  const [forgot, { isError: isError_forgot, error: error_forgot }] =
+  const [forgot, {data: forgotData, error: error_forgot }] =
     userAPI.useForgotMutation();
 
   const [
     newPassword,
-    { isError: isError_new_password, error: error_new_password },
+    {  error: error_new_password },
   ] = userAPI.useNewPasswordMutation();
 
   const apiErrs: any = {
@@ -99,15 +101,13 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
 
     if (data) {
       dispatch(setCredentials(data));
+      
+      const isActive = data.userInfo?.is_active;
 
-      const isActiveUser = data.userInfo.is_active;
+      setIsActiveUser(isActive);
 
-      setIsActiveUser(isActiveUser);
-
-      if (typePage === 'forgot') {
-        showForgotSendInfo(data);
-      } else if (isActiveUser) {
-        navigate('/createFirstPoint');
+      if (typePage !== "forgot" && isActive) {
+        navigate("/createFirstPoint");
       }
     }
   };
@@ -225,18 +225,18 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
           sx={{ my: 2 }}
         >
           <Typography color="error">
-            {!!apiErrs[typePage] && apiErrs[typePage]?.data}
+            {!!apiErrs[typePage] && apiErrs[typePage]?.data?.message}
           </Typography>
         </Stack>
       </Collapse>
 
-      {showForgotSendInfo && (
+      {forgotData?.ok && typePage === 'forgot' && (
         <Typography sx={{ my: 2, textAlign: 'left' }} color="green">
-          {showForgotSendInfo}
+          {forgotData.message}
         </Typography>
       )}
 
-      {!isActiveUser && (
+      {!isActiveUser && typePage === 'sign_in' && (
         <Typography sx={{ my: 2, textAlign: 'left' }} color="red">
           {t('company.deactivated_user')}
         </Typography>

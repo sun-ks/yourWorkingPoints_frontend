@@ -29,8 +29,6 @@ const Content: FC = () => {
 
   const {
     data: point,
-    error,
-    isLoading: isLoading_point,
   } = pointAPI.useGetPointByPointIdQuery(point_id);
 
   const [updatePoint, { isError, error: errorupdatePoint }] =

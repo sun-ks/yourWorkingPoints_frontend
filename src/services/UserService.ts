@@ -39,9 +39,9 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    forgot: build.mutation<string, { email: string }>({
+    forgot: build.mutation<any, { email: string }>({
       query: (body) => ({
-        url: `/auth/resset_password`,
+        url: `/auth/reset_password`,
         method: 'POST',
         body: { email: body.email },
       }),

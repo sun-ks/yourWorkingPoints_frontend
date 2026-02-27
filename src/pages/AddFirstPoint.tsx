@@ -51,7 +51,6 @@ const NewPoint: FC = () => {
 
   const {
     data: points,
-    error,
     isLoading,
   } = pointAPI.useGetPointsQuery(getAuthorizationHeaders(accessToken));
 
