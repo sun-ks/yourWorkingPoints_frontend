@@ -51,6 +51,9 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
   const [signUp, { error: error_sign_up }] =
     userAPI.useSignUpMutation();
 
+  const [sendEmailsAfterSignUp] =
+    userAPI.useSendEmailsAfterSignUpMutation();
+
   const [addWorker, { error: error_add_worker }] =
     userAPI.useAddWorkerMutation();
 
@@ -105,6 +108,10 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
       const isActive = data.userInfo?.is_active;
 
       setIsActiveUser(isActive);
+
+      if (typePage === "sign_up") {
+        sendEmailsAfterSignUp({ email: data.userInfo.email });
+      }
 
       if (typePage !== "forgot" && isActive) {
         navigate("/createFirstPoint");

@@ -39,6 +39,14 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    sendEmailsAfterSignUp: build.mutation<any, { email: string; }>({
+      query: (body) => ({
+        url: `/emails/sendEmailsAfterSignUp/`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
     forgot: build.mutation<any, { email: string }>({
       query: (body) => ({
         url: `/auth/reset_password`,
