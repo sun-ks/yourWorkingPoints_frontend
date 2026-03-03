@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { IUser } from '../types/IUser';
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
+import { log } from 'console';
 
 export const userAPI = createApi({
   reducerPath: 'user',
@@ -28,6 +29,13 @@ export const userAPI = createApi({
         url: `/auth/login/`,
         method: 'POST',
         body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+    logout: build.mutation<any, null>({
+      query: () => ({
+        url: `/auth/logout/`,
+        method: 'POST',
       }),
       invalidatesTags: ['User'],
     }),

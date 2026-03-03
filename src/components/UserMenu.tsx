@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 import React, { FC, useState } from 'react';
@@ -11,18 +10,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
-
-import { authSlice } from '../store/reducers/AuthSlice';
 import { selectCurrentUser } from '../store/reducers/AuthSlice';
-import { persistor } from '../store/store';
+import { userAPI } from '../services/UserService';
 
 const UserMenu: FC<any> = () => {
   const { t } = useTranslation();
   const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const { logOut } = authSlice.actions;
+  const [logout] = userAPI.useLogoutMutation();
+
+
 
   let avatarLetters = '=)';
   const userRole = currentUser?.userInfo.role;
@@ -114,8 +112,7 @@ const UserMenu: FC<any> = () => {
       >
         <MenuItem
           onClick={async () => {
-            await persistor.purge();
-            dispatch({ type: 'RESET_APP_STATE' });
+            await logout(null);
 
             handleClose();
           }}
