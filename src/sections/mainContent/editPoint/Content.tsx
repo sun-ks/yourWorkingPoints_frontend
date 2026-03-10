@@ -27,9 +27,7 @@ const Content: FC = () => {
 
   const { point_id } = useParams();
 
-  const {
-    data: point,
-  } = pointAPI.useGetPointByPointIdQuery(point_id);
+  const { data: point } = pointAPI.useGetPointByPointIdQuery(point_id);
 
   const [updatePoint, { isError, error: errorupdatePoint }] =
     pointAPI.useUpdatePointMutation();

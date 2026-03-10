@@ -49,10 +49,9 @@ const NewPoint: FC = () => {
   const { t } = useTranslation();
   const accessToken = useSelector(selectAccessToken);
 
-  const {
-    data: points,
-    isLoading,
-  } = pointAPI.useGetPointsQuery(getAuthorizationHeaders(accessToken));
+  const { data: points, isLoading } = pointAPI.useGetPointsQuery(
+    getAuthorizationHeaders(accessToken),
+  );
 
   const [createPoint, { isError, error: errorCreatePoint }] =
     pointAPI.useCreatePointMutation();

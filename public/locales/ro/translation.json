@@ -173,6 +173,7 @@
     "no_points_available": "Nu există puncte disponibile"
   },
   "editTicket": {
+    "created_by": "Creat de",
     "choose_part": "Selectați piesă din stoc",
     "guarantee_till": "Garanție până",
     "set_status_paid": "După starea „Plătit” puteți tipări garanția",

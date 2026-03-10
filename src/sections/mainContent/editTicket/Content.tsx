@@ -239,17 +239,19 @@ const Content: FC<{
       </Typography>
 
       <Stack spacing={3} sx={{ textAlign: 'left', marginBottom: 4 }}>
-        <TopFields
-          t={t}
-          control={control}
-          ticket={ticket}
-          status={status}
-          ticketStatuses={ticketStatuses}
-          ticketPriorities={ticketPriorities}
-          points={points}
-          workersList={workersList}
-          Item={Item}
-        />
+        {ticket && (
+          <TopFields
+            t={t}
+            control={control}
+            ticket={ticket}
+            status={status}
+            ticketStatuses={ticketStatuses}
+            ticketPriorities={ticketPriorities}
+            points={points}
+            workersList={workersList}
+            Item={Item}
+          />
+        )}
 
         <PartsList
           savedInventoryItemsForCurrentTicket={

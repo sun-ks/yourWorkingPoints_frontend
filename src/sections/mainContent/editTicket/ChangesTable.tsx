@@ -5,7 +5,6 @@ import { ITicket_change } from '../../../types/IItem';
 export const ChangesTable = ({
   change,
   t,
-  isLast,
   ticketStatuses,
   ticketPriorities,
 }: {
@@ -15,26 +14,16 @@ export const ChangesTable = ({
   ticketStatuses: { value: string; text: string }[];
   ticketPriorities: { value: string; text: string }[];
 }) => (
-  <Table size="small" sx={{ marginBottom: !isLast ? 4 : 6 }}>
-    <TableBody
-      sx={{
-        '& .MuiTableRow-root:nth-of-type(even)': {
-          backgroundColor: '#f5f5f5',
-        },
-        '& .MuiTableRow-root:nth-of-type(odd)': {
-          backgroundColor: '#ffffff',
-        },
-      }}
-    >
+  <Table size="small" sx={{ marginBottom: 4 }}>
+    <TableBody>
       <TableRow>
         <TableCell align="left">
-          {t('editTicket.changed_by')}{' '}
-          {change.changed_by?.name && `${change.changed_by?.name} /`}{' '}
-          {change.changed_by?.email}
-        </TableCell>
-        <TableCell align="right">
+          {t('editTicket.changed_by')}
           {change.changed_at &&
             ` ${new Date(change.changed_at).toLocaleDateString()}`}
+        </TableCell>
+        <TableCell align="right">
+          {change.changed_by?.name && `${change.changed_by?.name}`}
         </TableCell>
       </TableRow>
 
@@ -58,8 +47,7 @@ export const ChangesTable = ({
             {t('editTicket.changed_assigned_at')}:
           </TableCell>
           <TableCell align="right">
-            {change.assigned_at?.name && `${change.assigned_at?.name} /`}{' '}
-            {change.assigned_at?.email}
+            {change.assigned_at?.name && `${change.assigned_at?.name}`}
           </TableCell>
         </TableRow>
       )}

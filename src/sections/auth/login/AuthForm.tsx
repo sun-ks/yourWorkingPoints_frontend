@@ -2,7 +2,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 import React, { FC, useEffect, useState } from 'react';
 
@@ -48,25 +48,20 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
 
   const [isActiveUser, setIsActiveUser] = useState<any>(true);
 
-  const [signUp, { error: error_sign_up }] =
-    userAPI.useSignUpMutation();
+  const [signUp, { error: error_sign_up }] = userAPI.useSignUpMutation();
 
-  const [sendEmailsAfterSignUp] =
-    userAPI.useSendEmailsAfterSignUpMutation();
+  const [sendEmailsAfterSignUp] = userAPI.useSendEmailsAfterSignUpMutation();
 
   const [addWorker, { error: error_add_worker }] =
     userAPI.useAddWorkerMutation();
 
-  const [login, { error: error_sign_in }] =
-    userAPI.useLoginMutation();
+  const [login, { error: error_sign_in }] = userAPI.useLoginMutation();
 
-  const [forgot, {data: forgotData, error: error_forgot }] =
+  const [forgot, { data: forgotData, error: error_forgot }] =
     userAPI.useForgotMutation();
 
-  const [
-    newPassword,
-    {  error: error_new_password },
-  ] = userAPI.useNewPasswordMutation();
+  const [newPassword, { error: error_new_password }] =
+    userAPI.useNewPasswordMutation();
 
   const apiErrs: any = {
     sign_up: error_sign_up,
@@ -104,17 +99,17 @@ const AuthForm: FC<{ typePage: AuthPageType; token?: string }> = ({
 
     if (data) {
       dispatch(setCredentials(data));
-      
+
       const isActive = data.userInfo?.is_active;
 
       setIsActiveUser(isActive);
 
-      if (typePage === "sign_up") {
+      if (typePage === 'sign_up') {
         sendEmailsAfterSignUp({ email: data.userInfo.email });
       }
 
-      if (typePage !== "forgot" && isActive) {
-        navigate("/createFirstPoint");
+      if (typePage !== 'forgot' && isActive) {
+        navigate('/createFirstPoint');
       }
     }
   };

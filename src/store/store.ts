@@ -47,7 +47,10 @@ const reducers = {
 const appReducer = combineReducers(reducers);
 
 const rootReducer = (state: any, action: any) => {
-  if (userAPI.endpoints.logout.matchFulfilled(action) || action.type === 'RESET_APP_STATE') {
+  if (
+    userAPI.endpoints.logout.matchFulfilled(action) ||
+    action.type === 'RESET_APP_STATE'
+  ) {
     state = undefined;
   }
   return appReducer(state, action);
