@@ -185,6 +185,7 @@
     "no_points_available": "No points available"
   },
   "editTicket": {
+    "created_by": "Created by",
     "choose_part": "Choose Part from Warehouse",
     "guarantee_till": "Guarantee till",
     "set_status_paid": "After reaching the status 'Paid,' printing the Guarantee will be possible",

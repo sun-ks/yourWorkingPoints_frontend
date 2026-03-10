@@ -10,8 +10,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
-import { selectCurrentUser } from '../store/reducers/AuthSlice';
+
 import { userAPI } from '../services/UserService';
+import { selectCurrentUser } from '../store/reducers/AuthSlice';
 
 const UserMenu: FC<any> = () => {
   const { t } = useTranslation();
@@ -19,8 +20,6 @@ const UserMenu: FC<any> = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const [logout] = userAPI.useLogoutMutation();
-
-
 
   let avatarLetters = '=)';
   const userRole = currentUser?.userInfo.role;

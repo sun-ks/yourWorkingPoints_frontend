@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { log } from 'console';
 
 import { IUser } from '../types/IUser';
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
-import { log } from 'console';
 
 export const userAPI = createApi({
   reducerPath: 'user',
@@ -47,7 +47,7 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    sendEmailsAfterSignUp: build.mutation<any, { email: string; }>({
+    sendEmailsAfterSignUp: build.mutation<any, { email: string }>({
       query: (body) => ({
         url: `/emails/sendEmailsAfterSignUp/`,
         method: 'POST',

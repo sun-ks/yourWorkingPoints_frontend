@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
 import { Control, Controller } from 'react-hook-form';
 
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Table, TableBody, TableCell, TableRow } from '@mui/material';
 import {
   Accordion,
   AccordionDetails,
@@ -25,7 +26,7 @@ import { ChangesTable } from './ChangesTable';
 export const TopFields: FC<{
   t: (key: string) => string;
   control: Control<IItem>;
-  ticket?: IItem;
+  ticket: IItem;
   status: string;
   ticketStatuses: { value: string; text: string }[];
   ticketPriorities: { value: string; text: string }[];
@@ -43,6 +44,20 @@ export const TopFields: FC<{
   workersList,
   Item,
 }) => {
+  const hasTicketChanges = useRef(
+    !!(ticket && ticket.ticket_changes && Array.isArray(ticket.ticket_changes)),
+  );
+
+  useEffect(() => {
+    hasTicketChanges.current = !!(
+      ticket &&
+      ticket.ticket_changes &&
+      Array.isArray(ticket.ticket_changes)
+    );
+  }, [ticket]);
+
+  console.log('hasTicketChanges.current', hasTicketChanges.current);
+
   return (
     <>
       <Grid container spacing={1}>
@@ -206,64 +221,89 @@ export const TopFields: FC<{
           </Item>
         </Grid>
         <>
-          {ticket && ticket.ticket_changes && ticket.ticket_changes.length && (
-            <Item
-              sx={{
-                textAlign: 'left',
-                boxShadow: 0,
-                width: '100%',
-                paddingTop: '0 !important',
-                paddingBottom: '0 !important',
-              }}
-            >
-              <Accordion
+          {(hasTicketChanges.current || (ticket && ticket.creator_name)) && (
+            <>
+              <Item
                 sx={{
-                  marginBottom: 0,
-                  borderRadius: '0 !important',
+                  textAlign: 'left',
                   boxShadow: 0,
+                  width: '100%',
+                  paddingTop: '0 !important',
+                  paddingBottom: '0 !important',
                 }}
               >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  sx={{ padding: '0 3px 0 0 !important' }}
+                <Accordion
+                  sx={{
+                    marginBottom: 0,
+                    borderRadius: '0 !important',
+                    boxShadow: 0,
+                  }}
                 >
-                  <Typography
-                    fontSize={14}
-                    sx={{
-                      textAlign: 'right !important',
-                      width: '100%',
-                    }}
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    sx={{ padding: '0 3px 0 0 !important' }}
                   >
-                    <Button variant="text">
-                      {t('editTicket.ticket_changes_title')}
-                    </Button>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails sx={{ padding: '0' }}>
-                  {[...ticket.ticket_changes].reverse().map((change, index) => {
-                    if (
-                      change.assigned_at === null &&
-                      change.status === null &&
-                      change.priority === null
-                    )
-                      return null;
+                    <Typography
+                      fontSize={14}
+                      sx={{
+                        textAlign: 'right !important',
+                        width: '100%',
+                      }}
+                    >
+                      <Button variant="text">
+                        {t('editTicket.ticket_changes_title')}
+                      </Button>
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails sx={{ padding: '0' }}>
+                    {hasTicketChanges.current &&
+                      [...(ticket.ticket_changes || [])]
+                        .reverse()
+                        .map((change, index) => {
+                          if (
+                            change.assigned_at === null &&
+                            change.status === null &&
+                            change.priority === null
+                          )
+                            return null;
 
-                    return (
-                      <ChangesTable
-                        change={change}
-                        t={t}
-                        key={`${index}_ticket_change`}
-                        ticketStatuses={ticketStatuses}
-                        ticketPriorities={ticketPriorities}
-                        isLast={
-                          index === (ticket.ticket_changes?.length ?? 0) - 1
-                        }
-                      />
-                    );
-                  })}
-                </AccordionDetails>
-              </Accordion>
-            </Item>
+                          return (
+                            <ChangesTable
+                              change={change}
+                              t={t}
+                              key={`${index}_ticket_change`}
+                              ticketStatuses={ticketStatuses}
+                              ticketPriorities={ticketPriorities}
+                              isLast={
+                                index ===
+                                (ticket.ticket_changes?.length ?? 0) - 1
+                              }
+                            />
+                          );
+                        })}
+                    {ticket && ticket.creator_name && (
+                      <Table
+                        size="small"
+                        sx={{
+                          marginBottom: 4,
+                        }}
+                      >
+                        <TableBody>
+                          <TableRow>
+                            <TableCell align="left">
+                              {t('editTicket.created_by')}:
+                            </TableCell>
+                            <TableCell align="right">
+                              {ticket.creator_name}
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    )}
+                  </AccordionDetails>
+                </Accordion>
+              </Item>
+            </>
           )}
         </>
       </Grid>
