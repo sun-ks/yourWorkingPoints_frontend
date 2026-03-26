@@ -31,7 +31,13 @@
     "required": "This field is required",
     "available": "Available",
     "default_label": "Others",
-    "added_successfully": "Added successfully!"
+    "added_successfully": "Added successfully!",
+    "updated_successfully": "Updated Successfully!",
+    "btn_edit":"Edit",
+    "btn_add": "Add",
+    "btn_save": "Save",
+    "delete": "Delete",
+    "created_by":"Created by"
   },
   "contactUs": {
     "title_seo": "Contact us",
@@ -75,6 +81,29 @@
     "alert_delete_title": "Do you really want to delete this Warehouse Item?",
     "used_in_tickets": "This spare part was used in these tasks:",
     "quantity": "Quantity"
+  },
+  "service_catalog": {
+    "menu_item": "Service Catalog",
+    "add_service": "Add Service",
+    "title_seo": "Service Catalog",
+    "edit_service": "Edit Service",
+    "alert_delete_title":"Do you really want to delete this service?",
+    "columns": {
+      "created": "Created",
+      "name": "Name",
+      "created_by":"Created by",
+      "price": "Default Price",
+      "category":"Category",
+      "description":"Description"
+    }
+  },
+  "add_service": {
+    "title_seo": "Add Service",
+    "title": "Add New Service"
+  },
+  "edit_service": {
+    "title_seo": "Edit Service",
+    "title": "Edit Service"
   },
   "statuses": {
     "inbox": "Inbox",

@@ -6,12 +6,15 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import React, { Dispatch, SetStateAction, useMemo } from 'react';
 
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { DataGrid, DataGridProps, GridColDef } from '@mui/x-data-grid';
+
+import { isOwner as isOvnerSelector } from '../store/reducers/AuthSlice';
 
 const SortableHeader = ({
   id,
@@ -81,6 +84,7 @@ function draggableDataGrid(
     setRowsForPage?: Dispatch<SetStateAction<number>>;
     rowsForPage?: number;
   } & Omit<DataGridProps, 'columns'>) {
+    const isOwner = useSelector(isOvnerSelector);
     const handleDragEnd = (event: DragEndEvent) => {
       const { active, over } = event;
       if (!over || active.id === over.id) return;
@@ -152,6 +156,12 @@ function draggableDataGrid(
               onPaginationModelChange={(newModel) => {
                 if (!setRowsForPage) return;
                 setRowsForPage(newModel.pageSize);
+              }}
+              slotProps={{
+                toolbar: {
+                  printOptions: { disableToolbarButton: !isOwner },
+                  csvOptions: { disableToolbarButton: !isOwner },
+                },
               }}
             />
           </Box>

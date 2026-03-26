@@ -7,9 +7,9 @@ import * as React from 'react';
 import AlbumIcon from '@mui/icons-material/Album';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PeopleIcon from '@mui/icons-material/People';
-import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import Box from '@mui/material/Box';
@@ -87,6 +87,13 @@ export default function Navigator(props: DrawerProps) {
           avaliable: true,
           linkTo: '/warehouse',
           icon: <WarehouseIcon />,
+        },
+        {
+          id: t('service_catalog.menu_item'),
+          active: false,
+          avaliable: true,
+          linkTo: '/service-catalog',
+          icon: <FormatListBulletedIcon />,
         },
       ],
     },

@@ -28,6 +28,12 @@ export const dataGridColumnWidthsSlice = createSlice({
     ) => {
       return { ...state, warehouses: action.payload };
     },
+    setdataGridColumnWidthsServiceCatalog: (
+      state,
+      action: PayloadAction<{ [key: string]: number }>,
+    ) => {
+      return { ...state, serviceCatalog: action.payload };
+    },
   },
 });
 
@@ -44,6 +50,10 @@ export const selectDataGridColumnWidthsClients = (state: {
 export const selectDataGridColumnWidthsUsers = (state: {
   dataGridColumnWidthsReducer: { users: { [key: string]: number } };
 }) => state.dataGridColumnWidthsReducer.users;
+
+export const selectDataGridColumnWidthsServiceCatalog = (state: {
+  dataGridColumnWidthsReducer: { serviceCatalog: { [key: string]: number } };
+}) => state.dataGridColumnWidthsReducer.serviceCatalog;
 
 export const selectDataGridColumnWidthsWarehouses = (state: {
   dataGridColumnWidthsReducer: { warehouses: { [key: string]: number } };
