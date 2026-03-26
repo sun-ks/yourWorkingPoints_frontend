@@ -19,6 +19,12 @@ export const dataGridRowsForPageSlice = createSlice({
     ) => {
       return { ...state, warehouses: action.payload };
     },
+    setdataGridRowsForPageServiceCatalog: (
+      state,
+      action: PayloadAction<number>,
+    ) => {
+      return { ...state, serviceCatalog: action.payload };
+    },
   },
 });
 
@@ -39,3 +45,7 @@ export const selectDataGridRowsForPageClients = (state: {
 export const selectDataGridRowsForPageWarehouses = (state: {
   dataGridRowsForPageReducer: { warehouses: number };
 }) => state.dataGridRowsForPageReducer.warehouses;
+
+export const selectDataGridRowsForPageServiceCatalog = (state: {
+  dataGridRowsForPageReducer: { serviceCatalog: number };
+}) => state.dataGridRowsForPageReducer.serviceCatalog;

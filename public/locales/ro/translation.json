@@ -30,7 +30,13 @@
     "required": "Acest câmp este obligatoriu",
     "available": "Disponibil",
     "default_label": "Altele",
-    "added_successfully": "Adăugat cu succes!"
+    "added_successfully": "Adăugat cu succes!",
+    "updated_successfully": "Actualizat cu succes",
+    "btn_edit": "Editează",
+    "btn_add": "Adaugă",
+    "btn_save": "Salvează",
+    "delete": "Șterge",
+    "created_by":"Creat de"
   },
   "contactUs": {
     "title_seo": "Contactați‑ne",
@@ -74,6 +80,32 @@
     "alert_delete_title": "Sigur doriți să ștergeți acest articol?",
     "used_in_tickets": "Acest articol a fost folosit în aceste sarcini:",
     "quantity": "Cantitate"
+  },
+  "service_catalog": {
+    "menu_item": "Catalog de servicii",
+    "title_seo": "Catalog de servicii",
+    "add_service": "Adaugă serviciu",
+    "alert_delete_title": "Sigur doriți să ștergeți acest articol?",
+    "columns": {
+      "created": "Creat",
+      "name": "Nume",
+      "created_by": "Creat de",
+      "price": "Preț",
+      "description": "Descriere"
+    }
+  },
+  "add_service": {
+    "title": "Adăugați serviciu",
+    "menu_item": "Catalog de servicii",
+    "title_seo": "Catalog de servicii",
+    "add_service": "Adăugați serviciu",
+    "field_name": "Denumire serviciu",
+    "field_price": "Preț serviciu",
+    "field_description": "Descriere"
+  },
+  "edit_service": {
+    "title_seo": "Editare serviciu",
+    "title": "Editare serviciu"
   },
   "statuses": {
     "inbox": "Preluată pentru reparație",

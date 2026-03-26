@@ -29,6 +29,12 @@ export const initialDataGridOrderState = {
     'phone',
     'email',
   ],
+  serviceCatalogDataGridColumnsOrder: [
+    'name',
+    'created_at',
+    'created_by_user_name',
+    'price',
+  ],
 };
 
 export type DataGridOrderState = typeof initialDataGridOrderState;

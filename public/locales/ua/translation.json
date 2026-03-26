@@ -30,7 +30,13 @@
     "required": "Це поле є обов'язковим для заповнення",
     "available": "Доступно",
     "default_label": "Інші",
-    "added_successfully": "Успішно додано!"
+    "added_successfully": "Успішно додано!",
+    "btn_edit": "Редагувати",
+    "updated_successfully": "Успішно оновлено!",
+    "btn_add": "Додати",
+    "btn_save": "Зберегти",
+    "delete": "Видалити",
+    "created_by": "Створив"
   },
   "contactUs": {
     "title_seo": "Контакти",
@@ -74,6 +80,27 @@
     "alert_delete_title": "Ви справді хочете видалити цей товар?",
     "used_in_tickets": "Цю запчастину було використано в цих задачах:",
     "quantity": "Кількість"
+  },
+  "service_catalog": {
+    "menu_item": "Каталог послуг",
+    "title_seo": "Каталог послуг",
+    "add_service": "Додати послугу",
+    "alert_delete_title": "Ви справді хочете видалити цю послугу?",
+    "columns": {
+      "created": "Створено",
+      "name": "Назва",
+      "created_by": "Створив",
+      "price": "Ціна за замовчуванням",
+      "description": "Опис"
+    }
+  },
+  "add_service": {
+    "title_seo": "Додайте послугу",
+    "title": "Додайте послугу"
+  },
+  "edit_service": {
+    "title_seo": "Редагувати послугу",
+    "title": "Редагувати послугу"
   },
   "statuses":{
     "inbox": "Взято на ремонт",
@@ -130,7 +157,7 @@
     "do_not_account": "Перейти до"
   },
   "ticketsColumns": {
-    "created": "Створен",
+    "created": "Створено",
     "status": "Статус",
     "priority": "Пріорітет",
     "device_sn": "Серійний номер",
@@ -141,7 +168,7 @@
     "assigned_at": "Назначен на"
   },
   "usersColumns":{
-    "created": "Створен",
+    "created": "Створено",
     "role": "Роль",
     "name": "Ім'я",
     "phone": "Номер телефона",

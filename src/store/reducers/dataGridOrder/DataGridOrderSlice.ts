@@ -12,6 +12,9 @@ export const dataGridOrderSlice = createSlice({
     setColumnsOrderWarehouse: (state, action: PayloadAction<string[]>) => {
       state.warehouseDataGridColumnsOrder = action.payload;
     },
+    setColumnsOrderServiceCatalog: (state, action: PayloadAction<string[]>) => {
+      state.serviceCatalogDataGridColumnsOrder = action.payload;
+    },
     setColumnsOrderClients: (state, action: PayloadAction<string[]>) => {
       state.clientsDataGridColumnsOrder = action.payload;
     },
@@ -30,6 +33,10 @@ export const selectTicketsDataGridColumnsOrder = (state: {
 export const selectWarehouseDataGridColumnsOrder = (state: {
   dataGridOrderReducer: { warehouseDataGridColumnsOrder: string[] };
 }) => state.dataGridOrderReducer.warehouseDataGridColumnsOrder;
+
+export const selectServiceCatalogDataGridColumnsOrder = (state: {
+  dataGridOrderReducer: { serviceCatalogDataGridColumnsOrder: string[] };
+}) => state.dataGridOrderReducer.serviceCatalogDataGridColumnsOrder;
 
 export const selectClientDataGridColumnsOrder = (state: {
   dataGridOrderReducer: { clientsDataGridColumnsOrder: string[] };

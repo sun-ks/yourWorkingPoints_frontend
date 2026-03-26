@@ -4,7 +4,7 @@ import { IApiResponse } from '../types/IApiResponse';
 import { IWarehouseItem } from '../types/IWarehouse';
 import baseQueryCheckAccessToken from './baseQueryCheckAccessToken';
 
-type TWarehouseResponse = IApiResponse<IWarehouseItem>;
+type TWarehouseResponse = IApiResponse<IWarehouseItem[]>;
 
 export const warehouseAPI = createApi({
   reducerPath: 'warehouse',

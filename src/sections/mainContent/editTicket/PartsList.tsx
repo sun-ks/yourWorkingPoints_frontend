@@ -26,7 +26,7 @@ import { IApiResponse } from '../../../types/IApiResponse';
 import { IItem } from '../../../types/IItem';
 import { IWarehouseItem } from '../../../types/IWarehouse';
 
-type TWarehouseResponse = IApiResponse<IWarehouseItem>;
+type TWarehouseResponse = IApiResponse<IWarehouseItem[]>;
 
 export const PartsList: FC<{
   savedInventoryItemsForCurrentTicket?: IWarehouseItem[];
@@ -71,10 +71,11 @@ export const PartsList: FC<{
 
   return (
     <>
-      {availableInventoryItemsForCurrentTicket?.data &&
+      {availableInventoryItemsForCurrentTicket &&
+        availableInventoryItemsForCurrentTicket.data &&
         partsFields.map((fieldId, index) => {
           const currentWarehouseData =
-            availableInventoryItemsForCurrentTicket.data.find(
+            availableInventoryItemsForCurrentTicket.data?.find(
               (item) => item.id === getValues(`parts.${index}.id`),
             );
 

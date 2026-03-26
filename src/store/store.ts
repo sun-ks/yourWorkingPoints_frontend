@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
+import { version } from 'os';
 import { persistReducer } from 'redux-persist';
 import { createMigrate } from 'redux-persist';
 import { persistStore } from 'redux-persist';
@@ -24,6 +25,7 @@ const {
   companyAPI,
   clientAPI,
   warehouseAPI,
+  serviceCatalogAPI,
   refreshTokenAPI,
 } = services;
 
@@ -41,6 +43,7 @@ const reducers = {
   [companyAPI.reducerPath]: companyAPI.reducer,
   [clientAPI.reducerPath]: clientAPI.reducer,
   [warehouseAPI.reducerPath]: warehouseAPI.reducer,
+  [serviceCatalogAPI.reducerPath]: serviceCatalogAPI.reducer,
   [refreshTokenAPI.reducerPath]: refreshTokenAPI.reducer,
 };
 
@@ -59,6 +62,7 @@ const rootReducer = (state: any, action: any) => {
 const persistConfig = {
   key: 'root',
   storage,
+  version: 5,
   whitelist: [
     'testReducer',
     'authReducer',
@@ -100,6 +104,7 @@ export const setupStore = () => {
         .concat(companyAPI.middleware)
         .concat(clientAPI.middleware)
         .concat(warehouseAPI.middleware)
+        .concat(serviceCatalogAPI.middleware)
         .concat(refreshTokenAPI.middleware),
     devTools: true, // Enable Redux DevTools
   });

@@ -1,4 +1,6 @@
 export interface IApiResponse<T> {
-  success: boolean;
-  data: T[];
+  success?: boolean;
+  ok?: boolean;
+  message?: string;
+  data?: T;
 }

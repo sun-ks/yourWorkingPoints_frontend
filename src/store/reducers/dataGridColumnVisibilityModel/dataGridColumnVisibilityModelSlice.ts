@@ -28,6 +28,12 @@ export const dataGridColumnVisibilityModelSlice = createSlice({
     ) => {
       return { ...state, warehouse: action.payload };
     },
+    setColumnsVisibilityModelServiceCatalog: (
+      state,
+      action: PayloadAction<{ [key: string]: boolean }>,
+    ) => {
+      return { ...state, serviceCatalog: action.payload };
+    },
   },
 });
 
@@ -50,3 +56,9 @@ export const selectDataGridColumnVisibilityModeWarehouse = (state: {
     warehouse: { [key: string]: boolean };
   };
 }) => state.dataGridColumnVisibilityModelReducer.warehouse;
+
+export const selectDataGridColumnVisibilityModeServiceCatalog = (state: {
+  dataGridColumnVisibilityModelReducer: {
+    serviceCatalog: { [key: string]: boolean };
+  };
+}) => state.dataGridColumnVisibilityModelReducer.serviceCatalog;
