@@ -36,7 +36,8 @@
     "btn_add": "Додати",
     "btn_save": "Зберегти",
     "delete": "Видалити",
-    "created_by": "Створив"
+    "created_by": "Створив",
+    "price":"Ціна"
   },
   "contactUs": {
     "title_seo": "Контакти",
@@ -211,7 +212,7 @@
   },
   "editTicket": {
     "created_by": "Створив",
-    "choose_part": "Оберіть деталь зі складу",
+    "choose_part": "Додати деталь зі складу",
     "guarantee_till": "Гарантія до",
     "set_status_paid": "Після досягнення статусу 'Сплачено' буде можливий друк гарантії",
     "print_guarantee": "Друк гарантії",

@@ -36,7 +36,8 @@
     "btn_add": "Adaugă",
     "btn_save": "Salvează",
     "delete": "Șterge",
-    "created_by":"Creat de"
+    "created_by":"Creat de",
+    "price":"Preț"
   },
   "contactUs": {
     "title_seo": "Contactați‑ne",

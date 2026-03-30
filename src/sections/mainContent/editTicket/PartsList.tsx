@@ -12,6 +12,7 @@ import React, { FC } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {
   Autocomplete,
   Box,
@@ -21,6 +22,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 
 import { IApiResponse } from '../../../types/IApiResponse';
 import { IItem } from '../../../types/IItem';
@@ -95,10 +97,17 @@ export const PartsList: FC<{
             <Grid
               container
               spacing={1}
-              sx={{ marginTop: '0 !important' }}
+              sx={{
+                marginTop: '0 !important',
+                marginBottom: '16px !important',
+              }}
               key={fieldId}
             >
-              <Grid size={{ xs: 9, sm: 9 }}>
+              <Grid
+                size={
+                  currentWarehouseData ? { xs: 7, sm: 7 } : { xs: 12, sm: 12 }
+                }
+              >
                 <Controller
                   control={control}
                   name={`parts.${index}.id`}
@@ -150,10 +159,7 @@ export const PartsList: FC<{
                           newValue?.retail_price,
                         );
 
-                        if (
-                          currentCount !== undefined &&
-                          currentCount !== null
-                        ) {
+                        if (currentCount) {
                           resetField(`parts.${index}.used_count_this_ticket`, {
                             defaultValue: 1,
                           });
@@ -162,6 +168,7 @@ export const PartsList: FC<{
                       renderInput={(params) => (
                         <TextField
                           {...params}
+                          value={params.inputProps.value ?? ''}
                           label={t('editTicket.select_part')}
                           error={!!errors?.parts?.[index]?.id}
                           helperText={errors?.parts?.[index]?.id?.message}
@@ -172,61 +179,104 @@ export const PartsList: FC<{
                 />
               </Grid>
 
-              <Grid size={{ xs: 2, sm: 2 }}>
-                <Controller
-                  control={control}
-                  name={`parts.${index}.used_count_this_ticket`}
-                  rules={{
-                    required: `${t('form.required')}`,
-                  }}
-                  render={({ field: controllerField }) => (
-                    <TextField
-                      size="small"
-                      {...controllerField}
-                      type="number"
-                      label={t('editTicket.count')}
-                      fullWidth
-                      error={
-                        !!errors?.parts &&
-                        !!errors?.parts[index]?.used_count_this_ticket
-                      }
-                      helperText={
-                        errors?.parts?.[index]?.used_count_this_ticket?.message
-                      }
-                      inputProps={{
-                        min: 1,
-                        max: quantityMax,
+              {currentWarehouseData && (
+                <>
+                  <Grid size={{ xs: 2, sm: 2 }}>
+                    <Controller
+                      control={control}
+                      name={`parts.${index}.used_count_this_ticket`}
+                      defaultValue={1}
+                      rules={{
+                        required: `${t('form.required')}`,
                       }}
+                      render={({ field: controllerField }) => (
+                        <TextField
+                          size="small"
+                          {...controllerField}
+                          type="number"
+                          label={t('editTicket.count')}
+                          fullWidth
+                          error={
+                            !!errors?.parts &&
+                            !!errors?.parts[index]?.used_count_this_ticket
+                          }
+                          helperText={
+                            errors?.parts?.[index]?.used_count_this_ticket
+                              ?.message
+                          }
+                          inputProps={{
+                            min: 1,
+                            max: quantityMax,
+                          }}
+                        />
+                      )}
                     />
-                  )}
-                />
-              </Grid>
-              <Grid size={{ xs: 2, sm: 2 }} sx={{ display: 'none' }}>
-                <Controller
-                  control={control}
-                  defaultValue={currentWarehouseData?.retail_price}
-                  name={`parts.${index}.price_at_use`}
-                  render={({ field }) => <input {...field} />}
-                />
-              </Grid>
+                  </Grid>
+                  <Grid size={{ xs: 2, sm: 2 }}>
+                    <Controller
+                      control={control}
+                      defaultValue={currentWarehouseData?.retail_price}
+                      name={`parts.${index}.price_at_use`}
+                      render={({ field }) => (
+                        <TextField
+                          label={
+                            <Box>
+                              {t('form.price')}
+                              <Tooltip
+                                title={
+                                  <>
+                                    {t('warehouse.field_retail_price')}:{' '}
+                                    {currentWarehouseData?.retail_price} <br />
+                                    {t('warehouse.fild_purchase_price')}:{' '}
+                                    {currentWarehouseData?.purchase_price}
+                                  </>
+                                }
+                              >
+                                <IconButton color="inherit">
+                                  <HelpOutlineIcon fontSize="small" />
+                                </IconButton>
+                              </Tooltip>
+                            </Box>
+                          }
+                          variant="outlined"
+                          size="small"
+                          rows={4}
+                          {...field}
+                          value={field.value ?? ''}
+                          error={
+                            !!errors?.parts &&
+                            !!errors?.parts[index]?.price_at_use
+                          }
+                          helperText={
+                            !!errors?.parts &&
+                            !!errors?.parts[index]?.price_at_use
+                              ? errors?.parts?.[index]?.price_at_use?.message
+                              : ''
+                          }
+                        />
+                      )}
+                    />
+                  </Grid>
 
-              <Grid size={{ xs: 1, sm: 1 }}>
-                <IconButton
-                  onClick={() => {
-                    setPartsFields((prev) =>
-                      prev.filter((item) => item !== fieldId),
-                    );
-                    removeField(index);
-                  }}
-                  sx={{
-                    '&:hover': {
-                      color: 'error.main',
-                    },
-                  }}
-                >
-                  <DeleteForeverIcon fontSize="small" />
-                </IconButton>
-              </Grid>
+                  <Grid size={{ xs: 1, sm: 1 }}>
+                    <IconButton
+                      onClick={() => {
+                        setPartsFields((prev) =>
+                          prev.filter((item) => item !== fieldId),
+                        );
+                        removeField(index);
+                      }}
+                      sx={{
+                        '&:hover': {
+                          color: 'error.main',
+                        },
+                      }}
+                    >
+                      <DeleteForeverIcon fontSize="small" />
+                    </IconButton>
+                  </Grid>
+                </>
+              )}
             </Grid>
           );
         })}

@@ -37,7 +37,8 @@
     "btn_add": "Add",
     "btn_save": "Save",
     "delete": "Delete",
-    "created_by":"Created by"
+    "created_by":"Created by",
+    "price": "Price"
   },
   "contactUs": {
     "title_seo": "Contact us",
@@ -215,7 +216,7 @@
   },
   "editTicket": {
     "created_by": "Created by",
-    "choose_part": "Choose Part from Warehouse",
+    "choose_part": "Add Part from Warehouse",
     "guarantee_till": "Guarantee till",
     "set_status_paid": "After reaching the status 'Paid,' printing the Guarantee will be possible",
     "print_guarantee": "Print Guarantee",
