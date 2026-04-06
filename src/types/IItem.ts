@@ -23,6 +23,7 @@ export interface IItem {
   client_phone: string;
   created_by: string;
   creator_name?: string;
+  creator_email?: string;
   status:
     | 'inbox'
     | 'in progress'

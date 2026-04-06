@@ -57,9 +57,9 @@ const Content: FC<{
 
   const { t } = useTranslation();
 
-  const ticketStatuses = useMemo(() => getTicketStatuses(t), [t]);
+  const ticketStatuses = getTicketStatuses(t);
 
-  const ticketPriorities = useMemo(() => getTicketPriorities(t), [t]);
+  const ticketPriorities = getTicketPriorities(t);
 
   const currentUser = useSelector(selectCurrentUser);
 
@@ -104,7 +104,8 @@ const Content: FC<{
 
   const [openDeleteAlertDialog, setOpenDeleteAlertDialog] = useState(false);
 
-  const { data: points } = pointAPI.useGetPointsQuery('');
+  const { data: points, isLoading: isLoadingPoints } =
+    pointAPI.useGetPointsQuery('');
 
   const { data: workers } = userAPI.useGetAllUsersQuery('');
 
@@ -248,6 +249,7 @@ const Content: FC<{
             ticketStatuses={ticketStatuses}
             ticketPriorities={ticketPriorities}
             points={points}
+            isLoadingPoints={isLoadingPoints}
             workersList={workersList}
             Item={Item}
           />

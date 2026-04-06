@@ -12,7 +12,16 @@ i18n
     fallbackLng: 'en',
     supportedLngs: ['en', 'ua', 'ro'],
     interpolation: { escapeValue: false },
-    react: { useSuspense: false },
+    react: {
+      useSuspense: false,
+      bindI18n: 'languageChanged loaded',
+    },
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.json?v=' + new Date().getTime(),
+      requestOptions: {
+        cache: 'no-store',
+      },
+    },
   });
 
 export default i18n as typeof i18n & { t: (key: string) => string };

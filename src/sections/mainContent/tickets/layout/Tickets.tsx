@@ -45,10 +45,6 @@ const Tickets: FC = () => {
     };
   }, [ws]);
 
-  useEffect(() => {
-    console.log('NewTicketsCreatedByOtherUser', newTicketsCreatedByOtherUser);
-  }, [newTicketsCreatedByOtherUser]);
-
   return (
     <HelmetProvider>
       <Helmet>

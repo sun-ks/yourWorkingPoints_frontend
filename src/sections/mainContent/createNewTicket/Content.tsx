@@ -21,7 +21,8 @@ const Content: FC = () => {
 
   const { t } = useTranslation();
 
-  const { data: points } = pointAPI.useGetPointsQuery('');
+  const { data: points, isLoading: isloadingPoints } =
+    pointAPI.useGetPointsQuery('');
 
   const { data: clients } = clientAPI.useGetClientsByCompanyIdQuery('');
 
@@ -122,36 +123,34 @@ const Content: FC = () => {
       </Typography>
 
       <Stack spacing={3} sx={{ textAlign: 'left' }}>
-        <Controller
-          control={control}
-          name="point_id"
-          render={({ field }) => {
-            return (
-              <TextField
-                {...field}
-                id="outlined-select-currency-native2"
-                select
-                label={t('createTicket.select_point')}
-                variant="outlined"
-                SelectProps={{
-                  native: true,
-                }}
-              >
-                {points && points.length > 0 ? (
-                  points.map((point) => (
+        {points && points.length > 0 ? (
+          <Controller
+            control={control}
+            name="point_id"
+            render={({ field }) => {
+              return (
+                <TextField
+                  {...field}
+                  id="outlined-select-currency-native2"
+                  select
+                  label={t('createTicket.select_point')}
+                  variant="outlined"
+                  SelectProps={{
+                    native: true,
+                  }}
+                >
+                  {points.map((point) => (
                     <option key={point.point_id} value={point.point_id}>
                       {point.name}
                     </option>
-                  ))
-                ) : (
-                  <option value="" disabled>
-                    {t('createTicket.no_points_available')}
-                  </option>
-                )}
-              </TextField>
-            );
-          }}
-        />
+                  ))}
+                </TextField>
+              );
+            }}
+          />
+        ) : (
+          !isloadingPoints && <>{t('createTicket.no_points_available')}!</>
+        )}
 
         <Controller
           control={control}

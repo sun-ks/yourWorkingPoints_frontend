@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Control, Controller } from 'react-hook-form';
 
-import React, { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Table, TableBody, TableCell, TableRow } from '@mui/material';
@@ -31,6 +31,7 @@ export const TopFields: FC<{
   ticketStatuses: { value: string; text: string }[];
   ticketPriorities: { value: string; text: string }[];
   points?: IPoint[];
+  isLoadingPoints: boolean;
   workersList: { user_id: string | null; name?: string }[];
   Item: any;
 }> = ({
@@ -41,6 +42,7 @@ export const TopFields: FC<{
   ticketStatuses,
   ticketPriorities,
   points,
+  isLoadingPoints,
   workersList,
   Item,
 }) => {
@@ -55,8 +57,6 @@ export const TopFields: FC<{
       Array.isArray(ticket.ticket_changes)
     );
   }, [ticket]);
-
-  console.log('hasTicketChanges.current', hasTicketChanges.current);
 
   return (
     <>
@@ -91,27 +91,35 @@ export const TopFields: FC<{
         <Grid size={{ xs: 12, sm: 5 }}>
           <Item sx={{ textAlign: 'left', boxShadow: 0, padding: 0 }}>
             <Box sx={{ marginBottom: 2 }}>
-              <Controller
-                control={control}
-                name="point_id"
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    select
-                    label={t('editTicket.current_point')}
-                    variant="outlined"
-                    size="small"
-                    SelectProps={{ native: true }}
-                  >
-                    {points?.map((point) => (
-                      <option key={point.point_id} value={point.point_id}>
-                        {point.name}
-                      </option>
-                    ))}
-                  </TextField>
-                )}
-              />
+              {points && points.length > 0 ? (
+                <Controller
+                  control={control}
+                  name="point_id"
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      select
+                      label={t('editTicket.current_point')}
+                      variant="outlined"
+                      size="small"
+                      SelectProps={{
+                        native: true,
+                      }}
+                    >
+                      {points.map((point) => (
+                        <option key={point.point_id} value={point.point_id}>
+                          {point.name}
+                        </option>
+                      ))}
+                    </TextField>
+                  )}
+                />
+              ) : (
+                <>
+                  !isLoadingPoints && {t('createTicket.no_points_available')}!
+                </>
+              )}
             </Box>
 
             <Box sx={{ marginBottom: 2 }}>
@@ -121,12 +129,14 @@ export const TopFields: FC<{
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    SelectProps={{
+                      native: true,
+                    }}
                     fullWidth
                     select
                     label={t('editTicket.ticket_status')}
                     variant="outlined"
                     size="small"
-                    SelectProps={{ native: true }}
                   >
                     {ticketStatuses.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -221,7 +231,7 @@ export const TopFields: FC<{
           </Item>
         </Grid>
         <>
-          {(hasTicketChanges.current || (ticket && ticket.creator_name)) && (
+          {(hasTicketChanges.current || (ticket && ticket.creator_email)) && (
             <>
               <Item
                 sx={{
@@ -250,7 +260,11 @@ export const TopFields: FC<{
                         width: '100%',
                       }}
                     >
-                      <Button variant="text">
+                      <Button
+                        variant="text"
+                        component="span"
+                        onClick={(e) => e.preventDefault()}
+                      >
                         {t('editTicket.ticket_changes_title')}
                       </Button>
                     </Typography>
@@ -281,7 +295,7 @@ export const TopFields: FC<{
                             />
                           );
                         })}
-                    {ticket && ticket.creator_name && (
+                    {ticket && ticket.creator_email && (
                       <Table
                         size="small"
                         sx={{
@@ -294,7 +308,9 @@ export const TopFields: FC<{
                               {t('editTicket.created_by')}:
                             </TableCell>
                             <TableCell align="right">
-                              {ticket.creator_name}
+                              {ticket.creator_name !== ''
+                                ? ticket.creator_name
+                                : ticket.creator_email}
                             </TableCell>
                           </TableRow>
                         </TableBody>
