@@ -42,8 +42,8 @@ export const ticketAPI = createApi({
     }),
     updateTicket: build.mutation<IItem, any>({
       query: (body) => ({
-        url: `/tickets/updateTicket`,
-        method: 'PUT',
+        url: `/ticket`,
+        method: 'PATCH',
         body: body,
       }),
       invalidatesTags: ['Ticket', 'Warehouse'],

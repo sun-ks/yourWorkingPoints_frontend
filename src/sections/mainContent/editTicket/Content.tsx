@@ -179,9 +179,9 @@ const Content: FC<{
     });
   }, [watchedParts, availableInventoryItemsForCurrentTicket]);
 
-  const dataFromError: any =
+  const dataFromError: any = 
     errorUpdateTicket && 'data' in errorUpdateTicket
-      ? errorUpdateTicket?.data
+      ? (errorUpdateTicket.data as any)?.message
       : undefined;
 
   const onSubmit: SubmitHandler<IItem> = async (args) => {
@@ -201,8 +201,8 @@ const Content: FC<{
 
       showSnackbar(t('update_successful'), false);
     } catch (err: any) {
-      const dataFromError = err?.data || 'An error occurred';
-      showSnackbar(dataFromError, true);
+      const message = err?.data?.message || 'Something went wrong';
+      showSnackbar(message, true);
     }
   };
 
@@ -279,8 +279,6 @@ const Content: FC<{
         />
 
         <TicketNoteAndPaymentFields control={control} errors={errors} t={t} />
-
-        {isError && <Typography color="error">{dataFromError}</Typography>}
 
         <SnackbarComponent />
 

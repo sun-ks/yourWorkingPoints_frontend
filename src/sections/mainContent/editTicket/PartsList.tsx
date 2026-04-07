@@ -204,9 +204,11 @@ export const PartsList: FC<{
                             errors?.parts?.[index]?.used_count_this_ticket
                               ?.message
                           }
-                          inputProps={{
-                            min: 1,
-                            max: quantityMax,
+                          slotProps={{
+                            htmlInput: {
+                              min: 1,
+                              max: quantityMax,
+                            },
                           }}
                         />
                       )}
